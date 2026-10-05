@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 8 — Use Case Specification</title>
+  <style>
+    :root {
+      --bg:#0a0e1a; --surface:#111827; --surface2:#1a2236; --surface3:#1f2d45;
+      --border:#1f2d45; --accent:#6366f1; --accent2:#06b6d4; --accent3:#8b5cf6;
+      --text:#e2e8f0; --muted:#64748b; --success:#22c55e; --warn:#f59e0b; --danger:#ef4444;
+      --radius:10px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    nav{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:50}
+    .nav-back{font-size:.85rem;color:var(--muted);text-decoration:none}
+    .nav-back:hover{color:var(--text)}
+    .nav-title{font-size:.9rem;font-weight:600;color:var(--text);margin-left:auto}
+    .nav-prog{font-size:.78rem;color:var(--muted)}
+    .hero{padding:3rem 1.5rem 2rem;max-width:900px;margin:0 auto}
+    .module-tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);padding:.25rem .7rem;border-radius:99px;display:inline-block;margin-bottom:1rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;color:#f8fafc;line-height:1.2}
+    .hero p{margin-top:.75rem;color:var(--muted);font-size:1rem;max-width:580px}
+    .hero-meta{display:flex;gap:1rem;margin-top:1.2rem;flex-wrap:wrap}
+    .meta-pill{font-size:.78rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:.25rem .7rem;border-radius:99px}
+    .tabs{display:flex;gap:.25rem;border-bottom:1px solid var(--border);padding:0 1.5rem;max-width:900px;margin:0 auto}
+    .tab{padding:.75rem 1.2rem;font-size:.88rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;transition:color .15s,border-color .15s}
+    .tab:hover{color:var(--text)}
+    .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .content{max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem}
+    .panel{display:none}.panel.active{display:block}
+
+    .section{margin-bottom:3.5rem}
+    .section-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+    .section-num{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0}
+    .section h2{font-size:1.25rem;font-weight:700;color:#f1f5f9}
+    .prose{color:#cbd5e1;font-size:.96rem;margin-bottom:1rem}
+    .prose strong{color:#f1f5f9}
+    ul.prose-list{color:#cbd5e1;font-size:.95rem;margin:.5rem 0 1rem 1.4rem}
+    ul.prose-list li{margin-bottom:.45rem}
+
+    .callout{border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin:1.2rem 0}
+    .callout.info{background:rgba(99,102,241,.08);border-left:3px solid var(--accent)}
+    .callout.tip{background:rgba(6,182,212,.08);border-left:3px solid var(--accent2)}
+    .callout.warn{background:rgba(245,158,11,.08);border-left:3px solid var(--warn)}
+    .callout.danger{background:rgba(239,68,68,.08);border-left:3px solid var(--danger)}
+    .callout-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+    .callout.info .callout-title{color:var(--accent)}
+    .callout.tip .callout-title{color:var(--accent2)}
+    .callout.warn .callout-title{color:var(--warn)}
+    .callout.danger .callout-title{color:var(--danger)}
+    .callout p,.callout li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .callout ul{margin:.4rem 0 0 1.2rem}
+
+    .fig{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0;overflow-x:auto}
+    .fig-caption{font-size:.78rem;color:var(--muted);margin-top:.85rem;text-align:center;font-style:italic}
+    .fig-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem}
+
+    /* UC SPEC TEMPLATE */
+    .uc-spec{font-family:'Courier New',monospace;font-size:.82rem;background:var(--surface3);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+    .uc-row{display:flex;border-bottom:1px solid var(--border);min-height:36px}
+    .uc-row:last-child{border-bottom:none}
+    .uc-row.clickable{cursor:pointer;transition:background .15s}
+    .uc-row.clickable:hover,.uc-row.clickable.active{background:rgba(99,102,241,.12)}
+    .uc-label{padding:.55rem .8rem;min-width:175px;font-weight:700;color:#a5b4fc;border-right:1px solid var(--border);flex-shrink:0;font-size:.78rem;display:flex;align-items:flex-start;padding-top:.65rem}
+    .uc-val{padding:.55rem .9rem;color:#cbd5e1;font-size:.82rem;line-height:1.65;flex:1}
+    .uc-val.code{color:#86efac;font-family:'Courier New',monospace}
+    .uc-val em{color:var(--muted);font-style:italic}
+    .uc-explain{background:rgba(99,102,241,.08);border-top:1px solid var(--border);padding:.75rem 1rem;font-size:.85rem;color:#cbd5e1;line-height:1.65;display:none}
+    .uc-explain.show{display:block}
+
+    /* FLOW DISPLAY */
+    .flow-block{background:var(--surface3);border-radius:8px;padding:1.1rem 1.25rem;margin:.6rem 0;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.8;color:#cbd5e1}
+    .flow-block .flow-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:.6rem;font-family:sans-serif}
+    .flow-step{display:flex;gap:.6rem;margin:.2rem 0}
+    .flow-step .step-num{color:var(--muted);min-width:22px;flex-shrink:0}
+    .flow-step .step-text{color:#cbd5e1}
+    .flow-step.indent{padding-left:1.5rem}
+    .ep-tag{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:var(--warn);font-size:.72rem;padding:.1rem .4rem;border-radius:4px;font-family:sans-serif;vertical-align:middle;margin-left:.3rem}
+    .sub-tag{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);color:#c4b5fd;font-size:.72rem;padding:.1rem .4rem;border-radius:4px;font-family:sans-serif;vertical-align:middle;margin-left:.3rem}
+
+    /* ALT FLOW TYPE CARDS */
+    .af-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin:1rem 0}
+    .af-card{background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;padding:.9rem;cursor:pointer;transition:border-color .15s}
+    .af-card:hover,.af-card.active{border-color:var(--accent2)}
+    .af-title{font-size:.82rem;font-weight:700;color:var(--accent2);margin-bottom:.3rem}
+    .af-sym{font-size:1.1rem;font-family:monospace;color:var(--warn);margin-bottom:.4rem}
+    .af-explain-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.88rem;color:#cbd5e1;min-height:80px;margin-top:.5rem;line-height:1.65}
+
+    /* QUIZ */
+    .quiz-progress{display:flex;gap:.35rem;margin-bottom:1.75rem;flex-wrap:wrap}
+    .qp-dot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:background .2s}
+    .qp-dot.correct{background:var(--success)}.qp-dot.wrong{background:var(--danger)}
+    .q-num{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem}
+    .q-text{font-size:1rem;font-weight:600;color:#f1f5f9;margin-bottom:1.25rem;line-height:1.55}
+    .q-options{display:flex;flex-direction:column;gap:.5rem}
+    .q-opt{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;cursor:pointer;font-size:.9rem;color:var(--text);text-align:left;transition:border-color .15s,background .15s}
+    .q-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(99,102,241,.08)}
+    .q-opt.correct{border-color:var(--success)!important;background:rgba(34,197,94,.1);color:#86efac}
+    .q-opt.wrong{border-color:var(--danger)!important;background:rgba(239,68,68,.1);color:#fca5a5}
+    .q-explanation{margin-top:.9rem;background:var(--surface3);border-radius:8px;padding:.9rem 1rem;font-size:.87rem;color:#cbd5e1;display:none;line-height:1.65}
+    .q-explanation.show{display:block}
+    .q-nav{display:flex;gap:.75rem;margin-top:1.25rem;align-items:center;flex-wrap:wrap}
+    .q-nav button{padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:background .15s}
+    .q-nav button:hover{background:var(--surface3)}
+    .q-nav button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .q-nav button.primary:hover{opacity:.88}
+    .q-score{font-size:.82rem;color:var(--muted);margin-left:auto}
+    .quiz-result{text-align:center;padding:2.5rem}
+    .score-big{font-size:3.5rem;font-weight:800;color:var(--accent)}
+    .quiz-result p{color:var(--muted);margin-top:.5rem;font-size:.95rem}
+    .quiz-result button{margin-top:1.5rem;padding:.6rem 1.6rem;border-radius:6px;background:var(--accent);border:none;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer}
+
+    /* EXERCISES */
+    .exercise{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden}
+    .ex-header{padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;user-select:none}
+    .ex-header:hover{background:var(--surface2)}
+    .ex-num{background:var(--surface3);border-radius:6px;padding:.2rem .55rem;font-size:.75rem;font-weight:700;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-header h3{font-size:.92rem;font-weight:600;color:#f1f5f9;flex:1;line-height:1.5}
+    .ex-toggle{font-size:.75rem;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-body{padding:1.25rem;border-top:1px solid var(--border);display:none}
+    .ex-body p,.ex-body li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .ex-body ul{margin:.6rem 0 .6rem 1.3rem}
+    .ex-body strong{color:#f1f5f9}
+    .solution{background:var(--surface2);border-radius:8px;padding:1.1rem;margin-top:1rem;display:none}
+    .solution.show{display:block}
+    .sol-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--success);margin-bottom:.65rem}
+    .solution p,.solution li{font-size:.88rem;color:#cbd5e1;line-height:1.65}
+    .solution ul{margin:.5rem 0 .5rem 1.3rem}
+    .solution strong{color:#f1f5f9}
+    .sol-btn{margin-top:.85rem;padding:.4rem .9rem;border-radius:6px;font-size:.82rem;font-weight:500;background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s}
+    .sol-btn:hover{border-color:var(--success);color:var(--success)}
+    .done-btn{display:inline-block;margin-top:.75rem;padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);color:var(--success);cursor:pointer;transition:background .15s}
+    .done-btn:hover{background:rgba(34,197,94,.18)}.done-btn.done{background:rgba(34,197,94,.2)}
+
+    code{font-family:'Courier New',monospace;font-size:.85em;background:var(--surface3);padding:.1em .4em;border-radius:4px;color:#a5b4fc}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    @media(max-width:620px){.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-back">← Hjem</a>
+  <span class="nav-title">Modul 8 — Use Case Specification</span>
+  <span class="nav-prog" id="nav-prog"></span>
+</nav>
+
+<div class="hero">
+  <div class="module-tag">Modul 08</div>
+  <h1>Use Case Specification</h1>
+  <p>Lær å skrive presise use case-spesifikasjoner med basic flow, extension points, alternative flows og subflows — direkte fra Kenneth's forelesninger.</p>
+  <div class="hero-meta">
+    <span class="meta-pill">📖 4 seksjoner</span>
+    <span class="meta-pill">🎯 10 quizspørsmål</span>
+    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">⏱ ~40 min</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+</div>
+
+<div class="content">
+<!-- ═══════════════════ THEORY ═══════════════════ -->
+<div class="panel active" id="panel-theory">
+
+<!-- ─── SEKSJON 1: Use Case Specification Format ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Use Case Specification — de 8 komponentene</h2>
+  </div>
+
+  <p class="prose">En use case-spesifikasjon er et tekstdokument som presist beskriver flyten av hendelser innenfor én use case. Kenneth sier: «We have to specify what the system and the actor should perform within the use case.» Klikk på hver rad for å forstå den i detalj:</p>
+
+  <div class="uc-spec">
+    <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-1')">
+      <div class="uc-label">Use Case Name</div>
+      <div class="uc-val">Register for Courses</div>
+    </div>
+    <div class="uc-explain" id="uc-exp-1">
+      <strong>Obligatorisk.</strong> Bruk present tense, aktiv form, fra aktørens perspektiv. Eks: «Register for Courses», «Withdraw Money», «Select Courses to Teach». Reflekterer hva aktøren gjør — ikke hva systemet gjør.
+    </div>
+
+    <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-2')">
+      <div class="uc-label">Brief Description</div>
+      <div class="uc-val">This use case describes how a student registers for courses for a given semester. It begins when the student chooses to register and ends when the schedule is confirmed.</div>
+    </div>
+    <div class="uc-explain" id="uc-exp-2">
+      <strong>Obligatorisk.</strong> Kort og presis — formål og overordnet oversikt. Inkluder: hva use casen gjør, hvem som initierer den, og når den slutter. Hold det til 2–4 setninger.
+    </div>
+
+    <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-3')">
+      <div class="uc-label">Participating Actors</div>
+      <div class="uc-val">Student (initiator), Billing System (secondary)</div>
+    </div>
+    <div class="uc-explain" id="uc-exp-3">
+      <strong>Obligatorisk.</strong> List alle aktører — primær (den som initierer) og sekundær (andre systemer/aktører som deltar). Skillnaden mellom primær og sekundær er viktig for use case-diagrammet (pil vs linje).
+    </div>
+
+    <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-4')">
+      <div class="uc-label">Preconditions</div>
+      <div class="uc-val"><em>(bare hvis nødvendig)</em><br>The student is logged in to the system.</div>
+    </div>
+    <div class="uc-explain" id="uc-exp-4">
+      <strong>Valgfri — bare legg til hvis use casen IKKE kan utføres uten visse forutsetninger.</strong>
+      <br><br>
+      Kenneth: «A precondition is a statement about the state that the system and/or the actor must be in for the use case to be performed.»
+      <br><br>
+      To kritiske regler:
+      <ul style="margin:.5rem 0 0 1.2rem">
+        <li><strong>Precondition sier HVA som må være sant — ikke HVORDAN gjøre det sant.</strong> Skriv: «Student is logged in», ikke «Student must log in by entering username and password».</li>
+        <li><strong>Preconditions gjør use cases uavhengige av hverandre.</strong> Du trenger ikke beskrive login-flyten inne i Register-use casen — precondition fanger kravet uten å koble de to use casene.</li>
+      </ul>
+      <br>
+      ATM-eksempel: precondition for «Withdraw Money» → «Balance ≥ amount to withdraw». Dette er HVA som må være sant, ikke en forklaring av hvordan systemet sjekker det.
+    </div>
+
+    <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-5')">
+      <div class="uc-label">Flow of Events</div>
+      <div class="uc-val"><em>Basic Flow + Alternative Flows (se nedenfor)</em></div>
+    </div>
+    <div class="uc-explain" id="uc-exp-5">
+      <strong>Obligatorisk.</strong> Beskriv sekvensen av handlinger — hva systemet og aktøren gjør. Start alltid med <em>basic flow</em> (normaltilfellet). Legg til <em>alternative flows</em> etterpå for unntak, varianter og valgfri atferd.
+      <br><br>
+      Basic flow skrives som pseudokode: <code>if/then</code>, <code>while</code>, <code>repeat</code>. Kenneth: «It's kind of like specifying the flow of events using pseudo-code.»
+    </div>
+
+    <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-6')">
+      <div class="uc-label">Postconditions</div>
+      <div class="uc-val"><em>(bare hvis viktig)</em><br>The student's schedule is confirmed and saved. The billing system has been notified.</div>
+    </div>
+    <div class="uc-explain" id="uc-exp-6">
+      <strong>Valgfri — bare legg til hvis nødvendig.</strong> Kenneth: «A postcondition is only needed if the system state when the use case ends is important to an actor, OR if the completion leaves the system in a state that may need to be a precondition for another use case.»
+      <br><br>
+      ATM-eksempel: postcondition for «Withdraw Money» → «Balance is still non-negative after withdrawal.»
+      <br><br>
+      Formål: hjelper stakeholders forstå hva resultatet av use casen er — spesielt viktig når resultattilstanden ikke er åpenbar.
+    </div>
+
+    <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-7')">
+      <div class="uc-label">Alternative Flows</div>
+      <div class="uc-val"><em>A1, A2, ... An — se Seksjon 2</em></div>
+    </div>
+    <div class="uc-explain" id="uc-exp-7">
+      <strong>Legg til etter behov.</strong> Alternative flows beskriver valgfri, variant eller eksepsjonell atferd. De nummereres A1, A2, ..., An. Hvert alternative flow spesifiserer eksplisitt <em>where it resumes</em> i slutten. Se Seksjon 2 for detaljert gjennomgang.
+    </div>
+
+    <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-8')">
+      <div class="uc-label">Non-Functional Req.</div>
+      <div class="uc-val"><em>(bare hvis relevant for akkurat denne use casen)</em><br>The registration must complete within 3 seconds.</div>
+    </div>
+    <div class="uc-explain" id="uc-exp-8">
+      <strong>Valgfri.</strong> Kun ikke-funksjonelle krav som er spesifikke for <em>denne</em> use casen (f.eks. responstid for registrering). Generelle system-NFR plasseres i SRS, ikke her.
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:1.25rem">
+    <div class="callout-title">Precondition vs Postcondition — klassisk eksamensspørsmål</div>
+    <p><strong>Precondition</strong> = tilstand systemet/aktøren MÅ være i <em>før</em> use casen starter. Sier HVA som er sant, ikke HVORDAN det ble sant. Gjør use cases uavhengige av hverandre.<br><br>
+    <strong>Postcondition</strong> = tilstand systemet er i <em>etter</em> use casen. Bare nødvendig hvis tilstanden er viktig for en annen use case, eller ikke er åpenbar.</p>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 2: Extension Points og Alternative Flows ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>Extension Points og Alternative Flows</h2>
+  </div>
+
+  <p class="prose">Et <strong>extension point</strong> er et navngitt sted i flyten av hendelser — en label — der alternativ atferd kan settes inn. Kenneth forklarer: «Extension points are primarily used for defining alternative flows — alternative, exceptional, or optional behavior within the use case specification.»</p>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">De tre typene extension points</h3>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-bottom:1.25rem">
+    <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent)">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Single Location</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Labelen forekommer <strong style="color:#cbd5e1">nøyaktig én gang</strong> i spesifikasjonen. Eksempel: «enter term» vises bare ett sted i flyten.</p>
+    </div>
+    <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent2)">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Discrete Locations</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Labelen forekommer på <strong style="color:#cbd5e1">to eller flere spesifikke steder</strong>. Eks: «line passed» vises i create activity OG i modify activity.</p>
+    </div>
+    <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent3)">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent3);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Region</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Definerer et <strong style="color:#cbd5e1">område mellom to extension points</strong>. Alt som skjer innenfor regionen kan referere til den. Eks: fra «begin modifying» til «confirm modifying».</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .5rem">De tre typene alternative flows</h3>
+  <p class="prose">Alternative flows nummereres A1, A2, ..., An. Klikk for å utforske forskjellene:</p>
+
+  <div class="af-grid">
+    <div class="af-card" onclick="showAF(this,'specific','<strong>Specific Alternative Flow</strong><br><br>Starter ved ett spesifikt extension point. Første linje har formen:<br><br><code>At [extension point], if/when [condition], [action].</code><br><br>Eks: «At <em>select activity</em>, if the instructor entered the wrong term or year, the system informs the instructor that the term or year is invalid. The flow of events resumes at <em>enter term</em>.»<br><br>Avhenger av at noe spesifikt skjer på et spesifikt sted i flyten.')">
+      <div class="af-sym">A1</div>
+      <div class="af-title">Specific</div>
+      <p style="font-size:.8rem;color:var(--muted)">Starter ved ett navngitt extension point</p>
+    </div>
+    <div class="af-card" onclick="showAF(this,'bounded','<strong>Bounded Alternative Flow</strong><br><br>Kan skje <em>mellom</em> to extension points — innenfor en region. Første linje:<br><br><code>Between [EP1] and [EP2], if/when [condition], [action].</code><br><br>Eks: «Between <em>begin modifying schedule</em> and <em>confirm modifying schedule</em>, if a schedule already exists, show a popup. The flow of events resumes at <em>select activity</em>.»<br><br>Nyttig for å modellere feil som kan oppstå gjennom en hel sekvens.')">
+      <div class="af-sym">A2</div>
+      <div class="af-title">Bounded</div>
+      <p style="font-size:.8rem;color:var(--muted)">Skjer mellom to extension points (region)</p>
+    </div>
+    <div class="af-card" onclick="showAF(this,'general','<strong>General Alternative Flow</strong><br><br>Kan starte <em>når som helst</em> i flyten — ikke knyttet til et spesifikt sted. Første linje:<br><br><code>At any time, if/when [condition], [action].</code><br><br>Eks: «At any time, if the student cancels, the system discards all changes. The use case ends.»<br><br>Brukes typisk for generelle unntak: tidstidsavbrudd, avbryting, nettverksfeil.')">
+      <div class="af-sym">A3</div>
+      <div class="af-title">General</div>
+      <p style="font-size:.8rem;color:var(--muted)">Kan starte når som helst i flyten</p>
+    </div>
+  </div>
+  <div class="af-explain-box" id="af-explain">Klikk på en alternativ-flow-type for forklaring.</div>
+
+  <div class="callout danger" style="margin-top:1.25rem">
+    <div class="callout-title">Siste linje i alternative flow — obligatorisk</div>
+    <p>Kenneth er eksplisitt: «The last line of an alternative flow must specify the exit point of the flow — where the actor resumes the flow of events.»</p>
+    <ul>
+      <li><strong>Valgfri atferd</strong> → resume ved original extension point</li>
+      <li><strong>Variant atferd</strong> → resume ved et annet extension point</li>
+      <li><strong>Eksepsjonell atferd</strong> → resume ved original EP, et annet EP, <em>eller</em> use casen slutter</li>
+    </ul>
+    <p style="margin-top:.5rem">Glem denne linjen på eksamen = feil svar. Alltid spesifiser eksplisitt.</p>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 3: Subflows ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Subflows</h2>
+  </div>
+
+  <p class="prose">En <strong>subflow</strong> er et segment av hendelser innenfor en use case som har et klart formål og er atomisk — man trekker det ut for å forbedre lesbarheten. Kenneth: «By using subflow, we can improve the readability of a use case specification.»</p>
+
+  <div class="two-col">
+    <div style="background:var(--surface2);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:1rem">
+      <div style="font-size:.78rem;font-weight:700;color:var(--success);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Subflow — regler</div>
+      <ul style="font-size:.87rem;color:#cbd5e1;line-height:1.7;margin-left:1.2rem">
+        <li>Nummereres <strong style="color:#f1f5f9">S1, S2, ..., Sn</strong></li>
+        <li>Gi hvert subflow et <strong style="color:#f1f5f9">beskrivende navn</strong></li>
+        <li><strong style="color:#f1f5f9">Ingen nesting</strong> — ikke legg subflows inni subflows</li>
+        <li>Et subflow er <strong style="color:#f1f5f9">ikke en separat use case</strong> — bare en del av den</li>
+      </ul>
+    </div>
+    <div style="background:var(--surface2);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:1rem">
+      <div style="font-size:.78rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Subflow vs separat use case</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Kenneth: «A subflow is not a separate use case. It's just part of the use case — a segment that is meaningful and has a clear purpose.»</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem">Separat use case: ville du noen gang gjort <em>bare</em> dette trinnet uten resten? Hvis nei → subflow.</p>
+    </div>
+  </div>
+
+  <div class="callout info" style="margin-top:1rem">
+    <div class="callout-title">Ikke dele opp for mye — Kenneth's poeng</div>
+    <p>Kenneth advarer mot over-splitting: «Use cases do not directly communicate with each other. We assume use cases are intended to be independent of each other.»</p>
+    <p style="margin-top:.5rem">Eksempel på feil: «Select Products», «Enter Order Info», «Enter Shipping Info», «Enter Payment», «Confirm Order» — alle som separate use cases. Kenneth: «They are too small. They are simply part of the story, not the entire story.» <strong>Løsning:</strong> Grupper alt til én stor «Place Order»-use case og bruk subflows for delene.</p>
+    <p style="margin-top:.5rem">Test: «Would you ever do just one thing without doing the others? If you have to do other things together anyway, then why don't you group them together?»</p>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Hvor mye detalj er nok?</h3>
+  <p class="prose">Kenneth's tommelfingerregel: «There should be enough detail so that all the stakeholders understand what's happening within the use case. The basic flow should unambiguously describe the required behavior. Keep asking yourself, <em>what does this mean?</em> — until all ambiguities have been resolved.»</p>
+</div>
+
+<!-- ─── SEKSJON 4: Komplett eksempel ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>Komplett eksempel — «Select Courses to Teach» (ASU)</h2>
+  </div>
+
+  <p class="prose">Kenneth bruker ASU Course Registration System som gjennomgående eksempel. Her er en komplett use case-spesifikasjon med alle elementer — klikk på radene for forklaringer.</p>
+
+  <div class="uc-spec">
+    <div class="uc-row">
+      <div class="uc-label">Use Case Name</div>
+      <div class="uc-val">Select Courses to Teach</div>
+    </div>
+    <div class="uc-row">
+      <div class="uc-label">Brief Description</div>
+      <div class="uc-val">This use case describes how a professor selects courses to teach for a term that has not started.</div>
+    </div>
+    <div class="uc-row">
+      <div class="uc-label">Participating Actors</div>
+      <div class="uc-val">Instructor (initiator)</div>
+    </div>
+    <div class="uc-row">
+      <div class="uc-label">Preconditions</div>
+      <div class="uc-val">The instructor is logged in to the system.</div>
+    </div>
+    <div class="uc-row">
+      <div class="uc-label">Flow of Events</div>
+      <div class="uc-val"><em>See Basic Flow and Subflows below.</em></div>
+    </div>
+    <div class="uc-row">
+      <div class="uc-label">Postconditions</div>
+      <div class="uc-val">The instructor's selected courses are saved in the system.</div>
+    </div>
+  </div>
+
+  <div class="flow-block" style="margin-top:1.1rem">
+    <div class="flow-title">Basic Flow</div>
+    <div class="flow-step"><span class="step-num">1.</span><span class="step-text">The use case begins when the Instructor chooses to select courses to teach.</span></div>
+    <div class="flow-step"><span class="step-num">2.</span><span class="step-text">The system displays the interface for selecting courses to teach.</span></div>
+    <div class="flow-step"><span class="step-num">3.</span><span class="step-text">The Instructor indicates the term and year. <span class="ep-tag">EP: enter term</span></span></div>
+    <div class="flow-step"><span class="step-num">4.</span><span class="step-text">When the Instructor has an activity to perform:</span></div>
+    <div class="flow-step indent"><span class="step-num">4a.</span><span class="step-text">If the Instructor chooses to <strong>create</strong> a schedule: <span class="sub-tag">S1: Create Schedule</span></span></div>
+    <div class="flow-step indent"><span class="step-num">4b.</span><span class="step-text">If the Instructor chooses to <strong>modify</strong> a schedule: <span class="sub-tag">S2: Modify Schedule</span></span></div>
+    <div class="flow-step"><span class="step-num">5.</span><span class="step-text">The system saves the selected courses. The use case ends.</span></div>
+  </div>
+
+  <div class="flow-block" style="margin-top:.75rem">
+    <div class="flow-title">S1: Create Schedule <span style="color:var(--muted);font-size:.75em">(Subflow)</span></div>
+    <div class="flow-step"><span class="step-num">1.</span><span class="step-text">The system retrieves and displays available course information for the given term, if the final date for changes has not passed. <span class="ep-tag">EP: line passed</span></span></div>
+    <div class="flow-step"><span class="step-num">2.</span><span class="step-text">The Instructor selects the courses he wants to teach.</span></div>
+    <div class="flow-step"><span class="step-num">3.</span><span class="step-text">The system records the selection. The subflow ends.</span></div>
+  </div>
+
+  <div class="flow-block" style="margin-top:.75rem">
+    <div class="flow-title">S2: Modify Schedule <span style="color:var(--muted);font-size:.75em">(Subflow)</span></div>
+    <div class="flow-step"><span class="step-num">1.</span><span class="step-text"><span class="ep-tag">EP: begin modifying schedule</span> The system displays the instructor's current schedule.</span></div>
+    <div class="flow-step"><span class="step-num">2.</span><span class="step-text">The Instructor makes changes to the schedule.</span></div>
+    <div class="flow-step"><span class="step-num">3.</span><span class="step-text"><span class="ep-tag">EP: confirm modifying schedule</span> The Instructor confirms changes. The subflow ends.</span></div>
+  </div>
+
+  <div class="flow-block" style="margin-top:.75rem">
+    <div class="flow-title">A1: Wrong Term/Year Entered <span style="color:var(--muted);font-size:.75em">(Specific Alternative Flow)</span></div>
+    <div class="flow-step"><span class="step-num"></span><span class="step-text" style="color:#fde68a">At <em>enter term</em>, if the Instructor entered the wrong term or year:</span></div>
+    <div class="flow-step"><span class="step-num">1.</span><span class="step-text">The system informs the Instructor that the term or year is invalid.</span></div>
+    <div class="flow-step"><span class="step-num">2.</span><span class="step-text"><strong style="color:#86efac">The flow of events resumes at <em>enter term</em>.</strong></span></div>
+  </div>
+
+  <div class="flow-block" style="margin-top:.75rem">
+    <div class="flow-title">A2: Schedule Already Exists <span style="color:var(--muted);font-size:.75em">(Bounded Alternative Flow)</span></div>
+    <div class="flow-step"><span class="step-num"></span><span class="step-text" style="color:#fde68a">Between <em>begin modifying schedule</em> and <em>confirm modifying schedule</em>, if a schedule already exists:</span></div>
+    <div class="flow-step"><span class="step-num">1.</span><span class="step-text">The system displays a popup informing the Instructor that a schedule already exists.</span></div>
+    <div class="flow-step"><span class="step-num">2.</span><span class="step-text"><strong style="color:#86efac">The flow of events resumes at <em>select activity</em>.</strong></span></div>
+  </div>
+
+  <div class="fig-caption" style="margin-top:.75rem">Extension points er markert <span class="ep-tag">EP</span>. Subflows er markert <span class="sub-tag">S1/S2</span>. Legg merke til at hvert alternative flow eksplisitt angir hvor flyten gjenopptas (grønn tekst).</div>
+</div>
+
+</div><!-- /panel-theory -->
+
+<!-- ═══════════════════ QUIZ ═══════════════════ -->
+<div class="panel" id="panel-quiz">
+  <div class="quiz-progress" id="quiz-dots"></div>
+  <div id="quiz-container"></div>
+</div>
+
+<!-- ═══════════════════ EXERCISES ═══════════════════ -->
+<div class="panel" id="panel-exercises">
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 1</span>
+      <h3>Skriv en use case-spesifikasjon for «Withdraw Money» (ATM)</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p><strong>Scenario:</strong> Du skal skrive en komplett use case-spesifikasjon for use casen «Withdraw Money» fra et ATM-system. Kenneth bruker dette eksempelet direkte i forelesningen.</p>
+      <ul>
+        <li>Aktøren er en <strong>Bank Customer</strong></li>
+        <li>Kunden setter inn kortet, taster PIN, velger beløp og tar ut pengene</li>
+        <li>Systemet skal sjekke at saldo er tilstrekkelig</li>
+        <li>Systemet skal oppdatere saldo etter uttak</li>
+        <li>Alternative tilfeller: feil PIN, utilstrekkelig saldo, kunden avbryter</li>
+      </ul>
+      <p style="margin-top:.75rem">Skriv: Use Case Name, Brief Description, Participating Actors, Precondition, Basic Flow (med minst ett extension point), Postcondition, og minst to alternative flows (spesifiser type for hvert).</p>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <p><strong>Use Case Name:</strong> Withdraw Money</p>
+        <p><strong>Brief Description:</strong> This use case describes how a bank customer withdraws cash from an ATM. It begins when the customer inserts their card and ends when the cash is dispensed or the transaction is cancelled.</p>
+        <p><strong>Participating Actors:</strong> Bank Customer (initiator), Banking System (secondary)</p>
+        <p><strong>Precondition:</strong> The ATM is operational and connected to the banking system. <em>(Kenneth's example: «Balance ≥ withdrawal amount» — but this is actually a condition checked during the flow, not a strict precondition.)</em></p>
+        <p><strong>Basic Flow:</strong></p>
+        <ul>
+          <li>1. The use case begins when the Customer inserts their card. <em>[EP: card inserted]</em></li>
+          <li>2. The system prompts for PIN entry.</li>
+          <li>3. The Customer enters PIN. <em>[EP: PIN entered]</em></li>
+          <li>4. The system validates the PIN and displays the menu.</li>
+          <li>5. The Customer selects Withdraw and enters the amount. <em>[EP: amount entered]</em></li>
+          <li>6. The system verifies sufficient balance and dispenses cash.</li>
+          <li>7. The system updates the balance and ejects the card. The use case ends.</li>
+        </ul>
+        <p><strong>Postcondition:</strong> The customer's balance is reduced by the withdrawn amount. The balance remains non-negative. <em>(Kenneth: «The balance must still be non-negative after the withdrawal.»)</em></p>
+        <p><strong>A1 (Specific — Wrong PIN):</strong> At <em>PIN entered</em>, if the PIN is incorrect: the system displays an error. After 3 failures, the card is retained and the use case ends. Otherwise, the flow resumes at <em>PIN entered</em>.</p>
+        <p><strong>A2 (Specific — Insufficient Balance):</strong> At <em>amount entered</em>, if the balance is less than the requested amount: the system displays an insufficient funds message. The flow resumes at <em>amount entered</em>.</p>
+        <p><strong>A3 (General — Customer Cancels):</strong> At any time, if the Customer presses Cancel: the system ejects the card and discards all changes. The use case ends.</p>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 2</span>
+      <h3>Identifiser type alternative flow</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>For hvert alternative flow nedenfor: identifiser om det er <strong>Specific</strong>, <strong>Bounded</strong>, eller <strong>General</strong>. Begrunn svaret.</p>
+      <ul>
+        <li style="margin-bottom:.6rem"><strong>a)</strong> «At any time, if the network connection is lost, the system displays an error and the use case ends.»</li>
+        <li style="margin-bottom:.6rem"><strong>b)</strong> «At <em>confirm order</em>, if the payment fails, the system prompts the customer to retry. The flow resumes at <em>enter payment</em>.»</li>
+        <li style="margin-bottom:.6rem"><strong>c)</strong> «Between <em>begin checkout</em> and <em>confirm checkout</em>, if the shopping cart becomes empty, the system returns to the main page. The use case ends.»</li>
+        <li style="margin-bottom:.6rem"><strong>d)</strong> «At <em>select activity</em> and <em>modify schedule</em>, if the deadline has passed, the system displays a message. The flow resumes at <em>select activity</em>.»</li>
+      </ul>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <ul>
+          <li><strong>a) General</strong> — «At any time» er den klassiske formuleringen for general alternative flow. Kan starte når som helst i flyten, ikke knyttet til et spesifikt sted.</li>
+          <li><strong>b) Specific</strong> — «At <em>confirm order</em>» peker på ett spesifikt extension point. Første linje: «At [EP], if [condition]» — typisk specific.</li>
+          <li><strong>c) Bounded</strong> — «Between <em>begin checkout</em> and <em>confirm checkout</em>» definerer en region mellom to extension points. Klassiisk bounded.</li>
+          <li><strong>d) Discrete locations (Specific)</strong> — «At <em>select activity</em> and <em>modify schedule</em>» viser at det er en discrete locations extension point (forekommer på to steder). Alternative flowen er fortsatt av typen Specific (knyttet til navngitte extension points, selv om de er to).</li>
+        </ul>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 3</span>
+      <h3>Subflow eller separat use case?</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>Kenneth advarer mot å dele opp for mye. For hvert scenario: avgjør om det bør være en <strong>subflow</strong>, en <strong>separat use case</strong>, eller et <strong>alternative flow</strong>. Bruk Kenneths test: «Would you ever do just this one thing without doing the others?»</p>
+      <ul>
+        <li style="margin-bottom:.6rem"><strong>a)</strong> «Enter Payment Information» som del av «Place Order»</li>
+        <li style="margin-bottom:.6rem"><strong>b)</strong> «View Order History» — en student kan åpne dette uavhengig fra menyen</li>
+        <li style="margin-bottom:.6rem"><strong>c)</strong> «Create Schedule» og «Modify Schedule» som deler av «Select Courses to Teach»</li>
+        <li style="margin-bottom:.6rem"><strong>d)</strong> «System disconnects unexpectedly» som del av en hvilken som helst use case</li>
+      </ul>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <ul>
+          <li><strong>a) Subflow.</strong> «Enter Payment Information» har ingen mening alene — du ville aldri gjøre dette uten å faktisk plassere en ordre. Det er en del av historien, ikke hele historien. Kenneth: «They are simply part of the story, not the entire story.»</li>
+          <li><strong>b) Separat use case.</strong> «View Order History» er en komplett, selvstendig funksjonalitet. Studenten kan gå direkte dit fra menyen uten å gjøre noe annet. Det er sin egen komplette historie.</li>
+          <li><strong>c) Subflows S1 og S2.</strong> Kenneth bruker dette eksempelet direkte. «Create Schedule» og «Modify Schedule» er deler av «Select Courses to Teach». Du ville ikke gjøre en av dem uten konteksten fra use casen de tilhører.</li>
+          <li><strong>d) General Alternative Flow.</strong> «System disconnects» er ikke en subflow (ikke et segment av normalflyten) og ikke en separat use case. Det er eksepsjonell atferd som kan skje når som helst — typisk general alternative flow. «At any time, if the connection is lost...»</li>
+        </ul>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+</div><!-- /panel-exercises -->
+</div><!-- /content -->
+
+<script>
+const MOD_ID='mod08',KEY='se-progress-v1';
+function getP(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};}}
+function saveP(d){const p=getP();p[MOD_ID]={...(p[MOD_ID]||{}),...d,updatedAt:Date.now()};localStorage.setItem(KEY,JSON.stringify(p));}
+function getModP(){return getP()[MOD_ID]||{};}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='quiz')renderQuiz();
+}
+
+function toggleUCRow(row, expId){
+  const exp=document.getElementById(expId);
+  const open=exp.classList.toggle('show');
+  row.classList.toggle('active',open);
+}
+
+function showAF(el,type,html){
+  document.querySelectorAll('.af-card').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('af-explain').innerHTML=html;
+}
+
+function toggleEx(header){
+  const body=header.nextElementSibling;
+  const arrow=header.querySelector('.ex-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  arrow.textContent=open?'▾':'▴';
+}
+function toggleSol(btn){
+  const sol=btn.nextElementSibling;
+  const show=sol.classList.toggle('show');
+  btn.textContent=show?'Skjul løsning':'Vis løsning';
+}
+function markDone(btn,id){
+  btn.classList.toggle('done');
+  const done=btn.classList.contains('done');
+  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  const p=getModP();
+  const s=new Set(p.doneExercises||[]);
+  done?s.add(id):s.delete(id);
+  saveP({doneExercises:[...s]});
+  updateNav();
+}
+
+const QUESTIONS=[
+  {q:'Hva er de åtte komponentene i en use case-spesifikasjon?',opts:['Navn, beskrivelse, aktører, preconditions, flows, postconditions, alternative flows, NFR','Navn, beskrivelse, design, kode, testing, NFR, budsjett, tidsplan','Aktører, use cases, assosiasjoner, multiplicity, constraints, generalizations, NFR, deployment','Scope, stakeholders, krav, design, implementasjon, testing, deployment, vedlikehold'],correct:0,exp:'De åtte komponentene er: (1) Use case name, (2) Brief description, (3) Participating actors, (4) Preconditions, (5) Flow of events, (6) Postconditions, (7) Alternative flows, (8) Non-functional requirements. Av disse er preconditions, postconditions og NFR valgfrie — legg dem til bare når nødvendig.'},
+  {q:'En precondition sier at «The student must log in by entering username and password before the use case begins.» Hva er feil med denne formuleringen?',opts:['Den er for kort — trenger mer detalj','Den beskriver HVORDAN noe gjøres, ikke HVA som er sant — det er feil','Den mangler en referanse til systemet','Den bør stå i postconditions, ikke preconditions'],correct:1,exp:'Kenneth: «A precondition states what should be true — not how to make it true.» Riktig formulering: «The student is logged in to the system.» — dette sier hva som er sant (at studenten ER logget inn) uten å beskrive prosessen for å logge inn.'},
+  {q:'Når trenger du en postcondition?',opts:['Alltid — alle use cases krever en postcondition','Kun når use casen er initiert av en sekundær aktør','Når systemtilstanden etter use casen er viktig for en annen use case, eller når utfallet ikke er åpenbart','Kun for use cases som endrer data i databasen'],correct:2,exp:'Kenneth: «A postcondition is only needed if the system state when the use case ends is important to an actor, OR if the completion leaves the system in a state that may need to be a precondition for another use case.» Eksempel: etter «Withdraw Money» → «Balance is still non-negative» — dette er ikke åpenbart og er viktig å presisere.'},
+  {q:'Hva er et extension point?',opts:['En spesiell type use case for å utvide systemet','Et navngitt sted (label) i flyten av hendelser der alternativ atferd kan settes inn','En ekstern aktør som utvider systemets funksjonalitet','En pil mellom to use cases i use case-diagrammet'],correct:1,exp:'Kenneth: «An extension point is a named place — a label — in the flow of events where additional behavior can be inserted.» Extension points brukes primært for å definere alternative flows. De tre typene: single location (forekommer én gang), discrete locations (forekommer på 2+ steder), region (mellom to EPs).'},
+  {q:'Hva kjennetegner en «specific alternative flow»?',opts:['Den kan starte når som helst i flyten','Den skjer mellom to extension points','Den starter ved ett spesifikt navngitt extension point','Den er knyttet til et bestemt non-functional requirement'],correct:2,exp:'Specific alternative flow starter ved ett spesifikt extension point. Første linje: «At [EP], if/when [condition], [action].» Eksempel: «At enter term, if the instructor entered the wrong term or year, the system informs the instructor. The flow resumes at enter term.»'},
+  {q:'Hva kjennetegner en «bounded alternative flow»?',opts:['Den er tidsbegrenset til 30 sekunder','Den skjer mellom to extension points (innenfor en region)','Den kan bare forekomme én gang i flyten','Den har ingen resumption point — den avslutter alltid use casen'],correct:1,exp:'Bounded alternative flow kan skje på et vilkårlig punkt <em>mellom</em> to navngitte extension points — altså innenfor en region. Første linje: «Between [EP1] and [EP2], if/when [condition], [action].» Eksempel: «Between begin modifying schedule and confirm modifying schedule, if a schedule already exists...»'},
+  {q:'Hva MÅ alltid stå som siste linje i et alternative flow?',opts:['Aktøren som initierer alternative flowen','Hvilket alternative flow-nummer det er (A1, A2, osv.)','Eksplisitt angivelse av hvor flyten gjenopptas (resumption point)','En referanse til det tilhørende extension point'],correct:2,exp:'Kenneth er eksplisitt: «The last line of an alternative flow must specify the exit point — where the actor resumes the flow of events.» For valgfri atferd: resume ved original EP. For variant: resume ved annet EP. For eksepsjonell: resume ved EP, annet EP, eller use casen slutter. Glemmer du dette = feil svar på eksamen.'},
+  {q:'Hva er en subflow?',opts:['En use case som er en del av en annen use case','Et segment av hendelser med klart formål, atomisk, trukket ut for lesbarheten','En alternativ flow som kan starte når som helst','En type extension point som skjer over et område'],correct:1,exp:'Kenneth: «A subflow is a segment of events within your use case specification that has a clear purpose and is atomic. By using subflow, we can improve the readability.» Subflows nummereres S1, S2, ..., Sn. Viktig: en subflow er NOT en separat use case — den er bare en del av use casen.'},
+  {q:'Kenneth advarer mot å dele opp use cases for mye. Hva er konsekvensen av over-splitting?',opts:['Diagrammet blir for stort å tegne','De små use casene avhenger av hverandre, noe som bryter use case-uavhengighetsprinsippet','Det blir for mange alternative flows å spesifisere','Use casene blir for lange å lese'],correct:1,exp:'Kenneth: «Use cases do not directly communicate with each other — we assume they are intended to be independent.» Hvis du splitter «Place Order» i «Select Products», «Enter Payment», «Enter Shipping», «Confirm Order» — vil disse avhenge av hverandre. Kenneth: «They are simply part of the story, not the entire story. Group them together as a larger use case.»'},
+  {q:'Hva er regelen for hvor mye detalj en use case-spesifikasjon skal ha?',opts:['Maks 2 sider — mer enn det er for komplisert','Nok til at alle stakeholders forstår hva som skjer — basic flow skal entydig beskrive forventet atferd','Minst 10 steg i basic flow, minst 3 alternative flows','Detaljnivå avhenger av om det er requirement model eller solution model'],correct:1,exp:'Kenneth: «There should be enough detail so that all the stakeholders understand what\'s happening within the use case. The basic flow should unambiguously describe the required behavior. Keep asking yourself, what does this mean? — until all ambiguities have been resolved.»'},
+];
+
+let qAnswers={},qCurrent=0;
+function renderQuiz(){
+  const p=getModP();
+  if(p.quizDone){showQuizResult(p.quizScore,p.quizTotal);return;}
+  document.getElementById('quiz-dots').innerHTML=QUESTIONS.map((_,i)=>`<div class="qp-dot ${qAnswers[i]!=null?(qAnswers[i].correct?'correct':'wrong'):''}" id="dot-${i}"></div>`).join('');
+  renderQuestion(qCurrent);
+}
+function renderQuestion(idx){
+  const q=QUESTIONS[idx];const answered=qAnswers[idx];
+  document.getElementById('quiz-container').innerHTML=`
+    <div>
+      <div class="q-num">Spørsmål ${idx+1} av ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">${q.opts.map((o,i)=>`<button class="q-opt ${answered!=null?(i===q.correct?'correct':(i===answered.chosen?'wrong':''))  :''}" onclick="answerQ(${idx},${i})" ${answered!=null?'disabled':''}>${o}</button>`).join('')}</div>
+      <div class="q-explanation ${answered!=null?'show':''}">💡 ${q.exp}</div>
+      <div class="q-nav">
+        ${idx>0?`<button onclick="gotoQ(${idx-1})">← Forrige</button>`:''}
+        ${idx<QUESTIONS.length-1?`<button class="primary" onclick="gotoQ(${idx+1})">Neste →</button>`:''}
+        ${idx===QUESTIONS.length-1&&Object.keys(qAnswers).length===QUESTIONS.length?`<button class="primary" onclick="finishQuiz()">Se resultat</button>`:''}
+        <span class="q-score">${Object.keys(qAnswers).length}/${QUESTIONS.length} besvart</span>
+      </div>
+    </div>`;
+}
+function answerQ(qi,chosen){
+  qAnswers[qi]={chosen,correct:chosen===QUESTIONS[qi].correct};
+  document.getElementById('dot-'+qi).className='qp-dot '+(chosen===QUESTIONS[qi].correct?'correct':'wrong');
+  renderQuestion(qi);
+}
+function gotoQ(idx){qCurrent=idx;renderQuestion(idx);}
+function finishQuiz(){
+  const score=Object.values(qAnswers).filter(a=>a.correct).length;
+  saveP({quizScore:score,quizTotal:QUESTIONS.length,quizDone:true});
+  updateNav();showQuizResult(score,QUESTIONS.length);
+}
+function showQuizResult(score,total){
+  const pct=Math.round(score/total*100);
+  const msg=pct>=80?'🎉 Utmerket! Du har god kontroll på use case-spesifikasjon.':pct>=60?'👍 Bra! Les gjennom forklaringene på det du fikk feil.':'📚 Gå gjennom teorien igjen — særlig alternative flow-typene og subflows.';
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-result"><div class="score-big">${score}/${total}</div><p>${pct}% riktige</p><p style="margin-top:.3rem">${msg}</p><button onclick="resetQuiz()">Prøv igjen</button></div>`;
+  document.getElementById('quiz-dots').innerHTML='';
+}
+function resetQuiz(){qAnswers={};qCurrent=0;saveP({quizDone:false,quizScore:null});renderQuiz();}
+
+function updateNav(){
+  const p=getModP();
+  const ex=(p.doneExercises||[]).length;
+  document.getElementById('nav-prog').textContent=`${ex}/3 oppgaver · quiz ${p.quizScore!=null?p.quizScore+'/10':'—'}`;
+}
+
+(function init(){
+  const p=getModP();
+  (p.doneExercises||[]).forEach(id=>{
+    const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
+    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+  });
+  updateNav();
+})();
+</script>
+</body>
+</html>

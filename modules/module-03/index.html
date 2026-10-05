@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 3 — Advanced Class Diagrams</title>
+  <style>
+    :root {
+      --bg:#0a0e1a; --surface:#111827; --surface2:#1a2236; --surface3:#1f2d45;
+      --border:#1f2d45; --accent:#6366f1; --accent2:#06b6d4; --accent3:#8b5cf6;
+      --text:#e2e8f0; --muted:#64748b; --success:#22c55e; --warn:#f59e0b; --danger:#ef4444;
+      --radius:10px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    nav{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:50}
+    .nav-back{font-size:.85rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.3rem}
+    .nav-back:hover{color:var(--text)}
+    .nav-title{font-size:.9rem;font-weight:600;color:var(--text);margin-left:auto}
+    .nav-prog{font-size:.78rem;color:var(--muted)}
+    .hero{padding:3rem 1.5rem 2rem;max-width:900px;margin:0 auto}
+    .module-tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);padding:.25rem .7rem;border-radius:99px;display:inline-block;margin-bottom:1rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;color:#f8fafc;line-height:1.2}
+    .hero p{margin-top:.75rem;color:var(--muted);font-size:1rem;max-width:580px}
+    .hero-meta{display:flex;gap:1rem;margin-top:1.2rem;flex-wrap:wrap}
+    .meta-pill{font-size:.78rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:.25rem .7rem;border-radius:99px}
+    .tabs{display:flex;gap:.25rem;border-bottom:1px solid var(--border);padding:0 1.5rem;max-width:900px;margin:0 auto}
+    .tab{padding:.75rem 1.2rem;font-size:.88rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;transition:color .15s,border-color .15s}
+    .tab:hover{color:var(--text)}
+    .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .content{max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem}
+    .panel{display:none}
+    .panel.active{display:block}
+    .section{margin-bottom:3.5rem}
+    .section-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+    .section-num{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0}
+    .section h2{font-size:1.25rem;font-weight:700;color:#f1f5f9}
+    .prose{color:#cbd5e1;font-size:.96rem;margin-bottom:1rem}
+    .prose strong{color:#f1f5f9}
+    ul.prose-list{color:#cbd5e1;font-size:.95rem;margin:.5rem 0 1rem 1.4rem}
+    ul.prose-list li{margin-bottom:.45rem}
+    .callout{border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin:1.2rem 0}
+    .callout.info{background:rgba(99,102,241,.08);border-left:3px solid var(--accent)}
+    .callout.tip{background:rgba(6,182,212,.08);border-left:3px solid var(--accent2)}
+    .callout.warn{background:rgba(245,158,11,.08);border-left:3px solid var(--warn)}
+    .callout.danger{background:rgba(239,68,68,.08);border-left:3px solid var(--danger)}
+    .callout-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+    .callout.info .callout-title{color:var(--accent)}
+    .callout.tip .callout-title{color:var(--accent2)}
+    .callout.warn .callout-title{color:var(--warn)}
+    .callout.danger .callout-title{color:var(--danger)}
+    .callout p,.callout li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .callout ul{margin:.4rem 0 0 1.2rem}
+    .fig{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0;overflow-x:auto}
+    .fig-caption{font-size:.78rem;color:var(--muted);margin-top:.85rem;text-align:center;font-style:italic}
+    .fig-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem}
+    .uml-class{display:inline-block;min-width:160px;border:2px solid var(--accent);border-radius:6px;overflow:hidden;font-family:'Courier New',monospace}
+    .uml-name{background:rgba(99,102,241,.18);padding:.4rem .8rem;font-size:.85rem;font-weight:700;color:#a5b4fc;text-align:center;border-bottom:1px solid var(--border)}
+    .uml-name.italic-name{font-style:italic;color:#c4b5fd}
+    .uml-attrs,.uml-ops{padding:.4rem .8rem;font-size:.75rem;color:#94a3b8;border-bottom:1px solid var(--border);line-height:1.7}
+    .uml-ops{border-bottom:none}
+    .uml-line{display:block}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:1rem 0}
+    code{font-family:'Courier New',monospace;font-size:.85em;background:var(--surface3);padding:.1em .4em;border-radius:4px;color:#a5b4fc}
+    /* Constraint cards */
+    .constraint-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin:1rem 0}
+    .c-card{background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;padding:.9rem;cursor:pointer;transition:border-color .15s}
+    .c-card:hover,.c-card.active{border-color:var(--accent2)}
+    .c-sym{font-family:monospace;font-size:1.05rem;font-weight:700;color:var(--warn);margin-bottom:.3rem}
+    .c-name{font-size:.75rem;color:var(--muted)}
+    .c-explain{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.88rem;color:#cbd5e1;min-height:64px;margin-top:.5rem;line-height:1.65;transition:all .2s}
+    /* Quiz */
+    .quiz-progress{display:flex;gap:.35rem;margin-bottom:1.75rem;flex-wrap:wrap}
+    .qp-dot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:background .2s}
+    .qp-dot.correct{background:var(--success)}
+    .qp-dot.wrong{background:var(--danger)}
+    .q-num{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem}
+    .q-text{font-size:1rem;font-weight:600;color:#f1f5f9;margin-bottom:1.25rem;line-height:1.55}
+    .q-options{display:flex;flex-direction:column;gap:.5rem}
+    .q-opt{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;cursor:pointer;font-size:.9rem;color:var(--text);text-align:left;transition:border-color .15s,background .15s}
+    .q-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(99,102,241,.08)}
+    .q-opt.correct{border-color:var(--success)!important;background:rgba(34,197,94,.1);color:#86efac}
+    .q-opt.wrong{border-color:var(--danger)!important;background:rgba(239,68,68,.1);color:#fca5a5}
+    .q-explanation{margin-top:.9rem;background:var(--surface3);border-radius:8px;padding:.9rem 1rem;font-size:.87rem;color:#cbd5e1;display:none;line-height:1.65}
+    .q-explanation.show{display:block}
+    .q-nav{display:flex;gap:.75rem;margin-top:1.25rem;align-items:center;flex-wrap:wrap}
+    .q-nav button{padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:background .15s}
+    .q-nav button:hover{background:var(--surface3)}
+    .q-nav button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .q-nav button.primary:hover{opacity:.88}
+    .q-score{font-size:.82rem;color:var(--muted);margin-left:auto}
+    .quiz-result{text-align:center;padding:2.5rem}
+    .score-big{font-size:3.5rem;font-weight:800;color:var(--accent)}
+    .quiz-result p{color:var(--muted);margin-top:.5rem;font-size:.95rem}
+    .quiz-result button{margin-top:1.5rem;padding:.6rem 1.6rem;border-radius:6px;background:var(--accent);border:none;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer}
+    /* Exercises */
+    .exercise{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden}
+    .ex-header{padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;user-select:none}
+    .ex-header:hover{background:var(--surface2)}
+    .ex-num{background:var(--surface3);border-radius:6px;padding:.2rem .55rem;font-size:.75rem;font-weight:700;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-header h3{font-size:.92rem;font-weight:600;color:#f1f5f9;flex:1;line-height:1.5}
+    .ex-toggle{font-size:.75rem;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-body{padding:1.25rem;border-top:1px solid var(--border);display:none}
+    .ex-body p,.ex-body li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .ex-body ul{margin:.6rem 0 .6rem 1.3rem}
+    .ex-body strong{color:#f1f5f9}
+    .solution{background:var(--surface2);border-radius:8px;padding:1.1rem;margin-top:1rem;display:none}
+    .solution.show{display:block}
+    .sol-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--success);margin-bottom:.65rem}
+    .solution p,.solution li{font-size:.88rem;color:#cbd5e1;line-height:1.65}
+    .solution ul{margin:.5rem 0 .5rem 1.3rem}
+    .solution strong{color:#f1f5f9}
+    .sol-btn{margin-top:.85rem;padding:.4rem .9rem;border-radius:6px;font-size:.82rem;font-weight:500;background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s}
+    .sol-btn:hover{border-color:var(--success);color:var(--success)}
+    .done-btn{display:inline-block;margin-top:.75rem;padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);color:var(--success);cursor:pointer;transition:background .15s}
+    .done-btn:hover{background:rgba(34,197,94,.18)}
+    .done-btn.done{background:rgba(34,197,94,.2)}
+    @media(max-width:620px){.two-col,.three-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-back">← Hjem</a>
+  <span class="nav-title">Modul 3 — Advanced Class Diagrams</span>
+  <span class="nav-prog" id="nav-prog"></span>
+</nav>
+
+<div class="hero">
+  <div class="module-tag">Modul 03</div>
+  <h1>Advanced Class Diagrams</h1>
+  <p>Association classes, generalisering, arv, disjoint/overlapping, complete/incomplete og tilleggsbegrensninger — alt du trenger for å tegne et fullt UML class diagram på eksamen.</p>
+  <div class="hero-meta">
+    <span class="meta-pill">📖 4 seksjoner</span>
+    <span class="meta-pill">🎯 10 quizspørsmål</span>
+    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">⏱ ~40 min</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════ THEORY ═══════════════════ -->
+<div class="panel active" id="panel-theory">
+
+<!-- ─── SEKSJON 1: Association Class ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Association Class — når assosiasjonen selv har attributter</h2>
+  </div>
+
+  <p class="prose">Noen ganger er det ikke nok å bare koble to klasser med en assosiasjon — selve koblingen har egne egenskaper. Kenneth introduserer dette med et eksempel: vi vil registrere karakter (<code>grade</code>) når en student melder seg på et kurs.</p>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.25rem 0 .6rem">Problemet: tre mislykkede forsøk</h3>
+
+  <div class="three-col">
+    <div style="background:var(--surface3);border:1.5px solid var(--danger);border-radius:8px;padding:1rem">
+      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">❌ Alternativ 1</div>
+      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6"><strong style="color:#f1f5f9">Grade som attributt under Student</strong></p>
+      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Fungerer ikke: vi vet ikke hvor mange kurs en student tar — vi vet ikke hvor mange grade-attributter vi trenger.</p>
+    </div>
+    <div style="background:var(--surface3);border:1.5px solid var(--danger);border-radius:8px;padding:1rem">
+      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">❌ Alternativ 2</div>
+      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6"><strong style="color:#f1f5f9">Grade som multi-verdi attributt</strong></p>
+      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Fungerer ikke: en liste med karakterer forteller ikke hvilken karakter som tilhører hvilket kurs — ingen mapping.</p>
+    </div>
+    <div style="background:var(--surface3);border:1.5px solid var(--warn);border-radius:8px;padding:1rem">
+      <div style="font-size:.75rem;font-weight:700;color:var(--warn);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">⚠️ Alternativ 3</div>
+      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6"><strong style="color:#f1f5f9">Association class</strong></p>
+      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Bedre — men har én kritisk begrensning. Se nedenfor.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">Association class — hva det er og hvordan det tegnes</h3>
+  <p class="prose">En association class er en klasse som er koblet til selve assosiasjonslinjen (ikke til en av klassene). Den brukes når assosiasjonen i seg selv har attributter. Grade hører til koblingen mellom student og kurs — ikke til student alene og ikke til kurs alene.</p>
+
+  <div class="fig">
+    <div class="fig-title">Association class med «Enrolls In» og grade-attributt</div>
+    <svg width="100%" height="160" viewBox="0 0 500 160" style="display:block;max-width:500px;margin:0 auto">
+      <!-- Student -->
+      <rect x="10" y="50" width="100" height="55" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="60" y="70" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">Student</text>
+      <line x1="10" y1="76" x2="110" y2="76" stroke="#1f2d45"/>
+      <text x="18" y="89" fill="#94a3b8" font-size="9" font-family="monospace">+ name : String</text>
+      <text x="18" y="100" fill="#94a3b8" font-size="9" font-family="monospace">+ id : Integer</text>
+      <!-- Course -->
+      <rect x="390" y="50" width="100" height="55" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="440" y="70" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">Course</text>
+      <line x1="390" y1="76" x2="490" y2="76" stroke="#1f2d45"/>
+      <text x="398" y="89" fill="#94a3b8" font-size="9" font-family="monospace">+ code : String</text>
+      <text x="398" y="100" fill="#94a3b8" font-size="9" font-family="monospace">+ title : String</text>
+      <!-- Association line -->
+      <line x1="110" y1="77" x2="390" y2="77" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="225" y="68" fill="#64748b" font-size="9" font-family="sans-serif">enrolls in</text>
+      <text x="115" y="70" fill="#f59e0b" font-size="9" font-family="sans-serif">*</text>
+      <text x="372" y="70" fill="#f59e0b" font-size="9" font-family="sans-serif">*</text>
+      <!-- Association class dashed line -->
+      <line x1="250" y1="77" x2="250" y2="110" stroke="#06b6d4" stroke-width="1.3" stroke-dasharray="4,3"/>
+      <!-- Association class box -->
+      <rect x="185" y="110" width="130" height="45" rx="4" fill="#1a2236" stroke="#06b6d4" stroke-width="1.8"/>
+      <text x="250" y="128" text-anchor="middle" fill="#67e8f9" font-size="11" font-weight="bold" font-family="monospace">Enrollment</text>
+      <line x1="185" y1="134" x2="315" y2="134" stroke="#1f2d45"/>
+      <text x="193" y="148" fill="#94a3b8" font-size="9" font-family="monospace">+ grade : String</text>
+    </svg>
+    <div class="fig-caption">Association class koblet til assosiasjonslinjen med stiplet linje — grade tilhører <em>koblingen</em>, ikke Student eller Course alene.</div>
+  </div>
+
+  <div class="callout danger">
+    <div class="callout-title">Den kritiske begrensningen — Kenneth's Kenneth-eksempel</div>
+    <p>Kenneth gir dette eksempelet: <em>«Kenneth takes COM3111, fails (F). Next semester he takes COM3111 again and gets A+. Can we store both?»</em></p>
+    <p style="margin-top:.6rem"><strong>Nei.</strong> Regelen er: <strong>ett par av instanser kan kun ha én link</strong>. Kenneth og COM3111 er allerede koblet — vi kan ikke koble dem igjen med en annen link. Vi kan bare lagre én av de to karakterene.</p>
+    <p style="margin-top:.6rem">Kenneth sier det slik: «Once a pair of instances are related, they are related. We cannot relate the same pair of instances using two different links.»</p>
+    <p style="margin-top:.6rem">Konsekvens: association class er <em>ikke</em> egnet når en student kan ta samme kurs mer enn én gang.</p>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">Løsningen: introduser en Offering-klasse</h3>
+  <p class="prose">Isteden for at studenten tar et <em>kurs</em> direkte, tar studenten en <em>offering</em> av kurset. Et kurs kan ha mange offerings (ett per semester). Dermed er Kenneth koblet til to ulike offerings, ikke to ganger til det samme kurset.</p>
+
+  <div class="fig">
+    <div class="fig-title">Offering-modellen: historisk data bevares</div>
+    <svg width="100%" height="165" viewBox="0 0 560 165" style="display:block;max-width:560px;margin:0 auto">
+      <!-- Student -->
+      <rect x="10" y="55" width="100" height="55" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="60" y="75" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">Student</text>
+      <line x1="10" y1="81" x2="110" y2="81" stroke="#1f2d45"/>
+      <text x="18" y="94" fill="#94a3b8" font-size="9" font-family="monospace">+ name : String</text>
+      <text x="18" y="105" fill="#94a3b8" font-size="9" font-family="monospace">+ id : Integer</text>
+      <!-- Offering -->
+      <rect x="210" y="30" width="140" height="70" rx="4" fill="#1a2236" stroke="#06b6d4" stroke-width="1.8"/>
+      <text x="280" y="50" text-anchor="middle" fill="#67e8f9" font-size="11" font-weight="bold" font-family="monospace">Offering</text>
+      <line x1="210" y1="56" x2="350" y2="56" stroke="#1f2d45"/>
+      <text x="218" y="69" fill="#94a3b8" font-size="9" font-family="monospace">+ semester : String</text>
+      <text x="218" y="80" fill="#94a3b8" font-size="9" font-family="monospace">+ grade : String</text>
+      <line x1="210" y1="86" x2="350" y2="86" stroke="#1f2d45"/>
+      <text x="218" y="97" fill="#94a3b8" font-size="9" font-family="monospace">+ enroll()</text>
+      <!-- Course -->
+      <rect x="450" y="55" width="100" height="55" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="500" y="75" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">Course</text>
+      <line x1="450" y1="81" x2="550" y2="81" stroke="#1f2d45"/>
+      <text x="458" y="94" fill="#94a3b8" font-size="9" font-family="monospace">+ code : String</text>
+      <text x="458" y="105" fill="#94a3b8" font-size="9" font-family="monospace">+ title : String</text>
+      <!-- Student --enrolls in-- Offering -->
+      <line x1="110" y1="82" x2="210" y2="65" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="120" y="79" fill="#f59e0b" font-size="9" font-family="sans-serif">*</text>
+      <text x="195" y="64" fill="#f59e0b" font-size="9" font-family="sans-serif">*</text>
+      <text x="140" y="68" fill="#64748b" font-size="8" font-family="sans-serif">enrolls in</text>
+      <!-- Offering --is of-- Course -->
+      <line x1="350" y1="65" x2="450" y2="82" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="352" y="64" fill="#f59e0b" font-size="9" font-family="sans-serif">*</text>
+      <text x="440" y="79" fill="#f59e0b" font-size="9" font-family="sans-serif">1</text>
+      <text x="378" y="68" fill="#64748b" font-size="8" font-family="sans-serif">is of</text>
+      <!-- Example data label -->
+      <text x="10" y="145" fill="#64748b" font-size="9" font-family="sans-serif">Eksempel: Kenneth → COM3111-Fall2019 (F)   Kenneth → COM3111-Spring2020 (A+)   ✓ Begge bevart!</text>
+    </svg>
+    <div class="fig-caption">Student tar en spesifikk Offering — ikke kurset direkte. Nå kan Kenneth kobles til to ulike offerings og begge karakterer lagres.</div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-title">Huskeregel: Når bruker du association class?</div>
+    <ul>
+      <li>Assosiasjonen mellom to klasser har egne attributter</li>
+      <li><strong>Og</strong> ett par instanser vil aldri kobles mer enn én gang</li>
+    </ul>
+    <p style="margin-top:.5rem">Hvis et par instanser kan kobles mer enn én gang (f.eks. student tar samme kurs to ganger) → bruk en mellomklasse som <code>Offering</code> i stedet.</p>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 2: Generalisering ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>Generalisering og arv</h2>
+  </div>
+
+  <p class="prose">Generalisering (arv) er relasjonen mellom klasser av samme type. Vi bruker en <strong>hul trekant</strong> i UML for å vise at en klasse er en spesialisering av en annen. Det finnes to retninger å tenke på:</p>
+
+  <div class="two-col">
+    <div style="background:var(--surface2);border:1px solid rgba(99,102,241,.4);border-radius:8px;padding:1.1rem">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.6rem">Spesialisering (top-down)</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Start med en generell klasse (<code>Account</code>). Se at noen attributter bare gjelder noen typer — <code>serviceCharge</code> bare for CheckingAccount, <code>interestRate</code> bare for SavingsAccount. Spesialiser ned til subklasser.</p>
+      <p style="font-size:.83rem;color:var(--muted);margin-top:.5rem;line-height:1.5">Kenneth: <em>«We can see there is a discriminator — accountType — to discriminate account into two different types.»</em></p>
+    </div>
+    <div style="background:var(--surface2);border:1px solid rgba(6,182,212,.4);border-radius:8px;padding:1.1rem">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:.6rem">Generalisering (bottom-up)</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Se at to klasser (<code>BankAccount</code> og <code>CreditCard</code>) har veldig like attributter og operasjoner. Trekk ut en felles superklasse. Flytt felles ting opp.</p>
+      <p style="font-size:.83rem;color:var(--muted);margin-top:.5rem;line-height:1.5">Kenneth: <em>«We can see that they are kind of similar objects — then we can perform generalization and create a more general class.»</em></p>
+    </div>
+  </div>
+
+  <div class="fig" style="margin-top:1.25rem">
+    <div class="fig-title">Bankeksempel: Account-hierarki med generalisering</div>
+    <svg width="100%" height="280" viewBox="0 0 560 280" style="display:block;max-width:560px;margin:0 auto">
+      <!-- Account (abstract) -->
+      <rect x="175" y="10" width="210" height="80" rx="4" fill="#1a2236" stroke="#8b5cf6" stroke-width="1.8"/>
+      <text x="280" y="31" text-anchor="middle" fill="#c4b5fd" font-size="12" font-weight="bold" font-family="monospace" font-style="italic">Account</text>
+      <line x1="175" y1="37" x2="385" y2="37" stroke="#1f2d45"/>
+      <text x="183" y="50" fill="#94a3b8" font-size="9" font-family="monospace">+ accountNo : Integer</text>
+      <text x="183" y="62" fill="#94a3b8" font-size="9" font-family="monospace">+ balance : Money</text>
+      <line x1="175" y1="68" x2="385" y2="68" stroke="#1f2d45"/>
+      <text x="183" y="80" fill="#94a3b8" font-size="9" font-family="monospace">+ checkBalance() : Money</text>
+      <text x="183" y="90" fill="#94a3b8" font-size="9" font-family="monospace">+ withdraw(amt:Money)</text>
+      <!-- Generalization line down -->
+      <line x1="280" y1="90" x2="280" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="100" y1="115" x2="460" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Hollow triangle at superclass -->
+      <polygon points="274,90 286,90 280,83" fill="#1a2236" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Left branch line -->
+      <line x1="100" y1="115" x2="100" y2="135" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Right branch line -->
+      <line x1="460" y1="115" x2="460" y2="135" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Constraint label -->
+      <text x="248" y="130" fill="#f59e0b" font-size="9" font-family="sans-serif">{disjoint, complete}</text>
+      <!-- CheckingAccount -->
+      <rect x="20" y="135" width="160" height="80" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="100" y="155" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">CheckingAccount</text>
+      <line x1="20" y1="161" x2="180" y2="161" stroke="#1f2d45"/>
+      <text x="28" y="174" fill="#94a3b8" font-size="9" font-family="monospace">+ serviceCharge:Money</text>
+      <line x1="20" y1="180" x2="180" y2="180" stroke="#1f2d45"/>
+      <text x="28" y="193" fill="#94a3b8" font-size="9" font-family="monospace">+ charge()</text>
+      <text x="28" y="205" fill="#94a3b8" font-size="9" font-family="monospace">+ withdraw(amt:Money)</text>
+      <!-- SavingsAccount -->
+      <rect x="380" y="135" width="160" height="80" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="460" y="155" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">SavingsAccount</text>
+      <line x1="380" y1="161" x2="540" y2="161" stroke="#1f2d45"/>
+      <text x="388" y="174" fill="#94a3b8" font-size="9" font-family="monospace">+ interestRate : Float</text>
+      <line x1="380" y1="180" x2="540" y2="180" stroke="#1f2d45"/>
+      <text x="388" y="193" fill="#94a3b8" font-size="9" font-family="monospace">+ payInterest()</text>
+      <!-- Overriding note -->
+      <polygon points="130,235 205,235 215,245 215,275 130,275" fill="#1f2d45" stroke="#f59e0b" stroke-width="1.2"/>
+      <polygon points="205,235 205,245 215,245" fill="#0a0e1a" stroke="#f59e0b" stroke-width="1.2"/>
+      <text x="137" y="250" fill="#fde68a" font-size="8" font-family="sans-serif">withdraw() overstyrer</text>
+      <text x="137" y="261" fill="#cbd5e1" font-size="8" font-family="sans-serif">superklassens versjon</text>
+      <text x="137" y="272" fill="#cbd5e1" font-size="8" font-family="sans-serif">(overriding)</text>
+      <line x1="100" y1="215" x2="145" y2="235" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+    <div class="fig-caption">Account (italic = abstrakt) spesialiseres i CheckingAccount og SavingsAccount. CheckingAccount overstyrster withdraw() fra superklassen.</div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">Fordelene med generalisering</h3>
+  <p class="prose">Kenneth oppsummerer: <em>«We can extract the common attributes, relationships, and operations and put them in the superclass. They will be shared by the subclasses. This reduces redundancy of description and promotes reusability.»</em></p>
+
+  <ul class="prose-list">
+    <li><strong>Definér én gang</strong> — felles attributter og operasjoner i superklassen deles av alle subklasser automatisk</li>
+    <li><strong>Enklere endringer</strong> — endre i superklassen og alle subklasser får oppdateringen</li>
+    <li><strong>Overriding</strong> — en subklasse kan overskrive en operasjon fra superklassen. <code>withdraw()</code> i CheckingAccount brukes da istedenfor <code>withdraw()</code> i Account</li>
+    <li><strong>Abstrakt klasse (italic)</strong> — ingen direkte instanser. Alle instanser er av en subtype. Brukes for modellering.</li>
+  </ul>
+
+  <div class="callout warn">
+    <div class="callout-title">Grense for arvdybde</div>
+    <p>Kenneth: «Try to limit the level of inheritance to only two or up to three levels. If you have four, five or six levels of inheritance, it's going to make your diagram very difficult to read.» Hold det enkelt og lesbart.</p>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Multiplicity i generalisering — bruk notes</div>
+    <p>Eksempel: PG-studenter tar 0–3 kurs, UG-studenter tar 1–5 kurs. Isteden for to separate assosiasjoner: relax til <code>0..5</code> på Student-nivå, og legg en UML-note for de spesifikke begrensningene. Kenneth: «You can always provide additional information using a note.»</p>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 3: Disjoint/Overlapping, Complete/Incomplete ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Generaliseringsbegrensninger: disjoint, overlapping, complete, incomplete</h2>
+  </div>
+
+  <p class="prose">Når vi tegner et generaliseringshierarki, MÅ vi spesifisere to typer begrensninger — en for <strong>overlapp</strong> og en for <strong>fullstendighet</strong>. Disse skrives i krøllparentes ved generaliseringstrekanten: f.eks. <code>{disjoint, complete}</code>.</p>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.25rem 0 .75rem">Del 1: Kan en instans tilhøre flere subklasser?</h3>
+
+  <div class="two-col">
+    <div style="background:var(--surface2);border:1px solid rgba(99,102,241,.4);border-radius:8px;padding:1.1rem">
+      <div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">{disjoint}</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">En instans kan tilhøre <strong style="color:#f1f5f9">kun én</strong> subklasse — ikke begge.</p>
+      <div style="background:var(--surface3);border-radius:6px;padding:.7rem;margin-top:.6rem;font-size:.83rem;color:#94a3b8;line-height:1.6">
+        <strong style="color:#cbd5e1">Kenneth's eksempel:</strong> Account kan være <em>Personal</em> eller <em>Business</em> — aldri begge. En konto er enten for privatperson eller bedrift.
+      </div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid rgba(6,182,212,.4);border-radius:8px;padding:1.1rem">
+      <div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem">{overlapping}</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">En instans kan tilhøre <strong style="color:#f1f5f9">flere</strong> subklasser samtidig.</p>
+      <div style="background:var(--surface3);border-radius:6px;padding:.7rem;margin-top:.6rem;font-size:.83rem;color:#94a3b8;line-height:1.6">
+        <strong style="color:#cbd5e1">Kenneth's eksempel:</strong> Player kan spille Tennis <em>og</em> Soccer på samme tid. En del av sirkelen overlapper. Det er mulig å tilhøre begge subklassene.
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Del 2: Er alle subklasser listet opp?</h3>
+
+  <div class="two-col">
+    <div style="background:var(--surface2);border:1px solid rgba(34,197,94,.4);border-radius:8px;padding:1.1rem">
+      <div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--success);margin-bottom:.5rem">{complete}</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Alle subklasser er listet. Det finnes <strong style="color:#f1f5f9">ingen andre typer</strong> enn de vi har tegnet.</p>
+      <div style="background:var(--surface3);border-radius:6px;padding:.7rem;margin-top:.6rem;font-size:.83rem;color:#94a3b8;line-height:1.6">
+        <strong style="color:#cbd5e1">Eksempel:</strong> Universitetet har kun UG og PG studenter. «That's it» — Kenneth. Ingen andre studenttyper finnes.
+      </div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid rgba(245,158,11,.4);border-radius:8px;padding:1.1rem">
+      <div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--warn);margin-bottom:.5rem">{incomplete}</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Det kan finnes <strong style="color:#f1f5f9">andre subklasser</strong> som ikke er modellert.</p>
+      <div style="background:var(--surface3);border-radius:6px;padding:.7rem;margin-top:.6rem;font-size:.83rem;color:#94a3b8;line-height:1.6">
+        <strong style="color:#cbd5e1">Eksempel:</strong> Tree kan være furu, bjørk, eik — men det finnes mange andre tretyper. Modellen er ikke uttømmende.
+      </div>
+    </div>
+  </div>
+
+  <div class="fig" style="margin-top:1.5rem">
+    <div class="fig-title">Kenneth's eksempel: betale studieavgift — hva er riktig constraint?</div>
+    <div style="background:var(--surface3);border-radius:8px;padding:1.1rem;font-size:.9rem;color:#cbd5e1;line-height:1.7">
+      <p><strong style="color:#f1f5f9">Scenario:</strong> Studenter kan betale studieavgift med: Cash, Credit Card, eller Debit Card.</p>
+      <p style="margin-top:.6rem"><strong style="color:#f1f5f9">Overlapping eller disjoint?</strong> → <span style="color:#06b6d4">Overlapping</span>. Du kan betale deler med kontanter og resten med kredittkort. Begge subklassene gjelder.</p>
+      <p style="margin-top:.4rem"><strong style="color:#f1f5f9">Complete eller incomplete?</strong> → <span style="color:#f59e0b">Incomplete</span>. Det finnes andre betalingsmetoder — f.eks. nettbank — som ikke er listet.</p>
+      <p style="margin-top:.6rem;font-family:monospace;color:var(--warn);font-size:.9rem">Korrekt constraint: {overlapping, incomplete}</p>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-title">Eksamensstrategi: steg-for-steg</div>
+    <ul>
+      <li><strong>Steg 1:</strong> Spør: «Kan en instans tilhøre mer enn én subklasse?» → Ja = overlapping, Nei = disjoint</li>
+      <li><strong>Steg 2:</strong> Spør: «Er alle mulige typer representert i diagrammet?» → Ja = complete, Nei = incomplete</li>
+      <li><strong>Steg 3:</strong> Kombiner: skriv f.eks. <code>{disjoint, complete}</code> ved trekanten</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 4: Tilleggsbegrensninger og sammendrag ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>Tilleggsbegrensninger og class diagram sammendrag</h2>
+  </div>
+
+  <p class="prose">Kenneth dekker tre ytterligere begrensninger vi kan legge på class diagram. En constraint er en <strong>påstand som enten er sann eller usann</strong>, og som systemet MÅ håndheve.</p>
+
+  <p class="prose">Klikk på en begrensning for å lese forklaring og eksempel:</p>
+  <div class="constraint-grid">
+    <div class="c-card" onclick="showConstraint(this,'{ordered}','<strong style=&quot;color:#f1f5f9&quot;>{ordered}</strong><br><br>Objektene i relasjonen er sortert i en bestemt rekkefølge.<br><br><strong style=&quot;color:#cbd5e1&quot;>Kenneth\'s eksempel:</strong> Studenter kan stå på venteliste til et kurs — rekkefølgen er «first in, first out». Assosiasjonens «*»-side merkes med <code>{ordered}</code>.<br><br>Uten denne begrensningen er rekkefølgen undefined.')">
+      <div class="c-sym">{ordered}</div><div class="c-name">Ordnet rekkefølge</div>
+    </div>
+    <div class="c-card" onclick="showConstraint(this,'{subset}','<strong style=&quot;color:#f1f5f9&quot;>{subset}</strong><br><br>Én assosiasjon er en delmengde av en annen.<br><br><strong style=&quot;color:#cbd5e1&quot;>Kenneth\'s eksempel:</strong> En komité har en Person som leder (chair) og mange Person som medlemmer (members). Lederen MÅ være ett av medlemmene — chair ⊆ members.<br><br>Tegnes som: en stiplet pil fra chair-assosiasjonen til members-assosiasjonen med <code>{subset}</code>.')">
+      <div class="c-sym">{subset}</div><div class="c-name">Delmengde</div>
+    </div>
+    <div class="c-card" onclick="showConstraint(this,'{xor}','<strong style=&quot;color:#f1f5f9&quot;>{xor} — Exclusive Or</strong><br><br>Nøyaktig én av to assosiasjoner gjelder på samme tid — aldri begge, aldri ingen.<br><br><strong style=&quot;color:#cbd5e1&quot;>Kenneth\'s eksempel:</strong> En Account holdes av enten en Person ELLER en Company — ikke begge og ikke ingen.<br><br>Tegnes med en stiplet linje mellom de to assosiasjonene og <code>{xor}</code>-label. Se figur nedenfor.')">
+      <div class="c-sym">{xor}</div><div class="c-name">Exclusive Or</div>
+    </div>
+  </div>
+  <div class="c-explain" id="constraint-explain">Klikk på en begrensning ovenfor for forklaring og eksempel.</div>
+
+  <div class="fig" style="margin-top:1.5rem">
+    <div class="fig-title">{xor}-eksempel: Account holdes av Person ELLER Company</div>
+    <svg width="100%" height="165" viewBox="0 0 500 165" style="display:block;max-width:500px;margin:0 auto">
+      <!-- Person -->
+      <rect x="10" y="60" width="100" height="40" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="60" y="84" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">Person</text>
+      <!-- Account -->
+      <rect x="200" y="60" width="100" height="40" rx="4" fill="#1a2236" stroke="#8b5cf6" stroke-width="1.8"/>
+      <text x="250" y="84" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="bold" font-family="monospace">Account</text>
+      <!-- Company -->
+      <rect x="390" y="60" width="100" height="40" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="440" y="84" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">Company</text>
+      <!-- Person -- Account -->
+      <line x1="110" y1="80" x2="200" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="115" y="74" fill="#f59e0b" font-size="9" font-family="sans-serif">0..1</text>
+      <text x="181" y="74" fill="#f59e0b" font-size="9" font-family="sans-serif">*</text>
+      <text x="130" y="94" fill="#64748b" font-size="8" font-family="sans-serif">holds</text>
+      <!-- Account -- Company -->
+      <line x1="300" y1="80" x2="390" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="302" y="74" fill="#f59e0b" font-size="9" font-family="sans-serif">*</text>
+      <text x="373" y="74" fill="#f59e0b" font-size="9" font-family="sans-serif">0..1</text>
+      <text x="328" y="94" fill="#64748b" font-size="8" font-family="sans-serif">holds</text>
+      <!-- XOR dashed line + label -->
+      <line x1="155" y1="80" x2="345" y2="80" stroke="#ef4444" stroke-width="1" stroke-dasharray="5,4"/>
+      <rect x="218" y="105" width="64" height="22" rx="4" fill="#1f2d45" stroke="#ef4444" stroke-width="1.2"/>
+      <text x="250" y="120" text-anchor="middle" fill="#fca5a5" font-size="10" font-family="monospace" font-weight="bold">{xor}</text>
+      <line x1="250" y1="100" x2="250" y2="105" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+    <div class="fig-caption">{xor}-begrensning: stiplet linje mellom de to assosiasjonene viser at nøyaktig én gjelder.</div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Sammendrag: alle class diagram-elementer</h3>
+
+  <div style="overflow-x:auto;margin:.75rem 0">
+    <table style="width:100%;border-collapse:collapse;font-size:.86rem">
+      <thead>
+        <tr style="border-bottom:1px solid var(--border)">
+          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase">Element</th>
+          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase">Notasjon</th>
+          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase">Hva det betyr</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface3)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Klasse</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#a5b4fc">Rektangel med 3 seksjoner</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Navn, attributter, operasjoner</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface2)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Abstrakt klasse</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#c4b5fd">Italic klassenavn</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Ingen direkte instanser</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface3)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Assosiasjon</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#a5b4fc">— linje med multiplicity</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Relasjon mellom klasser; bidireksjonell i req. model</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface2)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Association class</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#67e8f9">Boks koblet til linje med stiplet linje</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Assosiasjonen har egne attributter</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface3)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Aggregering</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#a5b4fc">◇ Hul diamant</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Del av — valgfri (0..1)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface2)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Komposisjon</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#86efac">◆ Fylt diamant</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Del av — obligatorisk (1)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface3)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Generalisering</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#a5b4fc">△ Hul trekant</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Arv; subklasse er en type av superklasse</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface2)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Gen.-constraints</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#fde68a">{disjoint/overlapping, complete/incomplete}</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Overlapp og fullstendighet for subklasser</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface3)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">UML-note</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#fde68a">Foldet boks + stiplet linje</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Fritekst-begrensning eller kommentar</td>
+        </tr>
+        <tr style="background:var(--surface2)">
+          <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">{xor}, {ordered}, {subset}</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#fca5a5">Stiplet linje mellom assosiasjoner</td>
+          <td style="padding:.55rem .75rem;color:#94a3b8">Tilleggsbegrensninger på assosiasjoner</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /panel-theory -->
+
+<!-- ═══════════════════ QUIZ ═══════════════════ -->
+<div class="panel" id="panel-quiz">
+  <div class="quiz-progress" id="quiz-dots"></div>
+  <div id="quiz-container"></div>
+</div>
+
+<!-- ═══════════════════ EXERCISES ═══════════════════ -->
+<div class="panel" id="panel-exercises">
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 1</span>
+      <h3>Association class vs mellomklasse — når bruker du hva?</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p><strong>Scenario A:</strong> Et firma vil holde styr på hvilke ansatte som er med i hvilke prosjekter. Hvert (ansatt, prosjekt)-par har en attributt <code>role : String</code> (f.eks. «developer», «tester»). En ansatt kan bare ha én rolle per prosjekt, og kan ikke jobbe på samme prosjekt to ganger.</p>
+      <p style="margin-top:.75rem"><strong>Scenario B:</strong> Et bibliotek vil holde styr på utlån. Samme bok kan lånes av samme person flere ganger (ulike datoer). Hvert utlån har attributter <code>borrowDate</code> og <code>returnDate</code>.</p>
+      <p style="margin-top:.75rem">For hvert scenario: bruk association class eller introduser mellomklasse? Begrunn svaret.</p>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <p><strong>Scenario A — Association class er riktig.</strong></p>
+        <ul>
+          <li>Assosiasjonen (Employee–Project) har en attributt (<code>role</code>)</li>
+          <li>En ansatt kan bare ha én rolle per prosjekt → ett par instanser kobles maks én gang → begrensningen brytes ikke</li>
+          <li>Tegn en association class «Assignment» med <code>role : String</code> koblet til enrolls-assosiasjonen</li>
+        </ul>
+        <p style="margin-top:.65rem"><strong>Scenario B — Mellomklasse (Loan) er nødvendig.</strong></p>
+        <ul>
+          <li>Samme person kan låne samme bok mer enn én gang → ett par instanser kobles flere ganger</li>
+          <li>Association class tillater ikke dette — «once related, they are related»</li>
+          <li>Løsning: introduser klassen <code>Loan</code> med <code>borrowDate</code>, <code>returnDate</code>. Person tar en Loan, Loan er av en Book. Nå er person koblet til to ulike Loan-instanser for samme bok.</li>
+        </ul>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 2</span>
+      <h3>Tegn et generaliseringshierarki for et universitetssystem</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p><strong>Scenario:</strong> Fra applikasjonsdomenet vet du følgende om et universitetssystem:</p>
+      <ul>
+        <li>Alle brukere (<code>User</code>) har <code>username</code> og <code>password</code></li>
+        <li>Studenter er enten UG (bachelor) eller PG (master/phd) — ingen andre typer</li>
+        <li>En UG-student kan ta 1–5 kurs, en PG-student kan ta 0–3 kurs</li>
+        <li>Lærere kan undervise i mange kurs, og en lærer kan også være student (doktorgrads-student)</li>
+        <li>Det finnes kun studenter og lærere som brukertyper i systemet</li>
+      </ul>
+      <p style="margin-top:.75rem">Tegn class diagrammet. Husk: klassenavn, constraints på generalisering, multiplicity og UML-notes der det trengs.</p>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <p><strong>Hierarki:</strong> User (abstract, italic) → {Student, Teacher}</p>
+        <ul>
+          <li>User → Student, Teacher: <code>{disjoint, complete}</code> — en bruker er enten student eller lærer (men se merknad!), og det finnes ingen andre typer</li>
+          <li>Student → UGStudent, PGStudent: <code>{disjoint, complete}</code> — kun disse to typene</li>
+          <li>User er abstract (italic) — ingen direkte User-instanser</li>
+          <li>Student er abstract (italic) — alle instanser er enten UGStudent eller PGStudent</li>
+        </ul>
+        <p style="margin-top:.5rem"><strong>Assosiasjoner:</strong></p>
+        <ul>
+          <li>Student enrolls in Course: multiplicity <code>0..5</code> på Student-siden (relax fra 1..5/0..3 fordi det må gjelde alltid)</li>
+          <li>UML-note: «UGStudent: 1..5 courses. PGStudent: 0..3 courses»</li>
+          <li>Teacher teaches Course: <code>*</code> på begge sider</li>
+        </ul>
+        <p style="margin-top:.5rem"><strong>Merknad om doktorgradsstudent-lærer:</strong> Overlapping? Kenneth sier at hvis en lærer KAN være student, kan vi endre User-hierarkiet til <code>{overlapping, complete}</code>. Alternativt introduser en separat PhDStudent-klasse under PGStudent. Avhengig av domenebeskrivelsen.</p>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 3</span>
+      <h3>Identifiser riktig generaliseringsbegrensning</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>For hvert scenario: velg riktig kombinasjon av <strong>disjoint/overlapping</strong> og <strong>complete/incomplete</strong>. Begrunn valget.</p>
+      <ul>
+        <li><strong>a)</strong> Et kjøretøy er enten bil, motorsykkel, eller lastebil. Et kjøretøy kan kun tilhøre én type.</li>
+        <li><strong>b)</strong> En person kan ha rollen som both Student og Employee ved samme institusjon. Det finnes også andre roller (f.eks. Alumni) som ikke er modellert.</li>
+        <li><strong>c)</strong> Et dokument er enten Confidential eller Public. Det kan ikke være begge. Disse er de eneste to klassifiseringene som finnes.</li>
+        <li><strong>d)</strong> Et måltid kan inneholde forrett, hovedrett OG dessert — eller bare noen av dem. Vi antar det finnes andre typer måltidskomponenter.</li>
+      </ul>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <ul>
+          <li><strong>a) {disjoint, incomplete}</strong> — kun én type (disjoint). Men det finnes andre kjøretøytyper som sykkel, scooter, osv. som ikke er modellert (incomplete).</li>
+          <li><strong>b) {overlapping, incomplete}</strong> — kan tilhøre begge roller (overlapping). Alumni og andre roller eksisterer men er ikke modellert (incomplete).</li>
+          <li><strong>c) {disjoint, complete}</strong> — kan ikke være begge (disjoint). Disse er de eneste to mulige klassifiseringene (complete).</li>
+          <li><strong>d) {overlapping, incomplete}</strong> — et måltid kan ha flere komponenter samtidig (overlapping). Antatt at det finnes andre typer (incomplete).</li>
+        </ul>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+</div><!-- /panel-exercises -->
+</div><!-- /content -->
+
+<script>
+const MOD_ID='mod03',KEY='se-progress-v1';
+function getP(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};}}
+function saveP(d){const p=getP();p[MOD_ID]={...(p[MOD_ID]||{}),...d,updatedAt:Date.now()};localStorage.setItem(KEY,JSON.stringify(p));}
+function getModP(){return getP()[MOD_ID]||{};}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='quiz')renderQuiz();
+}
+
+function showConstraint(el,sym,html){
+  document.querySelectorAll('.c-card').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('constraint-explain').innerHTML='<strong style="color:#f59e0b;font-size:1.05rem;font-family:monospace">'+sym+'</strong><br><br>'+html;
+}
+
+function toggleEx(header){
+  const body=header.nextElementSibling;
+  const arrow=header.querySelector('.ex-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  arrow.textContent=open?'▾':'▴';
+}
+function toggleSol(btn){
+  const sol=btn.nextElementSibling;
+  const show=sol.classList.toggle('show');
+  btn.textContent=show?'Skjul løsning':'Vis løsning';
+}
+function markDone(btn,id){
+  btn.classList.toggle('done');
+  const done=btn.classList.contains('done');
+  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  const p=getModP();
+  const s=new Set(p.doneExercises||[]);
+  done?s.add(id):s.delete(id);
+  saveP({doneExercises:[...s]});
+  updateNav();
+}
+
+const QUESTIONS=[
+  {q:'Hva er en «association class» og når bruker man den?',opts:['En klasse som arver fra en assosiasjon','En klasse koblet til en assosiasjons linje — brukes når assosiasjonen selv har attributter','En abstrakt superklasse for assosiasjoner','En klasse som erstatter en assosiasjon'],correct:1,exp:'Association class brukes når selve koblingen mellom to klasser har egne attributter. Eksempel: Grade hører til koblingen mellom Student og Course — ikke til Student alene (vet ikke hvor mange kurs) og ikke til Course alene. Kenneth: «Whenever the association has properties, we can model the properties of an association using attributes under the association.»'},
+  {q:'Kenneth viser dette eksempelet: Kenneth tar COM3111, stryker (F). Neste semester tar han det igjen og får A+. Kan vi lagre begge karakterene med en association class?',opts:['Ja — association class støtter flere attributtverdier per par','Nei — ett par instanser kan kun ha én link; vi kan ikke koble Kenneth og COM3111 to ganger','Ja — bare vi bruker en multi-value attributt','Nei — association class er kun for binære assosiasjoner'],correct:1,exp:'Dette er den kritiske begrensningen Kenneth understreker: «Once a pair of instances are related, they are related. We cannot relate the same pair of instances using more than one link.» Vi kan lagre én av de to karakterene, men ikke begge. Kenneth og COM3111 kan kun kobles én gang.'},
+  {q:'Hva er den korrekte løsningen på Kenneth-COM3111-problemet?',opts:['Bruk to separate association classes','Introduser en Offering-klasse: Student enrolls in Offering, Offering is of Course','Lagre grade som multi-value attributt under Course','Bruk to assosiasjoner mellom Student og Course'],correct:1,exp:'Kenneth løser dette ved å introdusere en mellomklasse: Offering. Et kurs har mange offerings (én per semester). Dermed er Kenneth koblet til COM3111-Fall2019 og COM3111-Spring2020 som to ulike Offering-instanser. Begge karakterer kan lagres. Kenneth: «Students are not taking courses — they are taking offerings of courses.»'},
+  {q:'Hva er forskjellen på spesialisering og generalisering i UML?',opts:['De er synonymer og brukes om hverandre','Spesialisering: top-down (general klasse → subklasser). Generalisering: bottom-up (like klasser → felles superklasse).','Spesialisering: brukes kun for abstrakte klasser. Generalisering: bare for konkrete klasser.','Spesialisering bruker hul trekant; generalisering bruker fylt trekant'],correct:1,exp:'Kenneth forklarer begge retningene. Top-down (spesialisering): vi starter med Account og ser at serviceCharge bare gjelder CheckingAccount og interestRate bare SavingsAccount — vi spesialiserer ned. Bottom-up (generalisering): vi ser at BankAccount og CreditCard er veldig like — vi trekker ut en felles superklasse Account.'},
+  {q:'Hva betyr overriding i UML/OO-sammenheng?',opts:['At superklassen overstyrer subklassen','At subklassen definerer samme operasjon som superklassen — subklassens versjon brukes','At en operasjon kalles fra en annen klasse','At operasjonen er privat og ikke kan arves'],correct:1,exp:'Kenneth: «If we define the same operation again in the subtype, we\'re going to use the operation defined in the subtype.» I eksempelet: CheckingAccount definerer withdraw() på nytt — dermed brukes den versjonen istedenfor withdraw() fra Account. Subklassens implementasjon overstyrer superklassens.'},
+  {q:'Hva er en abstrakt klasse i UML og hvordan vises den?',opts:['En klasse med private attributter — vises med minus-tegn','En klasse uten direkte instanser — vises med italic klassenavn','En klasse uten operasjoner — vises med tom seksjon','En klasse med kun én subklasse — vises med enkelt pil'],correct:1,exp:'En abstrakt klasse har ingen direkte instanser — alle instanser er av en subtype. I UML vises den med italic klassenavn. Kenneth: «An abstract class is a class that has no direct instances. We don\'t store any instances under account — all instances are either checking accounts or saving accounts.» Brukes for modelleringsformål.'},
+  {q:'Spillere kan spille tennis OG soccer på samme tid. Hva er riktig constraint?',opts:['{disjoint}','{overlapping}','{complete}','{subset}'],correct:1,exp:'Overlapping betyr at en instans kan tilhøre flere subklasser samtidig. Kenneth: «Some players, they are playing tennis and soccer at the same time — this green part, they may be playing tennis and soccer at the same time.» Disjoint ville betydd at en spiller KUN kan spille ett av de to sportene.'},
+  {q:'Et universitet har nøyaktig to studenttyper: UG og PG. Ingen andre finnes. Hva er riktig constraint for fullstendighet?',opts:['{incomplete} — det kan alltid finnes andre typer','{complete} — alle subklasser er representert','{ordered} — UG kommer før PG','{subset} — PG er en delmengde av UG'],correct:1,exp:'Complete betyr at alle mulige subklasser er listet. Kenneth: «Under a university we only have UG and PG students — that\'s it. We do not have another type of student.» Incomplete brukes når det kan finnes andre typer som ikke er modellert (f.eks. trær: vi har modellert furu, bjørk og eik, men det finnes mange andre tretyper).'},
+  {q:'Hva betyr {xor}-begrensningen i et class diagram?',opts:['At to assosiasjoner er ordnet','At to assosiasjoner er gjensidig utelukkende — nøyaktig én gjelder på samme tid','At én assosiasjon er en delmengde av en annen','At to klasser deler en felles assosiasjon'],correct:1,exp:'XOR = Exclusive Or. Kenneth\'s eksempel: «An account is going to be held by either a Person or a Company — exclusive or, either this or that, but not both at the same time.» Tegnes med en stiplet linje mellom de to assosiasjonene og {xor}-label. Betyr aldri begge og aldri ingen.'},
+  {q:'Hva er en constraint i UML?',opts:['Et kommentar som ikke håndheves','En påstand som enten er sann eller usann — MÅ håndheves av systemet','Et alternativt navn for en assosiasjon','En begrensning på antall assosiasjoner'],correct:1,exp:'Kenneth: «A constraint is actually a statement that can be tested to be either true or false, and it should be enforced by the system implementation.» Eksempel: balance >= 800,000. Dette er sant eller usant, og systemet MÅ sørge for at det alltid er sant. Constraints kan spesifiseres ved siden av operasjoner eller i UML-notes.'},
+];
+
+let qAnswers={},qCurrent=0;
+function renderQuiz(){
+  const p=getModP();
+  if(p.quizDone){showQuizResult(p.quizScore,p.quizTotal);return;}
+  document.getElementById('quiz-dots').innerHTML=QUESTIONS.map((_,i)=>`<div class="qp-dot ${qAnswers[i]!=null?(qAnswers[i].correct?'correct':'wrong'):''}" id="dot-${i}"></div>`).join('');
+  renderQuestion(qCurrent);
+}
+function renderQuestion(idx){
+  const q=QUESTIONS[idx];const answered=qAnswers[idx];
+  document.getElementById('quiz-container').innerHTML=`
+    <div>
+      <div class="q-num">Spørsmål ${idx+1} av ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">${q.opts.map((o,i)=>`<button class="q-opt ${answered!=null?(i===q.correct?'correct':(i===answered.chosen?'wrong':''))  :''}" onclick="answerQ(${idx},${i})" ${answered!=null?'disabled':''}>${o}</button>`).join('')}</div>
+      <div class="q-explanation ${answered!=null?'show':''}">💡 ${q.exp}</div>
+      <div class="q-nav">
+        ${idx>0?`<button onclick="gotoQ(${idx-1})">← Forrige</button>`:''}
+        ${idx<QUESTIONS.length-1?`<button class="primary" onclick="gotoQ(${idx+1})">Neste →</button>`:''}
+        ${idx===QUESTIONS.length-1&&Object.keys(qAnswers).length===QUESTIONS.length?`<button class="primary" onclick="finishQuiz()">Se resultat</button>`:''}
+        <span class="q-score">${Object.keys(qAnswers).length}/${QUESTIONS.length} besvart</span>
+      </div>
+    </div>`;
+}
+function answerQ(qi,chosen){
+  qAnswers[qi]={chosen,correct:chosen===QUESTIONS[qi].correct};
+  document.getElementById('dot-'+qi).className='qp-dot '+(chosen===QUESTIONS[qi].correct?'correct':'wrong');
+  renderQuestion(qi);
+}
+function gotoQ(idx){qCurrent=idx;renderQuestion(idx);}
+function finishQuiz(){
+  const score=Object.values(qAnswers).filter(a=>a.correct).length;
+  saveP({quizScore:score,quizTotal:QUESTIONS.length,quizDone:true});
+  updateNav();showQuizResult(score,QUESTIONS.length);
+}
+function showQuizResult(score,total){
+  const pct=Math.round(score/total*100);
+  const msg=pct>=80?'🎉 Utmerket! Stålkontroll på avansert class diagram.':pct>=60?'👍 Bra! Les gjennom forklaringene på feil svar.':'📚 Gå gjennom teorien igjen — spesielt association class og generalisering.';
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-result"><div class="score-big">${score}/${total}</div><p>${pct}% riktige</p><p style="margin-top:.3rem">${msg}</p><button onclick="resetQuiz()">Prøv igjen</button></div>`;
+  document.getElementById('quiz-dots').innerHTML='';
+}
+function resetQuiz(){qAnswers={};qCurrent=0;saveP({quizDone:false,quizScore:null});renderQuiz();}
+
+function updateNav(){
+  const p=getModP();
+  const ex=(p.doneExercises||[]).length;
+  document.getElementById('nav-prog').textContent=`${ex}/3 oppgaver · quiz ${p.quizScore!=null?p.quizScore+'/10':'—'}`;
+}
+
+(function init(){
+  const p=getModP();
+  (p.doneExercises||[]).forEach(id=>{
+    const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
+    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+  });
+  updateNav();
+})();
+</script>
+</body>
+</html>

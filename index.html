@@ -295,7 +295,15 @@
 
     // Module definitions — add entries here as modules are built
     const MODULES = [
-      { id: 'mod02', num: '02', title: 'UML Class Diagrams', desc: 'Klasser, assosiasjoner, multiplicities, aggregering og komposisjon.', path: 'modules/module-02/', exercises: 3, quizQuestions: 12 },
+      { id: 'mod01', num: '01', title: 'Introduction to Software Engineering', desc: 'Hvorfor software er komplekst, design goals, modularitet, information hiding og hva SE egentlig er.', path: 'modules/module-01/', exercises: 3, quizQuestions: 10 },
+      { id: 'mod02', num: '02', title: 'UML Class Diagrams', desc: 'Klasser, assosiasjoner, multiplicities, aggregering og komposisjon — med Kenneths egne eksempler.', path: 'modules/module-02/', exercises: 3, quizQuestions: 12 },
+      { id: 'mod03', num: '03', title: 'Advanced Class Diagrams', desc: 'Association class, generalisering, disjoint/overlapping, complete/incomplete og XOR-constraints.', path: 'modules/module-03/', exercises: 3, quizQuestions: 10 },
+      { id: 'mod04', num: '04', title: 'Software Project Management', desc: 'De 4 P-ene, software-typer, prosjekttyper, risikostyring og prosjektplanlegging.', path: 'modules/module-04/', exercises: 3, quizQuestions: 10 },
+      { id: 'mod05', num: '05', title: 'Software Development Processes', desc: 'Waterfall, Code & Fix, Spiral, Agile/Scrum, XP, CI og Unified Process.', path: 'modules/module-05/', exercises: 3, quizQuestions: 10 },
+      { id: 'mod06', num: '06', title: 'Requirements Capture & Domain Modeling', desc: 'Kravinnsamling, SRS, identifisering og filtrering av klasser, assosiasjoner og attributter.', path: 'modules/module-06/', exercises: 3, quizQuestions: 10 },
+      { id: 'mod07', num: '07', title: 'Use Case Modeling', desc: 'Aktører, use cases, scenarioer, notasjon og komplett ASU course registration-eksempel.', path: 'modules/module-07/', exercises: 3, quizQuestions: 10 },
+      { id: 'mod08', num: '08', title: 'Use Case Specification', desc: 'Use case-spesifikasjonsformat, extension points, alternative flows og subflows.', path: 'modules/module-08/', exercises: 3, quizQuestions: 10 },
+      { id: 'mod09', num: '09', title: 'Non-Functional Requirements & Validation', desc: 'NFR-kategorier, SetWatch-eksempler, valideringskriterier og SRS-oppsummering.', path: 'modules/module-09/', exercises: 3, quizQuestions: 10 },
     ];
 
     function getProgress() {
@@ -306,7 +314,7 @@
       const grid = document.getElementById('module-grid');
       const progress = getProgress();
 
-      if (!MODULES.length) return; // keep empty state
+      if (!MODULES.length) return;
 
       grid.innerHTML = '';
       let doneCount = 0, totalExercises = 0, doneExercises = 0, bestQuiz = null;
@@ -314,9 +322,10 @@
       MODULES.forEach((mod, i) => {
         const p = progress[mod.id] || {};
         const exDone = (p.doneExercises || []).length;
-        const finished = p.finished || false;
-        const isActive = !finished && (i === 0 || progress[MODULES[i-1]?.id]?.finished);
-        const isLocked = i > 0 && !progress[MODULES[i-1]?.id]?.finished && !finished;
+        const quizDone = p.quizDone || false;
+        const finished = p.finished || (quizDone && exDone >= (mod.exercises || 0));
+        const isActive = !finished;
+        const isLocked = false;
         const quizScore = p.quizScore != null ? Math.round(p.quizScore / (p.quizTotal||1) * 100) : null;
 
         if (finished) doneCount++;

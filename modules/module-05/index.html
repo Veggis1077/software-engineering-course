@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 5 — Software Development Processes</title>
+  <style>
+    :root {
+      --bg:#0a0e1a; --surface:#111827; --surface2:#1a2236; --surface3:#1f2d45;
+      --border:#1f2d45; --accent:#6366f1; --accent2:#06b6d4; --accent3:#8b5cf6;
+      --text:#e2e8f0; --muted:#64748b; --success:#22c55e; --warn:#f59e0b; --danger:#ef4444;
+      --radius:10px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    nav{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:50}
+    .nav-back{font-size:.85rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.3rem}
+    .nav-back:hover{color:var(--text)}
+    .nav-title{font-size:.9rem;font-weight:600;color:var(--text);margin-left:auto}
+    .nav-prog{font-size:.78rem;color:var(--muted)}
+    .hero{padding:3rem 1.5rem 2rem;max-width:900px;margin:0 auto}
+    .module-tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);padding:.25rem .7rem;border-radius:99px;display:inline-block;margin-bottom:1rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;color:#f8fafc;line-height:1.2}
+    .hero p{margin-top:.75rem;color:var(--muted);font-size:1rem;max-width:580px}
+    .hero-meta{display:flex;gap:1rem;margin-top:1.2rem;flex-wrap:wrap}
+    .meta-pill{font-size:.78rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:.25rem .7rem;border-radius:99px}
+    .tabs{display:flex;gap:.25rem;border-bottom:1px solid var(--border);padding:0 1.5rem;max-width:900px;margin:0 auto}
+    .tab{padding:.75rem 1.2rem;font-size:.88rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;transition:color .15s,border-color .15s}
+    .tab:hover{color:var(--text)}
+    .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .content{max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    .section{margin-bottom:3.5rem}
+    .section-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+    .section-num{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0}
+    .section h2{font-size:1.25rem;font-weight:700;color:#f1f5f9}
+    .prose{color:#cbd5e1;font-size:.96rem;margin-bottom:1rem}
+    .prose strong{color:#f1f5f9}
+    ul.prose-list{color:#cbd5e1;font-size:.95rem;margin:.5rem 0 1rem 1.4rem}
+    ul.prose-list li{margin-bottom:.45rem}
+
+    .callout{border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin:1.2rem 0}
+    .callout.info{background:rgba(99,102,241,.08);border-left:3px solid var(--accent)}
+    .callout.tip{background:rgba(6,182,212,.08);border-left:3px solid var(--accent2)}
+    .callout.warn{background:rgba(245,158,11,.08);border-left:3px solid var(--warn)}
+    .callout.danger{background:rgba(239,68,68,.08);border-left:3px solid var(--danger)}
+    .callout-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+    .callout.info .callout-title{color:var(--accent)}
+    .callout.tip .callout-title{color:var(--accent2)}
+    .callout.warn .callout-title{color:var(--warn)}
+    .callout.danger .callout-title{color:var(--danger)}
+    .callout p,.callout li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .callout ul{margin:.4rem 0 0 1.2rem}
+
+    .fig{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0;overflow-x:auto}
+    .fig-caption{font-size:.78rem;color:var(--muted);margin-top:.85rem;text-align:center;font-style:italic}
+    .fig-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem}
+
+    /* PROCESS TABLE */
+    .proc-table{width:100%;border-collapse:collapse;font-size:.84rem;margin:1rem 0}
+    .proc-table th{background:var(--surface3);color:var(--muted);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:.55rem .75rem;text-align:left;border-bottom:1px solid var(--border)}
+    .proc-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border);color:#cbd5e1;vertical-align:top;line-height:1.55}
+    .proc-table tr:last-child td{border-bottom:none}
+    .proc-table tr:hover td{background:var(--surface3)}
+    .proc-name{font-weight:700;color:#f1f5f9}
+    .tag{display:inline-block;font-size:.7rem;padding:.15rem .45rem;border-radius:4px;font-weight:600;margin:.1rem}
+    .tag.pro{background:rgba(34,197,94,.12);color:var(--success)}
+    .tag.con{background:rgba(239,68,68,.12);color:var(--danger)}
+
+    /* SCRUM DIAGRAM */
+    .scrum-flow{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin:1rem 0}
+    .scrum-box{background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;padding:.7rem 1rem;font-size:.82rem;font-weight:600;color:#f1f5f9;text-align:center;min-width:110px}
+    .scrum-box.backlog{border-color:rgba(99,102,241,.5);color:#a5b4fc}
+    .scrum-box.sprint{border-color:rgba(6,182,212,.5);color:#67e8f9;background:rgba(6,182,212,.07)}
+    .scrum-box.done{border-color:rgba(34,197,94,.5);color:#86efac}
+    .scrum-arrow{color:var(--muted);font-size:1.1rem;flex-shrink:0}
+
+    /* BURNDOWN */
+    .burndown-wrap{overflow-x:auto}
+
+    /* QUIZ */
+    .quiz-progress{display:flex;gap:.35rem;margin-bottom:1.75rem;flex-wrap:wrap}
+    .qp-dot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:background .2s}
+    .qp-dot.correct{background:var(--success)}
+    .qp-dot.wrong{background:var(--danger)}
+    .q-num{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem}
+    .q-text{font-size:1rem;font-weight:600;color:#f1f5f9;margin-bottom:1.25rem;line-height:1.55}
+    .q-options{display:flex;flex-direction:column;gap:.5rem}
+    .q-opt{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;cursor:pointer;font-size:.9rem;color:var(--text);text-align:left;transition:border-color .15s,background .15s}
+    .q-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(99,102,241,.08)}
+    .q-opt.correct{border-color:var(--success)!important;background:rgba(34,197,94,.1);color:#86efac}
+    .q-opt.wrong{border-color:var(--danger)!important;background:rgba(239,68,68,.1);color:#fca5a5}
+    .q-explanation{margin-top:.9rem;background:var(--surface3);border-radius:8px;padding:.9rem 1rem;font-size:.87rem;color:#cbd5e1;display:none;line-height:1.65}
+    .q-explanation.show{display:block}
+    .q-nav{display:flex;gap:.75rem;margin-top:1.25rem;align-items:center;flex-wrap:wrap}
+    .q-nav button{padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:background .15s}
+    .q-nav button:hover{background:var(--surface3)}
+    .q-nav button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .q-nav button.primary:hover{opacity:.88}
+    .q-score{font-size:.82rem;color:var(--muted);margin-left:auto}
+    .quiz-result{text-align:center;padding:2.5rem}
+    .score-big{font-size:3.5rem;font-weight:800;color:var(--accent)}
+    .quiz-result p{color:var(--muted);margin-top:.5rem;font-size:.95rem}
+    .quiz-result button{margin-top:1.5rem;padding:.6rem 1.6rem;border-radius:6px;background:var(--accent);border:none;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer}
+
+    /* EXERCISES */
+    .exercise{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden}
+    .ex-header{padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;user-select:none}
+    .ex-header:hover{background:var(--surface2)}
+    .ex-num{background:var(--surface3);border-radius:6px;padding:.2rem .55rem;font-size:.75rem;font-weight:700;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-header h3{font-size:.92rem;font-weight:600;color:#f1f5f9;flex:1;line-height:1.5}
+    .ex-toggle{font-size:.75rem;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-body{padding:1.25rem;border-top:1px solid var(--border);display:none}
+    .ex-body p,.ex-body li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .ex-body ul{margin:.6rem 0 .6rem 1.3rem}
+    .ex-body strong{color:#f1f5f9}
+    .solution{background:var(--surface2);border-radius:8px;padding:1.1rem;margin-top:1rem;display:none}
+    .solution.show{display:block}
+    .sol-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--success);margin-bottom:.65rem}
+    .solution p,.solution li{font-size:.88rem;color:#cbd5e1;line-height:1.65}
+    .solution ul{margin:.5rem 0 .5rem 1.3rem}
+    .solution strong{color:#f1f5f9}
+    .sol-btn{margin-top:.85rem;padding:.4rem .9rem;border-radius:6px;font-size:.82rem;font-weight:500;background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s}
+    .sol-btn:hover{border-color:var(--success);color:var(--success)}
+    .done-btn{display:inline-block;margin-top:.75rem;padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);color:var(--success);cursor:pointer;transition:background .15s}
+    .done-btn:hover{background:rgba(34,197,94,.18)}
+    .done-btn.done{background:rgba(34,197,94,.2)}
+
+    code{font-family:'Courier New',monospace;font-size:.85em;background:var(--surface3);padding:.1em .4em;border-radius:4px;color:#a5b4fc}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    @media(max-width:620px){.two-col{grid-template-columns:1fr}.scrum-flow{flex-direction:column;align-items:flex-start}}
+
+    /* Process cards */
+    .proc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.85rem;margin:1rem 0}
+    .proc-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem;cursor:pointer;transition:border-color .15s}
+    .proc-card:hover,.proc-card.active{border-color:var(--accent)}
+    .proc-card h4{font-size:.9rem;font-weight:700;color:#f1f5f9;margin-bottom:.4rem}
+    .proc-card .tag-row{display:flex;flex-wrap:wrap;gap:.25rem;margin-bottom:.5rem}
+    .proc-card p{font-size:.82rem;color:#94a3b8;line-height:1.55}
+    .proc-detail{background:var(--surface3);border-radius:8px;padding:1.1rem;min-height:80px;font-size:.88rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem;display:none}
+    .proc-detail.show{display:block}
+
+    /* Role cards */
+    .role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin:1rem 0}
+    .role-card{background:var(--surface3);border-radius:8px;padding:1rem;border-top:3px solid var(--accent)}
+    .role-card.sm{border-top-color:var(--accent2)}
+    .role-card.team{border-top-color:var(--accent3)}
+    .role-card h4{font-size:.88rem;font-weight:700;color:#f1f5f9;margin-bottom:.3rem}
+    .role-card p{font-size:.8rem;color:#94a3b8;line-height:1.55}
+    @media(max-width:540px){.role-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-back">← Hjem</a>
+  <span class="nav-title">Modul 5 — Software Development Processes</span>
+  <span class="nav-prog" id="nav-prog"></span>
+</nav>
+
+<div class="hero">
+  <div class="module-tag">Modul 05</div>
+  <h1>Software Development Processes</h1>
+  <p>Waterfall, Agile, Scrum, Spiral og Unified Process — forstå styrker og svakheter slik at du kan velge riktig prosess til riktig scenario.</p>
+  <div class="hero-meta">
+    <span class="meta-pill">📖 5 seksjoner</span>
+    <span class="meta-pill">🎯 10 quizspørsmål</span>
+    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">⏱ ~40 min</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════ THEORY ═══════════════════ -->
+<div class="panel active" id="panel-theory">
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Felles kjerne — alle prosesser inneholder de samme fasene</h2>
+  </div>
+
+  <p class="prose">Kenneth starter forelesningen med et viktig poeng: <strong>uansett hvilken software development process du velger, vil den alltid inneholde de samme grunnleggende fasene.</strong> Det som skiller prosessene er ikke hva de gjør, men <em>hvordan</em> de kombinerer, vektlegger og utfører fasene.</p>
+
+  <div class="fig">
+    <div class="fig-title">Felles kjerne i alle prosesser</div>
+    <div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;justify-content:center">
+      <div style="background:rgba(99,102,241,.15);border:1.5px solid var(--accent);border-radius:8px;padding:.7rem 1.1rem;text-align:center;min-width:110px">
+        <div style="font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em">Requirements</div>
+        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Hva skal vi bygge?</div>
+      </div>
+      <div style="color:var(--muted);font-size:1.2rem">→</div>
+      <div style="background:rgba(6,182,212,.1);border:1.5px solid var(--accent2);border-radius:8px;padding:.7rem 1.1rem;text-align:center;min-width:130px">
+        <div style="font-size:.75rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.07em">Analysis &amp; Design</div>
+        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Hvordan skal vi bygge det?</div>
+      </div>
+      <div style="color:var(--muted);font-size:1.2rem">→</div>
+      <div style="background:rgba(139,92,246,.1);border:1.5px solid var(--accent3);border-radius:8px;padding:.7rem 1.1rem;text-align:center;min-width:110px">
+        <div style="font-size:.75rem;font-weight:700;color:var(--accent3);text-transform:uppercase;letter-spacing:.07em">Implementation</div>
+        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Skriv koden</div>
+      </div>
+      <div style="color:var(--muted);font-size:1.2rem">→</div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid var(--success);border-radius:8px;padding:.7rem 1.1rem;text-align:center;min-width:110px">
+        <div style="font-size:.75rem;font-weight:700;color:var(--success);text-transform:uppercase;letter-spacing:.07em">Testing</div>
+        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Verifiser korrekthet</div>
+      </div>
+    </div>
+    <div class="fig-caption">Kenneth: «No matter which software development process you use, eventually the process will contain these stages.»</div>
+  </div>
+
+  <p class="prose">Etter dette kurset er det viktigste du skal sitte igjen med: <strong>forstå styrker og svakheter til hver prosess, slik at du gitt et scenario vet hvilken som passer.</strong> Det er eksamensspørsmålet.</p>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>Plan-drevne prosesser — Waterfall, Code &amp; Fix, Prototyping, Spiral, Phased Release</h2>
+  </div>
+
+  <p class="prose">Klikk på en prosess for å se Kenneth's forklaring, pros og cons:</p>
+
+  <div class="proc-cards">
+    <div class="proc-card" onclick="showProc(this,'waterfall')">
+      <h4>Waterfall</h4>
+      <div class="tag-row"><span class="tag pro">Forutsigbar</span><span class="tag pro">Disiplinert</span><span class="tag con">Kan ikke gå tilbake</span></div>
+      <p>Lineær, én fase av gangen — krav må fryses tidlig.</p>
+    </div>
+    <div class="proc-card" onclick="showProc(this,'codefix')">
+      <h4>Code &amp; Fix</h4>
+      <div class="tag-row"><span class="tag pro">Enkel å starte</span><span class="tag con">Uforutsigbar</span><span class="tag con">Ikke skalerbar</span></div>
+      <p>Kode → test → fiks, gjenta. Unngå for store systemer.</p>
+    </div>
+    <div class="proc-card" onclick="showProc(this,'proto')">
+      <h4>Prototyping</h4>
+      <div class="tag-row"><span class="tag pro">Vage krav OK</span><span class="tag pro">Klientfeedback</span><span class="tag con">Ufullstendig prosess</span></div>
+      <p>Rask prototype → vis til klient → raffiner.</p>
+    </div>
+    <div class="proc-card" onclick="showProc(this,'spiral')">
+      <h4>Spiral</h4>
+      <div class="tag-row"><span class="tag pro">Risikoanalyse</span><span class="tag pro">Iterativ</span><span class="tag con">Trenger risikoekspert</span></div>
+      <p>Planlegg → risikoanalyse → implementer → evaluer, gjenta.</p>
+    </div>
+    <div class="proc-card" onclick="showProc(this,'phased')">
+      <h4>Phased Release</h4>
+      <div class="tag-row"><span class="tag pro">Tidlig feedback</span><span class="tag pro">Reduserer risiko</span><span class="tag con">Vanskelig å dele opp</span></div>
+      <p>Lever systemet stykkevis som «builds».</p>
+    </div>
+  </div>
+  <div class="proc-detail" id="proc-detail-box">Klikk på en prosess ovenfor.</div>
+
+  <div class="fig" style="margin-top:1.5rem">
+    <div class="fig-title">Sammenlignstabell</div>
+    <div style="overflow-x:auto">
+      <table class="proc-table">
+        <thead>
+          <tr>
+            <th>Prosess</th>
+            <th>Tilnærming</th>
+            <th>Passer best når...</th>
+            <th>Viktigste ulempe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="proc-name">Waterfall</span></td>
+            <td>Lineær, sekvensiell</td>
+            <td>Krav er velforstått og stabile</td>
+            <td>Å gå tilbake er svært kostbart</td>
+          </tr>
+          <tr>
+            <td><span class="proc-name">Code &amp; Fix</span></td>
+            <td>Kode → test → fiks</td>
+            <td>Programmeringsoppgaver (ikke produksjon)</td>
+            <td>Uforutsigbar, mesete kode, ikke skalerbar</td>
+          </tr>
+          <tr>
+            <td><span class="proc-name">Prototyping</span></td>
+            <td>Rask prototype → feedback</td>
+            <td>Krav er vage og uklare</td>
+            <td>Ikke en komplett prosess; lite dokumentasjon</td>
+          </tr>
+          <tr>
+            <td><span class="proc-name">Spiral</span></td>
+            <td>Iterativ + risikoanalyse</td>
+            <td>Intern utvikling med høy risiko</td>
+            <td>Trenger risikoekspert; mer overhead</td>
+          </tr>
+          <tr>
+            <td><span class="proc-name">Phased Release</span></td>
+            <td>Inkrementelle builds</td>
+            <td>Stor system som kan deles opp</td>
+            <td>Vanskelig å identifisere delte komponenter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title">Kenneth om Code &amp; Fix</div>
+    <p>«This is usually the approach that we use in programming assignment. But it's not suitable for large systems. If you are using this process, you make the process unpredictable and also uncontrollable. Very likely maybe over budget, over schedule and also fails to meet expectations — because you don't know exactly how many times you have to fix before you get the correct system. So this is the process that we should avoid.»</p>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Agile — XP, Continuous Integration og Scrum</h2>
+  </div>
+
+  <p class="prose">Agile handler ikke om å kaste planer — det handler om å prioritere annerledes. Agile-manifestet setter fire verdier:</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0">
+    <div style="background:rgba(99,102,241,.1);border:1.5px solid rgba(99,102,241,.4);border-radius:8px;padding:.9rem">
+      <div style="font-size:.75rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.07em">Vi verdsetter mer:</div>
+      <ul style="margin:.3rem 0 0 1.1rem;font-size:.85rem;color:#cbd5e1;line-height:1.7">
+        <li>Individer og interaksjoner</li>
+        <li>Fungerende software</li>
+        <li>Samarbeid med kunden</li>
+        <li>Respons på endring</li>
+      </ul>
+    </div>
+    <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;padding:.9rem">
+      <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.07em">Fremfor:</div>
+      <ul style="margin:.3rem 0 0 1.1rem;font-size:.85rem;color:#64748b;line-height:1.7">
+        <li>Prosesser og verktøy</li>
+        <li>Dokumentasjon</li>
+        <li>Kontraktsforhandling</li>
+        <li>Å følge en plan</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Viktig presisering fra Kenneth</div>
+    <p>«This does not imply that there's no value in the items on the right hand side. Just that we focus less on those items.» Agile erstatter ikke dokumentasjon — det prioriterer bare fungerende software over det.</p>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Extreme Programming (XP)</h3>
+  <p class="prose">XP er en agile-praksis med tre kjennetegn Kenneth fremhever spesielt:</p>
+  <ul class="prose-list">
+    <li><strong>Pair programming</strong> — To utviklere jobber ved samme maskin. Én koder, én kontrollerer. Kenneth: «If we try to avoid making mistakes, another guy is double-checking your source code — then we can avoid mistakes.»</li>
+    <li><strong>Test-Driven Development (TDD)</strong> — Tenk på testcaser FØR du implementerer. Kenneth: «Even before we implement, we think about what are the possible test cases for the system.»</li>
+    <li><strong>Kunden velger features</strong> — Utviklerne gir tid- og kostestimat per feature. Kunden velger selv hvilke som inkluderes i neste iterasjon.</li>
+  </ul>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Continuous Integration (CI)</h3>
+  <p class="prose">Utviklere integrerer kode til et delt repository <strong>daglig</strong> — ikke ukentlig eller månedlig. Fordelen er at feil oppdages umiddelbart, og konflikter er minimale fordi endringene er små.</p>
+
+  <div class="fig">
+    <div class="fig-title">CI-arkitektur</div>
+    <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;justify-content:center">
+      <div style="text-align:center">
+        <div style="background:var(--surface3);border:1.5px solid var(--accent);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#a5b4fc">Developer A</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">commit daglig</div>
+      </div>
+      <div style="color:var(--muted)">→</div>
+      <div style="text-align:center">
+        <div style="background:rgba(6,182,212,.1);border:1.5px solid var(--accent2);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#67e8f9">Version Control<br>Repository</div>
+      </div>
+      <div style="color:var(--muted)">→</div>
+      <div style="text-align:center">
+        <div style="background:rgba(139,92,246,.1);border:1.5px solid var(--accent3);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#c4b5fd">CI Server<br><span style="font-weight:400;font-size:.75rem">bygg + test automatisk</span></div>
+      </div>
+      <div style="color:var(--muted)">→</div>
+      <div style="text-align:center">
+        <div style="background:rgba(239,68,68,.1);border:1.5px solid var(--danger);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#fca5a5">Feedback<br><span style="font-weight:400;font-size:.75rem">til alle utviklere</span></div>
+      </div>
+    </div>
+    <div class="fig-caption">Building and testing are done automatically using scripts on the CI server.</div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Scrum — roller, artefakter og seremonier</h3>
+  <p class="prose">Scrum er den mest brukte agile-prosessen i industrien. Kenneth: «Scrum is an agile software development process that mainly specifies <em>what</em> you should do — the team needs to decide <em>how</em> to work on it.»</p>
+
+  <div class="role-grid">
+    <div class="role-card">
+      <h4>Product Owner</h4>
+      <p>= Klienten. Definerer og prioriterer kravene i product backlog. Bestemmer release-datoer. Godkjenner eller avviser leveranser. Kenneth: «The product owner is your client.»</p>
+    </div>
+    <div class="role-card sm">
+      <h4>Scrum Master</h4>
+      <p>= Manager / fasilitator. Sørger for at Scrum-verdiene følges. Fjerner hindringer. Skjermer teamet fra ytre forstyrrelser. Setter opp møter. Kenneth: «Scrum master is usually the manager.»</p>
+    </div>
+    <div class="role-card team">
+      <h4>Development Team</h4>
+      <p>Selvorganisert team av utviklere og testere. Bestemmer selv den beste måten å levere produktet på. Tverrfunksjonelt — ingen spesialistroller.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Scrum-flyten</h3>
+
+  <div class="fig">
+    <div class="fig-title">Fra Product Backlog til ferdig inkrement</div>
+    <div class="scrum-flow">
+      <div class="scrum-box backlog">Product<br>Backlog<br><span style="font-size:.72rem;font-weight:400">alle features</span></div>
+      <div class="scrum-arrow">→</div>
+      <div class="scrum-box backlog">Sprint<br>Planning<br><span style="font-size:.72rem;font-weight:400">velg features</span></div>
+      <div class="scrum-arrow">→</div>
+      <div class="scrum-box sprint">Sprint<br>Backlog<br><span style="font-size:.72rem;font-weight:400">2–4 uker</span></div>
+      <div class="scrum-arrow">→</div>
+      <div style="display:flex;flex-direction:column;gap:.3rem;align-items:center">
+        <div style="font-size:.72rem;color:var(--muted);text-align:center">Daily Scrum<br>↻ hver dag</div>
+        <div class="scrum-box sprint" style="font-size:.78rem;padding:.5rem .8rem">Design<br>Code<br>Test</div>
+      </div>
+      <div class="scrum-arrow">→</div>
+      <div class="scrum-box done">Potentially<br>Shippable<br>Increment</div>
+    </div>
+    <div class="fig-caption">Krav endres ikke innen en sprint. Etter sprint-review starter neste sprint.</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin:1.25rem 0">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem">Artefakter</div>
+      <ul style="margin:.3rem 0 0 1.1rem;font-size:.85rem;color:#cbd5e1;line-height:1.7">
+        <li><strong style="color:#f1f5f9">Product Backlog</strong> — alle features (wish list)</li>
+        <li><strong style="color:#f1f5f9">Sprint Backlog</strong> — features for inneværende sprint</li>
+        <li><strong style="color:#f1f5f9">Burn-down Chart</strong> — gjenstående arbeid per dag</li>
+      </ul>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem">Seremonier</div>
+      <ul style="margin:.3rem 0 0 1.1rem;font-size:.85rem;color:#cbd5e1;line-height:1.7">
+        <li><strong style="color:#f1f5f9">Sprint Planning</strong> — velg features fra backlog</li>
+        <li><strong style="color:#f1f5f9">Daily Scrum</strong> — hva gjorde du i går? i dag? hindringer?</li>
+        <li><strong style="color:#f1f5f9">Sprint Review</strong> — demo av ferdig inkrement</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Burn-down Chart — det viktigste verktøyet i Scrum</h3>
+  <p class="prose">Kenneth (via Scrum-videoen): «The Burn-down Chart is the number one reason for Scrum's popularity and one of the best project visibility tools.» Grafen viser gjenstående arbeid (timer/story points) per dag i en sprint.</p>
+
+  <div class="fig">
+    <div class="fig-title">Burn-down Chart — idealverdi vs faktisk</div>
+    <div class="burndown-wrap">
+      <svg width="100%" height="200" viewBox="0 0 520 200" style="max-width:520px;display:block;margin:0 auto">
+        <!-- Grid -->
+        <line x1="50" y1="20" x2="50" y2="170" stroke="#1f2d45" stroke-width="1"/>
+        <line x1="50" y1="170" x2="490" y2="170" stroke="#1f2d45" stroke-width="1"/>
+        <!-- Grid horizontals -->
+        <line x1="50" y1="70" x2="490" y2="70" stroke="#1f2d45" stroke-width=".5" stroke-dasharray="4,3"/>
+        <line x1="50" y1="120" x2="490" y2="120" stroke="#1f2d45" stroke-width=".5" stroke-dasharray="4,3"/>
+        <!-- Y labels -->
+        <text x="44" y="24" text-anchor="end" fill="#64748b" font-size="9" font-family="sans-serif">100%</text>
+        <text x="44" y="74" text-anchor="end" fill="#64748b" font-size="9" font-family="sans-serif">67%</text>
+        <text x="44" y="124" text-anchor="end" fill="#64748b" font-size="9" font-family="sans-serif">33%</text>
+        <text x="44" y="174" text-anchor="end" fill="#64748b" font-size="9" font-family="sans-serif">0%</text>
+        <!-- X labels (days) -->
+        <text x="50" y="185" text-anchor="middle" fill="#64748b" font-size="9" font-family="sans-serif">D1</text>
+        <text x="160" y="185" text-anchor="middle" fill="#64748b" font-size="9" font-family="sans-serif">D5</text>
+        <text x="270" y="185" text-anchor="middle" fill="#64748b" font-size="9" font-family="sans-serif">D10</text>
+        <text x="380" y="185" text-anchor="middle" fill="#64748b" font-size="9" font-family="sans-serif">D15</text>
+        <text x="490" y="185" text-anchor="middle" fill="#64748b" font-size="9" font-family="sans-serif">D20</text>
+        <!-- Ideal line (straight) -->
+        <line x1="50" y1="20" x2="490" y2="170" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <!-- Actual line (bumpy) -->
+        <polyline points="50,20 72,35 100,50 128,40 156,70 184,90 212,85 240,110 268,100 296,120 324,115 352,135 380,145 408,150 436,155 464,162 490,170" fill="none" stroke="#06b6d4" stroke-width="2"/>
+        <!-- Legend -->
+        <line x1="55" y1="195" x2="85" y2="195" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <text x="90" y="198" fill="#64748b" font-size="9" font-family="sans-serif">Ideal</text>
+        <line x1="130" y1="195" x2="160" y2="195" stroke="#06b6d4" stroke-width="2"/>
+        <text x="165" y="198" fill="#64748b" font-size="9" font-family="sans-serif">Faktisk</text>
+      </svg>
+    </div>
+    <div class="fig-caption">Burndown velocity = helningen på grafen. Avvik mellom ideal og faktisk synliggjør om prosjektet er på rute.</div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-title">Burn-down Chart — to nøkkelpoeng</div>
+    <p><strong>1. Burndown Velocity</strong> = gjennomsnittlig produktivitet per dag (helningen). Fra velocity kan du beregne estimert fullføringsdato.</p>
+    <p style="margin-top:.5rem"><strong>2. Tidlig varsling</strong>: «Knowing whether or not the project is on track early in the schedule can help teams make the proper adjustments necessary to get the project on track.» — Scrum-videoen</p>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>Unified Process — et overordnet rammeverk</h2>
+  </div>
+
+  <p class="prose">Kenneth avslutter med Unified Process (UP) — ikke en konkret prosess, men et <strong>generelt rammeverk</strong> som tar de beste praksisene fra alle prosessene og kombinerer dem. Kenneth: «UP selects from the best practices of previous processes to provide a generic process framework for software development.»</p>
+
+  <p class="prose">Uansett hvilken prosess du bruker, trenger du alltid begge dimensjoner:</p>
+
+  <div class="two-col">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.6rem">Faser (tidslinjen)</div>
+      <ul style="margin:.3rem 0 0 1.1rem;font-size:.86rem;color:#cbd5e1;line-height:1.7">
+        <li><strong style="color:#f1f5f9">Inception</strong> — samle krav + sjekk om det er gjennomførbart</li>
+        <li><strong style="color:#f1f5f9">Elaboration</strong> — utarbeid design</li>
+        <li><strong style="color:#f1f5f9">Construction</strong> — implementer systemet</li>
+        <li><strong style="color:#f1f5f9">Transition</strong> — deploy + vedlikehold</li>
+      </ul>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.6rem">Aktiviteter (på tvers av faser)</div>
+      <ul style="margin:.3rem 0 0 1.1rem;font-size:.86rem;color:#cbd5e1;line-height:1.7">
+        <li>Requirements capture</li>
+        <li>Analysis &amp; Design</li>
+        <li>Implementation</li>
+        <li>Testing</li>
+        <li>Software Quality Assurance (SQA)</li>
+        <li>Project Management</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Hver iterasjon gir et fungerende produkt</div>
+    <p>Kenneth: «Each iteration results in a working product and then each increment establishes a system baseline.» UP er iterativt og inkrementelt — du leverer noe konkret etter hver iterasjon.</p>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2>Når bruker du hvilken prosess?</h2>
+  </div>
+
+  <p class="prose">Kenneth gir en direkte guide basert på prosjektets kjennetegn. Dette er eksamensstoffet — gitt et scenario, velg riktig prosess og begrunn valget:</p>
+
+  <div style="overflow-x:auto;margin:.75rem 0 1rem">
+    <table class="proc-table">
+      <thead>
+        <tr>
+          <th>Kjennetegn / Behov</th>
+          <th>Anbefalt(e) prosess(er)</th>
+          <th>Hvorfor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Trenger <strong>formalitet og disiplin</strong></td>
+          <td>Waterfall, Spiral</td>
+          <td>Begge håndhever dokumentasjon og godkjenning mellom faser</td>
+        </tr>
+        <tr>
+          <td>Trenger <strong>separation of concerns</strong></td>
+          <td>Waterfall, Spiral, Phased Release</td>
+          <td>Disse isolerer faser og deler av systemet fra hverandre</td>
+        </tr>
+        <tr>
+          <td>Systemet vil <strong>endre seg</strong></td>
+          <td>Spiral, Phased Release, Agile</td>
+          <td>Alle støtter endringer uten å kollapse hele prosessen</td>
+        </tr>
+        <tr>
+          <td>Trenger <strong>inkrementell utvikling</strong></td>
+          <td>Prototyping, Spiral, Phased Release, Agile</td>
+          <td>Alle leverer noe fungerende underveis — ikke alt på slutten</td>
+        </tr>
+        <tr>
+          <td>Trenger <strong>risikovurdering</strong></td>
+          <td>Spiral</td>
+          <td>Spiral er den eneste med eksplisitt risikoanalyse i hver iterasjon</td>
+        </tr>
+        <tr>
+          <td>Krav er <strong>vage og uklare</strong></td>
+          <td>Prototyping, Agile</td>
+          <td>Begge involverer klienten tidlig og lar krav utvikle seg</td>
+        </tr>
+        <tr>
+          <td>Krav er <strong>stabile og klare</strong></td>
+          <td>Waterfall</td>
+          <td>Waterfall forutsetter at krav kan fryses — fungerer bare da</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout danger">
+    <div class="callout-title">Eksamenstips — argumenter alltid</div>
+    <p>Det holder ikke å bare velge en prosess. Kenneth forventer at du begrunner valget med prosjektets kjennetegn. Eks: «Jeg velger Spiral fordi kravene er delvis kjent og risikoen er høy — Spiral lar oss identifisere og mitigere risiko i hver iterasjon.»</p>
+  </div>
+</div>
+
+</div><!-- /panel-theory -->
+
+<!-- ═══════════════════ QUIZ ═══════════════════ -->
+<div class="panel" id="panel-quiz">
+  <div class="quiz-progress" id="quiz-dots"></div>
+  <div id="quiz-container"></div>
+</div>
+
+<!-- ═══════════════════ EXERCISES ═══════════════════ -->
+<div class="panel" id="panel-exercises">
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 1</span>
+      <h3>Velg riktig prosess for tre scenarioer</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>For hvert scenario: velg prosess og begrunn valget med spesifikke kjennetegn fra Kenneth's guide.</p>
+      <ul>
+        <li><strong>Scenario A:</strong> Et forsvarsdepartement bestiller et nytt systemer for flystyring. Kravene er fullstendig spesifisert i kontrakten og vil ikke endres. Systemet må dokumenteres grundig.</li>
+        <li><strong>Scenario B:</strong> En startup skal lage en ny app, men vet ikke helt hva brukerne egentlig trenger. De vil involvere tidlige brukere kontinuerlig og lansere raskt.</li>
+        <li><strong>Scenario C:</strong> Et stort finansforetak skal migrere et legacy-system. Teknologirisikoen er høy (ukjent), men de kan jobbe internt uten ekstern klient.</li>
+      </ul>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <p><strong>A → Waterfall.</strong> Kravene er stabile og frosne (kontrakt). Dokumentasjonskravet passer Waterfall. Kenneth: «This model can only be applied when the requirements are well understood and unlikely to change.»</p>
+        <p style="margin-top:.6rem"><strong>B → Agile (Scrum/XP).</strong> Vage krav + kontinuerlig brukerfeedback + rask lansering = kjernen i Agile. Kenneth: «Agile is adaptable to changing requirements. Immediate feedback is provided by the client.»</p>
+        <p style="margin-top:.6rem"><strong>C → Spiral.</strong> Høy teknologirisiko + intern utvikling = Spiral. Kenneth: «It's more appropriate for internal development. The risk evaluation can help reduce development problems.»</p>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 2</span>
+      <h3>Scrum — roller, artefakter og sprint-syklus</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>Et team på 8 personer bruker Scrum. Koble hvert navn/begrep til riktig Scrum-begrep:</p>
+      <ul>
+        <li>a) Lin er sjef for prosjektet. Hun setter opp møter, fjerner hindringer og skjermer teamet.</li>
+        <li>b) ACME Corp. er kunden som betaler for systemet og bestemmer hvilke features som er viktigst.</li>
+        <li>c) Teamet er halvveis i en 3-ukers periode der de jobber med et fast sett av features. Hva heter perioden?</li>
+        <li>d) I starten valgte teamet 15 av 80 features å jobbe med denne perioden. Hva heter listen de 80 er på? Hva heter listen de 15 er på?</li>
+        <li>e) Grafen som viser gjenstående arbeid per dag — hva heter den, og hva avdekker den?</li>
+      </ul>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <ul>
+          <li><strong>a) Scrum Master</strong> — Kenneth: «Scrum master is usually the manager. Responsible for enacting Scrum values, removing impediments, shields the team from external influences.»</li>
+          <li><strong>b) Product Owner</strong> — Kenneth: «Product owner is your client. Sets priority for items.»</li>
+          <li><strong>c) Sprint</strong> — 2–4 uker. Krav endres ikke innen en sprint.</li>
+          <li><strong>d)</strong> De 80: <strong>Product Backlog</strong> (alle features). De 15: <strong>Sprint Backlog</strong> (features for denne sprinten).</li>
+          <li><strong>e) Burn-down Chart</strong> — avdekker om teamet er på rute. Burndown velocity (helningen) lar deg beregne estimert fullføringsdato.</li>
+        </ul>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 3</span>
+      <h3>Identifiser problemer med Code &amp; Fix</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>Et team på 12 utviklere bygger et banksystem med Code &amp; Fix. Etter 6 måneder er de fortsatt ikke ferdige, budsjettet er brukt opp og kunden er misfornøyd.</p>
+      <ul>
+        <li>a) Hva er de tre viktigste grunnene til at Code &amp; Fix mislykkes i store prosjekter?</li>
+        <li>b) Hvilken prosess ville Kenneth anbefalt for et banksystem? Begrunn.</li>
+        <li>c) Hva er problemet med «messy code» i Code &amp; Fix over tid?</li>
+      </ul>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <p><strong>a)</strong></p>
+        <ul>
+          <li><strong>Uforutsigbar og ukontrollerbar</strong> — du vet ikke hvor mange fix-runder det tar</li>
+          <li><strong>Mesete kode</strong> — konstante workarounds gjør koden stadig vanskeligere å endre</li>
+          <li><strong>Ikke skalerbar</strong> — Kenneth: «Not suitable for large systems»</li>
+        </ul>
+        <p style="margin-top:.6rem"><strong>b)</strong> For et banksystem: <strong>Waterfall eller Spiral</strong>. Bankkrav er typisk godt definerte (regulatoriske krav) → Waterfall passer. Hvis risikoen er høy (ny teknologi) → Spiral. Begge håndhever formalitet og dokumentasjon.</p>
+        <p style="margin-top:.6rem"><strong>c)</strong> Teknisk gjeld bygger seg opp. Workarounds legges over workarounds. Kenneth: «Very often the code structure is going to be messy because you're going to put many workarounds in your source code to make it work.» Over tid blir koden nesten umulig å vedlikeholde.</p>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+const MOD_ID='mod05',KEY='se-progress-v1';
+function getP(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};}}
+function saveP(d){const p=getP();p[MOD_ID]={...(p[MOD_ID]||{}),...d,updatedAt:Date.now()};localStorage.setItem(KEY,JSON.stringify(p));}
+function getModP(){return getP()[MOD_ID]||{};}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='quiz')renderQuiz();
+}
+
+const PROC_DETAILS={
+  waterfall:'<strong style="color:#f1f5f9">Waterfall</strong> er den mest disiplinerte prosessen. Du beveger deg alltid nedover: requirements → analysis & design → implementation → testing → maintenance. Å gå tilbake er mulig, men <strong style="color:#fca5a5">svært kostbart</strong>. Kenneth: «Going back is going to be costly, so you want to always go down.»<br><br><strong>Feil du MÅ unngå:</strong> Ikke frys krav for tidlig hvis de er uklare. Krevende review etter hver fase er obligatorisk.<br><br><span style="color:var(--success)">✓ Pros:</span> Forutsigbar, disiplinert, lett å monitorere, passer til andre engineering-prosjekter.<br><span style="color:var(--danger)">✗ Cons:</span> Antar at krav kan fryses, lite bruker-feedback underveis.',
+  codefix:'<strong style="color:#f1f5f9">Code & Fix</strong> er tilnærmingen du bruker på programmeringsoppgaver — men den er helt uegnet for store systemer. Kenneth: «This is the process that we should avoid.»<br><br>Problemet: du vet ikke hvor mange fix-runder det tar → <strong style="color:#fca5a5">uforutsigbar og ukontrollerbar</strong>. Over tid bygger workarounds seg opp og koden blir mesete.<br><br><span style="color:var(--danger)">✗ Cons:</span> Uforutsigbar, over budsjett og tidsplan, mesete kode, ikke skalerbar.',
+  proto:'<strong style="color:#f1f5f9">Prototyping</strong> passer når kravene er <strong>vage</strong>. I stedet for å fryse krav, bygger du en rask prototype (f.eks. bare UI) og lar klienten gi feedback.<br><br>Kenneth: «It\'s very useful when the requirements are vague, because you can collect more requirements from your client using the prototype.»<br><br><span style="color:var(--success)">✓ Pros:</span> Krav utforskes raskt, bruker-feedback før vi investerer for mye.<br><span style="color:var(--danger)">✗ Cons:</span> Ikke en komplett prosess, fremgang vanskelig å måle, lite dokumentasjon.',
+  spiral:'<strong style="color:#f1f5f9">Spiral</strong> legger til en ekstra fase andre prosesser mangler: <strong>risikoanalyse</strong>. Hver runde: planlegg → risikoanalyse → go/no-go → implementer → klient-evaluering → planlegg igjen.<br><br>Kenneth: «Spiral is more appropriate for internal development. You need some expert in the risk analysis phase to identify all the risks.»<br><br><span style="color:var(--success)">✓ Pros:</span> Reduserer risiko, iterativ, klientinvolvering.<br><span style="color:var(--danger)">✗ Cons:</span> Trenger risikoekspert, mer overhead, passer best til intern utvikling.',
+  phased:'<strong style="color:#f1f5f9">Phased Release</strong> leverer systemet i builds — stykke for stykke. Build 1 → release → build 2 → release, osv.<br><br>Utvikling kan være <strong>inkrementell</strong> (legg til nye deler) eller <strong>iterativ</strong> (forbedre hele systemet gradvis). Mange organisasjoner kombinerer begge.<br><br>Kenneth: «It\'s hard to identify common facilities needed by all pieces — that part is going to be critical.»<br><br><span style="color:var(--success)">✓ Pros:</span> Redusert risiko, tidlig feedback, promoterer modularitet.<br><span style="color:var(--danger)">✗ Cons:</span> Systemdelene bør være relativt små; delte komponenter vanskelig å identifisere.'
+};
+
+function showProc(el,key){
+  document.querySelectorAll('.proc-card').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  const box=document.getElementById('proc-detail-box');
+  box.innerHTML=PROC_DETAILS[key];
+  box.classList.add('show');
+}
+
+function toggleEx(header){
+  const body=header.nextElementSibling;
+  const arrow=header.querySelector('.ex-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  arrow.textContent=open?'▾':'▴';
+}
+function toggleSol(btn){
+  const sol=btn.nextElementSibling;
+  const show=sol.classList.toggle('show');
+  btn.textContent=show?'Skjul løsning':'Vis løsning';
+}
+function markDone(btn,id){
+  btn.classList.toggle('done');
+  const done=btn.classList.contains('done');
+  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  const p=getModP();
+  const s=new Set(p.doneExercises||[]);
+  done?s.add(id):s.delete(id);
+  saveP({doneExercises:[...s]});
+  updateNav();
+}
+
+const QUESTIONS=[
+  {q:'Kenneth sier at alle software development processes inneholder de samme fasene. Hva er disse fasene?',opts:['Plan → Build → Test → Deploy','Requirements → Analysis & Design → Implementation → Testing','Inception → Elaboration → Construction → Transition','Design → Code → Review → Ship'],correct:1,exp:'Kenneth fra forelesningen: «No matter which software development process you use, eventually the process will contain the following stages: requirements, analysis and design, implementation, and testing.» Det som skiller prosessene er hvordan fasene kombineres og vektlegges.'},
+  {q:'Hvilket utsagn om Waterfall er korrekt?',opts:['Waterfall er egnet når krav sannsynligvis vil endre seg underveis','Waterfall passer best når kravene er velforstått og stabile','Waterfall er den raskeste prosessen fordi man unngår møter','Waterfall er en agile-prosess med iterasjoner'],correct:1,exp:'Kenneth: «This model can only be applied when the requirements are well understood and also unlikely to change.» Det er nettopp grunnen til at Waterfall er sjelden brukt i industrien — krav endrer seg nesten alltid.'},
+  {q:'Hva er Scrum Master-rollen i Scrum?',opts:['Klienten som eier backlog og setter prioriteringer','Project manager/fasilitator som sikrer at Scrum-verdiene følges og fjerner hindringer','Seniorutvikleren som bestemmer den tekniske retningen','Testlederen som verifiserer sprints'],correct:1,exp:'Kenneth: «Scrum master is usually the manager. Responsible for enacting Scrum values and practices, ensures the team is fully functional and productive, removes impediments and shields the teams from external influences.»'},
+  {q:'Hva er et Burn-down Chart?',opts:['Et diagram som viser alle features i product backlog','En graf som viser gjenstående arbeid (timer/story points) per dag i en sprint','Et Gantt-diagram over hele prosjektets faser','En liste over bugs funnet per sprint'],correct:1,exp:'Fra Scrum-videoen Kenneth viser: «The Burndown Chart provides a day by day measure of the amount of work that remains in a given sprint or release. It communicates a massive amount of information in just a few seconds.» Burndown velocity (helningen) lar deg beregne estimert fullføringsdato.'},
+  {q:'Hva er Extreme Programming (XP) sin tilnærming til testing?',opts:['Testing gjøres utelukkende av et dedikert QA-team etter implementasjon','Test-Driven Development: testcaser designes FØR implementasjon','Testing erstattes av pair programming','Testing er valgfritt i XP fordi pair programming fanger feil'],correct:1,exp:'Kenneth: «For each task, the developer has to design the test cases. So that means we are going to use test-driven development — we have to think about the test cases before we implement a particular task.» TDD er et kjennetegn ved XP.'},
+  {q:'Hva er den viktigste fordelen med Continuous Integration?',opts:['Utviklere trenger ikke skrive tester','Bugs og integrasjonfeil oppdages umiddelbart etter commit — ikke etter uker','CI-serveren erstatter behovet for code reviews','Det eliminerer behovet for versjonskontroll'],correct:1,exp:'Kenneth: «If we are just talking about integrating a small part of the source code, the effort needed for integration and testing is going to be minimal. We want to perform integration quickly and testing quickly to identify any errors immediately.» CI-serveren bygger og tester automatisk etter hver commit.'},
+  {q:'Du bygger et kritisk banksystem med høy teknologirisiko, men intern utvikling (ingen ekstern klient). Hvilken prosess passer best?',opts:['Code & Fix — enklest å komme i gang','Waterfall — kravene er klare i bank','Spiral — innebygd risikoanalyse, passer intern utvikling','Prototyping — kunden vet ikke hva de vil ha'],correct:2,exp:'Kenneth: «Spiral is more appropriate for internal development because you know exactly what the requirements are, and it\'s easier to foresee all the risks.» Risiko er eksplisitt del av Spiral-prosessen — perfekt for høy teknologirisiko.'},
+  {q:'Krav endres ikke innen en sprint. Hva er konsekvensen av dette?',opts:['Teamet må avbryte sprinten og starte på nytt hvis kravene endres','Endringer legges i product backlog og prioriteres til neste sprint','Product Owner kan overstyre og legge til features mid-sprint','Daily Scrum avgjør om endringer godtas'],correct:1,exp:'Kenneth: «The requirements are not allowed to change during a sprint.» Endringer som kommer inn under en sprint legges i product backlog og behandles i sprint planning for neste sprint. Dette gir teamet ro til å levere det de har forpliktet seg til.'},
+  {q:'Hva er den viktigste ulempen med Prototyping?',opts:['Det er umulig å involvere klienten','Det er ikke en komplett software development process — fremgang er vanskelig å måle','Det er ikke tillatt å refine prototypen','Prototyping krever at kravene er ferdig spesifisert'],correct:1,exp:'Kenneth: «It\'s not really a complete software development process. The process is not visible, making progress hard to measure — you don\'t know exactly how many times you have to refine the prototype before you get the final system.»'},
+  {q:'Hva betyr «Phased Release» — inkrementell vs iterativ utvikling?',opts:['De er synonymer og betyr det samme','Inkrementell = legg til nye deler. Iterativ = forbedre hele systemet gradvis. Mange bruker begge.','Inkrementell = forbedre systemet. Iterativ = legg til nye deler','Phased Release er kun inkrementell, aldri iterativ'],correct:1,exp:'Kenneth: «The development may be incremental — we start with part of the system and build another part. Or it can be iterative — we try to get the full system but make it more and more sophisticated. Many organizations use a combination of iterative and incremental approaches at the same time.»'},
+];
+
+let qAnswers={},qCurrent=0;
+function renderQuiz(){
+  const p=getModP();
+  if(p.quizDone){showQuizResult(p.quizScore,p.quizTotal);return;}
+  document.getElementById('quiz-dots').innerHTML=QUESTIONS.map((_,i)=>`<div class="qp-dot ${qAnswers[i]!=null?(qAnswers[i].correct?'correct':'wrong'):''}" id="dot-${i}"></div>`).join('');
+  renderQuestion(qCurrent);
+}
+function renderQuestion(idx){
+  const q=QUESTIONS[idx];const answered=qAnswers[idx];
+  document.getElementById('quiz-container').innerHTML=`
+    <div>
+      <div class="q-num">Spørsmål ${idx+1} av ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">${q.opts.map((o,i)=>`<button class="q-opt ${answered!=null?(i===q.correct?'correct':(i===answered.chosen?'wrong':''))  :''}" onclick="answerQ(${idx},${i})" ${answered!=null?'disabled':''}>${o}</button>`).join('')}</div>
+      <div class="q-explanation ${answered!=null?'show':''}">💡 ${q.exp}</div>
+      <div class="q-nav">
+        ${idx>0?`<button onclick="gotoQ(${idx-1})">← Forrige</button>`:''}
+        ${idx<QUESTIONS.length-1?`<button class="primary" onclick="gotoQ(${idx+1})">Neste →</button>`:''}
+        ${idx===QUESTIONS.length-1&&Object.keys(qAnswers).length===QUESTIONS.length?`<button class="primary" onclick="finishQuiz()">Se resultat</button>`:''}
+        <span class="q-score">${Object.keys(qAnswers).length}/${QUESTIONS.length} besvart</span>
+      </div>
+    </div>`;
+}
+function answerQ(qi,chosen){
+  qAnswers[qi]={chosen,correct:chosen===QUESTIONS[qi].correct};
+  document.getElementById('dot-'+qi).className='qp-dot '+(chosen===QUESTIONS[qi].correct?'correct':'wrong');
+  renderQuestion(qi);
+}
+function gotoQ(idx){qCurrent=idx;renderQuestion(idx);}
+function finishQuiz(){
+  const score=Object.values(qAnswers).filter(a=>a.correct).length;
+  saveP({quizScore:score,quizTotal:QUESTIONS.length,quizDone:true});
+  updateNav();showQuizResult(score,QUESTIONS.length);
+}
+function showQuizResult(score,total){
+  const pct=Math.round(score/total*100);
+  const msg=pct>=80?'🎉 Utmerket! Du har god kontroll på software development processes.':pct>=60?'👍 Bra jobbet! Les gjennom forklaringene du fikk feil.':'📚 Gå gjennom teorien igjen — særlig Scrum og prosessvalg.';
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-result"><div class="score-big">${score}/${total}</div><p>${pct}% riktige</p><p style="margin-top:.3rem">${msg}</p><button onclick="resetQuiz()">Prøv igjen</button></div>`;
+  document.getElementById('quiz-dots').innerHTML='';
+}
+function resetQuiz(){qAnswers={};qCurrent=0;saveP({quizDone:false,quizScore:null});renderQuiz();}
+
+function updateNav(){
+  const p=getModP();
+  const ex=(p.doneExercises||[]).length;
+  document.getElementById('nav-prog').textContent=`${ex}/3 oppgaver · quiz ${p.quizScore!=null?p.quizScore+'/10':'—'}`;
+}
+
+(function init(){
+  const p=getModP();
+  (p.doneExercises||[]).forEach(id=>{
+    const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
+    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+  });
+  updateNav();
+})();
+</script>
+</body>
+</html>

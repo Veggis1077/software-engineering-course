@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 9 — Non-Functional Requirements & Validation</title>
+  <style>
+    :root {
+      --bg:#0a0e1a; --surface:#111827; --surface2:#1a2236; --surface3:#1f2d45;
+      --border:#1f2d45; --accent:#6366f1; --accent2:#06b6d4; --accent3:#8b5cf6;
+      --text:#e2e8f0; --muted:#64748b; --success:#22c55e; --warn:#f59e0b; --danger:#ef4444;
+      --radius:10px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    nav{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:50}
+    .nav-back{font-size:.85rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.3rem}
+    .nav-back:hover{color:var(--text)}
+    .nav-title{font-size:.9rem;font-weight:600;color:var(--text);margin-left:auto}
+    .nav-prog{font-size:.78rem;color:var(--muted)}
+    .hero{padding:3rem 1.5rem 2rem;max-width:900px;margin:0 auto}
+    .module-tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);padding:.25rem .7rem;border-radius:99px;display:inline-block;margin-bottom:1rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;color:#f8fafc;line-height:1.2}
+    .hero p{margin-top:.75rem;color:var(--muted);font-size:1rem;max-width:580px}
+    .hero-meta{display:flex;gap:1rem;margin-top:1.2rem;flex-wrap:wrap}
+    .meta-pill{font-size:.78rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:.25rem .7rem;border-radius:99px}
+    .tabs{display:flex;gap:.25rem;border-bottom:1px solid var(--border);padding:0 1.5rem;max-width:900px;margin:0 auto}
+    .tab{padding:.75rem 1.2rem;font-size:.88rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;transition:color .15s,border-color .15s}
+    .tab:hover{color:var(--text)}
+    .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .content{max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    .section{margin-bottom:3.5rem}
+    .section-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+    .section-num{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0}
+    .section h2{font-size:1.25rem;font-weight:700;color:#f1f5f9}
+    .prose{color:#cbd5e1;font-size:.96rem;margin-bottom:1rem}
+    .prose strong{color:#f1f5f9}
+    ul.prose-list{color:#cbd5e1;font-size:.95rem;margin:.5rem 0 1rem 1.4rem}
+    ul.prose-list li{margin-bottom:.45rem}
+
+    .callout{border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin:1.2rem 0}
+    .callout.info{background:rgba(99,102,241,.08);border-left:3px solid var(--accent)}
+    .callout.tip{background:rgba(6,182,212,.08);border-left:3px solid var(--accent2)}
+    .callout.warn{background:rgba(245,158,11,.08);border-left:3px solid var(--warn)}
+    .callout.danger{background:rgba(239,68,68,.08);border-left:3px solid var(--danger)}
+    .callout-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+    .callout.info .callout-title{color:var(--accent)}
+    .callout.tip .callout-title{color:var(--accent2)}
+    .callout.warn .callout-title{color:var(--warn)}
+    .callout.danger .callout-title{color:var(--danger)}
+    .callout p,.callout li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .callout ul{margin:.4rem 0 0 1.2rem}
+
+    .fig{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0;overflow-x:auto}
+    .fig-caption{font-size:.78rem;color:var(--muted);margin-top:.85rem;text-align:center;font-style:italic}
+    .fig-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem}
+
+    /* NFR CATEGORY TABLE */
+    .nfr-table{width:100%;border-collapse:collapse;font-size:.87rem;margin:1rem 0}
+    .nfr-table th{text-align:left;padding:.55rem .85rem;background:var(--surface3);color:var(--muted);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--border)}
+    .nfr-table td{padding:.6rem .85rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+    .nfr-table tr:last-child td{border-bottom:none}
+    .nfr-table tr:hover td{background:var(--surface3)}
+    .cat-pill{display:inline-block;font-size:.72rem;font-weight:700;padding:.15rem .55rem;border-radius:99px;white-space:nowrap}
+
+    /* INTERACTIVE CLASSIFIER */
+    .classifier-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.9rem;overflow:hidden}
+    .clf-q{padding:1rem 1.25rem;font-size:.92rem;color:#f1f5f9;font-weight:500;line-height:1.55;cursor:pointer;user-select:none}
+    .clf-q:hover{background:var(--surface2)}
+    .clf-body{display:none;padding:0 1.25rem 1rem;border-top:1px solid var(--border)}
+    .clf-opts{display:flex;flex-wrap:wrap;gap:.5rem;margin:.85rem 0 .5rem}
+    .clf-opt{padding:.35rem .85rem;border-radius:99px;border:1.5px solid var(--border);background:var(--surface2);color:var(--muted);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s}
+    .clf-opt:hover{border-color:var(--accent);color:var(--text)}
+    .clf-opt.selected-correct{border-color:var(--success);background:rgba(34,197,94,.12);color:#86efac}
+    .clf-opt.selected-wrong{border-color:var(--danger);background:rgba(239,68,68,.1);color:#fca5a5}
+    .clf-opt.reveal-correct{border-color:var(--success);background:rgba(34,197,94,.08);color:#86efac}
+    .clf-explain{font-size:.87rem;color:#cbd5e1;line-height:1.65;display:none;margin-top:.5rem}
+    .clf-explain.show{display:block}
+
+    /* VALIDATION CARDS */
+    .val-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin:1.2rem 0}
+    .val-card{background:var(--surface3);border-radius:8px;padding:1rem;cursor:pointer;border:1.5px solid var(--border);transition:border-color .15s}
+    .val-card:hover,.val-card.active{border-color:var(--accent)}
+    .val-type{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+    .val-card h4{font-size:.9rem;font-weight:700;color:#f1f5f9;margin-bottom:.3rem}
+    .val-card p{font-size:.8rem;color:var(--muted);line-height:1.55}
+    .val-detail{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.88rem;color:#cbd5e1;min-height:60px;line-height:1.65;margin-top:.5rem;transition:all .2s}
+
+    /* SRS DIAGRAM */
+    .srs-box{background:var(--surface3);border-radius:8px;padding:.9rem 1.1rem;border:1px solid var(--border)}
+    .srs-box h4{font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em}
+    .srs-box ul{margin:.2rem 0 0 1.1rem}
+    .srs-box li{font-size:.83rem;color:#94a3b8;line-height:1.6}
+
+    /* QUIZ */
+    .quiz-progress{display:flex;gap:.35rem;margin-bottom:1.75rem;flex-wrap:wrap}
+    .qp-dot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:background .2s}
+    .qp-dot.correct{background:var(--success)}
+    .qp-dot.wrong{background:var(--danger)}
+    .q-num{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem}
+    .q-text{font-size:1rem;font-weight:600;color:#f1f5f9;margin-bottom:1.25rem;line-height:1.55}
+    .q-options{display:flex;flex-direction:column;gap:.5rem}
+    .q-opt{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;cursor:pointer;font-size:.9rem;color:var(--text);text-align:left;transition:border-color .15s,background .15s}
+    .q-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(99,102,241,.08)}
+    .q-opt.correct{border-color:var(--success)!important;background:rgba(34,197,94,.1);color:#86efac}
+    .q-opt.wrong{border-color:var(--danger)!important;background:rgba(239,68,68,.1);color:#fca5a5}
+    .q-explanation{margin-top:.9rem;background:var(--surface3);border-radius:8px;padding:.9rem 1rem;font-size:.87rem;color:#cbd5e1;display:none;line-height:1.65}
+    .q-explanation.show{display:block}
+    .q-nav{display:flex;gap:.75rem;margin-top:1.25rem;align-items:center;flex-wrap:wrap}
+    .q-nav button{padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:background .15s}
+    .q-nav button:hover{background:var(--surface3)}
+    .q-nav button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .q-nav button.primary:hover{opacity:.88}
+    .q-score{font-size:.82rem;color:var(--muted);margin-left:auto}
+    .quiz-result{text-align:center;padding:2.5rem}
+    .score-big{font-size:3.5rem;font-weight:800;color:var(--accent)}
+    .quiz-result p{color:var(--muted);margin-top:.5rem;font-size:.95rem}
+    .quiz-result button{margin-top:1.5rem;padding:.6rem 1.6rem;border-radius:6px;background:var(--accent);border:none;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer}
+
+    /* EXERCISES */
+    .exercise{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden}
+    .ex-header{padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;user-select:none}
+    .ex-header:hover{background:var(--surface2)}
+    .ex-num{background:var(--surface3);border-radius:6px;padding:.2rem .55rem;font-size:.75rem;font-weight:700;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-header h3{font-size:.92rem;font-weight:600;color:#f1f5f9;flex:1;line-height:1.5}
+    .ex-toggle{font-size:.75rem;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-body{padding:1.25rem;border-top:1px solid var(--border);display:none}
+    .ex-body p,.ex-body li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .ex-body ul,.ex-body ol{margin:.6rem 0 .6rem 1.3rem}
+    .ex-body strong{color:#f1f5f9}
+    .solution{background:var(--surface2);border-radius:8px;padding:1.1rem;margin-top:1rem;display:none}
+    .solution.show{display:block}
+    .sol-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--success);margin-bottom:.65rem}
+    .solution p,.solution li{font-size:.88rem;color:#cbd5e1;line-height:1.65}
+    .solution ul,.solution ol{margin:.5rem 0 .5rem 1.3rem}
+    .solution strong{color:#f1f5f9}
+    .sol-btn{margin-top:.85rem;padding:.4rem .9rem;border-radius:6px;font-size:.82rem;font-weight:500;background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s}
+    .sol-btn:hover{border-color:var(--success);color:var(--success)}
+    .done-btn{display:inline-block;margin-top:.75rem;padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);color:var(--success);cursor:pointer;transition:background .15s}
+    .done-btn:hover{background:rgba(34,197,94,.18)}
+    .done-btn.done{background:rgba(34,197,94,.2)}
+    code{font-family:'Courier New',monospace;font-size:.85em;background:var(--surface3);padding:.1em .4em;border-radius:4px;color:#a5b4fc}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    @media(max-width:620px){.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-back">← Hjem</a>
+  <span class="nav-title">Modul 9 — Non-Functional Requirements & Validation</span>
+  <span class="nav-prog" id="nav-prog"></span>
+</nav>
+
+<div class="hero">
+  <div class="module-tag">Modul 09</div>
+  <h1>Non-Functional Requirements &amp; Validation</h1>
+  <p>Lær å identifisere og klassifisere ikke-funksjonelle krav, og forstå hvordan vi validerer at alle krav er komplette, konsistente, klare, korrekte og realistiske.</p>
+  <div class="hero-meta">
+    <span class="meta-pill">📖 4 seksjoner</span>
+    <span class="meta-pill">🎯 10 quizspørsmål</span>
+    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">⏱ ~35 min</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════ THEORY ═══════════════════ -->
+<div class="panel active" id="panel-theory">
+
+<!-- ─── SEKSJON 1: Hva er NFR ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Hva er ikke-funksjonelle krav (NFR)?</h2>
+  </div>
+
+  <p class="prose">I forelesningen starter Kenneth med en viktig definisjon: <strong>«A non-functional requirement places a constraint on a use case, or on the system as a whole.»</strong> Det er ikke en funksjonalitet systemet utfører — det er en <em>begrensning</em> eller <em>egenskap</em> som gjelder for funksjonaliteten.</p>
+
+  <p class="prose">Tenk på det slik: brukerkravet «Systemet skal la brukere registrere seg» er <em>funksjonelt</em>. Men «Systemet skal svare på alle forespørsler innen 2 sekunder» er en <em>begrensning</em> på <em>alle</em> funksjonaliteter — det er et NFR.</p>
+
+  <div class="callout info">
+    <div class="callout-title">NFR vs funksjonelt krav</div>
+    <p><strong>Funksjonelt krav:</strong> Hva systemet gjør — en spesifikk funksjonalitet. Fangis i use case-modellen.</p>
+    <p style="margin-top:.5rem"><strong>NFR:</strong> En begrensning på <em>hvordan</em> systemet gjør det, eller en systemegensskap. Legges i en separat del av SRS.</p>
+  </div>
+
+  <p class="prose" style="margin-top:1.25rem">Kenneth deler NFR inn i følgende kategorier. Alle eksemplene er fra SetWatch-forelesningen:</p>
+
+  <div style="overflow-x:auto;margin:.75rem 0 1rem">
+    <table class="nfr-table">
+      <thead>
+        <tr>
+          <th>Kategori</th>
+          <th>Underkategori</th>
+          <th>SetWatch-eksempel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(99,102,241,.15);color:#a5b4fc">Design quality</span></td>
+          <td style="color:#94a3b8">Reliability</td>
+          <td style="color:#cbd5e1">«As SetWatch has no battery, no software fault requiring the resetting of the watch should occur.»</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(99,102,241,.15);color:#a5b4fc">Design quality</span></td>
+          <td style="color:#94a3b8">Supportability</td>
+          <td style="color:#cbd5e1">«SetWatch should accept upgrades to its onboard processor via USB interface.»</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(6,182,212,.15);color:#67e8f9">Performance</span></td>
+          <td style="color:#94a3b8">Response time</td>
+          <td style="color:#cbd5e1">«SetWatch should display the correct time zone within five minutes of the end of a GPS blackout period.»</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(6,182,212,.15);color:#67e8f9">Performance</span></td>
+          <td style="color:#94a3b8">Accuracy</td>
+          <td style="color:#cbd5e1">«SetWatch should measure time within one of a hundredth second over five years.»</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(139,92,246,.15);color:#c4b5fd">Implementation</span></td>
+          <td style="color:#94a3b8">Language/standards</td>
+          <td style="color:#cbd5e1">«All related software associated with SetWatch will be written using Java.»</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(34,197,94,.15);color:#86efac">Interface</span></td>
+          <td style="color:#94a3b8">External system</td>
+          <td style="color:#cbd5e1">«SetWatch complies with the physical, electrical and software interfaces defined by Webify Watch API 2.0.»</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(245,158,11,.15);color:#fde68a">Interface</span></td>
+          <td style="color:#94a3b8">Usability</td>
+          <td style="color:#cbd5e1">«Any user who knows how to read a digital watch and understand international time zone observations should be able to use SetWatch.»</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(239,68,68,.15);color:#fca5a5">Security</span></td>
+          <td style="color:#94a3b8">System/data/physical</td>
+          <td style="color:#cbd5e1">Begrensninger på hvem som kan få tilgang til systemet, dataene, eller fysisk enhet.</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(100,116,139,.15);color:#94a3b8">Hardware</span></td>
+          <td style="color:#94a3b8">Memory/storage</td>
+          <td style="color:#cbd5e1">Krav til minnestørrelse, lagringskapasitet, implementasjonsplattform.</td>
+        </tr>
+        <tr>
+          <td><span class="cat-pill" style="background:rgba(100,116,139,.15);color:#94a3b8">Documentation</span></td>
+          <td style="color:#94a3b8">What &amp; for whom</td>
+          <td style="color:#cbd5e1">Hvilken dokumentasjon trengs, og hvem er målgruppen (brukere, utviklere, operatører)?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-title">NFR som administrasjons-use cases</div>
+    <p>Kenneth påpeker at noen NFR-er — særlig sikkerhets- og operasjonelle krav — implementeres som egne <strong>administrasjons-use cases</strong>. Eksempler: login, system startup, system shutdown, system backup. Kenneth: «Administration use cases are use cases that deal with non-functional requirements, for example security, or system operation or maintenance.»</p>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 2: SetWatch gjennomgang ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>Praktisk gjennomgang — SetWatch satellittur</h2>
+  </div>
+
+  <p class="prose">Kenneth bruker SetWatch som gjennomgående case study. Han leser problem statement <em>setning for setning</em> og identifiserer NFR-type for hver. Dette er nøyaktig den teknikken du bruker på eksamen. Klikk på hvert krav for å se analysen:</p>
+
+  <div id="classifier-container">
+    <div class="classifier-card">
+      <div class="clf-q" onclick="toggleClf(this)">
+        📌 «Any user who knows how to read a digital watch and understand international time zone observations should be able to use SetWatch.»
+      </div>
+      <div class="clf-body">
+        <div class="clf-opts">
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability handler om feil og pålitelighet — ikke om brukergrensesnitt eller brukbarhet.')">Reliability</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Interface / Usability','Riktig! Kenneth: «It\'s related to interface and also usability. Because we say that a user who knows how to read a digital watch should be able to use SetWatch.» Kravet definerer hvem som skal klare å bruke systemet — det er en brukbarhets-/interface-begrensning.')">Interface / Usability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance','Performance handler om hastighet, nøyaktighet, svar-tid — ikke om brukervennlighet.')">Performance</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Security handler om tilgangskontroll og databeskyttelse.')">Security</button>
+        </div>
+        <div class="clf-explain"></div>
+      </div>
+    </div>
+
+    <div class="classifier-card">
+      <div class="clf-q" onclick="toggleClf(this)">
+        📌 «As SetWatch has no battery, no software fault requiring the resetting of the watch should occur.»
+      </div>
+      <div class="clf-body">
+        <div class="clf-opts">
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance','Performance er responstid og nøyaktighet — ikke feiltoleranse.')">Performance</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Security er tilgangskontroll.')">Security</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Design quality — Reliability','Riktig! Kenneth: «It\'s related to design quality, reliability. It should be very reliable.» Systemet skal ikke krasje eller kreve reset. Dette er en pålitelighets-begrensning.')">Design quality — Reliability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Implementation','Implementation handler om programmerings-standarder og språk.')">Implementation</button>
+        </div>
+        <div class="clf-explain"></div>
+      </div>
+    </div>
+
+    <div class="classifier-card">
+      <div class="clf-q" onclick="toggleClf(this)">
+        📌 «SetWatch should accept upgrades to its onboard processor via USB interface.»
+      </div>
+      <div class="clf-body">
+        <div class="clf-opts">
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Interface','Interface i NFR-sammenheng handler om ekstern systemgrensesnitt-format, ikke oppgraderingsmekanismer.')">Interface</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Design quality — Supportability','Riktig! Kenneth: «This one is related to design quality, supportability. That means somehow SetWatch should support upgrade via USB.» Systemet skal være designet slik at det kan oppgraderes — det er en vedlikeholds-/supportability-egenskap.')">Design quality — Supportability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Hardware','Hardware handler om minnestørrelse og lagringskapasitet.')">Hardware</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Feil — ikke sikkerhetsrelatert.')">Security</button>
+        </div>
+        <div class="clf-explain"></div>
+      </div>
+    </div>
+
+    <div class="classifier-card">
+      <div class="clf-q" onclick="toggleClf(this)">
+        📌 «SetWatch should display the correct time zone within five minutes of the end of a GPS blackout period.»
+      </div>
+      <div class="clf-body">
+        <div class="clf-opts">
+          <button class="clf-opt" onclick="checkClf(this,'correct','Performance — Response time','Riktig! Kenneth: «This one is related to response time. The correct time should be shown within five minutes.» Kravet setter en tidsbegrensning på når systemet MÅ gi riktig svar — det er response time.')">Performance — Response time</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance — Accuracy','Accuracy handler om nøyaktigheten av en måling (f.eks. 1/100 sek), ikke om tidsfristen for å vise riktig data.')">Performance — Accuracy</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability handler om fravær av feil, ikke om svartid.')">Reliability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Design quality','Vag — vær mer spesifikk om underkategori.')">Design quality (generelt)</button>
+        </div>
+        <div class="clf-explain"></div>
+      </div>
+    </div>
+
+    <div class="classifier-card">
+      <div class="clf-q" onclick="toggleClf(this)">
+        📌 «SetWatch should measure time within one of a hundredth second over five years.»
+      </div>
+      <div class="clf-body">
+        <div class="clf-opts">
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance — Response time','Response time handler om hvor <em>fort</em> systemet svarer, ikke om presisjonen i målingen.')">Performance — Response time</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Performance — Accuracy','Riktig! Kenneth: «This one is related to accuracy. It should be very accurate within one of a hundredth second.» Kravet definerer presisjonen på en måling over tid — det er en nøyaktighets-NFR.')">Performance — Accuracy</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability handler om fravær av programfeil.')">Reliability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Implementation','Implementation er f.eks. programmeringsspråk.')">Implementation</button>
+        </div>
+        <div class="clf-explain"></div>
+      </div>
+    </div>
+
+    <div class="classifier-card">
+      <div class="clf-q" onclick="toggleClf(this)">
+        📌 «All related software associated with SetWatch will be written using Java.»
+      </div>
+      <div class="clf-body">
+        <div class="clf-opts">
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Interface','Interface er om grensesnittstandarder, ikke om intern implementasjonsteknologi.')">Interface</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Design quality','Designkvalitet handler om pålitelighet og vedlikeholdbarhet, ikke om valg av språk.')">Design quality</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Implementation','Riktig! Kenneth: «This one is about implementation. And we are talking about the programming language that we\'re going to use for the software system.» Valg av teknologi, standarder og programmeringsspråk er Implementation-NFR.')">Implementation</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Documentation','Dokumentasjon handler om hvilken dokumentasjon som trengs og for hvem.')">Documentation</button>
+        </div>
+        <div class="clf-explain"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 3: Validering ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Validering av krav — de fem kriteriene</h2>
+  </div>
+
+  <p class="prose">Etter at alle kravene er fanget (domain model, use case model, NFR) MÅ de valideres kontinuerlig med klienten eller brukeren. Kenneth: <strong>«All the requirements that we have captured in the SRS should be validated continuously with the client or user.»</strong></p>
+
+  <p class="prose">Det er fem valideringskriterier. Klikk på hvert for å se Kenneth's SetWatch-eksempel:</p>
+
+  <div class="val-grid">
+    <div class="val-card" onclick="showVal(this,'complete','<strong style=\'color:#f1f5f9\'>Complete</strong><br><br>Alle krav er med — ingen scenarior eller atferd er uspesifisert.<br><br><strong>SetWatch-eksempel (incomplete):</strong> «The SetWatch specification does not specify the boundary behavior when the user is standing within GPS accuracy limitations of a time zone\'s boundary.»<br><br>Hva skjer om brukeren står mellom to tidssoner? Klokken vil veksle mellom to tidssoner om og om igjen. Kenneth: «The solution is to add another requirement: the time zone depicted by SetWatch should not change more often than once every five minutes.»')">
+      <div class="val-type" style="color:var(--success)">✓ Complete</div>
+      <h4>Alle krav er med</h4>
+      <p>Ingen mangler noe scenario eller atferd</p>
+    </div>
+    <div class="val-card" onclick="showVal(this,'consistent','<strong style=\'color:#f1f5f9\'>Consistent</strong><br><br>Ingen krav motstrider hverandre.<br><br><strong>SetWatch-eksempel (inconsistent):</strong><br>Krav A: «SetWatch software should not have bugs nor need to be upgraded.»<br>Krav B: «SetWatch software should be easily upgraded using the USB interface.»<br><br>Kenneth: «In one requirement you say it should not be upgraded. In the other requirement you say it should be easily upgraded using USB. So they are conflicting with one another.» Løsning: revider ett av de motstridende kravene.')">
+      <div class="val-type" style="color:var(--accent2)">↔ Consistent</div>
+      <h4>Ingen motsetninger</h4>
+      <p>Krav motstrider ikke hverandre</p>
+    </div>
+    <div class="val-card" onclick="showVal(this,'clear','<strong style=\'color:#f1f5f9\'>Clear</strong><br><br>Alle stakeholders kan forstå kravet entydig.<br><br><strong>SetWatch-eksempel (unclear):</strong> «SetWatch specification refers to time zones.»<br><br>Hva betyr «time zones»? Inkluderer det sommertid (daylight saving time)? Kenneth: «We have to refine and clarify the requirement by adding another requirement saying that SetWatch should deal with daylight saving time.» Et vagt begrep = et uklart krav.')">
+      <div class="val-type" style="color:var(--accent3)">☀ Clear</div>
+      <h4>Forståelig</h4>
+      <p>Alle stakeholders forstår det likt</p>
+    </div>
+    <div class="val-card" onclick="showVal(this,'correct','<strong style=\'color:#f1f5f9\'>Correct</strong><br><br>Kravene er faktisk riktige — de reflekterer virkeligheten.<br><br><strong>SetWatch-eksempel (incorrect):</strong> «SetWatch supports only 24 time zones.»<br><br>Kenneth: «We know that in reality, we have more than 24 time zones. So we have to fix and refine the requirement and change it to support all the time zones.» Kravet er ikke bare uklart — det er faktisk feil.')">
+      <div class="val-type" style="color:var(--warn)">⚠ Correct</div>
+      <h4>Faktisk riktig</h4>
+      <p>Kravene reflekterer virkeligheten</p>
+    </div>
+    <div class="val-card" onclick="showVal(this,'realistic','<strong style=\'color:#f1f5f9\'>Realistic</strong><br><br>Kravene er gjennomførbare — teknisk og kostnadsmessig mulige å implementere.<br><br><strong>Eksempel:</strong> «Systemet skal svare på alle forespørsler innen 0,001 millisekunder» kan være urealistisk gitt eksisterende hardware og nettverkslatens.<br><br>Urealistiske krav leder til prosjekter som aldri kan levere det som er lovet.')">
+      <div class="val-type" style="color:var(--danger)">🎯 Realistic</div>
+      <h4>Gjennomførbart</h4>
+      <p>Teknisk og kostnadsmessig mulig</p>
+    </div>
+  </div>
+  <div class="val-detail" id="val-detail">Klikk på et kriterie ovenfor for å se Kenneth's konkrete SetWatch-eksempel.</div>
+
+  <div class="callout warn" style="margin-top:1.5rem">
+    <div class="callout-title">Eksamensfelle — vet du de engelske begrepene?</div>
+    <p>På eksamen brukes de engelske begrepene. Husk dem: <strong>Complete, Consistent, Clear, Correct, Realistic</strong>. Du kan bli bedt om å identifisere hvilken type valideringsfeil et gitt kraveksempel representerer.</p>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 4: SRS-oppsummering ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>SRS — hva er en komplett kravspesifikasjon?</h2>
+  </div>
+
+  <p class="prose">Kenneth avslutter modul 9 med en oppsummering av hva en komplett <strong>System Requirements Specification (SRS)</strong> skal inneholde. Dette er kravpakken som leveres til klient og brukes som grunnlag for design og implementasjon.</p>
+
+  <div class="fig">
+    <div class="fig-title">SRS — tre deler</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem">
+      <div class="srs-box">
+        <h4>Domain Model</h4>
+        <ul>
+          <li>Fanger <strong>datakrav</strong></li>
+          <li>Representeres som <strong>class diagram</strong></li>
+          <li>Alle viktige objekter og relasjoner i applikasjonsdomenet</li>
+        </ul>
+      </div>
+      <div class="srs-box">
+        <h4>Use Case Model</h4>
+        <ul>
+          <li>Fanger <strong>funksjonelle krav</strong></li>
+          <li><strong>Use case diagram</strong> — oversikt over alle funksjonaliteter</li>
+          <li><strong>Use case specifications</strong> — flow of events for hvert use case</li>
+        </ul>
+      </div>
+      <div class="srs-box">
+        <h4>Non-Functional Requirements</h4>
+        <ul>
+          <li>Fanger <strong>begrensninger og egenskaper</strong></li>
+          <li>Design quality, Performance, Interface, Security, Implementation, Hardware, Documentation</li>
+          <li>Noen implementeres som administrasjons-use cases</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fig-caption">Kenneth: «In our SRS we should have a domain model, a use case model, and also all the non-functional requirements.»</div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Akseptansetester — den primære valideringsmekanismen</h3>
+
+  <p class="prose">Etter at SRS er ferdig, brukes <strong>akseptansetester</strong> for å validere at den ferdige implementasjonen faktisk tilfredsstiller kravene. Kenneth: <strong>«Acceptance tests are the primary means to validate the system implementation satisfies the requirements. In acceptance tests, we try to validate all the requirements in front of our client or user.»</strong></p>
+
+  <div class="callout info">
+    <div class="callout-title">Livssyklusen videre</div>
+    <p>Kenneth forklarer hva som skjer etter SRS: «In the subsequent iterations or phases, we will find and also transform the requirements by specifying more details. We should come up with a matching use case realization in the analysis model, and also a matching use case realization in the design model. And we're going to use the analysis model and also the design model for implementation.»</p>
+    <p style="margin-top:.5rem">SRS er altså startpunktet for all videre utvikling — ikke et isolert dokument.</p>
+  </div>
+</div>
+
+</div><!-- /panel-theory -->
+
+<!-- ═══════════════════ QUIZ ═══════════════════ -->
+<div class="panel" id="panel-quiz">
+  <div class="quiz-progress" id="quiz-dots"></div>
+  <div id="quiz-container"></div>
+</div>
+
+<!-- ═══════════════════ EXERCISES ═══════════════════ -->
+<div class="panel" id="panel-exercises">
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 1</span>
+      <h3>Klassifiser kravene — funksjonelt eller NFR?</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>For hvert krav: avgjør om det er et <strong>funksjonelt krav</strong> (FC) eller et <strong>ikke-funksjonelt krav</strong> (NFR). Hvis NFR, angi hvilken kategori (reliability, performance/response time, performance/accuracy, supportability, interface/usability, implementation, security, documentation, hardware).</p>
+      <ol style="margin:.75rem 0 .5rem 1.2rem">
+        <li style="margin-bottom:.5rem">«Systemet skal la brukere søke etter bøker med tittel, forfatter eller ISBN.»</li>
+        <li style="margin-bottom:.5rem">«Søk skal returnere resultater innen 1 sekund for databaser opptil 1 million bøker.»</li>
+        <li style="margin-bottom:.5rem">«All kildekode skal følge Google Java Style Guide.»</li>
+        <li style="margin-bottom:.5rem">«Systemet skal sende e-postvarsler til brukere ved forfalte lån.»</li>
+        <li style="margin-bottom:.5rem">«Systemet skal ikke tillate uautorisert tilgang til lånehistorikk.»</li>
+        <li style="margin-bottom:.5rem">«Systemet skal kunne håndtere 500 samtidige brukere uten ytelsesforringelse.»</li>
+        <li style="margin-bottom:.5rem">«Systemet skal tilby installasjonsveiledning for IT-personell.»</li>
+      </ol>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <ol style="margin:.4rem 0 0 1.2rem">
+          <li style="margin-bottom:.5rem"><strong>FC</strong> — Dette er en konkret funksjonalitet (søk) i use case-modellen.</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Performance (response time)</strong> — Setter en tidsbegrensning på funksjonaliteten.</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Implementation</strong> — Setter standarder for koding og programmeringskonvensjoner.</li>
+          <li style="margin-bottom:.5rem"><strong>FC</strong> — Konkret funksjonalitet (sende varsler). Vil bli modellert som et use case.</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Security</strong> — Tilgangskontroll er en sikkerhets-begrensning. Kan implementeres som administrasjons-use case (login).</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Performance (throughput/capacity)</strong> — Setter en kapasitetsbegrensning på systemet som helhet.</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Documentation</strong> — Definerer hva slags dokumentasjon som trengs og for hvem.</li>
+        </ol>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 2</span>
+      <h3>Finn valideringsfeilen — hvilken type er det?</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>For hvert kraveksempel: identifiser valideringsfeilen (Incomplete, Inconsistent, Unclear, Incorrect, Realistic) og beskriv kort hva som er galt og hva løsningen er.</p>
+      <ol style="margin:.75rem 0 .5rem 1.2rem">
+        <li style="margin-bottom:.65rem">«Systemet skal sende SMS-varsler til brukere.» — men det er ingen krav om hva SMS-en skal inneholde, når den skal sendes, eller om brukere kan slå det av.</li>
+        <li style="margin-bottom:.65rem">«Systemet skal ikke lagre persondata.» og «Systemet skal lagre brukerpreferanser og kjøpshistorikk for å personalisere anbefalinger.»</li>
+        <li style="margin-bottom:.65rem">«Systemet skal håndtere betalinger.» — men det er ikke spesifisert hvilke betalingsmetoder, valutaer, eller om det inkluderer refusjoner.</li>
+        <li style="margin-bottom:.65rem">«Systemet skal svare på alle spørringer innen 0,000001 sekunder» for et web-basert system.</li>
+        <li style="margin-bottom:.65rem">«Systemet skal støtte alle 193 land i FN» — men den faktiske listen over land systemet støtter er satt til bare G7-landene andre steder.</li>
+      </ol>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <div class="solution">
+        <div class="sol-title">Løsning</div>
+        <ol style="margin:.4rem 0 0 1.2rem">
+          <li style="margin-bottom:.55rem"><strong>Incomplete.</strong> Kravet beskriver en funksjon men spesifiserer ikke innhold, triggerbetingelse, eller brukervalg. Løsning: legg til krav om hva SMSen inneholder, når den sendes, og mulighet til å deaktivere.</li>
+          <li style="margin-bottom:.55rem"><strong>Inconsistent.</strong> De to kravene motstrider hverandre direkte. Det er umulig å oppfylle begge. Løsning: revider ett av dem — f.eks. tillat lagring av preferanser uten å lagre personidentifiserbar informasjon.</li>
+          <li style="margin-bottom:.55rem"><strong>Unclear (+ Incomplete).</strong> «Betalinger» er et vagt begrep. Løsning: presiser hvilke metoder (Visa, PayPal, ApplePay?), valutaer, og om refusjoner og delbetalinger er i scope.</li>
+          <li style="margin-bottom:.55rem"><strong>Realistic (Unrealistic).</strong> 1 mikrosekund svartid er teknisk umulig for web-baserte systemer med nettverkslatens. Løsning: sett et realistisk krav basert på faktisk infrastruktur.</li>
+          <li style="margin-bottom:.55rem"><strong>Incorrect + Inconsistent.</strong> Kravet om 193 land er faktisk feil i forhold til den implementerte listen. Løsning: korriger ett av de to kravene til å matche det som faktisk er mulig og ønsket.</li>
+        </ol>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-header" onclick="toggleEx(this)">
+      <span class="ex-num">Ex 3</span>
+      <h3>Skriv NFR-er for et mobilbetaling-system</h3>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body">
+      <p>Du jobber med kravinnsamling for et mobilbetalingssystem (som Vipps eller PayMe). Skriv <strong>ett NFR for hver av de følgende kategoriene</strong>. Hvert krav skal være konkret, målbart og ha tydelig kategori.</p>
+      <ul>
+        <li><strong>a)</strong> Performance — Response time</li>
+        <li><strong>b)</strong> Design quality — Reliability</li>
+        <li><strong>c)</strong> Security</li>
+        <li><strong>d)</strong> Interface (ekstern system)</li>
+        <li><strong>e)</strong> Implementation</li>
+      </ul>
+      <button class="sol-btn" onclick="toggleSol(this)">Vis eksempelløsning</button>
+      <div class="solution">
+        <div class="sol-title">Eksempelløsning (andre svar er mulig)</div>
+        <ul>
+          <li style="margin-bottom:.5rem"><strong>a) Performance — Response time:</strong> «En betalingstransaksjon skal bekreftes eller avvises innen 3 sekunder under normale nettverksforhold.»</li>
+          <li style="margin-bottom:.5rem"><strong>b) Reliability:</strong> «Systemet skal ha en oppetid på minst 99,9% per måned. Planlagt nedetid skal varsles 24 timer i forveien.»</li>
+          <li style="margin-bottom:.5rem"><strong>c) Security:</strong> «All kommunikasjon mellom mobilklient og server skal krypteres med TLS 1.3 eller nyere. Betalingsdata skal aldri lagres i klartekst.»</li>
+          <li style="margin-bottom:.5rem"><strong>d) Interface:</strong> «Systemet skal samsvare med PCI DSS v4.0 for behandling av kortbetalinger.»</li>
+          <li style="margin-bottom:.5rem"><strong>e) Implementation:</strong> «Backend-tjenester skal implementeres i Kotlin med Spring Boot. iOS-app i Swift, Android-app i Kotlin.»</li>
+        </ul>
+        <p style="margin-top:.6rem">Legg merke til at gode NFR-er er <strong>spesifikke og målbare</strong> — «innen 3 sekunder», «99,9% oppetid», «TLS 1.3» er langt bedre enn «rask», «pålitelig», «sikker».</p>
+      </div>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+    </div>
+  </div>
+
+</div><!-- /panel-exercises -->
+</div><!-- /content -->
+
+<script>
+const MOD_ID='mod09',KEY='se-progress-v1';
+function getP(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};}}
+function saveP(d){const p=getP();p[MOD_ID]={...(p[MOD_ID]||{}),...d,updatedAt:Date.now()};localStorage.setItem(KEY,JSON.stringify(p));}
+function getModP(){return getP()[MOD_ID]||{};}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='quiz')renderQuiz();
+}
+
+function toggleClf(header){
+  const body=header.nextElementSibling;
+  const open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+}
+
+function checkClf(btn,result,label,explanation){
+  const opts=btn.closest('.clf-opts').querySelectorAll('.clf-opt');
+  opts.forEach(o=>o.disabled=true);
+  const explain=btn.closest('.clf-body').querySelector('.clf-explain');
+  if(result==='correct'){
+    btn.classList.add('selected-correct');
+  } else {
+    btn.classList.add('selected-wrong');
+    opts.forEach(o=>{
+      if(o!==btn&&o.textContent.includes(label.split(' ')[0])){o.classList.add('reveal-correct');}
+    });
+  }
+  explain.innerHTML='💡 '+explanation;
+  explain.classList.add('show');
+}
+
+function showVal(card,key,html){
+  document.querySelectorAll('.val-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+  document.getElementById('val-detail').innerHTML=html;
+}
+
+function toggleEx(header){
+  const body=header.nextElementSibling;
+  const arrow=header.querySelector('.ex-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  arrow.textContent=open?'▾':'▴';
+}
+function toggleSol(btn){
+  const sol=btn.nextElementSibling;
+  const show=sol.classList.toggle('show');
+  btn.textContent=show?'Skjul løsning':'Vis løsning';
+}
+function markDone(btn,id){
+  btn.classList.toggle('done');
+  const done=btn.classList.contains('done');
+  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  const p=getModP();
+  const s=new Set(p.doneExercises||[]);
+  done?s.add(id):s.delete(id);
+  saveP({doneExercises:[...s]});
+  updateNav();
+}
+
+const QUESTIONS=[
+  {q:'Hva er definisjonen av et ikke-funksjonelt krav (NFR)?',opts:['En funksjonalitet som ikke er høyt prioritert','En begrensning som plasseres på et use case eller systemet som helhet','En feil i kravspesifikasjonen som skal rettes','Et krav som bare gjelder for administratorer'],correct:1,exp:'Kenneth: «A non-functional requirement places a constraint on a use case, or on the system as a whole.» NFR er IKKE en funksjonalitet — det er en begrensning eller egenskap. Funksjonelle krav fanges i use case-modellen; NFR spesifiseres separat.'},
+  {q:'SetWatch-kravet «No software fault requiring the resetting of the watch should occur» er et eksempel på hvilken NFR-kategori?',opts:['Performance — Response time','Design quality — Supportability','Design quality — Reliability','Implementation'],correct:2,exp:'Kenneth er eksplisitt: «It\'s related to design quality, reliability. It should be very reliable.» Kravet sier at systemet ikke skal krasje eller trenge reset — det er en pålitelighets-begrensning, ikke responstid eller implementasjonsspråk.'},
+  {q:'SetWatch-kravet «should display the correct time zone within five minutes of the end of a GPS blackout period» er:',opts:['Design quality — Reliability (systemet skal ikke feile)','Performance — Response time (tidsbegrensning på å vise riktig data)','Performance — Accuracy (nøyaktigheten av målingen)','Interface — Usability (brukervennlighet)'],correct:1,exp:'Kenneth: «This one is related to response time. The correct time should be shown within five minutes.» Kravet setter en deadline på når systemet MÅ gi riktig svar etter en hendelse — det er response time. Accuracy handler om presisjonen av en verdi, ikke om tidfristen.'},
+  {q:'Hva er et administrasjons-use case?',opts:['Et use case som bare Administratorer kan utføre','Et use case som implementerer et ikke-funksjonelt krav (f.eks. sikkerhet eller vedlikehold)','Et use case som er ekskludert fra SRS','Et use case som ikke har noen aktør'],correct:1,exp:'Kenneth: «Some of the non-functional requirements will be implemented as administration use cases. For example, login, system startup, system shutdown or system backup — they are for security. Administration use cases are use cases that deal with non-functional requirements.» De er altså en måte å spesifisere visse NFR-er som konkret atferd.'},
+  {q:'Hvilke fem kriterier bruker vi til å validere krav?',opts:['Functional, Non-functional, Testable, Clear, Correct','Complete, Consistent, Clear, Correct, Realistic','Unique, Verifiable, Traceable, Feasible, Necessary','Atomic, Consistent, Complete, Unambiguous, Prioritized'],correct:1,exp:'Kenneth liste disse fem: Complete (alle krav er med), Consistent (ingen motsetninger), Clear (forståelig for alle stakeholders), Correct (faktisk riktig), Realistic (gjennomførbart). Disse fem brukes til å validere SRS kontinuerlig med klient og bruker.'},
+  {q:'SetWatch-kravene «shall not have bugs nor need to be upgraded» og «shall be easily upgraded using USB» er et eksempel på:',opts:['Incomplete requirements (noe mangler)','Inconsistent requirements (de motstrider hverandre)','Unclear requirements (for vage)','Incorrect requirements (faktisk feil)'],correct:1,exp:'Kenneth: «In one requirement you say it should not be upgraded. In the other requirement you say it should be easily upgraded using USB. So they are conflicting with one another.» Løsning: revider ett av de motstridende kravene.'},
+  {q:'Kravet «SetWatch supports only 24 time zones» ble identifisert som hvilken type valideringsfeil?',opts:['Incomplete — mangler edge cases','Inconsistent — motstrider et annet krav','Unclear — tidssoner er vagt definert','Incorrect — det finnes faktisk mer enn 24 tidssoner'],correct:3,exp:'Kenneth: «We know that in reality we have more than 24 time zones. So we have to fix and refine the requirement and change it to support all the time zones.» Kravet er ikke bare uklart — det er faktisk galt. Det er Incorrect, ikke Unclear.'},
+  {q:'Hva er den primære metoden for å validere at implementasjonen møter kravene i SRS?',opts:['Code review av kildekoden','Unit tests skrevet av utviklerne','Akseptansetester gjennomført med klient/bruker','Statisk analyse av UML-diagrammer'],correct:2,exp:'Kenneth: «Acceptance tests are the primary means to validate the system implementation satisfies the requirements. In acceptance tests, we try to validate all the requirements in front of our client or user.» Akseptansetester valideres direkte med klienten — ikke isolert av utviklingsteamet.'},
+  {q:'Hva inneholder en komplett SRS (System Requirements Specification)?',opts:['Kildekode + testcaser + brukerveiledning','Domain model + use case model + non-functional requirements','User stories + sprint backlog + burn-down chart','Class diagram + sequence diagram + deployment diagram'],correct:1,exp:'Kenneth oppsummerer: «In our SRS we should have: a domain model to capture all the data requirements (= class diagram), a use case model to capture the functional requirements (= use case diagram + specifications), and finally all the non-functional requirements.» De tre delene utgjør den komplette kravpakken.'},
+  {q:'Kravet «SetWatch specification refers to time zones» ble identifisert som unclear fordi:',opts:['Det er i strid med et annet krav om tidssoner','Implementeringen støtter bare 12 tidssoner','Det er uklart om «time zones» inkluderer daylight saving time eller ikke','Det mangler multiplicity på assosiasjonen'],correct:2,exp:'Kenneth: «Do we have to deal with daylight saving time or not? We have to refine and clarify the requirement by adding another requirement saying that SetWatch should deal with daylight saving time.» Et begrep som kan tolkes på flere måter av ulike stakeholders er et unclear krav.'},
+];
+
+let qAnswers={},qCurrent=0;
+function renderQuiz(){
+  const p=getModP();
+  if(p.quizDone){showQuizResult(p.quizScore,p.quizTotal);return;}
+  document.getElementById('quiz-dots').innerHTML=QUESTIONS.map((_,i)=>`<div class="qp-dot ${qAnswers[i]!=null?(qAnswers[i].correct?'correct':'wrong'):''}" id="dot-${i}"></div>`).join('');
+  renderQuestion(qCurrent);
+}
+function renderQuestion(idx){
+  const q=QUESTIONS[idx];const answered=qAnswers[idx];
+  document.getElementById('quiz-container').innerHTML=`
+    <div>
+      <div class="q-num">Spørsmål ${idx+1} av ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">${q.opts.map((o,i)=>`<button class="q-opt ${answered!=null?(i===q.correct?'correct':(i===answered.chosen?'wrong':''))  :''}" onclick="answerQ(${idx},${i})" ${answered!=null?'disabled':''}>${o}</button>`).join('')}</div>
+      <div class="q-explanation ${answered!=null?'show':''}">💡 ${q.exp}</div>
+      <div class="q-nav">
+        ${idx>0?`<button onclick="gotoQ(${idx-1})">← Forrige</button>`:''}
+        ${idx<QUESTIONS.length-1?`<button class="primary" onclick="gotoQ(${idx+1})">Neste →</button>`:''}
+        ${idx===QUESTIONS.length-1&&Object.keys(qAnswers).length===QUESTIONS.length?`<button class="primary" onclick="finishQuiz()">Se resultat</button>`:''}
+        <span class="q-score">${Object.keys(qAnswers).length}/${QUESTIONS.length} besvart</span>
+      </div>
+    </div>`;
+}
+function answerQ(qi,chosen){
+  qAnswers[qi]={chosen,correct:chosen===QUESTIONS[qi].correct};
+  document.getElementById('dot-'+qi).className='qp-dot '+(chosen===QUESTIONS[qi].correct?'correct':'wrong');
+  renderQuestion(qi);
+}
+function gotoQ(idx){qCurrent=idx;renderQuestion(idx);}
+function finishQuiz(){
+  const score=Object.values(qAnswers).filter(a=>a.correct).length;
+  saveP({quizScore:score,quizTotal:QUESTIONS.length,quizDone:true});
+  updateNav();showQuizResult(score,QUESTIONS.length);
+}
+function showQuizResult(score,total){
+  const pct=Math.round(score/total*100);
+  const msg=pct>=80?'🎉 Utmerket! Du har god kontroll på NFR og validering.':pct>=60?'👍 Bra jobbet! Les gjennom forklaringene du fikk feil.':'📚 Gå gjennom teorien igjen — særlig NFR-kategoriene og de 5 valideringskriteriene.';
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-result"><div class="score-big">${score}/${total}</div><p>${pct}% riktige</p><p style="margin-top:.3rem">${msg}</p><button onclick="resetQuiz()">Prøv igjen</button></div>`;
+  document.getElementById('quiz-dots').innerHTML='';
+}
+function resetQuiz(){qAnswers={};qCurrent=0;saveP({quizDone:false,quizScore:null});renderQuiz();}
+
+function updateNav(){
+  const p=getModP();
+  const ex=(p.doneExercises||[]).length;
+  document.getElementById('nav-prog').textContent=`${ex}/3 oppgaver · quiz ${p.quizScore!=null?p.quizScore+'/10':'—'}`;
+}
+
+(function init(){
+  const p=getModP();
+  (p.doneExercises||[]).forEach(id=>{
+    const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
+    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+  });
+  updateNav();
+})();
+</script>
+</body>
+</html>
