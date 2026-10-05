@@ -150,27 +150,27 @@
 <body>
 
 <nav>
-  <a href="../../index.html" class="nav-back">← Hjem</a>
-  <span class="nav-title">Modul 9 — Non-Functional Requirements & Validation</span>
+  <a href="../../index.html" class="nav-back">← Home</a>
+  <span class="nav-title">Module 9 — Non-Functional Requirements & Validation</span>
   <span class="nav-prog" id="nav-prog"></span>
 </nav>
 
 <div class="hero">
-  <div class="module-tag">Modul 09</div>
+  <div class="module-tag">Module 09</div>
   <h1>Non-Functional Requirements &amp; Validation</h1>
-  <p>Lær å identifisere og klassifisere ikke-funksjonelle krav, og forstå hvordan vi validerer at alle krav er komplette, konsistente, klare, korrekte og realistiske.</p>
+  <p>Learn to identify and classify non-functional requirements, and understand how we validate that all requirements are complete, consistent, clear, correct and realistic.</p>
   <div class="hero-meta">
-    <span class="meta-pill">📖 4 seksjoner</span>
-    <span class="meta-pill">🎯 10 quizspørsmål</span>
-    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">📖 4 sections</span>
+    <span class="meta-pill">🎯 10 quiz questions</span>
+    <span class="meta-pill">✏️ 3 exercises</span>
     <span class="meta-pill">⏱ ~35 min</span>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Theory</button>
   <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Exercises</button>
 </div>
 
 <div class="content">
@@ -178,24 +178,24 @@
 <!-- ═══════════════════ THEORY ═══════════════════ -->
 <div class="panel active" id="panel-theory">
 
-<!-- ─── SEKSJON 1: Hva er NFR ─── -->
+<!-- ─── SECTION 1: What is NFR ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">1</div>
-    <h2>Hva er ikke-funksjonelle krav (NFR)?</h2>
+    <h2>What are Non-Functional Requirements (NFR)?</h2>
   </div>
 
-  <p class="prose">I forelesningen starter Kenneth med en viktig definisjon: <strong>«A non-functional requirement places a constraint on a use case, or on the system as a whole.»</strong> Det er ikke en funksjonalitet systemet utfører — det er en <em>begrensning</em> eller <em>egenskap</em> som gjelder for funksjonaliteten.</p>
+  <p class="prose">Kenneth opens with a key definition: <strong>«A non-functional requirement places a constraint on a use case, or on the system as a whole.»</strong> It is not a functionality the system performs — it is a <em>constraint</em> or <em>quality property</em> that applies to the functionality.</p>
 
-  <p class="prose">Tenk på det slik: brukerkravet «Systemet skal la brukere registrere seg» er <em>funksjonelt</em>. Men «Systemet skal svare på alle forespørsler innen 2 sekunder» er en <em>begrensning</em> på <em>alle</em> funksjonaliteter — det er et NFR.</p>
+  <p class="prose">Think of it this way: the requirement «The system shall allow users to register» is <em>functional</em>. But «The system shall respond to all requests within 2 seconds» is a <em>constraint</em> on <em>all</em> functionalities — that is an NFR.</p>
 
   <div class="callout info">
-    <div class="callout-title">NFR vs funksjonelt krav</div>
-    <p><strong>Funksjonelt krav:</strong> Hva systemet gjør — en spesifikk funksjonalitet. Fangis i use case-modellen.</p>
-    <p style="margin-top:.5rem"><strong>NFR:</strong> En begrensning på <em>hvordan</em> systemet gjør det, eller en systemegensskap. Legges i en separat del av SRS.</p>
+    <div class="callout-title">NFR vs Functional Requirement</div>
+    <p><strong>Functional requirement:</strong> What the system does — a specific functionality. Captured in the use case model.</p>
+    <p style="margin-top:.5rem"><strong>NFR:</strong> A constraint on <em>how</em> the system does it, or a system-wide property. Placed in a separate section of the SRS.</p>
   </div>
 
-  <p class="prose" style="margin-top:1.25rem">Kenneth deler NFR inn i følgende kategorier. Alle eksemplene er fra SetWatch-forelesningen:</p>
+  <p class="prose" style="margin-top:1.25rem">Kenneth divides NFRs into the following categories. All examples are from the SetWatch lecture:</p>
 
   <div style="overflow-x:auto;margin:.75rem 0 1rem">
     <table class="nfr-table">
@@ -245,36 +245,36 @@
         <tr>
           <td><span class="cat-pill" style="background:rgba(239,68,68,.15);color:#fca5a5">Security</span></td>
           <td style="color:#94a3b8">System/data/physical</td>
-          <td style="color:#cbd5e1">Begrensninger på hvem som kan få tilgang til systemet, dataene, eller fysisk enhet.</td>
+          <td style="color:#cbd5e1">Constraints on who can access the system, the data, or the physical device.</td>
         </tr>
         <tr>
           <td><span class="cat-pill" style="background:rgba(100,116,139,.15);color:#94a3b8">Hardware</span></td>
           <td style="color:#94a3b8">Memory/storage</td>
-          <td style="color:#cbd5e1">Krav til minnestørrelse, lagringskapasitet, implementasjonsplattform.</td>
+          <td style="color:#cbd5e1">Requirements for memory size, storage capacity, and implementation platform.</td>
         </tr>
         <tr>
           <td><span class="cat-pill" style="background:rgba(100,116,139,.15);color:#94a3b8">Documentation</span></td>
           <td style="color:#94a3b8">What &amp; for whom</td>
-          <td style="color:#cbd5e1">Hvilken dokumentasjon trengs, og hvem er målgruppen (brukere, utviklere, operatører)?</td>
+          <td style="color:#cbd5e1">What documentation is needed, and for whom (users, developers, operators)?</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <div class="callout tip">
-    <div class="callout-title">NFR som administrasjons-use cases</div>
-    <p>Kenneth påpeker at noen NFR-er — særlig sikkerhets- og operasjonelle krav — implementeres som egne <strong>administrasjons-use cases</strong>. Eksempler: login, system startup, system shutdown, system backup. Kenneth: «Administration use cases are use cases that deal with non-functional requirements, for example security, or system operation or maintenance.»</p>
+    <div class="callout-title">NFR as Administration Use Cases</div>
+    <p>Kenneth points out that some NFRs — especially security and operational requirements — are implemented as dedicated <strong>administration use cases</strong>. Examples: login, system startup, system shutdown, system backup. Kenneth: «Administration use cases are use cases that deal with non-functional requirements, for example security, or system operation or maintenance.»</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 2: SetWatch gjennomgang ─── -->
+<!-- ─── SECTION 2: SetWatch walkthrough ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">2</div>
-    <h2>Praktisk gjennomgang — SetWatch satellittur</h2>
+    <h2>Worked Example — SetWatch Satellite Trip</h2>
   </div>
 
-  <p class="prose">Kenneth bruker SetWatch som gjennomgående case study. Han leser problem statement <em>setning for setning</em> og identifiserer NFR-type for hver. Dette er nøyaktig den teknikken du bruker på eksamen. Klikk på hvert krav for å se analysen:</p>
+  <p class="prose">Kenneth uses SetWatch as a running case study. He reads the problem statement <em>sentence by sentence</em> and identifies the NFR type for each. This is exactly the technique you use in the exam. Click each requirement to see the analysis:</p>
 
   <div id="classifier-container">
     <div class="classifier-card">
@@ -283,10 +283,10 @@
       </div>
       <div class="clf-body">
         <div class="clf-opts">
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability handler om feil og pålitelighet — ikke om brukergrensesnitt eller brukbarhet.')">Reliability</button>
-          <button class="clf-opt" onclick="checkClf(this,'correct','Interface / Usability','Riktig! Kenneth: «It\'s related to interface and also usability. Because we say that a user who knows how to read a digital watch should be able to use SetWatch.» Kravet definerer hvem som skal klare å bruke systemet — det er en brukbarhets-/interface-begrensning.')">Interface / Usability</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance','Performance handler om hastighet, nøyaktighet, svar-tid — ikke om brukervennlighet.')">Performance</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Security handler om tilgangskontroll og databeskyttelse.')">Security</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability is about faults and dependability — not about the user interface or usability.')">Reliability</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Interface / Usability','Correct! Kenneth: «It\'s related to interface and also usability. Because we say that a user who knows how to read a digital watch should be able to use SetWatch.» The requirement defines who should be able to use the system — that is a usability/interface constraint.')">Interface / Usability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance','Performance is about speed, accuracy, response time — not about ease of use.')">Performance</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Security is about access control and data protection.')">Security</button>
         </div>
         <div class="clf-explain"></div>
       </div>
@@ -298,10 +298,10 @@
       </div>
       <div class="clf-body">
         <div class="clf-opts">
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance','Performance er responstid og nøyaktighet — ikke feiltoleranse.')">Performance</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Security er tilgangskontroll.')">Security</button>
-          <button class="clf-opt" onclick="checkClf(this,'correct','Design quality — Reliability','Riktig! Kenneth: «It\'s related to design quality, reliability. It should be very reliable.» Systemet skal ikke krasje eller kreve reset. Dette er en pålitelighets-begrensning.')">Design quality — Reliability</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Implementation','Implementation handler om programmerings-standarder og språk.')">Implementation</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance','Performance is response time and accuracy — not fault tolerance.')">Performance</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Security is about access control.')">Security</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Design quality — Reliability','Correct! Kenneth: «It\'s related to design quality, reliability. It should be very reliable.» The system must not crash or require a reset — this is a reliability constraint.')">Design quality — Reliability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Implementation','Implementation is about programming standards and language.')">Implementation</button>
         </div>
         <div class="clf-explain"></div>
       </div>
@@ -313,10 +313,10 @@
       </div>
       <div class="clf-body">
         <div class="clf-opts">
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Interface','Interface i NFR-sammenheng handler om ekstern systemgrensesnitt-format, ikke oppgraderingsmekanismer.')">Interface</button>
-          <button class="clf-opt" onclick="checkClf(this,'correct','Design quality — Supportability','Riktig! Kenneth: «This one is related to design quality, supportability. That means somehow SetWatch should support upgrade via USB.» Systemet skal være designet slik at det kan oppgraderes — det er en vedlikeholds-/supportability-egenskap.')">Design quality — Supportability</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Hardware','Hardware handler om minnestørrelse og lagringskapasitet.')">Hardware</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Feil — ikke sikkerhetsrelatert.')">Security</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Interface','Interface in NFR context is about external system interface formats, not upgrade mechanisms.')">Interface</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Design quality — Supportability','Correct! Kenneth: «This one is related to design quality, supportability. That means somehow SetWatch should support upgrade via USB.» The system must be designed so it can be upgraded — that is a supportability property.')">Design quality — Supportability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Hardware','Hardware is about memory size and storage capacity.')">Hardware</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Security','Incorrect — not security-related.')">Security</button>
         </div>
         <div class="clf-explain"></div>
       </div>
@@ -328,10 +328,10 @@
       </div>
       <div class="clf-body">
         <div class="clf-opts">
-          <button class="clf-opt" onclick="checkClf(this,'correct','Performance — Response time','Riktig! Kenneth: «This one is related to response time. The correct time should be shown within five minutes.» Kravet setter en tidsbegrensning på når systemet MÅ gi riktig svar — det er response time.')">Performance — Response time</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance — Accuracy','Accuracy handler om nøyaktigheten av en måling (f.eks. 1/100 sek), ikke om tidsfristen for å vise riktig data.')">Performance — Accuracy</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability handler om fravær av feil, ikke om svartid.')">Reliability</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Design quality','Vag — vær mer spesifikk om underkategori.')">Design quality (generelt)</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Performance — Response time','Correct! Kenneth: «This one is related to response time. The correct time should be shown within five minutes.» The requirement sets a deadline for when the system MUST provide the correct answer — that is response time.')">Performance — Response time</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance — Accuracy','Accuracy is about the precision of a measurement (e.g. 1/100 sec), not the deadline for displaying correct data.')">Performance — Accuracy</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability is about the absence of faults, not response time.')">Reliability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Design quality','Too vague — be more specific about the subcategory.')">Design quality (general)</button>
         </div>
         <div class="clf-explain"></div>
       </div>
@@ -343,10 +343,10 @@
       </div>
       <div class="clf-body">
         <div class="clf-opts">
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance — Response time','Response time handler om hvor <em>fort</em> systemet svarer, ikke om presisjonen i målingen.')">Performance — Response time</button>
-          <button class="clf-opt" onclick="checkClf(this,'correct','Performance — Accuracy','Riktig! Kenneth: «This one is related to accuracy. It should be very accurate within one of a hundredth second.» Kravet definerer presisjonen på en måling over tid — det er en nøyaktighets-NFR.')">Performance — Accuracy</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability handler om fravær av programfeil.')">Reliability</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Implementation','Implementation er f.eks. programmeringsspråk.')">Implementation</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Performance — Response time','Response time is about how <em>quickly</em> the system responds, not the precision of a measurement.')">Performance — Response time</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Performance — Accuracy','Correct! Kenneth: «This one is related to accuracy. It should be very accurate within one of a hundredth second.» The requirement defines the precision of a measurement over time — that is an accuracy NFR.')">Performance — Accuracy</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Reliability','Reliability is about the absence of software faults.')">Reliability</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Implementation','Implementation is e.g. programming language choice.')">Implementation</button>
         </div>
         <div class="clf-explain"></div>
       </div>
@@ -358,10 +358,10 @@
       </div>
       <div class="clf-body">
         <div class="clf-opts">
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Interface','Interface er om grensesnittstandarder, ikke om intern implementasjonsteknologi.')">Interface</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Design quality','Designkvalitet handler om pålitelighet og vedlikeholdbarhet, ikke om valg av språk.')">Design quality</button>
-          <button class="clf-opt" onclick="checkClf(this,'correct','Implementation','Riktig! Kenneth: «This one is about implementation. And we are talking about the programming language that we\'re going to use for the software system.» Valg av teknologi, standarder og programmeringsspråk er Implementation-NFR.')">Implementation</button>
-          <button class="clf-opt" onclick="checkClf(this,'wrong','Documentation','Dokumentasjon handler om hvilken dokumentasjon som trengs og for hvem.')">Documentation</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Interface','Interface is about external system interface standards, not internal technology choices.')">Interface</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Design quality','Design quality is about reliability and maintainability, not language choice.')">Design quality</button>
+          <button class="clf-opt" onclick="checkClf(this,'correct','Implementation','Correct! Kenneth: «This one is about implementation. And we are talking about the programming language that we\'re going to use for the software system.» Technology choice, standards and programming language are Implementation NFRs.')">Implementation</button>
+          <button class="clf-opt" onclick="checkClf(this,'wrong','Documentation','Documentation is about what documentation is needed and for whom.')">Documentation</button>
         </div>
         <div class="clf-explain"></div>
       </div>
@@ -369,100 +369,100 @@
   </div>
 </div>
 
-<!-- ─── SEKSJON 3: Validering ─── -->
+<!-- ─── SECTION 3: Validation ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">3</div>
-    <h2>Validering av krav — de fem kriteriene</h2>
+    <h2>Requirements Validation — the Five Criteria</h2>
   </div>
 
-  <p class="prose">Etter at alle kravene er fanget (domain model, use case model, NFR) MÅ de valideres kontinuerlig med klienten eller brukeren. Kenneth: <strong>«All the requirements that we have captured in the SRS should be validated continuously with the client or user.»</strong></p>
+  <p class="prose">Once all requirements have been captured (domain model, use case model, NFR) they MUST be validated continuously with the client or user. Kenneth: <strong>«All the requirements that we have captured in the SRS should be validated continuously with the client or user.»</strong></p>
 
-  <p class="prose">Det er fem valideringskriterier. Klikk på hvert for å se Kenneth's SetWatch-eksempel:</p>
+  <p class="prose">There are five validation criteria. Click each one to see Kenneth's SetWatch example:</p>
 
   <div class="val-grid">
-    <div class="val-card" onclick="showVal(this,'complete','<strong style=\'color:#f1f5f9\'>Complete</strong><br><br>Alle krav er med — ingen scenarior eller atferd er uspesifisert.<br><br><strong>SetWatch-eksempel (incomplete):</strong> «The SetWatch specification does not specify the boundary behavior when the user is standing within GPS accuracy limitations of a time zone\'s boundary.»<br><br>Hva skjer om brukeren står mellom to tidssoner? Klokken vil veksle mellom to tidssoner om og om igjen. Kenneth: «The solution is to add another requirement: the time zone depicted by SetWatch should not change more often than once every five minutes.»')">
+    <div class="val-card" onclick="showVal(this,'complete','<strong style=\'color:#f1f5f9\'>Complete</strong><br><br>All requirements are present — no scenario or behaviour is left unspecified.<br><br><strong>SetWatch example (incomplete):</strong> «The SetWatch specification does not specify the boundary behavior when the user is standing within GPS accuracy limitations of a time zone\'s boundary.»<br><br>What happens if the user stands between two time zones? The watch will keep switching back and forth. Kenneth: «The solution is to add another requirement: the time zone depicted by SetWatch should not change more often than once every five minutes.»')">
       <div class="val-type" style="color:var(--success)">✓ Complete</div>
-      <h4>Alle krav er med</h4>
-      <p>Ingen mangler noe scenario eller atferd</p>
+      <h4>All requirements present</h4>
+      <p>No scenario or behaviour missing</p>
     </div>
-    <div class="val-card" onclick="showVal(this,'consistent','<strong style=\'color:#f1f5f9\'>Consistent</strong><br><br>Ingen krav motstrider hverandre.<br><br><strong>SetWatch-eksempel (inconsistent):</strong><br>Krav A: «SetWatch software should not have bugs nor need to be upgraded.»<br>Krav B: «SetWatch software should be easily upgraded using the USB interface.»<br><br>Kenneth: «In one requirement you say it should not be upgraded. In the other requirement you say it should be easily upgraded using USB. So they are conflicting with one another.» Løsning: revider ett av de motstridende kravene.')">
+    <div class="val-card" onclick="showVal(this,'consistent','<strong style=\'color:#f1f5f9\'>Consistent</strong><br><br>No requirements contradict each other.<br><br><strong>SetWatch example (inconsistent):</strong><br>Req A: «SetWatch software should not have bugs nor need to be upgraded.»<br>Req B: «SetWatch software should be easily upgraded using the USB interface.»<br><br>Kenneth: «In one requirement you say it should not be upgraded. In the other requirement you say it should be easily upgraded using USB. So they are conflicting with one another.» Solution: revise one of the conflicting requirements.')">
       <div class="val-type" style="color:var(--accent2)">↔ Consistent</div>
-      <h4>Ingen motsetninger</h4>
-      <p>Krav motstrider ikke hverandre</p>
+      <h4>No contradictions</h4>
+      <p>Requirements do not conflict</p>
     </div>
-    <div class="val-card" onclick="showVal(this,'clear','<strong style=\'color:#f1f5f9\'>Clear</strong><br><br>Alle stakeholders kan forstå kravet entydig.<br><br><strong>SetWatch-eksempel (unclear):</strong> «SetWatch specification refers to time zones.»<br><br>Hva betyr «time zones»? Inkluderer det sommertid (daylight saving time)? Kenneth: «We have to refine and clarify the requirement by adding another requirement saying that SetWatch should deal with daylight saving time.» Et vagt begrep = et uklart krav.')">
+    <div class="val-card" onclick="showVal(this,'clear','<strong style=\'color:#f1f5f9\'>Clear</strong><br><br>All stakeholders can understand the requirement unambiguously.<br><br><strong>SetWatch example (unclear):</strong> «SetWatch specification refers to time zones.»<br><br>What does «time zones» mean? Does it include daylight saving time? Kenneth: «We have to refine and clarify the requirement by adding another requirement saying that SetWatch should deal with daylight saving time.» A vague term = an unclear requirement.')">
       <div class="val-type" style="color:var(--accent3)">☀ Clear</div>
-      <h4>Forståelig</h4>
-      <p>Alle stakeholders forstår det likt</p>
+      <h4>Unambiguous</h4>
+      <p>All stakeholders understand it the same way</p>
     </div>
-    <div class="val-card" onclick="showVal(this,'correct','<strong style=\'color:#f1f5f9\'>Correct</strong><br><br>Kravene er faktisk riktige — de reflekterer virkeligheten.<br><br><strong>SetWatch-eksempel (incorrect):</strong> «SetWatch supports only 24 time zones.»<br><br>Kenneth: «We know that in reality, we have more than 24 time zones. So we have to fix and refine the requirement and change it to support all the time zones.» Kravet er ikke bare uklart — det er faktisk feil.')">
+    <div class="val-card" onclick="showVal(this,'correct','<strong style=\'color:#f1f5f9\'>Correct</strong><br><br>The requirements actually reflect reality.<br><br><strong>SetWatch example (incorrect):</strong> «SetWatch supports only 24 time zones.»<br><br>Kenneth: «We know that in reality, we have more than 24 time zones. So we have to fix and refine the requirement and change it to support all the time zones.» The requirement is not just unclear — it is factually wrong.')">
       <div class="val-type" style="color:var(--warn)">⚠ Correct</div>
-      <h4>Faktisk riktig</h4>
-      <p>Kravene reflekterer virkeligheten</p>
+      <h4>Factually accurate</h4>
+      <p>Requirements reflect reality</p>
     </div>
-    <div class="val-card" onclick="showVal(this,'realistic','<strong style=\'color:#f1f5f9\'>Realistic</strong><br><br>Kravene er gjennomførbare — teknisk og kostnadsmessig mulige å implementere.<br><br><strong>Eksempel:</strong> «Systemet skal svare på alle forespørsler innen 0,001 millisekunder» kan være urealistisk gitt eksisterende hardware og nettverkslatens.<br><br>Urealistiske krav leder til prosjekter som aldri kan levere det som er lovet.')">
+    <div class="val-card" onclick="showVal(this,'realistic','<strong style=\'color:#f1f5f9\'>Realistic</strong><br><br>Requirements are achievable — technically and financially feasible.<br><br><strong>Example:</strong> «The system shall respond to all requests within 0.001 milliseconds» may be unrealistic given existing hardware and network latency.<br><br>Unrealistic requirements lead to projects that can never deliver what was promised.')">
       <div class="val-type" style="color:var(--danger)">🎯 Realistic</div>
-      <h4>Gjennomførbart</h4>
-      <p>Teknisk og kostnadsmessig mulig</p>
+      <h4>Achievable</h4>
+      <p>Technically and financially feasible</p>
     </div>
   </div>
-  <div class="val-detail" id="val-detail">Klikk på et kriterie ovenfor for å se Kenneth's konkrete SetWatch-eksempel.</div>
+  <div class="val-detail" id="val-detail">Click a criterion above to see Kenneth's concrete SetWatch example.</div>
 
   <div class="callout warn" style="margin-top:1.5rem">
-    <div class="callout-title">Eksamensfelle — vet du de engelske begrepene?</div>
-    <p>På eksamen brukes de engelske begrepene. Husk dem: <strong>Complete, Consistent, Clear, Correct, Realistic</strong>. Du kan bli bedt om å identifisere hvilken type valideringsfeil et gitt kraveksempel representerer.</p>
+    <div class="callout-title">Exam tip</div>
+    <p>You will be asked to identify which type of validation failure a given requirements example represents. Know the five criteria: <strong>Complete, Consistent, Clear, Correct, Realistic</strong>.</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 4: SRS-oppsummering ─── -->
+<!-- ─── SECTION 4: SRS Summary ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">4</div>
-    <h2>SRS — hva er en komplett kravspesifikasjon?</h2>
+    <h2>SRS — What Makes a Complete Requirements Specification?</h2>
   </div>
 
-  <p class="prose">Kenneth avslutter modul 9 med en oppsummering av hva en komplett <strong>System Requirements Specification (SRS)</strong> skal inneholde. Dette er kravpakken som leveres til klient og brukes som grunnlag for design og implementasjon.</p>
+  <p class="prose">Kenneth closes module 9 with a summary of what a complete <strong>System Requirements Specification (SRS)</strong> must contain. This is the requirements package delivered to the client and used as the basis for design and implementation.</p>
 
   <div class="fig">
-    <div class="fig-title">SRS — tre deler</div>
+    <div class="fig-title">SRS — Three Parts</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem">
       <div class="srs-box">
         <h4>Domain Model</h4>
         <ul>
-          <li>Fanger <strong>datakrav</strong></li>
-          <li>Representeres som <strong>class diagram</strong></li>
-          <li>Alle viktige objekter og relasjoner i applikasjonsdomenet</li>
+          <li>Captures <strong>data requirements</strong></li>
+          <li>Represented as a <strong>class diagram</strong></li>
+          <li>All important objects and relationships in the application domain</li>
         </ul>
       </div>
       <div class="srs-box">
         <h4>Use Case Model</h4>
         <ul>
-          <li>Fanger <strong>funksjonelle krav</strong></li>
-          <li><strong>Use case diagram</strong> — oversikt over alle funksjonaliteter</li>
-          <li><strong>Use case specifications</strong> — flow of events for hvert use case</li>
+          <li>Captures <strong>functional requirements</strong></li>
+          <li><strong>Use case diagram</strong> — overview of all functionalities</li>
+          <li><strong>Use case specifications</strong> — flow of events for each use case</li>
         </ul>
       </div>
       <div class="srs-box">
         <h4>Non-Functional Requirements</h4>
         <ul>
-          <li>Fanger <strong>begrensninger og egenskaper</strong></li>
+          <li>Captures <strong>constraints and quality properties</strong></li>
           <li>Design quality, Performance, Interface, Security, Implementation, Hardware, Documentation</li>
-          <li>Noen implementeres som administrasjons-use cases</li>
+          <li>Some are implemented as administration use cases</li>
         </ul>
       </div>
     </div>
     <div class="fig-caption">Kenneth: «In our SRS we should have a domain model, a use case model, and also all the non-functional requirements.»</div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Akseptansetester — den primære valideringsmekanismen</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Acceptance Tests — the Primary Validation Mechanism</h3>
 
-  <p class="prose">Etter at SRS er ferdig, brukes <strong>akseptansetester</strong> for å validere at den ferdige implementasjonen faktisk tilfredsstiller kravene. Kenneth: <strong>«Acceptance tests are the primary means to validate the system implementation satisfies the requirements. In acceptance tests, we try to validate all the requirements in front of our client or user.»</strong></p>
+  <p class="prose">Once the SRS is complete, <strong>acceptance tests</strong> are used to validate that the finished implementation actually satisfies the requirements. Kenneth: <strong>«Acceptance tests are the primary means to validate the system implementation satisfies the requirements. In acceptance tests, we try to validate all the requirements in front of our client or user.»</strong></p>
 
   <div class="callout info">
-    <div class="callout-title">Livssyklusen videre</div>
-    <p>Kenneth forklarer hva som skjer etter SRS: «In the subsequent iterations or phases, we will find and also transform the requirements by specifying more details. We should come up with a matching use case realization in the analysis model, and also a matching use case realization in the design model. And we're going to use the analysis model and also the design model for implementation.»</p>
-    <p style="margin-top:.5rem">SRS er altså startpunktet for all videre utvikling — ikke et isolert dokument.</p>
+    <div class="callout-title">The Lifecycle Going Forward</div>
+    <p>Kenneth explains what happens after the SRS: «In the subsequent iterations or phases, we will find and also transform the requirements by specifying more details. We should come up with a matching use case realization in the analysis model, and also a matching use case realization in the design model. And we're going to use the analysis model and also the design model for implementation.»</p>
+    <p style="margin-top:.5rem">The SRS is therefore the starting point for all further development — not an isolated document.</p>
   </div>
 </div>
 
@@ -480,71 +480,71 @@
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 1</span>
-      <h3>Klassifiser kravene — funksjonelt eller NFR?</h3>
+      <h3>Classify the requirements — functional or NFR?</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
-      <p>For hvert krav: avgjør om det er et <strong>funksjonelt krav</strong> (FC) eller et <strong>ikke-funksjonelt krav</strong> (NFR). Hvis NFR, angi hvilken kategori (reliability, performance/response time, performance/accuracy, supportability, interface/usability, implementation, security, documentation, hardware).</p>
+      <p>For each requirement: decide whether it is a <strong>functional requirement</strong> (FC) or a <strong>non-functional requirement</strong> (NFR). If NFR, state which category (reliability, performance/response time, performance/accuracy, supportability, interface/usability, implementation, security, documentation, hardware).</p>
       <ol style="margin:.75rem 0 .5rem 1.2rem">
-        <li style="margin-bottom:.5rem">«Systemet skal la brukere søke etter bøker med tittel, forfatter eller ISBN.»</li>
-        <li style="margin-bottom:.5rem">«Søk skal returnere resultater innen 1 sekund for databaser opptil 1 million bøker.»</li>
-        <li style="margin-bottom:.5rem">«All kildekode skal følge Google Java Style Guide.»</li>
-        <li style="margin-bottom:.5rem">«Systemet skal sende e-postvarsler til brukere ved forfalte lån.»</li>
-        <li style="margin-bottom:.5rem">«Systemet skal ikke tillate uautorisert tilgang til lånehistorikk.»</li>
-        <li style="margin-bottom:.5rem">«Systemet skal kunne håndtere 500 samtidige brukere uten ytelsesforringelse.»</li>
-        <li style="margin-bottom:.5rem">«Systemet skal tilby installasjonsveiledning for IT-personell.»</li>
+        <li style="margin-bottom:.5rem">«The system shall allow users to search for books by title, author or ISBN.»</li>
+        <li style="margin-bottom:.5rem">«Search shall return results within 1 second for databases of up to 1 million books.»</li>
+        <li style="margin-bottom:.5rem">«All source code shall follow the Google Java Style Guide.»</li>
+        <li style="margin-bottom:.5rem">«The system shall send email notifications to users for overdue loans.»</li>
+        <li style="margin-bottom:.5rem">«The system shall not permit unauthorised access to borrowing history.»</li>
+        <li style="margin-bottom:.5rem">«The system shall handle 500 concurrent users without performance degradation.»</li>
+        <li style="margin-bottom:.5rem">«The system shall provide an installation guide for IT staff.»</li>
       </ol>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
-        <div class="sol-title">Løsning</div>
+        <div class="sol-title">Solution</div>
         <ol style="margin:.4rem 0 0 1.2rem">
-          <li style="margin-bottom:.5rem"><strong>FC</strong> — Dette er en konkret funksjonalitet (søk) i use case-modellen.</li>
-          <li style="margin-bottom:.5rem"><strong>NFR — Performance (response time)</strong> — Setter en tidsbegrensning på funksjonaliteten.</li>
-          <li style="margin-bottom:.5rem"><strong>NFR — Implementation</strong> — Setter standarder for koding og programmeringskonvensjoner.</li>
-          <li style="margin-bottom:.5rem"><strong>FC</strong> — Konkret funksjonalitet (sende varsler). Vil bli modellert som et use case.</li>
-          <li style="margin-bottom:.5rem"><strong>NFR — Security</strong> — Tilgangskontroll er en sikkerhets-begrensning. Kan implementeres som administrasjons-use case (login).</li>
-          <li style="margin-bottom:.5rem"><strong>NFR — Performance (throughput/capacity)</strong> — Setter en kapasitetsbegrensning på systemet som helhet.</li>
-          <li style="margin-bottom:.5rem"><strong>NFR — Documentation</strong> — Definerer hva slags dokumentasjon som trengs og for hvem.</li>
+          <li style="margin-bottom:.5rem"><strong>FC</strong> — This is a concrete functionality (search) captured in the use case model.</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Performance (response time)</strong> — Places a time constraint on the functionality.</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Implementation</strong> — Sets coding standards and programming conventions.</li>
+          <li style="margin-bottom:.5rem"><strong>FC</strong> — Concrete functionality (sending notifications). Will be modelled as a use case.</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Security</strong> — Access control is a security constraint. Can be implemented as an administration use case (login).</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Performance (throughput/capacity)</strong> — Places a capacity constraint on the system as a whole.</li>
+          <li style="margin-bottom:.5rem"><strong>NFR — Documentation</strong> — Defines what documentation is needed and for whom.</li>
         </ol>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Mark as done</button>
     </div>
   </div>
 
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 2</span>
-      <h3>Finn valideringsfeilen — hvilken type er det?</h3>
+      <h3>Find the validation flaw — which type is it?</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
-      <p>For hvert kraveksempel: identifiser valideringsfeilen (Incomplete, Inconsistent, Unclear, Incorrect, Realistic) og beskriv kort hva som er galt og hva løsningen er.</p>
+      <p>For each requirements example: identify the validation flaw (Incomplete, Inconsistent, Unclear, Incorrect, Unrealistic) and briefly describe what is wrong and what the solution is.</p>
       <ol style="margin:.75rem 0 .5rem 1.2rem">
-        <li style="margin-bottom:.65rem">«Systemet skal sende SMS-varsler til brukere.» — men det er ingen krav om hva SMS-en skal inneholde, når den skal sendes, eller om brukere kan slå det av.</li>
-        <li style="margin-bottom:.65rem">«Systemet skal ikke lagre persondata.» og «Systemet skal lagre brukerpreferanser og kjøpshistorikk for å personalisere anbefalinger.»</li>
-        <li style="margin-bottom:.65rem">«Systemet skal håndtere betalinger.» — men det er ikke spesifisert hvilke betalingsmetoder, valutaer, eller om det inkluderer refusjoner.</li>
-        <li style="margin-bottom:.65rem">«Systemet skal svare på alle spørringer innen 0,000001 sekunder» for et web-basert system.</li>
-        <li style="margin-bottom:.65rem">«Systemet skal støtte alle 193 land i FN» — men den faktiske listen over land systemet støtter er satt til bare G7-landene andre steder.</li>
+        <li style="margin-bottom:.65rem">«The system shall send SMS notifications to users.» — but there is no requirement about what the SMS should contain, when it should be sent, or whether users can opt out.</li>
+        <li style="margin-bottom:.65rem">«The system shall not store personal data.» and «The system shall store user preferences and purchase history to personalise recommendations.»</li>
+        <li style="margin-bottom:.65rem">«The system shall handle payments.» — but it is unspecified which payment methods, currencies, or whether refunds are included.</li>
+        <li style="margin-bottom:.65rem">«The system shall respond to all queries within 0.000001 seconds» for a web-based system.</li>
+        <li style="margin-bottom:.65rem">«The system shall support all 193 UN member states» — but the actual list of supported countries elsewhere in the spec is limited to G7 countries only.</li>
       </ol>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
-        <div class="sol-title">Løsning</div>
+        <div class="sol-title">Solution</div>
         <ol style="margin:.4rem 0 0 1.2rem">
-          <li style="margin-bottom:.55rem"><strong>Incomplete.</strong> Kravet beskriver en funksjon men spesifiserer ikke innhold, triggerbetingelse, eller brukervalg. Løsning: legg til krav om hva SMSen inneholder, når den sendes, og mulighet til å deaktivere.</li>
-          <li style="margin-bottom:.55rem"><strong>Inconsistent.</strong> De to kravene motstrider hverandre direkte. Det er umulig å oppfylle begge. Løsning: revider ett av dem — f.eks. tillat lagring av preferanser uten å lagre personidentifiserbar informasjon.</li>
-          <li style="margin-bottom:.55rem"><strong>Unclear (+ Incomplete).</strong> «Betalinger» er et vagt begrep. Løsning: presiser hvilke metoder (Visa, PayPal, ApplePay?), valutaer, og om refusjoner og delbetalinger er i scope.</li>
-          <li style="margin-bottom:.55rem"><strong>Realistic (Unrealistic).</strong> 1 mikrosekund svartid er teknisk umulig for web-baserte systemer med nettverkslatens. Løsning: sett et realistisk krav basert på faktisk infrastruktur.</li>
-          <li style="margin-bottom:.55rem"><strong>Incorrect + Inconsistent.</strong> Kravet om 193 land er faktisk feil i forhold til den implementerte listen. Løsning: korriger ett av de to kravene til å matche det som faktisk er mulig og ønsket.</li>
+          <li style="margin-bottom:.55rem"><strong>Incomplete.</strong> The requirement describes a function but does not specify content, trigger condition, or user opt-out. Fix: add requirements for SMS content, when it is sent, and how to disable it.</li>
+          <li style="margin-bottom:.55rem"><strong>Inconsistent.</strong> The two requirements directly contradict each other. It is impossible to satisfy both. Fix: revise one — e.g. allow storage of preferences without storing personally identifiable information.</li>
+          <li style="margin-bottom:.55rem"><strong>Unclear (+ Incomplete).</strong> «Payments» is a vague term. Fix: specify which methods (Visa, PayPal, ApplePay?), currencies, and whether refunds and partial payments are in scope.</li>
+          <li style="margin-bottom:.55rem"><strong>Unrealistic.</strong> 1 microsecond response time is technically impossible for web-based systems with network latency. Fix: set a realistic requirement based on actual infrastructure.</li>
+          <li style="margin-bottom:.55rem"><strong>Incorrect + Inconsistent.</strong> The 193-country requirement contradicts the implemented country list elsewhere. Fix: correct one of the two to match what is actually possible and desired.</li>
         </ol>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Mark as done</button>
     </div>
   </div>
 
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 3</span>
-      <h3>Skriv NFR-er for et mobilbetaling-system</h3>
+      <h3>Write NFRs for a mobile payment system</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
@@ -568,7 +568,7 @@
         </ul>
         <p style="margin-top:.6rem">Legg merke til at gode NFR-er er <strong>spesifikke og målbare</strong> — «innen 3 sekunder», «99,9% oppetid», «TLS 1.3» er langt bedre enn «rask», «pålitelig», «sikker».</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -627,12 +627,12 @@ function toggleEx(header){
 function toggleSol(btn){
   const sol=btn.nextElementSibling;
   const show=sol.classList.toggle('show');
-  btn.textContent=show?'Skjul løsning':'Vis løsning';
+  btn.textContent=show?'Hide solution':'Show solution';
 }
 function markDone(btn,id){
   btn.classList.toggle('done');
   const done=btn.classList.contains('done');
-  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  btn.textContent=done?'✓ Done!':'✓ Mark as done';
   const p=getModP();
   const s=new Set(p.doneExercises||[]);
   done?s.add(id):s.delete(id);
@@ -705,7 +705,7 @@ function updateNav(){
   const p=getModP();
   (p.doneExercises||[]).forEach(id=>{
     const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+    if(btn){btn.classList.add('done');btn.textContent='✓ Done!';}
   });
   updateNav();
 })();

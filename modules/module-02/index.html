@@ -167,97 +167,97 @@
 <body>
 
 <nav>
-  <a href="../../index.html" class="nav-back">← Hjem</a>
-  <span class="nav-title">Modul 2 — UML Class Diagrams</span>
+  <a href="../../index.html" class="nav-back">← Home</a>
+  <span class="nav-title">Module 2 — UML Class Diagrams</span>
   <span class="nav-prog" id="nav-prog"></span>
 </nav>
 
 <div class="hero">
-  <div class="module-tag">Modul 02</div>
+  <div class="module-tag">Module 02</div>
   <h1>UML Class Diagrams</h1>
-  <p>Lær å modellere datakrav med klasser, assosiasjoner, multiplicities, aggregering og komposisjon — direkte fra forelesningene til Professor Kenneth.</p>
+  <p>Learn to model data requirements using classes, associations, multiplicities, aggregation and composition — drawn directly from Professor Kenneth's lectures.</p>
   <div class="hero-meta">
-    <span class="meta-pill">📖 5 seksjoner</span>
-    <span class="meta-pill">🎯 12 quizspørsmål</span>
-    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">📖 5 sections</span>
+    <span class="meta-pill">🎯 12 quiz questions</span>
+    <span class="meta-pill">✏️ 3 exercises</span>
     <span class="meta-pill">⏱ ~45 min</span>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Theory</button>
   <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Exercises</button>
 </div>
 
 <div class="content">
 <!-- ═══════════════════ THEORY ═══════════════════ -->
 <div class="panel active" id="panel-theory">
 
-<!-- ─── SEKSJON 1: Hvorfor modellere ─── -->
+<!-- ─── SECTION 1: Why model ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">1</div>
-    <h2>Hva er UML, og hvorfor bygger vi modeller?</h2>
+    <h2>What is UML, and why do we build models?</h2>
   </div>
 
-  <p class="prose">UML (Unified Modeling Language) er et <strong>visuelt modelleringsspråk</strong> — et standardisert verktøy vi bruker for å kommunisere med alle stakeholders i et prosjekt. Det er viktig å forstå at UML <strong>ikke er en utviklingsmetodologi</strong>, men et språk vi kan bruke uavhengig av hvilken prosess vi følger.</p>
+  <p class="prose">UML (Unified Modeling Language) is a <strong>visual modeling language</strong> — a standardized tool we use to communicate with all stakeholders in a project. It is important to understand that UML <strong>is not a development methodology</strong>, but a language we can use regardless of which process we follow.</p>
 
-  <p class="prose">Professor Kenneth forklarer det slik: tenk på flybygging. Ingeniørene bygger en modell av flyet <em>før</em> de faktisk bygger det — fordi flyet er så komplekst at det ikke er mulig å kommunisere alle detaljene direkte. Modellen gjør tre ting:</p>
+  <p class="prose">Professor Kenneth explains it like this: think about building an airplane. Engineers build a model of the plane <em>before</em> they actually build it — because the plane is so complex that it's impossible to communicate all the details directly. The model does three things:</p>
 
   <ul class="prose-list">
-    <li><strong>Abstraction</strong> — vi skjuler irrelevante detaljer og viser kun det essensielle</li>
-    <li><strong>Kommunikasjon</strong> — alle stakeholders (klient, designer, programmerer) kan se og forstå den samme modellen</li>
-    <li><strong>Bedre design</strong> — vi forstår kravene bedre, noe som gir renere design og mer vedlikeholdbar kode</li>
+    <li><strong>Abstraction</strong> — we hide irrelevant details and show only what's essential</li>
+    <li><strong>Communication</strong> — all stakeholders (client, designer, programmer) can see and understand the same model</li>
+    <li><strong>Better design</strong> — we understand the requirements better, leading to cleaner design and more maintainable code</li>
   </ul>
 
   <div class="callout warn">
-    <div class="callout-title">Klassisk misforståelse</div>
-    <p>Kenneth viser et morsomt bilde i forelesningen: klienten forklarer ett, prosjektlederen forstår noe annet, analytikeren bestemmer noe tredje, og programmereren implementerer noe fjerde. Det ingen av dem spør om, er hva brukeren <em>egentlig</em> trenger — og det er kanskje noe mye enklere. Nettopp derfor bygger vi modeller tidlig: for å synkronisere alle.</p>
+    <div class="callout-title">Classic miscommunication</div>
+    <p>Kenneth shows a famous picture in the lecture: the client explains one thing, the project manager understands something different, the analyst decides something else, and the programmer implements yet another thing. None of them asked what the user <em>actually</em> needs — and it might be something much simpler. That is exactly why we build models early: to synchronize everyone.</p>
   </div>
 
-  <p class="prose" style="margin-top:1rem">I dette kurset jobber vi med tre typer diagrammer:</p>
+  <p class="prose" style="margin-top:1rem">In this course we work with three types of diagrams:</p>
 
   <div class="fig">
-    <div class="fig-title">De tre UML-diagramtypene i COMP3111</div>
+    <div class="fig-title">The three UML diagram types in COMP3111</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem">
       <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent)">
         <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Class Diagram</div>
-        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Fanger <strong style="color:#cbd5e1">datakrav</strong> — hvilke viktige objekter og konsepter vi trenger å holde styr på i systemet, og hvordan de henger sammen.</p>
+        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Captures <strong style="color:#cbd5e1">data requirements</strong> — which important objects and concepts we need to track in the system, and how they relate to each other.</p>
       </div>
       <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent2)">
         <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Use Case Diagram</div>
-        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Fanger <strong style="color:#cbd5e1">funksjonelle krav</strong> — hvilke funksjoner systemet skal tilby, sett fra brukerens perspektiv.</p>
+        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Captures <strong style="color:#cbd5e1">functional requirements</strong> — what functions the system should provide, seen from the user's perspective.</p>
       </div>
       <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent3)">
         <div style="font-size:.78rem;font-weight:700;color:var(--accent3);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">State Machine</div>
-        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Fanger <strong style="color:#cbd5e1">tilstander</strong> — alle mulige tilstander et enkelt objekt kan befinne seg i, og hva som forårsaker overganger.</p>
+        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Captures <strong style="color:#cbd5e1">states</strong> — all possible states a single object can be in, and what causes transitions between them.</p>
       </div>
     </div>
-    <div class="fig-caption">Modul 2–3 handler om Class Diagram. Use Case og State Machine dekkes i senere moduler.</div>
+    <div class="fig-caption">Modules 2–3 cover Class Diagrams. Use Case and State Machine are covered in later modules.</div>
   </div>
 
   <div class="callout info">
     <div class="callout-title">Requirement model vs Solution model</div>
-    <p>I dette kurset skiller vi alltid mellom to nivåer:</p>
+    <p>In this course we always distinguish between two levels:</p>
     <ul>
-      <li><strong>Requirement model</strong> — fanger hva som <em>finnes</em> i applikasjonsdomenet. Ingen implementasjonsdetaljer. Vi sier ikke «hvordan» systemet løser problemet, bare «hva» som eksisterer.</li>
-      <li><strong>Solution model</strong> — den modellen vi faktisk skal implementere. Her tenker vi på design og kode.</li>
+      <li><strong>Requirement model</strong> — captures what <em>exists</em> in the application domain. No implementation details. We don't say "how" the system solves the problem, only "what" exists.</li>
+      <li><strong>Solution model</strong> — the model we actually implement. Here we think about design and code.</li>
     </ul>
-    <p style="margin-top:.5rem">I dette kurset fokuserer vi foreløpig på <strong>requirement model</strong>. Kenneth presiserer: «Requirement model har ingenting med implementasjon å gjøre.»</p>
+    <p style="margin-top:.5rem">In this course we currently focus on the <strong>requirement model</strong>. Kenneth is explicit: «Requirement model has nothing to do with implementation.»</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 2: Klasser ─── -->
+<!-- ─── SECTION 2: Classes ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">2</div>
-    <h2>Klasser — klassifisering av objekter</h2>
+    <h2>Classes — classifying objects</h2>
   </div>
 
-  <p class="prose">En klasse er en <strong>klassifisering</strong> av objekter. Kenneth forklarer det med bank som eksempel: i en bank har vi mange individuelle kontoer — «threats account», «savings account», «events account» osv. Hver konto har egne verdier (kontonummer, saldo), men de har alle de <em>samme</em> attributtene og operasjonene. Istedenfor å referere til hver enkelt konto om og om igjen, <strong>klassifiserer</strong> vi dem alle under én klasse: <code>Account</code>.</p>
+  <p class="prose">A class is a <strong>classification</strong> of objects. Kenneth explains it using a banking example: in a bank we have many individual accounts — «threats account», «savings account», «events account» and so on. Each account has its own values (account number, balance), but they all share the <em>same</em> attributes and operations. Instead of referring to each individual account over and over again, we <strong>classify</strong> them all under one class: <code>Account</code>.</p>
 
-  <p class="prose">En klasse har tre deler. Klikk på klassen nedenfor for å utforske hver del:</p>
+  <p class="prose">A class has three parts. Click on the class below to explore each part:</p>
 
   <div class="fig">
     <div style="display:flex;gap:2.5rem;align-items:flex-start;flex-wrap:wrap">
@@ -275,75 +275,75 @@
             <span class="uml-line">+ payInterest()</span>
           </div>
         </div>
-        <div class="uml-lbl">Klikk for å markere delene</div>
+        <div class="uml-lbl">Click to highlight parts</div>
       </div>
       <div class="explain-panel" id="class-explain">
-        <strong>Klikk på klassen</strong> for å utforske de tre delene:<br><br>
-        Første klikk → klassenavn<br>
-        Andre klikk → attributter<br>
-        Tredje klikk → operasjoner
+        <strong>Click on the class</strong> to explore the three parts:<br><br>
+        First click → class name<br>
+        Second click → attributes<br>
+        Third click → operations
       </div>
     </div>
-    <div class="fig-caption">Bankeksempelet fra forelesningen: Account-klassen med attributter og operasjoner</div>
+    <div class="fig-caption">Banking example from the lecture: the Account class with attributes and operations</div>
   </div>
 
-  <p class="prose">La oss gå gjennom hver del i detalj:</p>
+  <p class="prose">Let us go through each part in detail:</p>
 
   <div class="two-col">
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem">
-      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.6rem">Klassenavn</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Skal bruke vokabularet fra <strong style="color:#f1f5f9">applikasjonsdomenet</strong>, slik at modellen er meningsfull og lesbar for alle stakeholders. <code>Account</code> er et begrep folk i bankverdenen kjenner igjen.</p>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem"><strong style="color:#f1f5f9">En god klasse fanger én og bare én abstraksjon.</strong> Du skal ikke mikse to konsepter i én klasse — da mister du fordelen med modularitet.</p>
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.6rem">Class name</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Should use vocabulary from the <strong style="color:#f1f5f9">application domain</strong>, so the model is meaningful and readable for all stakeholders. <code>Account</code> is a term people in the banking world recognise.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem"><strong style="color:#f1f5f9">A good class captures one and only one abstraction.</strong> You should not mix two concepts in one class — that defeats the purpose of modularity.</p>
     </div>
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem">
-      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:.6rem">Attributter</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Format: <code>synlighet navn : type</code>. <strong style="color:#f1f5f9">Navn og type er obligatorisk</strong>. Synlighet, initial value og multiplicity er valgfritt i UML-modellen, men bør inkluderes der det er relevant.</p>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem">Synlighet: <code>+</code> public, <code>-</code> private, <code>#</code> protected, <code>~</code> package</p>
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:.6rem">Attributes</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Format: <code>visibility name : type</code>. <strong style="color:#f1f5f9">Name and type are mandatory</strong>. Visibility, initial value and multiplicity are optional in the UML model, but should be included where relevant.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem">Visibility: <code>+</code> public, <code>-</code> private, <code>#</code> protected, <code>~</code> package</p>
     </div>
   </div>
 
   <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem;margin-top:-.15rem">
-    <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent3);margin-bottom:.6rem">Operasjoner</div>
-    <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Format: <code>synlighet navn(parameternavn : type) : returtype</code>. Eks: <code>+ deposit(amount : Money)</code> — public, tar inn et beløp, returnerer ingenting.</p>
-    <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.6rem"><strong style="color:#f1f5f9">Operasjon vs metode:</strong> En <em>operasjon</em> er spesifikasjonen — «hva» den gjør. En <em>metode</em> er én konkret implementasjon av operasjonen. Samme operasjon kan ha <em>flere</em> metoder (f.eks. ulike implementasjoner for CheckingAccount og SavingsAccount). Når vi snakker om class diagram sier vi «operasjon», men i kode snakker vi om «metode».</p>
+    <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent3);margin-bottom:.6rem">Operations</div>
+    <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Format: <code>visibility name(parameterName : type) : returnType</code>. Example: <code>+ deposit(amount : Money)</code> — public, takes an amount, returns nothing.</p>
+    <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.6rem"><strong style="color:#f1f5f9">Operation vs method:</strong> An <em>operation</em> is the specification — «what» it does. A <em>method</em> is one concrete implementation of the operation. The same operation can have <em>multiple</em> methods (e.g. different implementations for CheckingAccount and SavingsAccount). When talking about a class diagram we say «operation», but in code we talk about «method».</p>
   </div>
 
   <div class="callout tip">
-    <div class="callout-title">Eksempel fra forelesningen</div>
-    <p>Kenneth viser at <code>payInterest()</code> bare gir mening for sparekonto, og <code>serviceCharge</code> bare for brukskonto. Dette er et signal om at vi kanskje burde ha separate subklasser (CheckingAccount, SavingsAccount) under en felles Account-superklasse — noe vi dekker i Modul 3 om generalisering.</p>
+    <div class="callout-title">Example from the lecture</div>
+    <p>Kenneth shows that <code>payInterest()</code> only makes sense for a savings account, and <code>serviceCharge</code> only for a checking account. This is a signal that we might want separate subclasses (CheckingAccount, SavingsAccount) under a common Account superclass — something covered in Module 3 on generalisation.</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 3: Assosiasjoner og multiplicities ─── -->
+<!-- ─── SECTION 3: Associations and multiplicities ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">3</div>
-    <h2>Assosiasjoner og multiplicities</h2>
+    <h2>Associations and multiplicities</h2>
   </div>
 
-  <p class="prose">Objekter eksisterer ikke alene — de er koblet til hverandre. Kenneth forklarer dette med et konkret eksempel: «Fred may hold an account, and this account may be associated with HSBC. Another guy, let's say Sarah, may have an account from Bank of China.» Vi har mange slike individuelle koblinger (<em>links</em>), og istedenfor å liste dem alle, <strong>klassifiserer</strong> vi dem som en <em>assosiasjon</em> mellom klassene.</p>
+  <p class="prose">Objects do not exist in isolation — they are connected to each other. Kenneth explains this with a concrete example: «Fred may hold an account, and this account may be associated with HSBC. Another guy, let's say Sarah, may have an account from Bank of China.» We have many such individual connections (<em>links</em>), and instead of listing them all, we <strong>classify</strong> them as an <em>association</em> between the classes.</p>
 
   <div class="fig">
-    <div class="fig-title">Fra individuelle linker til assosiasjon</div>
+    <div class="fig-title">From individual links to an association</div>
     <div style="display:flex;flex-direction:column;gap:1.2rem">
-      <!-- Instansnivå -->
+      <!-- Instance level -->
       <div>
-        <div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem;font-weight:600">INSTANSNIVÅ (mange individuelle linker)</div>
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem;font-weight:600">INSTANCE LEVEL (many individual links)</div>
         <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center">
           <div style="font-family:monospace;font-size:.82rem;color:#94a3b8">Fred ——holds——→ HSBC-account-001</div>
           <div style="font-family:monospace;font-size:.82rem;color:#94a3b8">Sarah ——holds——→ BOC-account-042</div>
           <div style="font-family:monospace;font-size:.82rem;color:#94a3b8">John ——holds——→ HSBC-account-107</div>
-          <div style="font-size:.78rem;color:var(--muted);font-style:italic">...og mange flere</div>
+          <div style="font-size:.78rem;color:var(--muted);font-style:italic">...and many more</div>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:.5rem;color:var(--muted);font-size:.85rem">
         <div style="height:1px;flex:1;background:var(--border)"></div>
-        Klassifisering (abstraction)
+        Classification (abstraction)
         <div style="height:1px;flex:1;background:var(--border)"></div>
       </div>
-      <!-- Klassenivå -->
+      <!-- Class level -->
       <div>
-        <div style="font-size:.75rem;color:var(--muted);margin-bottom:.75rem;font-weight:600">KLASSENIVÅ (én assosiasjon)</div>
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:.75rem;font-weight:600">CLASS LEVEL (one association)</div>
         <div class="assoc-fig">
           <div class="assoc-box">Customer</div>
           <div class="assoc-line" style="min-width:80px">
@@ -361,56 +361,56 @@
         </div>
       </div>
     </div>
-    <div class="fig-caption">En kunde har 0 eller flere kontoer (0..*). En konto tilhører nøyaktig én kunde (1) og én bank (1).</div>
+    <div class="fig-caption">A customer has 0 or more accounts (0..*). An account belongs to exactly one customer (1) and one bank (1).</div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .5rem">Multiplicity — antallsbegrensninger</h3>
-  <p class="prose">Multiplicity spesifiserer <strong>hvor mange objekter</strong> i én klasse som kan knyttes til ett objekt i den andre. Dette er et <strong>applikasjonsdomene-krav</strong> — du får verdiene fra domeneeksperter, ikke fra programmererne. Kenneth sier: «Domeneekspertene vil fortelle deg at en bank kan ha mange kontoer, og at en konto kan assosieres med nøyaktig én bank.»</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .5rem">Multiplicity — quantity constraints</h3>
+  <p class="prose">Multiplicity specifies <strong>how many objects</strong> of one class can be associated with one object of the other. This is an <strong>application-domain requirement</strong> — you get the values from domain experts, not from the programmers. Kenneth says: «The domain experts will tell you that a bank can have many accounts, and that an account can be associated with exactly one bank.»</p>
 
-  <p class="prose">Klikk på symbolene for å forstå hvert:</p>
+  <p class="prose">Click on the symbols to understand each one:</p>
   <div class="mult-grid">
-    <div class="mult-card" onclick="showMult(this,'1','<strong>Nøyaktig én (1)</strong><br><br>Obligatorisk og unik. Objektet MÅ være assosiert med nøyaktig ett annet objekt — ikke null, ikke to.<br><br><em>Eksempel:</em> En konto (<code>Account</code>) tilhører nøyaktig én bank. Du kan ikke ha en konto uten bank, og ikke en konto i to banker samtidig.')">
-      <div class="mult-sym">1</div><div class="mult-name">Nøyaktig én</div>
+    <div class="mult-card" onclick="showMult(this,'1','<strong>Exactly one (1)</strong><br><br>Mandatory and unique. The object MUST be associated with exactly one other object — not zero, not two.<br><br><em>Example:</em> An account (<code>Account</code>) belongs to exactly one bank. You cannot have an account without a bank, or an account in two banks at the same time.')">
+      <div class="mult-sym">1</div><div class="mult-name">Exactly one</div>
     </div>
-    <div class="mult-card" onclick="showMult(this,'0..1','<strong>Null eller én (0..1)</strong><br><br>Valgfri deltakelse. Objektet <em>kan</em> eksistere uten å være assosiert, men kan ikke ha mer enn én.<br><br><em>Eksempel:</em> En ansatt kan ha 0 eller 1 parkeringsplass. Det er ikke obligatorisk.')">
-      <div class="mult-sym">0..1</div><div class="mult-name">Null eller én</div>
+    <div class="mult-card" onclick="showMult(this,'0..1','<strong>Zero or one (0..1)</strong><br><br>Optional participation. The object <em>can</em> exist without being associated, but cannot have more than one.<br><br><em>Example:</em> An employee may have 0 or 1 parking spots. It is not mandatory.')">
+      <div class="mult-sym">0..1</div><div class="mult-name">Zero or one</div>
     </div>
-    <div class="mult-card" onclick="showMult(this,'*','<strong>Null eller flere (*)</strong><br><br>Ingen nedre eller øvre grense. Shorthand for 0..*. Brukes på «mange»-siden av en relasjon.<br><br><em>Eksempel:</em> En bank kan ha hvilken som helst antall kontoer (0, 1, 1000, eller ingen).')">
-      <div class="mult-sym">*</div><div class="mult-name">Null eller flere</div>
+    <div class="mult-card" onclick="showMult(this,'*','<strong>Zero or more (*)</strong><br><br>No lower or upper bound. Shorthand for 0..*. Used on the «many» side of a relation.<br><br><em>Example:</em> A bank can have any number of accounts (0, 1, 1000, or none).')">
+      <div class="mult-sym">*</div><div class="mult-name">Zero or more</div>
     </div>
-    <div class="mult-card" onclick="showMult(this,'1..*','<strong>Én eller flere (1..*)</strong><br><br>Obligatorisk, men ubestemt øvre grense. MÅ ha minst ett.<br><br><em>Eksempel:</em> En ordre MÅ ha minst én ordrelinje. En ordre uten noen produkter gir ikke mening.')">
-      <div class="mult-sym">1..*</div><div class="mult-name">Én eller flere</div>
+    <div class="mult-card" onclick="showMult(this,'1..*','<strong>One or more (1..*)</strong><br><br>Mandatory, but unbounded upper limit. MUST have at least one.<br><br><em>Example:</em> An order MUST have at least one order line. An order with no products makes no sense.')">
+      <div class="mult-sym">1..*</div><div class="mult-name">One or more</div>
     </div>
-    <div class="mult-card" onclick="showMult(this,'1..5','<strong>Spesifikt intervall (a..b)</strong><br><br>Definert nedre og øvre grense.<br><br><em>Eksempel fra forelesningen:</em> En student kan melde seg på minst 1 og maks 5 kurs per semester (1..5). Et kurs MÅ ha 10–45 studenter (10..45).<br><br>⚠️ Se nedenfor om «add-drop»-problemet!')">
-      <div class="mult-sym">1..5</div><div class="mult-name">Intervall</div>
+    <div class="mult-card" onclick="showMult(this,'1..5','<strong>Specific interval (a..b)</strong><br><br>Defined lower and upper bound.<br><br><em>Example from the lecture:</em> A student may enrol in at least 1 and at most 5 courses per semester (1..5). A course MUST have 10–45 students (10..45).<br><br>⚠️ See below about the «add-drop» problem!')">
+      <div class="mult-sym">1..5</div><div class="mult-name">Interval</div>
     </div>
   </div>
-  <div class="mult-explain-box" id="mult-explain">Klikk på et symbol ovenfor for forklaring.</div>
+  <div class="mult-explain-box" id="mult-explain">Click on a symbol above for an explanation.</div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Multiplicity shorthand — forkortelsene du MÅ kunne</h3>
-  <p class="prose">Kenneth forklarer to spesielle notasjoner som forenkler diagrammet. Begge er direkte fra forelesningen og brukes konsekvent i eksamen:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Multiplicity shorthand — abbreviations you MUST know</h3>
+  <p class="prose">Kenneth explains two special notations that simplify the diagram. Both come directly from the lecture and are used consistently in exams:</p>
   <div style="overflow-x:auto;margin:.75rem 0 1rem">
     <table style="width:100%;border-collapse:collapse;font-size:.88rem">
       <thead>
         <tr style="border-bottom:1px solid var(--border)">
-          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em">Full notasjon</th>
+          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em">Full notation</th>
           <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em">Shorthand</th>
-          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em">Mening</th>
-          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em">Eksempel</th>
+          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em">Meaning</th>
+          <th style="text-align:left;padding:.55rem .75rem;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em">Example</th>
         </tr>
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--border);background:var(--surface3)">
           <td style="padding:.55rem .75rem;font-family:monospace;color:var(--warn);font-weight:700">1..1</td>
           <td style="padding:.55rem .75rem;font-family:monospace;color:var(--success);font-weight:700">1</td>
-          <td style="padding:.55rem .75rem;color:#cbd5e1">Nøyaktig én — obligatorisk og unik</td>
-          <td style="padding:.55rem .75rem;color:var(--muted);font-size:.82rem">En konto er med nøyaktig én bank</td>
+          <td style="padding:.55rem .75rem;color:#cbd5e1">Exactly one — mandatory and unique</td>
+          <td style="padding:.55rem .75rem;color:var(--muted);font-size:.82rem">An account is with exactly one bank</td>
         </tr>
         <tr style="background:var(--surface2)">
           <td style="padding:.55rem .75rem;font-family:monospace;color:var(--warn);font-weight:700">0..*</td>
           <td style="padding:.55rem .75rem;font-family:monospace;color:var(--success);font-weight:700">*</td>
-          <td style="padding:.55rem .75rem;color:#cbd5e1">Null eller flere — ingen øvre grense</td>
-          <td style="padding:.55rem .75rem;color:var(--muted);font-size:.82rem">En bank kan ha mange kontoer</td>
+          <td style="padding:.55rem .75rem;color:#cbd5e1">Zero or more — no upper bound</td>
+          <td style="padding:.55rem .75rem;color:var(--muted);font-size:.82rem">A bank can have many accounts</td>
         </tr>
       </tbody>
     </table>
@@ -801,7 +801,7 @@
         <li>En konto kan ikke være begge typer samtidig, og det finnes ingen andre kontotyper.</li>
       </ul>
       <p style="margin-top:.75rem">Tegn class diagrammet. Inkluder: klasser, attributter, assosiasjoner med multiplicity, generalisering med riktig constraint.</p>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>Klasser:</strong> Bank, Customer, Account (abstract), SavingsAccount, CheckingAccount</p>
@@ -820,7 +820,7 @@
         </ul>
         <p style="margin-top:.5rem"><strong>Attributter:</strong> Account har <code>accountNo, balance</code> og operasjoner. SavingsAccount legger til <code>interestRate</code> og <code>payInterest()</code>. CheckingAccount legger til <code>serviceCharge</code>.</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -838,7 +838,7 @@
         <li>b) Hva er problemet med disse verdiene i et class diagram?</li>
         <li>c) Hva er den riktige løsningen?</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>a) Direkte fra domenet:</strong> Student <code>1..5 ——— 10..45</code> Course</p>
@@ -850,7 +850,7 @@
         </ul>
         <p style="margin-top:.6rem">Kenneth sier: «Once we specify constraints within the class diagram, we have to always follow these constraints — all the time.»</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -870,7 +870,7 @@
         <li><strong>e)</strong> Student og Course (en student tar kurs)</li>
         <li><strong>f)</strong> Car og Engine (motoren er integrert i bilen og kan ikke enkelt flyttes)</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <ul>
@@ -882,7 +882,7 @@
           <li><strong>f) Car ◆ Engine — Komposisjon</strong> (i de fleste domenekontekster). En motor i en bil er integrert — ødelegges bilen, ødelegges motoren i dette systemet. (Merknad: i et mekanisk-verksted-system ville svaret kanskje være aggregering. Domenet bestemmer.)</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -944,12 +944,12 @@ function toggleEx(header){
 function toggleSol(btn){
   const sol=btn.nextElementSibling;
   const show=sol.classList.toggle('show');
-  btn.textContent=show?'Skjul løsning':'Vis løsning';
+  btn.textContent=show?'Hide solution':'Show solution';
 }
 function markDone(btn,id){
   btn.classList.toggle('done');
   const done=btn.classList.contains('done');
-  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  btn.textContent=done?'✓ Done!':'✓ Mark as done';
   const p=getModP();
   const s=new Set(p.doneExercises||[]);
   done?s.add(id):s.delete(id);
@@ -1024,7 +1024,7 @@ function updateNav(){
   const p=getModP();
   (p.doneExercises||[]).forEach(id=>{
     const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+    if(btn){btn.classList.add('done');btn.textContent='✓ Done!';}
   });
   updateNav();
 })();

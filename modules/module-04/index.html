@@ -153,27 +153,27 @@
 <body>
 
 <nav>
-  <a href="../../index.html" class="nav-back">← Hjem</a>
-  <span class="nav-title">Modul 4 — Software Project Management</span>
+  <a href="../../index.html" class="nav-back">← Home</a>
+  <span class="nav-title">Module 4 — Software Project Management</span>
   <span class="nav-prog" id="nav-prog"></span>
 </nav>
 
 <div class="hero">
-  <div class="module-tag">Modul 04</div>
+  <div class="module-tag">Module 04</div>
   <h1>Software Project Management</h1>
-  <p>Typer software og prosjekter, de 4 P-ene, risikostyring med 80-20-regelen, og prosjektplanlegging — basert på Kenneth's forelesninger.</p>
+  <p>Software types, project types, the 4 P's, risk management with the 80-20 rule, and project planning — based on Kenneth's lectures.</p>
   <div class="hero-meta">
-    <span class="meta-pill">📖 4 seksjoner</span>
-    <span class="meta-pill">🎯 10 quizspørsmål</span>
-    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">📖 4 sections</span>
+    <span class="meta-pill">🎯 10 quiz questions</span>
+    <span class="meta-pill">✏️ 3 exercises</span>
     <span class="meta-pill">⏱ ~40 min</span>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Theory</button>
   <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Exercises</button>
 </div>
 
 <div class="content">
@@ -185,32 +185,32 @@
 <div class="section">
   <div class="section-header">
     <div class="section-num">1</div>
-    <h2>Hva er software — karakteristikker og typer</h2>
+    <h2>What is software — characteristics and types</h2>
   </div>
 
-  <p class="prose">Før vi kan forstå prosjektledelse, må vi forstå hva som gjør software spesielt. Kenneth lister fire grunnleggende karakteristikker som skiller software fra andre produkter:</p>
+  <p class="prose">Before we can understand project management, we need to understand what makes software special. Kenneth lists four fundamental characteristics that distinguish software from other products:</p>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin:1rem 0 1.5rem">
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent)">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase">Immateriell</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Vanskelig å visualisere. Du kan bygge en modell av en bil og se alle detaljene — men software er mye vanskeligere å forestille seg.</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase">Intangible</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Difficult to visualize. You can build a model of a car and see all the details — but software is much harder to picture.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent2)">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase">Lett å kopiere</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Produktet er kildekode. Det er billig og enkelt å masseprodusere — i motsetning til å produsere en fysisk bil.</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase">Easy to copy</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">The product is source code. It is cheap and easy to mass-produce — unlike manufacturing a physical car.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent3)">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent3);margin-bottom:.4rem;text-transform:uppercase">Arbeidsintensiv</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Den viktigste ressursen er programmere. Kenneth: «The major resource that you need is gonna be programmers to help you build the source code.»</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent3);margin-bottom:.4rem;text-transform:uppercase">Labor-intensive</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">The most important resource is programmers. Kenneth: «The major resource that you need is gonna be programmers to help you build the source code.»</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--success)">
-      <div style="font-size:.78rem;font-weight:700;color:var(--success);margin-bottom:.4rem;text-transform:uppercase">Slites ikke ut</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">En bil slites ut av bruk. Kildekode gjør det ikke — men det betyr at vedlikehold er noe annet: det handler om endringer og feil, ikke slitasje.</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--success);margin-bottom:.4rem;text-transform:uppercase">Doesn't wear out</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">A car wears out with use. Source code doesn't — but that means maintenance is different: it's about changes and defects, not wear and tear.</p>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Tre typer software</h3>
-  <p class="prose">Kenneth skiller mellom tre typer i forelesningen. Klikk for å utforske:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Three types of software</h3>
+  <p class="prose">Kenneth distinguishes between three types in the lecture. Click to explore:</p>
 
   <div class="p-cards" id="sw-types">
     <div class="p-card" onclick="showSWType(this,'generic')">
@@ -223,36 +223,36 @@
       <div class="p-icon">🏗️</div>
       <div class="p-label">Type 2</div>
       <div class="p-name">Custom</div>
-      <div class="p-short">Skreddersydd for én klient</div>
+      <div class="p-short">Tailored for one client</div>
     </div>
     <div class="p-card" onclick="showSWType(this,'embedded')">
       <div class="p-icon">📀</div>
       <div class="p-label">Type 3</div>
       <div class="p-name">Embedded</div>
-      <div class="p-short">DVD-spiller, maskinvare</div>
+      <div class="p-short">DVD player, hardware</div>
     </div>
   </div>
-  <div class="p-detail" id="sw-type-detail">Klikk på en korttype ovenfor for detaljer.</div>
+  <div class="p-detail" id="sw-type-detail">Click on a software type above for details.</div>
 
   <div class="callout info" style="margin-top:1.25rem">
-    <div class="callout-title">Kursens fokus</div>
+    <div class="callout-title">Course focus</div>
     <p>Dette kurset fokuserer på <strong>custom software</strong> fordi det er vanskeligst. Kenneth: «Custom software is not easy — somehow you have to capture all the requirements before you can work with custom software. Many custom software projects fail because they cannot correctly capture all the requirements at the very beginning of the project.»</p>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Tre typer prosjekter</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Three types of projects</h3>
 
   <div class="three-col">
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem">
       <div style="font-size:.78rem;font-weight:700;color:var(--success);margin-bottom:.4rem;text-transform:uppercase">Greenfield</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Start fra scratch. Ingen eksisterende kode. Frihet til å designe alt fra bunnen av, men ingen referanse.</p>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Start from scratch. No existing code. Freedom to design everything from the ground up, but no reference point.</p>
     </div>
     <div style="background:var(--surface2);border:1px solid rgba(99,102,241,.4);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase">Evolutionary ⭐ Vanligst</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Modifiser et eksisterende system. Fix defekter, tilpass ny teknologi, legg til funksjoner. Kenneth: «When you work in the industry, most of the projects are evolutionary projects.»</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase">Evolutionary ⭐ Most common</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Modify an existing system. Fix defects, adapt to new technology, add features. Kenneth: «When you work in the industry, most of the projects are evolutionary projects.»</p>
     </div>
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase">Framework-basert</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Tilpass et eksisterende rammeverk til spesifikke klientkrav. Rammeverket gir en grunnstruktur.</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase">Framework-based</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Adapt an existing framework to specific client requirements. The framework provides a base structure.</p>
     </div>
   </div>
 </div>
@@ -261,44 +261,44 @@
 <div class="section">
   <div class="section-header">
     <div class="section-num">2</div>
-    <h2>De 4 P-ene og software-livssyklus</h2>
+    <h2>The 4 P's and software lifecycle</h2>
   </div>
 
-  <p class="prose">Kenneth forklarer at alle software-prosjekter har fire fundamentale komponenter — de <strong>4 P-ene</strong>. Klikk på hvert for full forklaring:</p>
+  <p class="prose">Kenneth explains that all software projects have four fundamental components — the <strong>4 P's</strong>. Click each for the full explanation:</p>
 
   <div class="p-cards">
     <div class="p-card" onclick="showP(this,'people')">
       <div class="p-icon">👥</div>
-      <div class="p-label">1. P</div>
+      <div class="p-label">1st P</div>
       <div class="p-name">People</div>
-      <div class="p-short">Hvem er involvert?</div>
+      <div class="p-short">Who is involved?</div>
     </div>
     <div class="p-card" onclick="showP(this,'process')">
       <div class="p-icon">⚙️</div>
-      <div class="p-label">2. P</div>
+      <div class="p-label">2nd P</div>
       <div class="p-name">Process</div>
-      <div class="p-short">Hva gjør du?</div>
+      <div class="p-short">What do you do?</div>
     </div>
     <div class="p-card" onclick="showP(this,'product')">
       <div class="p-icon">📦</div>
-      <div class="p-label">3. P</div>
+      <div class="p-label">3rd P</div>
       <div class="p-name">Product</div>
-      <div class="p-short">Hva produseres?</div>
+      <div class="p-short">What is produced?</div>
     </div>
     <div class="p-card" onclick="showP(this,'project')">
       <div class="p-icon">📋</div>
-      <div class="p-label">4. P</div>
+      <div class="p-label">4th P</div>
       <div class="p-name">Project</div>
-      <div class="p-short">Scope, tid, budsjett</div>
+      <div class="p-short">Scope, time, budget</div>
     </div>
   </div>
-  <div class="p-detail" id="p-detail">Klikk på en av de 4 P-ene ovenfor for full forklaring.</div>
+  <div class="p-detail" id="p-detail">Click on one of the 4 P's above for the full explanation.</div>
 
   <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Software Development Lifecycle</h3>
-  <p class="prose">Hvert software-prosjekt følger en livssyklus. Kenneth beskriver følgende faser — klikk for å lese hva som skjer i hvert steg:</p>
+  <p class="prose">Every software project follows a lifecycle. Kenneth describes the following phases — click to read what happens at each step:</p>
 
   <div class="fig">
-    <div class="fig-title">Fasene i et software-prosjekts livssyklus</div>
+    <div class="fig-title">Phases of a software project lifecycle</div>
     <div class="lifecycle">
       <div class="lc-step" onclick="showLC(this,'define')">Define</div>
       <div class="lc-arrow">→</div>
@@ -314,18 +314,18 @@
       <div class="lc-arrow">→</div>
       <div class="lc-step" onclick="showLC(this,'retire')">Retire</div>
     </div>
-    <div class="lc-detail" id="lc-detail">Klikk på en fase for å se hva den innebærer.</div>
-    <div class="fig-caption">Etter Deploy fortsetter vedlikehold til systemet til slutt pensjoneres (retire)</div>
+    <div class="lc-detail" id="lc-detail">Click on a phase to see what it involves.</div>
+    <div class="fig-caption">After Deploy, maintenance continues until the system is eventually retired</div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Hva en prosjektplan inneholder</h3>
-  <p class="prose">Kenneth forklarer at det første du gjør som prosjektleder er å definere scope, mål og begrensninger. En god prosjektplan inneholder:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">What a project plan contains</h3>
+  <p class="prose">Kenneth explains that the first thing you do as a project manager is to define scope, goals and constraints. A good project plan contains:</p>
 
   <ul class="prose-list">
-    <li><strong>Scope</strong> — hva du skal gjøre og hva du <em>ikke</em> skal gjøre. Tydelige grenser er avgjørende.</li>
-    <li><strong>Design goals</strong> — 2–3 prioriterte mål (effektivitet, pålitelighet, sikkerhet…) som guider designvalgene.</li>
-    <li><strong>Kravanalyse</strong> — class diagram (datakrav) + use case diagram (funksjonelle krav) = oversikt over alle krav.</li>
-    <li><strong>Tid- og ressursestimat</strong> — budsjett og tidsplan. Estimering er alltid usikkert — se seksjon 4.</li>
+    <li><strong>Scope</strong> — what you will do and what you will <em>not</em> do. Clear boundaries are essential.</li>
+    <li><strong>Design goals</strong> — 2–3 prioritized goals (efficiency, reliability, security…) that guide design decisions.</li>
+    <li><strong>Requirements analysis</strong> — class diagram (data requirements) + use case diagram (functional requirements) = overview of all requirements.</li>
+    <li><strong>Time and resource estimates</strong> — budget and timeline. Estimation is always uncertain — see section 4.</li>
   </ul>
 </div>
 
@@ -333,107 +333,107 @@
 <div class="section">
   <div class="section-header">
     <div class="section-num">3</div>
-    <h2>Risikostyring</h2>
+    <h2>Risk Management</h2>
   </div>
 
-  <p class="prose">Kenneth definerer risiko enkelt: <strong>«Anything that can go wrong in your project.»</strong> Det høres åpenbart ut, men å systematisk identifisere og håndtere risiko tidlig er det som skiller gode prosjektledere fra dårlige.</p>
+  <p class="prose">Kenneth defines risk simply: <strong>«Anything that can go wrong in your project.»</strong> It sounds obvious, but systematically identifying and handling risks early is what separates good project managers from bad ones.</p>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1rem 0 .6rem">Risikotyper</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1rem 0 .6rem">Risk categories</h3>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.6rem;margin:.75rem 0 1.25rem">
-    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">🔧 <strong style="color:#cbd5e1">Teknologi</strong> — ukjente verktøy, ny plattform</div>
-    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">👤 <strong style="color:#cbd5e1">Folk</strong> — turn-over, sykdom, manglende kompetanse</div>
-    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">🏢 <strong style="color:#cbd5e1">Organisasjon</strong> — endring av prioriteringer, budsjettkutt</div>
-    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">📋 <strong style="color:#cbd5e1">Krav</strong> — vage, endrede eller feilaktige krav</div>
-    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">📊 <strong style="color:#cbd5e1">Estimering</strong> — feil budsjett eller tidsplan</div>
+    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">🔧 <strong style="color:#cbd5e1">Technology</strong> — unknown tools, new platform</div>
+    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">👤 <strong style="color:#cbd5e1">People</strong> — turnover, illness, missing skills</div>
+    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">🏢 <strong style="color:#cbd5e1">Organization</strong> — shifting priorities, budget cuts</div>
+    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">📋 <strong style="color:#cbd5e1">Requirements</strong> — vague, changing or incorrect requirements</div>
+    <div style="background:var(--surface3);border-radius:6px;padding:.7rem .9rem;font-size:.83rem;color:#94a3b8">📊 <strong style="color:#cbd5e1">Estimation</strong> — wrong budget or timeline</div>
   </div>
 
   <div class="callout warn">
-    <div class="callout-title">Estimering som risiko</div>
+    <div class="callout-title">Estimation as a risk</div>
     <p>Kenneth presiserer at feil estimering i seg selv er en risikotype: «If you wrongly estimate the time and budget that you need for your project, then your project may be behind schedule, your project may be out of budget. That certainly is going to be a risk within a project.»</p>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">For hver risiko: likelihood og impact</h3>
-  <p class="prose">Når du identifiserer en risiko, må du vurdere to dimensjoner:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">For each risk: likelihood and impact</h3>
+  <p class="prose">When you identify a risk, you must assess it across two dimensions:</p>
 
   <div class="two-col">
     <div style="background:var(--surface2);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--warn);text-transform:uppercase;margin-bottom:.4rem">Likelihood (sannsynlighet)</div>
-      <p style="font-size:.86rem;color:#cbd5e1;line-height:1.6">Sjansen for at risikoen materialiserer seg. Oppgis som prosent, f.eks. <strong>70%</strong>.</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--warn);text-transform:uppercase;margin-bottom:.4rem">Likelihood (probability)</div>
+      <p style="font-size:.86rem;color:#cbd5e1;line-height:1.6">The chance the risk materializes. Expressed as a percentage, e.g. <strong>70%</strong>.</p>
     </div>
     <div style="background:var(--surface2);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--danger);text-transform:uppercase;margin-bottom:.4rem">Impact (konsekvens)</div>
-      <p style="font-size:.86rem;color:#cbd5e1;line-height:1.6">Tre dimensjoner: <strong>natur</strong> (hva skjer?), <strong>omfang</strong> (hvor mye?), <strong>varighet</strong> (hvor lenge?).</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--danger);text-transform:uppercase;margin-bottom:.4rem">Impact (consequence)</div>
+      <p style="font-size:.86rem;color:#cbd5e1;line-height:1.6">Three dimensions: <strong>nature</strong> (what happens?), <strong>scope</strong> (how much?), <strong>duration</strong> (how long?).</p>
     </div>
   </div>
 
   <div class="fig" style="margin-top:1.25rem">
-    <div class="fig-title">Eksempel fra forelesningen: High Staff Turnover</div>
+    <div class="fig-title">Example from the lecture: High Staff Turnover</div>
     <div style="overflow-x:auto">
       <table class="risk-table">
         <thead>
           <tr>
-            <th>Risiko</th>
+            <th>Risk</th>
             <th>Likelihood</th>
             <th>Impact</th>
-            <th>Mulige tiltak</th>
+            <th>Possible actions</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong style="color:#f1f5f9">High staff turnover</strong><br><span style="font-size:.8rem;color:var(--muted)">Nøkkelpersoner slutter midt i prosjektet</span></td>
+            <td><strong style="color:#f1f5f9">High staff turnover</strong><br><span style="font-size:.8rem;color:var(--muted)">Key people leave mid-project</span></td>
             <td><span style="color:var(--warn);font-weight:700">70%</span></td>
-            <td>+15% prosjektvarighet<br>+12% total kostnad</td>
-            <td>Dokumenter kunnskap, overlappende onboarding, bonus-ordninger</td>
+            <td>+15% project duration<br>+12% total cost</td>
+            <td>Document knowledge, overlapping onboarding, retention incentives</td>
           </tr>
           <tr>
-            <td><strong style="color:#f1f5f9">Feil teknologivalg</strong><br><span style="font-size:.8rem;color:var(--muted)">Valgt plattform støtter ikke kravene</span></td>
+            <td><strong style="color:#f1f5f9">Wrong technology choice</strong><br><span style="font-size:.8rem;color:var(--muted)">Chosen platform doesn't support requirements</span></td>
             <td><span style="color:var(--success);font-weight:700">20%</span></td>
-            <td>Potensielt full omskriving</td>
-            <td>Proof-of-concept tidlig, teknologievaluering</td>
+            <td>Potentially full rewrite</td>
+            <td>Early proof-of-concept, technology evaluation</td>
           </tr>
           <tr>
-            <td><strong style="color:#f1f5f9">Uklar kravsspesifikasjon</strong><br><span style="font-size:.8rem;color:var(--muted)">Klienten vet ikke hva de vil ha</span></td>
+            <td><strong style="color:#f1f5f9">Unclear requirements</strong><br><span style="font-size:.8rem;color:var(--muted)">Client doesn't know what they want</span></td>
             <td><span style="color:var(--danger);font-weight:700">80%</span></td>
-            <td>Feil produkt levert</td>
-            <td>Workshops, prototyper, regelmessig review</td>
+            <td>Wrong product delivered</td>
+            <td>Workshops, prototypes, regular review sessions</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="fig-caption">Kenneth's eksempel: «High staff turnover — 70% likelihood — increases duration by 15% and cost by 12%.»</div>
+    <div class="fig-caption">Kenneth's example: «High staff turnover — 70% likelihood — increases duration by 15% and cost by 12%.»</div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Fire strategier for å håndtere risiko</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Four strategies for handling risk</h3>
 
   <div class="strategy-grid">
     <div class="strat-card avoid">
       <div class="strat-label">1. Avoid</div>
-      <p>Fjern risikoen helt. Endre designet eller tilnærmingen slik at risikosituasjonen aldri kan oppstå.</p>
-      <p style="margin-top:.5rem;font-size:.8rem;font-style:italic;color:var(--muted)">Eks: velg en velutprøvd teknologi fremfor noe nytt og ukjent.</p>
+      <p>Eliminate the risk entirely. Change the design or approach so the risk situation can never arise.</p>
+      <p style="margin-top:.5rem;font-size:.8rem;font-style:italic;color:var(--muted)">E.g. choose a well-proven technology instead of something new and unknown.</p>
     </div>
     <div class="strat-card confine">
-      <div class="strat-label">2. Confine (Begrens)</div>
-      <p>Aksepter at risikoen kan skje, men begrens omfanget av skaden. Kenneth: «Restrict the scope of its effect.»</p>
-      <p style="margin-top:.5rem;font-size:.8rem;font-style:italic;color:var(--muted)">Eks: isoler risikofulle komponenter slik at svikt i én ikke krasjer hele systemet.</p>
+      <div class="strat-label">2. Confine (Limit)</div>
+      <p>Accept that the risk may occur, but limit the scope of the damage. Kenneth: «Restrict the scope of its effect.»</p>
+      <p style="margin-top:.5rem;font-size:.8rem;font-style:italic;color:var(--muted)">E.g. isolate risky components so failure in one doesn't crash the whole system.</p>
     </div>
     <div class="strat-card mitigate">
-      <div class="strat-label">3. Mitigate (Reduser)</div>
-      <p>Lag tester eller planer som trer i kraft hvis risikoen skjer. Kenneth: «Devise tests to see if it's going to happen or not.»</p>
-      <p style="margin-top:.5rem;font-size:.8rem;font-style:italic;color:var(--muted)">Eks: lag detaljert dokumentasjon for å redusere konsekvensen av turn-over.</p>
+      <div class="strat-label">3. Mitigate (Reduce)</div>
+      <p>Create tests or contingency plans that activate if the risk occurs. Kenneth: «Devise tests to see if it's going to happen or not.»</p>
+      <p style="margin-top:.5rem;font-size:.8rem;font-style:italic;color:var(--muted)">E.g. create detailed documentation to reduce the impact of staff turnover.</p>
     </div>
     <div class="strat-card monitor">
-      <div class="strat-label">4. Monitor (Overvåk)</div>
-      <p>Følg risikoen tett gjennom prosjektets gang. Ikke la den ligge uten tilsyn.</p>
-      <p style="margin-top:.5rem;font-size:.8rem;font-style:italic;color:var(--muted)">Eks: ukentlig risikovurdering i prosjektstatus-møter.</p>
+      <div class="strat-label">4. Monitor (Watch)</div>
+      <p>Track the risk closely throughout the project. Don't leave it unattended.</p>
+      <p style="margin-top:.5rem;font-size:.8rem;font-style:italic;color:var(--muted)">E.g. weekly risk assessment in project status meetings.</p>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">80-20-regelen og kost-nytte-analyse</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">The 80-20 rule and cost-benefit analysis</h3>
 
-  <p class="prose">I et prosjekt er det alltid mange potensielle risikoer. Det er umulig å overvåke alle like tett. Kenneth er klar: <strong>«Instead of closely monitoring all the risks, we're going to simply focus on the 20% of the most important and most critical risks.»</strong></p>
+  <p class="prose">In any project there are always many potential risks. It's impossible to monitor all of them equally. Kenneth is clear: <strong>«Instead of closely monitoring all the risks, we're going to simply focus on the 20% of the most important and most critical risks.»</strong></p>
 
   <div class="fig">
-    <div class="fig-title">80-20-regelen visualisert</div>
+    <div class="fig-title">The 80-20 rule visualized</div>
     <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap">
       <svg width="180" height="180" viewBox="0 0 180 180">
         <circle cx="90" cy="90" r="75" fill="none" stroke="var(--border)" stroke-width="20"/>
@@ -442,15 +442,15 @@
         <circle cx="90" cy="90" r="75" fill="none" stroke="var(--surface3)" stroke-width="20"
           stroke-dasharray="282.6 188.4" stroke-dashoffset="-94.2" transform="rotate(-90 90 90)"/>
         <text x="90" y="84" text-anchor="middle" fill="#a5b4fc" font-size="22" font-weight="800" font-family="sans-serif">20%</text>
-        <text x="90" y="102" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">risikoer</text>
-        <text x="90" y="116" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">krever fokus</text>
+        <text x="90" y="102" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">of risks</text>
+        <text x="90" y="116" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">need focus</text>
       </svg>
       <div style="flex:1;min-width:200px">
-        <p style="font-size:.9rem;color:#cbd5e1;line-height:1.65;margin-bottom:.75rem">De <strong style="color:#a5b4fc">20% mest kritiske risikoene</strong> er ansvarlige for mesteparten av den potensielle skaden. Fokuser ressursene der.</p>
-        <p style="font-size:.9rem;color:#cbd5e1;line-height:1.65;margin-bottom:.75rem">Før du handler: gjør en <strong style="color:#f1f5f9">kost-nytte-analyse</strong>. Kenneth: «Is the cost of fixing the risk going to be more than the consequence of the risk itself? If the consequence is just a tiny effect, you may simply let it happen and fix it up later — because fixing it would take minimal effort.»</p>
+        <p style="font-size:.9rem;color:#cbd5e1;line-height:1.65;margin-bottom:.75rem">The <strong style="color:#a5b4fc">20% most critical risks</strong> account for the majority of potential damage. Focus your resources there.</p>
+        <p style="font-size:.9rem;color:#cbd5e1;line-height:1.65;margin-bottom:.75rem">Before acting: do a <strong style="color:#f1f5f9">cost-benefit analysis</strong>. Kenneth: «Is the cost of fixing the risk going to be more than the consequence of the risk itself? If the consequence is just a tiny effect, you may simply let it happen and fix it up later — because fixing it would take minimal effort.»</p>
         <div class="callout tip" style="margin:0">
-          <div class="callout-title">Sun Tzu — Kenneth siterer</div>
-          <p>«If you know the enemy and you know yourself, you need not fear the result of a hundred battles.» — Identifiser alle risikoer tidlig, og du er forberedt.</p>
+          <div class="callout-title">Sun Tzu — quoted by Kenneth</div>
+          <p>«If you know the enemy and you know yourself, you need not fear the result of a hundred battles.» — Identify all risks early, and you are prepared.</p>
         </div>
       </div>
     </div>
@@ -559,7 +559,7 @@
     <div class="ex-body">
       <p><strong>Scenario:</strong> Du er ansatt av et sykehus for å bygge et nytt pasientjournalsystem. Teamet består av 6 utviklere, 1 prosjektleder og en domeneekspert fra sykehuset. Dere bruker Scrum med 2-ukers sprinter. Leveransen er kildekoden, en bruksanvisning og et deployert system. Prosjektet skal fullføres på 9 måneder med et budsjett på 2 millioner.</p>
       <p style="margin-top:.75rem">a) Identifiser de 4 P-ene i dette scenariet.<br>b) Hva slags software er dette (generic/custom/embedded)?<br>c) Hva slags prosjekttype er det (greenfield/evolutionary/framework)?</p>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>a) De 4 P-ene:</strong></p>
@@ -572,7 +572,7 @@
         <p style="margin-top:.6rem"><strong>b) Custom software</strong> — kravene kommer fra sykehuset (én spesifikk klient). Kenneth: «Custom software — development effort is high because you have to capture all the requirements before you can build a system.»</p>
         <p style="margin-top:.6rem"><strong>c) Greenfield</strong> — «et nytt system» = fra scratch. Hvis det hadde stått «vi skal modernisere det eksisterende journalsystemet», ville det vært evolutionary.</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -592,7 +592,7 @@
         <li>En utvikler kan bli syk i én uke (likelihood: 90%, impact: én ukes forsinkelse)</li>
       </ol>
       <p style="margin-top:.75rem">a) Ranger etter prioritet (bruk 80-20-regelen — velg de 2 viktigste).<br>b) Foreslå én strategi (avoid/confine/mitigate/monitor) for hvert av de 2 viktigste.<br>c) Hvilken risiko bør du bare la skje og fikse etterpå?</p>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>a) Prioritering:</strong> Med 80-20-regelen fokuserer vi på de 20% mest kritiske. Kombiner likelihood og impact:</p>
@@ -610,7 +610,7 @@
         </ul>
         <p style="margin-top:.6rem"><strong>c) La skje:</strong> Risiko #5 (utvikler syk én uke). Kost-nytte: å sette i verk tiltak for dette koster mer enn konsekvensen. Kenneth: «If the consequence is just a tiny effect, you may simply let it happen and fix it up later.»</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -627,7 +627,7 @@
         <li>Du bygger et nytt bookingsystem for en liten restaurant som bruker papir i dag.</li>
         <li>Du skal tilpasse Shopify til å håndtere spesifikke lojalitetsprogramkrav for en retailkjede.</li>
       </ol>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <ul>
@@ -636,7 +636,7 @@
           <li><strong>Scenario 3: Framework-basert</strong> — tilpasse Shopify. Vanskeligste fase: <em>Design</em> — forstå hva rammeverket tillater og begrenser, og designe løsningen innenfor det.</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -708,12 +708,12 @@ function toggleEx(header){
 function toggleSol(btn){
   const sol=btn.nextElementSibling;
   const show=sol.classList.toggle('show');
-  btn.textContent=show?'Skjul løsning':'Vis løsning';
+  btn.textContent=show?'Hide solution':'Show solution';
 }
 function markDone(btn,id){
   btn.classList.toggle('done');
   const done=btn.classList.contains('done');
-  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  btn.textContent=done?'✓ Done!':'✓ Mark as done';
   const p=getModP();
   const s=new Set(p.doneExercises||[]);
   done?s.add(id):s.delete(id);
@@ -787,7 +787,7 @@ function updateNav(){
   const p=getModP();
   (p.doneExercises||[]).forEach(id=>{
     const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+    if(btn){btn.classList.add('done');btn.textContent='✓ Done!';}
   });
   updateNav();
 })();

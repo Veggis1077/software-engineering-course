@@ -135,27 +135,27 @@
 <body>
 
 <nav>
-  <a href="../../index.html" class="nav-back">← Hjem</a>
-  <span class="nav-title">Modul 6 — Requirements Capture &amp; Domain Modeling</span>
+  <a href="../../index.html" class="nav-back">← Home</a>
+  <span class="nav-title">Module 6 — Requirements Capture &amp; Domain Modeling</span>
   <span class="nav-prog" id="nav-prog"></span>
 </nav>
 
 <div class="hero">
-  <div class="module-tag">Modul 06</div>
+  <div class="module-tag">Module 06</div>
   <h1>Requirements Capture &amp; Domain Modeling</h1>
-  <p>Forstå hva krav er, hvorfor de er vanskelige å samle inn, og hvordan du trekker ut klasser, assosiasjoner og attributter fra en problem statement — akkurat slik Kenneth gjør det.</p>
+  <p>Understand what requirements are, why they are hard to gather, and how to extract classes, associations and attributes from a problem statement — exactly the way Kenneth does it.</p>
   <div class="hero-meta">
-    <span class="meta-pill">📖 4 seksjoner</span>
-    <span class="meta-pill">🎯 10 quizspørsmål</span>
-    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">📖 4 sections</span>
+    <span class="meta-pill">🎯 10 quiz questions</span>
+    <span class="meta-pill">✏️ 3 exercises</span>
     <span class="meta-pill">⏱ ~40 min</span>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Theory</button>
   <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Exercises</button>
 </div>
 
 <div class="content">
@@ -163,36 +163,36 @@
 <!-- ═══════════════════ THEORY ═══════════════════ -->
 <div class="panel active" id="panel-theory">
 
-<!-- ─── SEKSJON 1: Hva er krav ─── -->
+<!-- ─── SECTION 1: What are requirements ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">1</div>
-    <h2>Hva er krav, og hvorfor er de viktige?</h2>
+    <h2>What are requirements, and why do they matter?</h2>
   </div>
 
-  <p class="prose">I dette kurset definerer vi et <strong>krav</strong> slik: «A feature that the system must have, or a constraint that you have to satisfy, in order for your software system to be accepted by your client.»</p>
+  <p class="prose">In this course we define a <strong>requirement</strong> as: «A feature that the system must have, or a constraint that you have to satisfy, in order for your software system to be accepted by your client.»</p>
 
-  <p class="prose">Krav kan beskrives på to nivåer:</p>
+  <p class="prose">Requirements can be described at two levels:</p>
   <div class="two-col">
     <div style="background:var(--surface2);border:1px solid rgba(99,102,241,.35);border-radius:8px;padding:1.1rem">
       <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin-bottom:.6rem">User Requirements</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Skrevet i <strong style="color:#f1f5f9">naturlig språk</strong>, muligens med enkle diagrammer. Rettet mot <strong style="color:#f1f5f9">klienten</strong> — de som bestiller systemet. Beskriver tjenester og begrensninger på et overordnet nivå.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Written in <strong style="color:#f1f5f9">natural language</strong>, possibly with simple diagrams. Aimed at the <strong style="color:#f1f5f9">client</strong> — the people who commissioned the system. Describes services and constraints at a high level.</p>
       <div style="margin-top:.6rem;font-size:.8rem;background:var(--surface3);border-radius:5px;padding:.5rem .7rem;color:var(--muted);font-style:italic">«The system should allow students to register for courses.»</div>
     </div>
     <div style="background:var(--surface2);border:1px solid rgba(6,182,212,.35);border-radius:8px;padding:1.1rem">
       <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--accent2);margin-bottom:.6rem">System Requirements</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65"><strong style="color:#f1f5f9">Strukturert dokument</strong> med detaljert beskrivelse av funksjonalitet og begrensninger. Rettet mot <strong style="color:#f1f5f9">både klient og utviklere</strong>. Definerer hva som skal implementeres og fungerer som del av kontrakten.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65"><strong style="color:#f1f5f9">Structured document</strong> with detailed description of functionality and constraints. Aimed at <strong style="color:#f1f5f9">both client and developers</strong>. Defines what must be implemented and serves as part of the contract.</p>
       <div style="margin-top:.6rem;font-size:.8rem;background:var(--surface3);border-radius:5px;padding:.5rem .7rem;color:var(--muted);font-style:italic">«A student (1) may register for 0..5 courses per semester. The system shall validate...»</div>
     </div>
   </div>
 
   <div class="callout info">
     <div class="callout-title">SRS — System Requirements Specification</div>
-    <p>SRS er det <strong>offisielle dokumentet</strong> som spesifiserer kravene til systemet. Det er <em>ikke</em> et designdokument — vi sier ikke «hvordan» systemet skal løse problemet, bare «hva» det skal gjøre. Kenneth: «It's not a design document. We specify the problem, not the solution.»</p>
-    <p style="margin-top:.5rem">SRS inneholder: user requirements + system requirements specificert via modeller (domain model, use case model, non-functional requirements).</p>
+    <p>The SRS is the <strong>official document</strong> that specifies the system requirements. It is <em>not</em> a design document — we do not say «how» the system solves the problem, only «what» it must do. Kenneth: «It's not a design document. We specify the problem, not the solution.»</p>
+    <p style="margin-top:.5rem">The SRS contains: user requirements + system requirements specified via models (domain model, use case model, non-functional requirements).</p>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Hvorfor kravinnsamling er vanskelig — og viktig</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Why requirements capture is hard — and critical</h3>
 
   <div class="fig">
     <div class="fig-title">Kostnad for å fikse feil øker dramatisk over tid</div>
@@ -230,79 +230,79 @@
       <!-- Y label -->
       <text x="12" y="55" fill="#64748b" font-size="8" font-family="sans-serif" transform="rotate(-90,12,55)">Cost to fix</text>
     </svg>
-    <div class="fig-caption">Å fikse en requirements-feil under testing kan koste 100 ganger mer enn å fikse den der den ble introdusert</div>
+    <div class="fig-caption">Fixing a requirements defect during testing can cost 100 times more than fixing it when it was introduced</div>
   </div>
 
-  <p class="prose">Hva gjør kravinnsamling vanskelig? Kenneth forklarer: selv klienten vet ikke alltid hva de vil. Det er din jobb som software engineer å <em>konvertere de vage ideene fra klienten til noe mer presist</em>. Utfordringen er å bygge bro over kunnskapsgapet mellom ulike stakeholders.</p>
+  <p class="prose">What makes requirements capture difficult? Kenneth explains: even the client doesn't always know what they want. It is your job as a software engineer to <em>convert the client's vague ideas into something precise</em>. The challenge is bridging the knowledge gap between different stakeholders.</p>
 
   <div class="callout danger">
-    <div class="callout-title">Vanligste årsak til prosjektsvikt</div>
-    <p>Kenneth fra forelesningen: «Many software projects fail because of <strong>incomplete requirements</strong> or <strong>lack of user involvement</strong>. Just because you don't know exactly what you have to do within your project, you don't understand what the requirements are — and that may lead to project failure.»</p>
-    <p style="margin-top:.5rem">Og husk: vår hjerne er optimistisk. Du tror du husker alt — men etter noen dager har du glemt viktige detaljer. Det er grunnen til at vi <em>dokumenterer</em> kravene.</p>
+    <div class="callout-title">Most common cause of project failure</div>
+    <p>Kenneth from the lecture: «Many software projects fail because of <strong>incomplete requirements</strong> or <strong>lack of user involvement</strong>. Just because you don't know exactly what you have to do within your project, you don't understand what the requirements are — and that may lead to project failure.»</p>
+    <p style="margin-top:.5rem">And remember: our brains are optimistic. You think you'll remember everything — but after a few days, important details are gone. That is why we <em>document</em> requirements.</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 2: Tre modeller i SRS ─── -->
+<!-- ─── SECTION 2: Three models in the SRS ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">2</div>
-    <h2>De tre modellene i SRS</h2>
+    <h2>The three models in the SRS</h2>
   </div>
 
-  <p class="prose">Under kravinnsamling bygger vi tre typer modeller som til sammen utgjør SRS:</p>
+  <p class="prose">During requirements capture we build three types of models that together make up the SRS:</p>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem;margin:1rem 0">
     <div style="background:var(--surface3);border-radius:8px;padding:1.1rem;border-left:3px solid var(--accent)">
       <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Domain Model</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Fanger <strong style="color:#cbd5e1">datakrav</strong> — hvilke viktige objekter og konsepter finnes i applikasjonsdomenet, og hvordan henger de sammen. Representeres som et <strong style="color:#cbd5e1">class diagram</strong>.</p>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Captures <strong style="color:#cbd5e1">data requirements</strong> — which important objects and concepts exist in the application domain, and how they relate to each other. Represented as a <strong style="color:#cbd5e1">class diagram</strong>.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1.1rem;border-left:3px solid var(--accent2)">
       <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Use Case Model</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Fanger <strong style="color:#cbd5e1">funksjonelle krav</strong> — hvilke tjenester systemet skal tilby, sett fra aktørenes perspektiv. Representeres som <strong style="color:#cbd5e1">use case diagram + specifications</strong>.</p>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Captures <strong style="color:#cbd5e1">functional requirements</strong> — what services the system should provide, from the actors' perspective. Represented as <strong style="color:#cbd5e1">use case diagram + specifications</strong>.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1.1rem;border-left:3px solid var(--accent3)">
       <div style="font-size:.78rem;font-weight:700;color:var(--accent3);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Non-Functional Requirements</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Begrensninger på systemet som helhet — ytelse, sikkerhet, pålitelighet, osv. Ikke funksjonalitet, men <strong style="color:#cbd5e1">egenskaper</strong> systemet MÅ ha.</p>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Constraints on the system as a whole — performance, security, reliability, etc. Not functionality, but <strong style="color:#cbd5e1">qualities</strong> the system MUST have.</p>
     </div>
   </div>
 
   <div class="callout tip">
-    <div class="callout-title">Fokus i modul 6</div>
-    <p>Vi fokuserer på <strong>domain model</strong> — altså bruk av class diagram til å fange datakrav. Use case model dekkes i modul 7–8. NFR dekkes i modul 9.</p>
+    <div class="callout-title">Focus of Module 6</div>
+    <p>We focus on the <strong>domain model</strong> — using a class diagram to capture data requirements. The use case model is covered in modules 7–8. NFR is covered in module 9.</p>
   </div>
 
-  <p class="prose">Domain modeling handler om dette: gitt en problem statement, identifiser de <strong>viktigste objektene vi trenger å holde styr på</strong> i systemet, og vis hvordan de henger sammen. Vi bryr oss ikke om implementasjon — bare om «hva som finnes» i domenet.</p>
+  <p class="prose">Domain modeling is about this: given a problem statement, identify the <strong>most important objects we need to keep track of</strong> in the system, and show how they relate. We are not concerned with implementation — only with «what exists» in the domain.</p>
 </div>
 
-<!-- ─── SEKSJON 3: Identifisere klasser ─── -->
+<!-- ─── SECTION 3: Identifying classes ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">3</div>
-    <h2>Identifisere klasser fra en problem statement</h2>
+    <h2>Identifying classes from a problem statement</h2>
   </div>
 
-  <p class="prose">Kenneth har en enkel tommelfingerregel for å starte: <strong>klasser er substantiver</strong>, <strong>assosiasjoner er verb</strong>. Les gjennom problem statement og trekk ut alle substantiver og verbfraser — dette er dine kandidater.</p>
+  <p class="prose">Kenneth's simple starting rule: <strong>classes are nouns</strong>, <strong>associations are verbs</strong>. Read through the problem statement and extract all nouns and verb phrases — these are your candidates.</p>
 
   <div class="fig">
-    <div class="fig-title">Eksempel — problem statement med uthevet innhold</div>
+    <div class="fig-title">Example — problem statement with highlighted content</div>
     <div style="font-size:.92rem;line-height:2.2;color:#cbd5e1;font-style:italic">
       «A <span class="noun-tag">university</span> offers many <span class="noun-tag">courses</span>. Each <span class="noun-tag">course</span> has a <span class="noun-tag">name</span>, a <span class="noun-tag">course number</span> and a <span class="attr-tag">credit</span> value. A <span class="noun-tag">student</span> may <span class="verb-tag">register for</span> one or more courses. Each <span class="noun-tag">student</span> has a <span class="attr-tag">student ID</span>, a <span class="attr-tag">name</span>, and a <span class="attr-tag">password</span>. An <span class="noun-tag">instructor</span> <span class="verb-tag">teaches</span> courses. The <span class="noun-tag">system</span> shall store all <span class="noun-tag">information</span> about <span class="noun-tag">registrations</span>.»
     </div>
     <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.9rem">
-      <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted)"><span class="noun-tag" style="font-size:.75rem">Substantiv</span> → kandidatklasser</div>
-      <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted)"><span class="verb-tag" style="font-size:.75rem">Verb</span> → kandidatassosiasjoner</div>
-      <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted)"><span class="attr-tag" style="font-size:.75rem">Egenskap</span> → kandidatattributter</div>
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted)"><span class="noun-tag" style="font-size:.75rem">Noun</span> → candidate classes</div>
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted)"><span class="verb-tag" style="font-size:.75rem">Verb</span> → candidate associations</div>
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted)"><span class="attr-tag" style="font-size:.75rem">Property</span> → candidate attributes</div>
     </div>
-    <div class="fig-caption">Substantiver gir kandidatklasser — men ikke alle er relevante. Filtreringen skjer i neste steg.</div>
+    <div class="fig-caption">Nouns give candidate classes — but not all are relevant. Filtering happens in the next step.</div>
   </div>
 
-  <p class="prose">Etter at du har ekstrahert alle substantivene, bruker du <strong>elimineringsreglene</strong> for å filtrere ut de irrelevante. Klikk på en kategori for å fokusere:</p>
+  <p class="prose">After extracting all nouns, apply the <strong>elimination rules</strong> to filter out the irrelevant ones. Click a category to focus:</p>
 
   <div class="rules-filter">
-    <button class="rf-btn active" onclick="filterRules('all',this)">Alle regler</button>
-    <button class="rf-btn" onclick="filterRules('class',this)">Klasser</button>
-    <button class="rf-btn" onclick="filterRules('assoc',this)">Assosiasjoner</button>
-    <button class="rf-btn" onclick="filterRules('attr',this)">Attributter</button>
+    <button class="rf-btn active" onclick="filterRules('all',this)">All rules</button>
+    <button class="rf-btn" onclick="filterRules('class',this)">Classes</button>
+    <button class="rf-btn" onclick="filterRules('assoc',this)">Associations</button>
+    <button class="rf-btn" onclick="filterRules('attr',this)">Attributes</button>
   </div>
 
   <div id="rules-list">
@@ -310,130 +310,130 @@
       <div class="rule-num">1</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Irrelevant for domenet → slett</div>
-          <span class="rule-tag tag-class">Klasse</span>
+          <div class="rule-title">Irrelevant to the domain → delete</div>
+          <span class="rule-tag tag-class">Class</span>
         </div>
-        <div class="rule-desc">Klassen finnes i setningen, men har ingen relevans for det systemet vi skal bygge. Den trenger vi ikke holde styr på.</div>
-        <div class="rule-example">Eks: I et kurssystem er «library» irrelevant — slett det.</div>
+        <div class="rule-desc">The class appears in the sentence but has no relevance to the system we are building. We don't need to track it.</div>
+        <div class="rule-example">E.g. In a course registration system, «library» is irrelevant — delete it.</div>
       </div>
     </div>
     <div class="rule-card" data-type="class">
       <div class="rule-num">2</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Vag / for generell → slett eller spesifiser</div>
-          <span class="rule-tag tag-class">Klasse</span>
+          <div class="rule-title">Vague / too general → delete or specify</div>
+          <span class="rule-tag tag-class">Class</span>
         </div>
-        <div class="rule-desc">Substantiver som «information», «data» eller «thing» er for vage til å modellere meningsfylt. Kenneth: «You have to either ignore it or make it more specific.»</div>
-        <div class="rule-example">Eks: «The system shall store all <strong>information</strong>» → «information» er vag — slett eller spesifiser hva slags informasjon.</div>
+        <div class="rule-desc">Nouns like «information», «data» or «thing» are too vague to model meaningfully. Kenneth: «You have to either ignore it or make it more specific.»</div>
+        <div class="rule-example">E.g. «The system shall store all <strong>information</strong>» → «information» is vague — delete or specify what kind.</div>
       </div>
     </div>
     <div class="rule-card" data-type="class">
       <div class="rule-num">3</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Redundant → behold den mest beskrivende</div>
-          <span class="rule-tag tag-class">Klasse</span>
+          <div class="rule-title">Redundant → keep the most descriptive</div>
+          <span class="rule-tag tag-class">Class</span>
         </div>
-        <div class="rule-desc">Hvis to navn representerer det samme konseptet, behold det som er mest presist og beskrivende. Slett det andre.</div>
-        <div class="rule-example">Eks: «classes» og «courses» betyr det samme i dette domenet → behold «Course».</div>
+        <div class="rule-desc">If two names represent the same concept, keep the most precise and descriptive one. Delete the other.</div>
+        <div class="rule-example">E.g. «classes» and «courses» mean the same in this domain → keep «Course».</div>
       </div>
     </div>
     <div class="rule-card" data-type="class">
       <div class="rule-num">4</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Egentlig et attributt → gjør til attributt</div>
-          <span class="rule-tag tag-class">Klasse</span>
+          <div class="rule-title">Really an attribute → make it an attribute</div>
+          <span class="rule-tag tag-class">Class</span>
         </div>
-        <div class="rule-desc">Noen substantiver er egentlig egenskaper ved en annen klasse, ikke selvstendige konsepter. Spør: «Har dette noen assosiasjoner? Har det egne attributter?» Nei → det er et attributt.</div>
-        <div class="rule-example">Eks: «name» og «credit value» er egenskaper ved Course, ikke egne klasser.</div>
+        <div class="rule-desc">Some nouns are really properties of another class, not independent concepts. Ask: «Does this have any associations? Does it have its own attributes?» No → it is an attribute.</div>
+        <div class="rule-example">E.g. «name» and «credit value» are properties of Course, not separate classes.</div>
       </div>
     </div>
     <div class="rule-card" data-type="class">
       <div class="rule-num">5</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Egentlig et rollenavn → gjør til rollenavn på assosiasjon</div>
-          <span class="rule-tag tag-class">Klasse</span>
+          <div class="rule-title">Really a role name → make it a role name on the association</div>
+          <span class="rule-tag tag-class">Class</span>
         </div>
-        <div class="rule-desc">Noen substantiver beskriver hvilken rolle en klasse spiller i en relasjon — ikke en selvstendig klasse. Legg det som rollenavn på assosiasjonen i stedet.</div>
-        <div class="rule-example">Eks: «boss» og «worker» er rollenavn for Employee i en unær assosiasjon.</div>
+        <div class="rule-desc">Some nouns describe the role a class plays in a relationship — not an independent class. Place it as a role name on the association instead.</div>
+        <div class="rule-example">E.g. «boss» and «worker» are role names for Employee in a unary association.</div>
       </div>
     </div>
     <div class="rule-card" data-type="class">
       <div class="rule-num">6</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Egentlig en operasjon → slett</div>
-          <span class="rule-tag tag-class">Klasse</span>
+          <div class="rule-title">Really an operation → delete</div>
+          <span class="rule-tag tag-class">Class</span>
         </div>
-        <div class="rule-desc">Substantiver som egentlig beskriver en handling eller funksjonalitet hører hjemme som operasjoner på klasser, ikke som klasser selv.</div>
-        <div class="rule-example">Eks: «registration» i «perform a registration» er egentlig operasjonen <code>register()</code> på Student — ikke en klasse.</div>
+        <div class="rule-desc">Nouns that really describe an action or functionality belong as operations on classes, not as classes themselves.</div>
+        <div class="rule-example">E.g. «registration» in «perform a registration» is really the operation <code>register()</code> on Student — not a class.</div>
       </div>
     </div>
     <div class="rule-card" data-type="class">
       <div class="rule-num">7</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Implementasjonskonstrukt → slett</div>
-          <span class="rule-tag tag-class">Klasse</span>
+          <div class="rule-title">Implementation construct → delete</div>
+          <span class="rule-tag tag-class">Class</span>
         </div>
-        <div class="rule-desc">Substantiver som «system», «database», «module» eller «interface» beskriver tekniske løsninger, ikke domeneentiteter. De hører ikke hjemme i en domain model.</div>
-        <div class="rule-example">Eks: «The <strong>system</strong> shall...» → slett «system». Det er det vi bygger, ikke noe vi modellerer.</div>
+        <div class="rule-desc">Nouns like «system», «database», «module» or «interface» describe technical solutions, not domain entities. They do not belong in a domain model.</div>
+        <div class="rule-example">E.g. «The <strong>system</strong> shall...» → delete «system». It is what we are building, not something we model.</div>
       </div>
     </div>
     <div class="rule-card" data-type="assoc">
       <div class="rule-num">8</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Irrelevant assosiasjon → slett</div>
-          <span class="rule-tag tag-assoc">Assosiasjon</span>
+          <div class="rule-title">Irrelevant association → delete</div>
+          <span class="rule-tag tag-assoc">Association</span>
         </div>
-        <div class="rule-desc">Assosiasjonen er ikke nødvendig for å forstå domenet, eller vi trenger ikke holde styr på den i systemet.</div>
+        <div class="rule-desc">The association is not necessary to understand the domain, or we do not need to track it in the system.</div>
       </div>
     </div>
     <div class="rule-card" data-type="assoc">
       <div class="rule-num">9</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Egentlig en operasjon → slett</div>
-          <span class="rule-tag tag-assoc">Assosiasjon</span>
+          <div class="rule-title">Really an operation → delete</div>
+          <span class="rule-tag tag-assoc">Association</span>
         </div>
-        <div class="rule-desc">Noen verb beskriver en handling som skjer, men vi trenger ikke lagre koblingen permanent. Det er en operasjon, ikke en strukturell relasjon.</div>
-        <div class="rule-example">Eks: «instructor grades student» → «grades» er en operasjon, ikke en assosiasjon vi trenger å holde styr på.</div>
+        <div class="rule-desc">Some verbs describe an action that happens, but we don't need to store the link permanently. It is an operation, not a structural relationship.</div>
+        <div class="rule-example">E.g. «instructor grades student» → «grades» is an operation, not an association we need to track.</div>
       </div>
     </div>
     <div class="rule-card" data-type="assoc">
       <div class="rule-num">10</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Ternær → dekomponér til binære assosiasjoner</div>
-          <span class="rule-tag tag-assoc">Assosiasjon</span>
+          <div class="rule-title">Ternary → decompose into binary associations</div>
+          <span class="rule-tag tag-assoc">Association</span>
         </div>
-        <div class="rule-desc">Ternære assosiasjoner gjør diagrammet vanskeligere å lese. Prøv alltid å bryte dem opp i to binære assosiasjoner, gjerne ved å introdusere en mellomklasse.</div>
-        <div class="rule-example">Eks: Student–Course–Grade (ternær) → introduser Enrollment med grade som attributt.</div>
+        <div class="rule-desc">Ternary associations make diagrams harder to read. Always try to break them into two binary associations, often by introducing an intermediate class.</div>
+        <div class="rule-example">E.g. Student–Course–Grade (ternary) → introduce Enrollment with grade as an attribute.</div>
       </div>
     </div>
     <div class="rule-card" data-type="assoc">
       <div class="rule-num">11</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Avledet assosiasjon → slett MED forsiktighet</div>
-          <span class="rule-tag tag-assoc">Assosiasjon</span>
+          <div class="rule-title">Derived association → delete WITH caution</div>
+          <span class="rule-tag tag-assoc">Association</span>
         </div>
-        <div class="rule-desc">Hvis du kan nå samme informasjon via en annen sti i diagrammet, kan assosiasjonen være redundant. <strong>Men:</strong> sjekk alltid om de to stiene har <em>ulik semantikk</em> — da kan du <em>ikke</em> slette den.</div>
-        <div class="rule-example">Se Kenneths Transaction-eksempel nedenfor ↓</div>
+        <div class="rule-desc">If you can reach the same information via another path in the diagram, the association may be redundant. <strong>But:</strong> always check whether the two paths have <em>different semantics</em> — if they do, you <em>cannot</em> delete it.</div>
+        <div class="rule-example">See Kenneth's Transaction example below ↓</div>
       </div>
     </div>
     <div class="rule-card" data-type="attr">
       <div class="rule-num">12</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Eliminer alle IDs fra attributter</div>
-          <span class="rule-tag tag-attr">Attributt</span>
+          <div class="rule-title">Eliminate all IDs from attributes</div>
+          <span class="rule-tag tag-attr">Attribute</span>
         </div>
-        <div class="rule-desc">Kunstige identifikatorer (studentID, accountNo, courseNo) er tekniske hjelpemidler, ikke reelle egenskaper ved objektene. De hører ikke hjemme i en domain model.</div>
+        <div class="rule-desc">Artificial identifiers (studentID, accountNo, courseNo) are technical helpers, not real properties of objects. They do not belong in a domain model.</div>
         <div class="rule-example">Kenneth: «IDs are object identifiers. They are simply artificial numbers. Remove all of them from the domain model.»</div>
       </div>
     </div>
@@ -441,35 +441,35 @@
       <div class="rule-num">13</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Bør attributtet egentlig være en klasse?</div>
-          <span class="rule-tag tag-attr">Attributt</span>
+          <div class="rule-title">Should the attribute really be a class?</div>
+          <span class="rule-tag tag-attr">Attribute</span>
         </div>
-        <div class="rule-desc">Hvis et attributt har egne egenskaper eller relasjoner, bør det oppgraderes til en klasse. En klasse er alltid mer uttrykksfull enn et attributt.</div>
-        <div class="rule-example">Eks: «address» som ett tekstattributt kontra Address som klasse med street, city, zip.</div>
+        <div class="rule-desc">If an attribute has its own properties or relationships, it should be promoted to a class. A class is always more expressive than an attribute.</div>
+        <div class="rule-example">E.g. «address» as a single text attribute versus Address as a class with street, city, zip.</div>
       </div>
     </div>
     <div class="rule-card" data-type="attr">
       <div class="rule-num">14</div>
       <div class="rule-body">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="rule-title">Tilhører attributtet en association class?</div>
-          <span class="rule-tag tag-attr">Attributt</span>
+          <div class="rule-title">Does the attribute belong in an association class?</div>
+          <span class="rule-tag tag-attr">Attribute</span>
         </div>
-        <div class="rule-desc">Hvis et attributt avhenger av <em>begge</em> klassene i en relasjon (ikke bare én), hører det hjemme i en association class, ikke i noen av klassene alene.</div>
-        <div class="rule-example">Eks: «grade» avhenger av BÅDE student og kurs → belongs in an association class «Enrollment».</div>
+        <div class="rule-desc">If an attribute depends on <em>both</em> classes in a relationship (not just one), it belongs in an association class, not in either class alone.</div>
+        <div class="rule-example">E.g. «grade» depends on BOTH student and course → belongs in an association class «Enrollment».</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ─── SEKSJON 4: Kenneths Transaction-eksempel ─── -->
+<!-- ─── SECTION 4: Kenneth's Transaction example ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">4</div>
-    <h2>Avledede assosiasjoner — Kenneths Transaction-eksempel</h2>
+    <h2>Derived associations — Kenneth's Transaction example</h2>
   </div>
 
-  <p class="prose">En av de viktigste (og vanskeligste) reglene er håndtering av <strong>avledede assosiasjoner</strong>. Kenneth bruker et eksempel direkte fra L6-3 som du bør kjenne godt:</p>
+  <p class="prose">One of the most important (and hardest) rules is handling <strong>derived associations</strong>. Kenneth uses an example directly from L6-3 that you should know well:</p>
 
   <div class="fig">
     <div class="fig-title">Kan vi fjerne «made»-assosiasjonen?</div>
@@ -551,7 +551,7 @@
         <li>Hvilke elimineres, og hvilken regel brukes? Begrunn hvert valg.</li>
         <li>Hvilke attributter bør fjernes, og hvorfor?</li>
       </ol>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>Kandidatklasser (substantiver):</strong> university, system, student, course, instructor, registration, student ID, name, email address, password, course number, credit value, description, date, grade, information</p>
@@ -566,7 +566,7 @@
         <p style="margin-top:.65rem"><strong>Klasser som beholdes:</strong> Student, Course, Instructor, Registration</p>
         <p style="margin-top:.65rem"><strong>Fjern fra attributter:</strong> studentID og courseNumber (regel 12 — IDs er kunstige identifikatorer)</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -588,7 +588,7 @@
         <li>student <em>receives</em> grade (via course)</li>
       </ol>
       <p style="margin-top:.5rem">Hvilke beholdes, hvilke slettes, og hvilken regel begrunner avgjørelsen?</p>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <ul>
@@ -602,7 +602,7 @@
         </ul>
         <p style="margin-top:.5rem"><strong>Beholder:</strong> Student <em>registers for</em> Course (med Registration), Instructor <em>teaches</em> Course.</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -620,7 +620,7 @@
         Student <span style="color:#ef4444">?? ——<em>advised by</em>——</span> Instructor
       </div>
       <p>Spørsmål: kan vi fjerne «advised by»-assosiasjonen (rød) fordi vi kan nå Instructor fra Student via stien Student → Course → Instructor?</p>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>Nei, vi kan ikke fjerne «advised by» uten videre.</strong></p>
@@ -628,7 +628,7 @@
         <p style="margin-top:.5rem">De to stiene har <strong>ulik semantikk</strong>: den ene sier «instruktøren underivser i kurs jeg tar», den andre sier «denne personen er min personlige veileder». Kenneth: «If the two paths have two different meanings, you cannot remove the redundant path.»</p>
         <p style="margin-top:.5rem"><strong>Behold «advised by».</strong> Begge assosiasjonene er nødvendige.</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -667,12 +667,12 @@ function toggleEx(header){
 function toggleSol(btn){
   const sol=btn.nextElementSibling;
   const show=sol.classList.toggle('show');
-  btn.textContent=show?'Skjul løsning':'Vis løsning';
+  btn.textContent=show?'Hide solution':'Show solution';
 }
 function markDone(btn,id){
   btn.classList.toggle('done');
   const done=btn.classList.contains('done');
-  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  btn.textContent=done?'✓ Done!':'✓ Mark as done';
   const p=getModP();
   const s=new Set(p.doneExercises||[]);
   done?s.add(id):s.delete(id);
@@ -745,7 +745,7 @@ function updateNav(){
   const p=getModP();
   (p.doneExercises||[]).forEach(id=>{
     const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+    if(btn){btn.classList.add('done');btn.textContent='✓ Done!';}
   });
   updateNav();
 })();

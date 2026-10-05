@@ -122,27 +122,27 @@
 <body>
 
 <nav>
-  <a href="../../index.html" class="nav-back">← Hjem</a>
-  <span class="nav-title">Modul 3 — Advanced Class Diagrams</span>
+  <a href="../../index.html" class="nav-back">← Home</a>
+  <span class="nav-title">Module 3 — Advanced Class Diagrams</span>
   <span class="nav-prog" id="nav-prog"></span>
 </nav>
 
 <div class="hero">
-  <div class="module-tag">Modul 03</div>
+  <div class="module-tag">Module 03</div>
   <h1>Advanced Class Diagrams</h1>
-  <p>Association classes, generalisering, arv, disjoint/overlapping, complete/incomplete og tilleggsbegrensninger — alt du trenger for å tegne et fullt UML class diagram på eksamen.</p>
+  <p>Association classes, generalization, inheritance, disjoint/overlapping, complete/incomplete and additional constraints — everything you need to draw a full UML class diagram on the exam.</p>
   <div class="hero-meta">
-    <span class="meta-pill">📖 4 seksjoner</span>
-    <span class="meta-pill">🎯 10 quizspørsmål</span>
-    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">📖 4 sections</span>
+    <span class="meta-pill">🎯 10 quiz questions</span>
+    <span class="meta-pill">✏️ 3 exercises</span>
     <span class="meta-pill">⏱ ~40 min</span>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Theory</button>
   <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Exercises</button>
 </div>
 
 <div class="content">
@@ -154,33 +154,33 @@
 <div class="section">
   <div class="section-header">
     <div class="section-num">1</div>
-    <h2>Association Class — når assosiasjonen selv har attributter</h2>
+    <h2>Association Class — when the association itself has attributes</h2>
   </div>
 
-  <p class="prose">Noen ganger er det ikke nok å bare koble to klasser med en assosiasjon — selve koblingen har egne egenskaper. Kenneth introduserer dette med et eksempel: vi vil registrere karakter (<code>grade</code>) når en student melder seg på et kurs.</p>
+  <p class="prose">Sometimes it is not enough to simply connect two classes with an association — the link itself has its own properties. Kenneth introduces this with an example: we want to record a <code>grade</code> when a student enrols in a course.</p>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.25rem 0 .6rem">Problemet: tre mislykkede forsøk</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.25rem 0 .6rem">The problem: three failed attempts</h3>
 
   <div class="three-col">
     <div style="background:var(--surface3);border:1.5px solid var(--danger);border-radius:8px;padding:1rem">
-      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">❌ Alternativ 1</div>
-      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6"><strong style="color:#f1f5f9">Grade som attributt under Student</strong></p>
-      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Fungerer ikke: vi vet ikke hvor mange kurs en student tar — vi vet ikke hvor mange grade-attributter vi trenger.</p>
+      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">❌ Option 1</div>
+      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6"><strong style="color:#f1f5f9">Grade as an attribute under Student</strong></p>
+      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Does not work: we don't know how many courses a student takes — we don't know how many grade attributes we need.</p>
     </div>
     <div style="background:var(--surface3);border:1.5px solid var(--danger);border-radius:8px;padding:1rem">
-      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">❌ Alternativ 2</div>
-      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6"><strong style="color:#f1f5f9">Grade som multi-verdi attributt</strong></p>
-      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Fungerer ikke: en liste med karakterer forteller ikke hvilken karakter som tilhører hvilket kurs — ingen mapping.</p>
+      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">❌ Option 2</div>
+      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6"><strong style="color:#f1f5f9">Grade as a multi-value attribute</strong></p>
+      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Does not work: a list of grades does not tell us which grade belongs to which course — no mapping.</p>
     </div>
     <div style="background:var(--surface3);border:1.5px solid var(--warn);border-radius:8px;padding:1rem">
-      <div style="font-size:.75rem;font-weight:700;color:var(--warn);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">⚠️ Alternativ 3</div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--warn);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">⚠️ Option 3</div>
       <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6"><strong style="color:#f1f5f9">Association class</strong></p>
-      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Bedre — men har én kritisk begrensning. Se nedenfor.</p>
+      <p style="font-size:.83rem;color:#94a3b8;margin-top:.4rem;line-height:1.6">Better — but has one critical limitation. See below.</p>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">Association class — hva det er og hvordan det tegnes</h3>
-  <p class="prose">En association class er en klasse som er koblet til selve assosiasjonslinjen (ikke til en av klassene). Den brukes når assosiasjonen i seg selv har attributter. Grade hører til koblingen mellom student og kurs — ikke til student alene og ikke til kurs alene.</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">Association class — what it is and how to draw it</h3>
+  <p class="prose">An association class is a class attached to the association line itself (not to either of the two classes). It is used when the association itself has attributes. Grade belongs to the link between student and course — not to student alone and not to course alone.</p>
 
   <div class="fig">
     <div class="fig-title">Association class med «Enrolls In» og grade-attributt</div>
@@ -210,19 +210,19 @@
       <line x1="185" y1="134" x2="315" y2="134" stroke="#1f2d45"/>
       <text x="193" y="148" fill="#94a3b8" font-size="9" font-family="monospace">+ grade : String</text>
     </svg>
-    <div class="fig-caption">Association class koblet til assosiasjonslinjen med stiplet linje — grade tilhører <em>koblingen</em>, ikke Student eller Course alene.</div>
+    <div class="fig-caption">Association class attached to the association line with a dashed line — grade belongs to <em>the link</em>, not to Student or Course alone.</div>
   </div>
 
   <div class="callout danger">
-    <div class="callout-title">Den kritiske begrensningen — Kenneth's Kenneth-eksempel</div>
-    <p>Kenneth gir dette eksempelet: <em>«Kenneth takes COM3111, fails (F). Next semester he takes COM3111 again and gets A+. Can we store both?»</em></p>
-    <p style="margin-top:.6rem"><strong>Nei.</strong> Regelen er: <strong>ett par av instanser kan kun ha én link</strong>. Kenneth og COM3111 er allerede koblet — vi kan ikke koble dem igjen med en annen link. Vi kan bare lagre én av de to karakterene.</p>
-    <p style="margin-top:.6rem">Kenneth sier det slik: «Once a pair of instances are related, they are related. We cannot relate the same pair of instances using two different links.»</p>
-    <p style="margin-top:.6rem">Konsekvens: association class er <em>ikke</em> egnet når en student kan ta samme kurs mer enn én gang.</p>
+    <div class="callout-title">The critical limitation — Kenneth's own example</div>
+    <p>Kenneth gives this example: <em>«Kenneth takes COM3111, fails (F). Next semester he takes COM3111 again and gets A+. Can we store both?»</em></p>
+    <p style="margin-top:.6rem"><strong>No.</strong> The rule is: <strong>one pair of instances can only have one link</strong>. Kenneth and COM3111 are already linked — we cannot link them again with a different link. We can only store one of the two grades.</p>
+    <p style="margin-top:.6rem">Kenneth: «Once a pair of instances are related, they are related. We cannot relate the same pair of instances using two different links.»</p>
+    <p style="margin-top:.6rem">Consequence: association class is <em>not</em> suitable when a student can take the same course more than once.</p>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">Løsningen: introduser en Offering-klasse</h3>
-  <p class="prose">Isteden for at studenten tar et <em>kurs</em> direkte, tar studenten en <em>offering</em> av kurset. Et kurs kan ha mange offerings (ett per semester). Dermed er Kenneth koblet til to ulike offerings, ikke to ganger til det samme kurset.</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">The solution: introduce an Offering class</h3>
+  <p class="prose">Instead of the student taking a <em>course</em> directly, the student takes an <em>offering</em> of the course. A course can have many offerings (one per semester). This means Kenneth is linked to two different offerings, not twice to the same course.</p>
 
   <div class="fig">
     <div class="fig-title">Offering-modellen: historisk data bevares</div>
@@ -258,18 +258,18 @@
       <text x="440" y="79" fill="#f59e0b" font-size="9" font-family="sans-serif">1</text>
       <text x="378" y="68" fill="#64748b" font-size="8" font-family="sans-serif">is of</text>
       <!-- Example data label -->
-      <text x="10" y="145" fill="#64748b" font-size="9" font-family="sans-serif">Eksempel: Kenneth → COM3111-Fall2019 (F)   Kenneth → COM3111-Spring2020 (A+)   ✓ Begge bevart!</text>
+      <text x="10" y="145" fill="#64748b" font-size="9" font-family="sans-serif">Example: Kenneth → COM3111-Fall2019 (F)   Kenneth → COM3111-Spring2020 (A+)   ✓ Both stored!</text>
     </svg>
-    <div class="fig-caption">Student tar en spesifikk Offering — ikke kurset direkte. Nå kan Kenneth kobles til to ulike offerings og begge karakterer lagres.</div>
+    <div class="fig-caption">Student takes a specific Offering — not the course directly. Now Kenneth can be linked to two different offerings and both grades can be stored.</div>
   </div>
 
   <div class="callout tip">
-    <div class="callout-title">Huskeregel: Når bruker du association class?</div>
+    <div class="callout-title">Rule of thumb: when to use association class</div>
     <ul>
-      <li>Assosiasjonen mellom to klasser har egne attributter</li>
-      <li><strong>Og</strong> ett par instanser vil aldri kobles mer enn én gang</li>
+      <li>The association between two classes has its own attributes</li>
+      <li><strong>And</strong> a pair of instances will never be linked more than once</li>
     </ul>
-    <p style="margin-top:.5rem">Hvis et par instanser kan kobles mer enn én gang (f.eks. student tar samme kurs to ganger) → bruk en mellomklasse som <code>Offering</code> i stedet.</p>
+    <p style="margin-top:.5rem">If a pair of instances can be linked more than once (e.g. student takes the same course twice) → use an intermediate class like <code>Offering</code> instead.</p>
   </div>
 </div>
 
@@ -277,26 +277,26 @@
 <div class="section">
   <div class="section-header">
     <div class="section-num">2</div>
-    <h2>Generalisering og arv</h2>
+    <h2>Generalization and Inheritance</h2>
   </div>
 
-  <p class="prose">Generalisering (arv) er relasjonen mellom klasser av samme type. Vi bruker en <strong>hul trekant</strong> i UML for å vise at en klasse er en spesialisering av en annen. Det finnes to retninger å tenke på:</p>
+  <p class="prose">Generalization (inheritance) is the relationship between classes of the same type. We use a <strong>hollow triangle</strong> in UML to show that one class is a specialization of another. There are two directions to think about:</p>
 
   <div class="two-col">
     <div style="background:var(--surface2);border:1px solid rgba(99,102,241,.4);border-radius:8px;padding:1.1rem">
-      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.6rem">Spesialisering (top-down)</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Start med en generell klasse (<code>Account</code>). Se at noen attributter bare gjelder noen typer — <code>serviceCharge</code> bare for CheckingAccount, <code>interestRate</code> bare for SavingsAccount. Spesialiser ned til subklasser.</p>
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.6rem">Specialization (top-down)</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Start with a general class (<code>Account</code>). Notice that some attributes only apply to certain types — <code>serviceCharge</code> only for CheckingAccount, <code>interestRate</code> only for SavingsAccount. Specialize down into subclasses.</p>
       <p style="font-size:.83rem;color:var(--muted);margin-top:.5rem;line-height:1.5">Kenneth: <em>«We can see there is a discriminator — accountType — to discriminate account into two different types.»</em></p>
     </div>
     <div style="background:var(--surface2);border:1px solid rgba(6,182,212,.4);border-radius:8px;padding:1.1rem">
-      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:.6rem">Generalisering (bottom-up)</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Se at to klasser (<code>BankAccount</code> og <code>CreditCard</code>) har veldig like attributter og operasjoner. Trekk ut en felles superklasse. Flytt felles ting opp.</p>
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:.6rem">Generalization (bottom-up)</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Notice that two classes (<code>BankAccount</code> and <code>CreditCard</code>) share very similar attributes and operations. Extract a common superclass. Move shared things up.</p>
       <p style="font-size:.83rem;color:var(--muted);margin-top:.5rem;line-height:1.5">Kenneth: <em>«We can see that they are kind of similar objects — then we can perform generalization and create a more general class.»</em></p>
     </div>
   </div>
 
   <div class="fig" style="margin-top:1.25rem">
-    <div class="fig-title">Bankeksempel: Account-hierarki med generalisering</div>
+    <div class="fig-title">Bank example: Account hierarchy with generalization</div>
     <svg width="100%" height="280" viewBox="0 0 560 280" style="display:block;max-width:560px;margin:0 auto">
       <!-- Account (abstract) -->
       <rect x="175" y="10" width="210" height="80" rx="4" fill="#1a2236" stroke="#8b5cf6" stroke-width="1.8"/>
@@ -336,32 +336,32 @@
       <!-- Overriding note -->
       <polygon points="130,235 205,235 215,245 215,275 130,275" fill="#1f2d45" stroke="#f59e0b" stroke-width="1.2"/>
       <polygon points="205,235 205,245 215,245" fill="#0a0e1a" stroke="#f59e0b" stroke-width="1.2"/>
-      <text x="137" y="250" fill="#fde68a" font-size="8" font-family="sans-serif">withdraw() overstyrer</text>
-      <text x="137" y="261" fill="#cbd5e1" font-size="8" font-family="sans-serif">superklassens versjon</text>
+      <text x="137" y="250" fill="#fde68a" font-size="8" font-family="sans-serif">withdraw() overrides</text>
+      <text x="137" y="261" fill="#cbd5e1" font-size="8" font-family="sans-serif">superclass version</text>
       <text x="137" y="272" fill="#cbd5e1" font-size="8" font-family="sans-serif">(overriding)</text>
       <line x1="100" y1="215" x2="145" y2="235" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3"/>
     </svg>
-    <div class="fig-caption">Account (italic = abstrakt) spesialiseres i CheckingAccount og SavingsAccount. CheckingAccount overstyrster withdraw() fra superklassen.</div>
+    <div class="fig-caption">Account (italic = abstract) is specialized into CheckingAccount and SavingsAccount. CheckingAccount overrides withdraw() from the superclass.</div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">Fordelene med generalisering</h3>
-  <p class="prose">Kenneth oppsummerer: <em>«We can extract the common attributes, relationships, and operations and put them in the superclass. They will be shared by the subclasses. This reduces redundancy of description and promotes reusability.»</em></p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .6rem">Benefits of generalization</h3>
+  <p class="prose">Kenneth summarizes: <em>«We can extract the common attributes, relationships, and operations and put them in the superclass. They will be shared by the subclasses. This reduces redundancy of description and promotes reusability.»</em></p>
 
   <ul class="prose-list">
-    <li><strong>Definér én gang</strong> — felles attributter og operasjoner i superklassen deles av alle subklasser automatisk</li>
-    <li><strong>Enklere endringer</strong> — endre i superklassen og alle subklasser får oppdateringen</li>
-    <li><strong>Overriding</strong> — en subklasse kan overskrive en operasjon fra superklassen. <code>withdraw()</code> i CheckingAccount brukes da istedenfor <code>withdraw()</code> i Account</li>
-    <li><strong>Abstrakt klasse (italic)</strong> — ingen direkte instanser. Alle instanser er av en subtype. Brukes for modellering.</li>
+    <li><strong>Define once</strong> — common attributes and operations in the superclass are shared by all subclasses automatically</li>
+    <li><strong>Easier changes</strong> — change in the superclass and all subclasses receive the update</li>
+    <li><strong>Overriding</strong> — a subclass can override an operation from the superclass. <code>withdraw()</code> in CheckingAccount is then used instead of <code>withdraw()</code> in Account</li>
+    <li><strong>Abstract class (italic)</strong> — no direct instances. All instances are of a subtype. Used for modeling purposes.</li>
   </ul>
 
   <div class="callout warn">
-    <div class="callout-title">Grense for arvdybde</div>
-    <p>Kenneth: «Try to limit the level of inheritance to only two or up to three levels. If you have four, five or six levels of inheritance, it's going to make your diagram very difficult to read.» Hold det enkelt og lesbart.</p>
+    <div class="callout-title">Inheritance depth limit</div>
+    <p>Kenneth: «Try to limit the level of inheritance to only two or up to three levels. If you have four, five or six levels of inheritance, it's going to make your diagram very difficult to read.» Keep it simple and readable.</p>
   </div>
 
   <div class="callout info">
-    <div class="callout-title">Multiplicity i generalisering — bruk notes</div>
-    <p>Eksempel: PG-studenter tar 0–3 kurs, UG-studenter tar 1–5 kurs. Isteden for to separate assosiasjoner: relax til <code>0..5</code> på Student-nivå, og legg en UML-note for de spesifikke begrensningene. Kenneth: «You can always provide additional information using a note.»</p>
+    <div class="callout-title">Multiplicity in generalization — use notes</div>
+    <p>Example: PG students take 0–3 courses, UG students take 1–5 courses. Instead of two separate associations: relax to <code>0..5</code> at the Student level, and add a UML note for the specific constraints. Kenneth: «You can always provide additional information using a note.»</p>
   </div>
 </div>
 
@@ -369,65 +369,65 @@
 <div class="section">
   <div class="section-header">
     <div class="section-num">3</div>
-    <h2>Generaliseringsbegrensninger: disjoint, overlapping, complete, incomplete</h2>
+    <h2>Generalization constraints: disjoint, overlapping, complete, incomplete</h2>
   </div>
 
-  <p class="prose">Når vi tegner et generaliseringshierarki, MÅ vi spesifisere to typer begrensninger — en for <strong>overlapp</strong> og en for <strong>fullstendighet</strong>. Disse skrives i krøllparentes ved generaliseringstrekanten: f.eks. <code>{disjoint, complete}</code>.</p>
+  <p class="prose">When drawing a generalization hierarchy, we MUST specify two types of constraints — one for <strong>overlap</strong> and one for <strong>completeness</strong>. These are written in curly braces at the generalization triangle: e.g. <code>{disjoint, complete}</code>.</p>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.25rem 0 .75rem">Del 1: Kan en instans tilhøre flere subklasser?</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.25rem 0 .75rem">Part 1: Can an instance belong to more than one subclass?</h3>
 
   <div class="two-col">
     <div style="background:var(--surface2);border:1px solid rgba(99,102,241,.4);border-radius:8px;padding:1.1rem">
       <div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">{disjoint}</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">En instans kan tilhøre <strong style="color:#f1f5f9">kun én</strong> subklasse — ikke begge.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">An instance can belong to <strong style="color:#f1f5f9">only one</strong> subclass — not both.</p>
       <div style="background:var(--surface3);border-radius:6px;padding:.7rem;margin-top:.6rem;font-size:.83rem;color:#94a3b8;line-height:1.6">
-        <strong style="color:#cbd5e1">Kenneth's eksempel:</strong> Account kan være <em>Personal</em> eller <em>Business</em> — aldri begge. En konto er enten for privatperson eller bedrift.
+        <strong style="color:#cbd5e1">Kenneth's example:</strong> Account can be <em>Personal</em> or <em>Business</em> — never both. An account is either for a private person or a company.
       </div>
     </div>
     <div style="background:var(--surface2);border:1px solid rgba(6,182,212,.4);border-radius:8px;padding:1.1rem">
       <div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem">{overlapping}</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">En instans kan tilhøre <strong style="color:#f1f5f9">flere</strong> subklasser samtidig.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">An instance can belong to <strong style="color:#f1f5f9">multiple</strong> subclasses simultaneously.</p>
       <div style="background:var(--surface3);border-radius:6px;padding:.7rem;margin-top:.6rem;font-size:.83rem;color:#94a3b8;line-height:1.6">
-        <strong style="color:#cbd5e1">Kenneth's eksempel:</strong> Player kan spille Tennis <em>og</em> Soccer på samme tid. En del av sirkelen overlapper. Det er mulig å tilhøre begge subklassene.
+        <strong style="color:#cbd5e1">Kenneth's example:</strong> A Player can play Tennis <em>and</em> Soccer at the same time. Part of the circle overlaps. It is possible to belong to both subclasses.
       </div>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Del 2: Er alle subklasser listet opp?</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Part 2: Are all subclasses listed?</h3>
 
   <div class="two-col">
     <div style="background:var(--surface2);border:1px solid rgba(34,197,94,.4);border-radius:8px;padding:1.1rem">
       <div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--success);margin-bottom:.5rem">{complete}</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Alle subklasser er listet. Det finnes <strong style="color:#f1f5f9">ingen andre typer</strong> enn de vi har tegnet.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">All subclasses are listed. There are <strong style="color:#f1f5f9">no other types</strong> beyond those shown.</p>
       <div style="background:var(--surface3);border-radius:6px;padding:.7rem;margin-top:.6rem;font-size:.83rem;color:#94a3b8;line-height:1.6">
-        <strong style="color:#cbd5e1">Eksempel:</strong> Universitetet har kun UG og PG studenter. «That's it» — Kenneth. Ingen andre studenttyper finnes.
+        <strong style="color:#cbd5e1">Example:</strong> The university has only UG and PG students. «That's it» — Kenneth. No other student types exist.
       </div>
     </div>
     <div style="background:var(--surface2);border:1px solid rgba(245,158,11,.4);border-radius:8px;padding:1.1rem">
       <div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--warn);margin-bottom:.5rem">{incomplete}</div>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">Det kan finnes <strong style="color:#f1f5f9">andre subklasser</strong> som ikke er modellert.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.6">There may be <strong style="color:#f1f5f9">other subclasses</strong> that are not modeled.</p>
       <div style="background:var(--surface3);border-radius:6px;padding:.7rem;margin-top:.6rem;font-size:.83rem;color:#94a3b8;line-height:1.6">
-        <strong style="color:#cbd5e1">Eksempel:</strong> Tree kan være furu, bjørk, eik — men det finnes mange andre tretyper. Modellen er ikke uttømmende.
+        <strong style="color:#cbd5e1">Example:</strong> A Tree can be pine, birch, oak — but there are many other tree types. The model is not exhaustive.
       </div>
     </div>
   </div>
 
   <div class="fig" style="margin-top:1.5rem">
-    <div class="fig-title">Kenneth's eksempel: betale studieavgift — hva er riktig constraint?</div>
+    <div class="fig-title">Kenneth's example: paying tuition fees — what is the correct constraint?</div>
     <div style="background:var(--surface3);border-radius:8px;padding:1.1rem;font-size:.9rem;color:#cbd5e1;line-height:1.7">
-      <p><strong style="color:#f1f5f9">Scenario:</strong> Studenter kan betale studieavgift med: Cash, Credit Card, eller Debit Card.</p>
-      <p style="margin-top:.6rem"><strong style="color:#f1f5f9">Overlapping eller disjoint?</strong> → <span style="color:#06b6d4">Overlapping</span>. Du kan betale deler med kontanter og resten med kredittkort. Begge subklassene gjelder.</p>
-      <p style="margin-top:.4rem"><strong style="color:#f1f5f9">Complete eller incomplete?</strong> → <span style="color:#f59e0b">Incomplete</span>. Det finnes andre betalingsmetoder — f.eks. nettbank — som ikke er listet.</p>
-      <p style="margin-top:.6rem;font-family:monospace;color:var(--warn);font-size:.9rem">Korrekt constraint: {overlapping, incomplete}</p>
+      <p><strong style="color:#f1f5f9">Scenario:</strong> Students can pay tuition with: Cash, Credit Card, or Debit Card.</p>
+      <p style="margin-top:.6rem"><strong style="color:#f1f5f9">Overlapping or disjoint?</strong> → <span style="color:#06b6d4">Overlapping</span>. You can pay part with cash and the rest with a credit card. Both subclasses can apply.</p>
+      <p style="margin-top:.4rem"><strong style="color:#f1f5f9">Complete or incomplete?</strong> → <span style="color:#f59e0b">Incomplete</span>. There are other payment methods — e.g. online banking — not listed.</p>
+      <p style="margin-top:.6rem;font-family:monospace;color:var(--warn);font-size:.9rem">Correct constraint: {overlapping, incomplete}</p>
     </div>
   </div>
 
   <div class="callout tip">
-    <div class="callout-title">Eksamensstrategi: steg-for-steg</div>
+    <div class="callout-title">Exam strategy: step by step</div>
     <ul>
-      <li><strong>Steg 1:</strong> Spør: «Kan en instans tilhøre mer enn én subklasse?» → Ja = overlapping, Nei = disjoint</li>
-      <li><strong>Steg 2:</strong> Spør: «Er alle mulige typer representert i diagrammet?» → Ja = complete, Nei = incomplete</li>
-      <li><strong>Steg 3:</strong> Kombiner: skriv f.eks. <code>{disjoint, complete}</code> ved trekanten</li>
+      <li><strong>Step 1:</strong> Ask: «Can an instance belong to more than one subclass?» → Yes = overlapping, No = disjoint</li>
+      <li><strong>Step 2:</strong> Ask: «Are all possible types represented in the diagram?» → Yes = complete, No = incomplete</li>
+      <li><strong>Step 3:</strong> Combine: write e.g. <code>{disjoint, complete}</code> at the triangle</li>
     </ul>
   </div>
 </div>
@@ -500,7 +500,7 @@
       <tbody>
         <tr style="border-bottom:1px solid var(--border);background:var(--surface3)">
           <td style="padding:.55rem .75rem;color:#cbd5e1;font-weight:600">Klasse</td>
-          <td style="padding:.55rem .75rem;font-family:monospace;color:#a5b4fc">Rektangel med 3 seksjoner</td>
+          <td style="padding:.55rem .75rem;font-family:monospace;color:#a5b4fc">Rektangel med 3 sections</td>
           <td style="padding:.55rem .75rem;color:#94a3b8">Navn, attributter, operasjoner</td>
         </tr>
         <tr style="border-bottom:1px solid var(--border);background:var(--surface2)">
@@ -574,7 +574,7 @@
       <p><strong>Scenario A:</strong> Et firma vil holde styr på hvilke ansatte som er med i hvilke prosjekter. Hvert (ansatt, prosjekt)-par har en attributt <code>role : String</code> (f.eks. «developer», «tester»). En ansatt kan bare ha én rolle per prosjekt, og kan ikke jobbe på samme prosjekt to ganger.</p>
       <p style="margin-top:.75rem"><strong>Scenario B:</strong> Et bibliotek vil holde styr på utlån. Samme bok kan lånes av samme person flere ganger (ulike datoer). Hvert utlån har attributter <code>borrowDate</code> og <code>returnDate</code>.</p>
       <p style="margin-top:.75rem">For hvert scenario: bruk association class eller introduser mellomklasse? Begrunn svaret.</p>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>Scenario A — Association class er riktig.</strong></p>
@@ -590,7 +590,7 @@
           <li>Løsning: introduser klassen <code>Loan</code> med <code>borrowDate</code>, <code>returnDate</code>. Person tar en Loan, Loan er av en Book. Nå er person koblet til to ulike Loan-instanser for samme bok.</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -610,7 +610,7 @@
         <li>Det finnes kun studenter og lærere som brukertyper i systemet</li>
       </ul>
       <p style="margin-top:.75rem">Tegn class diagrammet. Husk: klassenavn, constraints på generalisering, multiplicity og UML-notes der det trengs.</p>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>Hierarki:</strong> User (abstract, italic) → {Student, Teacher}</p>
@@ -628,7 +628,7 @@
         </ul>
         <p style="margin-top:.5rem"><strong>Merknad om doktorgradsstudent-lærer:</strong> Overlapping? Kenneth sier at hvis en lærer KAN være student, kan vi endre User-hierarkiet til <code>{overlapping, complete}</code>. Alternativt introduser en separat PhDStudent-klasse under PGStudent. Avhengig av domenebeskrivelsen.</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -646,7 +646,7 @@
         <li><strong>c)</strong> Et dokument er enten Confidential eller Public. Det kan ikke være begge. Disse er de eneste to klassifiseringene som finnes.</li>
         <li><strong>d)</strong> Et måltid kan inneholde forrett, hovedrett OG dessert — eller bare noen av dem. Vi antar det finnes andre typer måltidskomponenter.</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <ul>
@@ -656,7 +656,7 @@
           <li><strong>d) {overlapping, incomplete}</strong> — et måltid kan ha flere komponenter samtidig (overlapping). Antatt at det finnes andre typer (incomplete).</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -693,12 +693,12 @@ function toggleEx(header){
 function toggleSol(btn){
   const sol=btn.nextElementSibling;
   const show=sol.classList.toggle('show');
-  btn.textContent=show?'Skjul løsning':'Vis løsning';
+  btn.textContent=show?'Hide solution':'Show solution';
 }
 function markDone(btn,id){
   btn.classList.toggle('done');
   const done=btn.classList.contains('done');
-  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  btn.textContent=done?'✓ Done!':'✓ Mark as done';
   const p=getModP();
   const s=new Set(p.doneExercises||[]);
   done?s.add(id):s.delete(id);
@@ -712,7 +712,7 @@ const QUESTIONS=[
   {q:'Hva er den korrekte løsningen på Kenneth-COM3111-problemet?',opts:['Bruk to separate association classes','Introduser en Offering-klasse: Student enrolls in Offering, Offering is of Course','Lagre grade som multi-value attributt under Course','Bruk to assosiasjoner mellom Student og Course'],correct:1,exp:'Kenneth løser dette ved å introdusere en mellomklasse: Offering. Et kurs har mange offerings (én per semester). Dermed er Kenneth koblet til COM3111-Fall2019 og COM3111-Spring2020 som to ulike Offering-instanser. Begge karakterer kan lagres. Kenneth: «Students are not taking courses — they are taking offerings of courses.»'},
   {q:'Hva er forskjellen på spesialisering og generalisering i UML?',opts:['De er synonymer og brukes om hverandre','Spesialisering: top-down (general klasse → subklasser). Generalisering: bottom-up (like klasser → felles superklasse).','Spesialisering: brukes kun for abstrakte klasser. Generalisering: bare for konkrete klasser.','Spesialisering bruker hul trekant; generalisering bruker fylt trekant'],correct:1,exp:'Kenneth forklarer begge retningene. Top-down (spesialisering): vi starter med Account og ser at serviceCharge bare gjelder CheckingAccount og interestRate bare SavingsAccount — vi spesialiserer ned. Bottom-up (generalisering): vi ser at BankAccount og CreditCard er veldig like — vi trekker ut en felles superklasse Account.'},
   {q:'Hva betyr overriding i UML/OO-sammenheng?',opts:['At superklassen overstyrer subklassen','At subklassen definerer samme operasjon som superklassen — subklassens versjon brukes','At en operasjon kalles fra en annen klasse','At operasjonen er privat og ikke kan arves'],correct:1,exp:'Kenneth: «If we define the same operation again in the subtype, we\'re going to use the operation defined in the subtype.» I eksempelet: CheckingAccount definerer withdraw() på nytt — dermed brukes den versjonen istedenfor withdraw() fra Account. Subklassens implementasjon overstyrer superklassens.'},
-  {q:'Hva er en abstrakt klasse i UML og hvordan vises den?',opts:['En klasse med private attributter — vises med minus-tegn','En klasse uten direkte instanser — vises med italic klassenavn','En klasse uten operasjoner — vises med tom seksjon','En klasse med kun én subklasse — vises med enkelt pil'],correct:1,exp:'En abstrakt klasse har ingen direkte instanser — alle instanser er av en subtype. I UML vises den med italic klassenavn. Kenneth: «An abstract class is a class that has no direct instances. We don\'t store any instances under account — all instances are either checking accounts or saving accounts.» Brukes for modelleringsformål.'},
+  {q:'Hva er en abstrakt klasse i UML og hvordan vises den?',opts:['En klasse med private attributter — vises med minus-tegn','En klasse uten direkte instanser — vises med italic klassenavn','En klasse uten operasjoner — vises med tom section','En klasse med kun én subklasse — vises med enkelt pil'],correct:1,exp:'En abstrakt klasse har ingen direkte instanser — alle instanser er av en subtype. I UML vises den med italic klassenavn. Kenneth: «An abstract class is a class that has no direct instances. We don\'t store any instances under account — all instances are either checking accounts or saving accounts.» Brukes for modelleringsformål.'},
   {q:'Spillere kan spille tennis OG soccer på samme tid. Hva er riktig constraint?',opts:['{disjoint}','{overlapping}','{complete}','{subset}'],correct:1,exp:'Overlapping betyr at en instans kan tilhøre flere subklasser samtidig. Kenneth: «Some players, they are playing tennis and soccer at the same time — this green part, they may be playing tennis and soccer at the same time.» Disjoint ville betydd at en spiller KUN kan spille ett av de to sportene.'},
   {q:'Et universitet har nøyaktig to studenttyper: UG og PG. Ingen andre finnes. Hva er riktig constraint for fullstendighet?',opts:['{incomplete} — det kan alltid finnes andre typer','{complete} — alle subklasser er representert','{ordered} — UG kommer før PG','{subset} — PG er en delmengde av UG'],correct:1,exp:'Complete betyr at alle mulige subklasser er listet. Kenneth: «Under a university we only have UG and PG students — that\'s it. We do not have another type of student.» Incomplete brukes når det kan finnes andre typer som ikke er modellert (f.eks. trær: vi har modellert furu, bjørk og eik, men det finnes mange andre tretyper).'},
   {q:'Hva betyr {xor}-begrensningen i et class diagram?',opts:['At to assosiasjoner er ordnet','At to assosiasjoner er gjensidig utelukkende — nøyaktig én gjelder på samme tid','At én assosiasjon er en delmengde av en annen','At to klasser deler en felles assosiasjon'],correct:1,exp:'XOR = Exclusive Or. Kenneth\'s eksempel: «An account is going to be held by either a Person or a Company — exclusive or, either this or that, but not both at the same time.» Tegnes med en stiplet linje mellom de to assosiasjonene og {xor}-label. Betyr aldri begge og aldri ingen.'},
@@ -771,7 +771,7 @@ function updateNav(){
   const p=getModP();
   (p.doneExercises||[]).forEach(id=>{
     const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+    if(btn){btn.classList.add('done');btn.textContent='✓ Done!';}
   });
   updateNav();
 })();

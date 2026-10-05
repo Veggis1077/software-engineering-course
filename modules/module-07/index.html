@@ -56,7 +56,6 @@
     .fig-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem}
     .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
     .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0}
-    /* QUIZ */
     .quiz-progress{display:flex;gap:.35rem;margin-bottom:1.75rem;flex-wrap:wrap}
     .qp-dot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:background .2s}
     .qp-dot.correct{background:var(--success)}
@@ -80,7 +79,6 @@
     .score-big{font-size:3.5rem;font-weight:800;color:var(--accent)}
     .quiz-result p{color:var(--muted);margin-top:.5rem;font-size:.95rem}
     .quiz-result button{margin-top:1.5rem;padding:.6rem 1.6rem;border-radius:6px;background:var(--accent);border:none;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer}
-    /* EXERCISES */
     .exercise{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden}
     .ex-header{padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;user-select:none}
     .ex-header:hover{background:var(--surface2)}
@@ -103,12 +101,10 @@
     .done-btn:hover{background:rgba(34,197,94,.18)}
     .done-btn.done{background:rgba(34,197,94,.2)}
     code{font-family:'Courier New',monospace;font-size:.85em;background:var(--surface3);padding:.1em .4em;border-radius:4px;color:#a5b4fc}
-    /* notation cards */
     .notation-card{background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:1rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;text-align:center}
     .notation-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
     .notation-name{font-size:.88rem;font-weight:600;color:#f1f5f9}
     .notation-desc{font-size:.8rem;color:#94a3b8;line-height:1.5}
-    /* step list */
     .step-list{list-style:none;margin:0;padding:0}
     .step-list li{display:flex;gap:.8rem;margin-bottom:.85rem;align-items:flex-start}
     .step-num{width:24px;height:24px;min-width:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff;margin-top:.18rem}
@@ -120,27 +116,27 @@
 <body>
 
 <nav>
-  <a href="../../index.html" class="nav-back">← Hjem</a>
-  <span class="nav-title">Modul 7 — Use Case Modeling</span>
+  <a href="../../index.html" class="nav-back">← Home</a>
+  <span class="nav-title">Module 7 — Use Case Modeling</span>
   <span class="nav-prog" id="nav-prog"></span>
 </nav>
 
 <div class="hero">
-  <div class="module-tag">Modul 07</div>
+  <div class="module-tag">Module 07</div>
   <h1>Use Case Modeling</h1>
-  <p>Lær å identifisere aktører, formulere use cases og tegne use case-diagrammer — slik Kenneth gjennomgår det med ASU Course Registration som gjennomgående eksempel.</p>
+  <p>Learn to identify actors, formulate use cases and draw use case diagrams — following Kenneth's walkthrough with ASU Course Registration as the running example.</p>
   <div class="hero-meta">
-    <span class="meta-pill">📖 4 seksjoner</span>
-    <span class="meta-pill">🎯 10 quizspørsmål</span>
-    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">📖 5 sections</span>
+    <span class="meta-pill">🎯 10 quiz questions</span>
+    <span class="meta-pill">✏️ 3 exercises</span>
     <span class="meta-pill">⏱ ~35 min</span>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Theory</button>
   <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Exercises</button>
 </div>
 
 <div class="content">
@@ -148,144 +144,144 @@
 <!-- ════════════════ THEORY ════════════════ -->
 <div class="panel active" id="panel-theory">
 
-<!-- ─── SEKSJON 1: Hva er use case modeling ─── -->
+<!-- ─── SECTION 1 ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">1</div>
-    <h2>Hva er use case modeling?</h2>
+    <h2>What is use case modeling?</h2>
   </div>
 
-  <p class="prose">Use case-modellen fanger <strong>funksjonelle krav</strong> fra brukerens perspektiv — «hva systemet skal gjøre», sett utenfra. Mens class-diagrammet (modul 2–3) svarer på «hvilke data trenger vi», svarer use case-diagrammet på «hvilke funksjoner tilbyr systemet?».</p>
+  <p class="prose">The use case model captures <strong>functional requirements</strong> from the user's perspective — "what the system shall do", seen from outside. While the class diagram (modules 2–3) answers "what data do we need", the use case diagram answers "what functions does the system provide?".</p>
 
-  <p class="prose">Kenneth forklarer det slik: «In use-case modeling, we try to capture the system behavior from the user's point of view.» Use cases driver hele utviklingsprosessen — du implementerer systemet basert på funksjonalitetene du har fanget i use case-modellen.</p>
+  <p class="prose">Kenneth explains it this way: «In use-case modeling, we try to capture the system behavior from the user's point of view.» Use cases drive the entire development process — you implement the system based on the functionalities captured in the use case model.</p>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.85rem;margin:1.2rem 0">
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent)">
-      <div style="font-size:.75rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Fanger</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6"><strong style="color:#cbd5e1">Funksjonelle krav</strong> — hvilke funksjoner systemet tilbyr, sett fra aktørens perspektiv.</p>
+      <div style="font-size:.75rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Captures</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6"><strong style="color:#cbd5e1">Functional requirements</strong> — what functions the system provides, from the actor's perspective.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent2)">
-      <div style="font-size:.75rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Utvikles</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Inkrementelt, i samarbeid med domenemodellen. Brukes til å planlegge iterasjoner.</p>
+      <div style="font-size:.75rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Developed</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Incrementally, in parallel with the domain model. Used to plan development iterations.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent3)">
-      <div style="font-size:.75rem;font-weight:700;color:var(--accent3);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Validerer</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Hjelper med å validere at kravene er forstått korrekt — stakeholders kan lese og verifisere.</p>
+      <div style="font-size:.75rem;font-weight:700;color:var(--accent3);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Validates</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Helps validate that requirements are correctly understood — stakeholders can read and verify.</p>
     </div>
   </div>
 
   <div class="callout info">
-    <div class="callout-title">Use case er en UML-klasse</div>
-    <p>Akkurat som en klasse klassifiserer objekter, klassifiserer en <em>use case</em> scenarioer. En use case er en stereotype av en UML-klasse. Et scenario er en <em>instans</em> av use casen — akkurat som et objekt er en instans av en klasse. Kenneth: «We classify all the instances together as a single use case.»</p>
+    <div class="callout-title">A use case is a UML class</div>
+    <p>Just as a class classifies objects, a <em>use case</em> classifies scenarios. A use case is a stereotype of a UML class. A scenario is an <em>instance</em> of the use case — just as an object is an instance of a class. Kenneth: «We classify all the instances together as a single use case.»</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 2: Aktører ─── -->
+<!-- ─── SECTION 2 ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">2</div>
-    <h2>Aktører — hvem interagerer med systemet?</h2>
+    <h2>Actors — who interacts with the system?</h2>
   </div>
 
-  <p class="prose">Den første tingen du må inkludere i use case-diagrammet er <strong>aktørene</strong>. Kenneth definerer det slik:</p>
+  <p class="prose">The first thing you must include in a use case diagram is the <strong>actors</strong>. Kenneth defines it this way:</p>
 
   <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.2rem;margin:1rem 0">
-    <p style="font-size:.95rem;color:#f1f5f9;font-weight:600;margin-bottom:.5rem">Definisjon</p>
-    <p style="font-size:.9rem;color:#cbd5e1;line-height:1.65">En aktør representerer noe <strong>utenfor systemet</strong> som interagerer <strong>direkte</strong> med systemet. En aktør kan være en person eller et annet system. Den gir input til eller mottar output fra systemet.</p>
+    <p style="font-size:.95rem;color:#f1f5f9;font-weight:600;margin-bottom:.5rem">Definition</p>
+    <p style="font-size:.9rem;color:#cbd5e1;line-height:1.65">An actor represents something <strong>outside the system</strong> that interacts <strong>directly</strong> with the system. An actor can be a person or another system. It provides input to or receives output from the system.</p>
   </div>
 
   <div class="two-col" style="margin:1.25rem 0">
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--success)">
-      <div style="font-size:.75rem;font-weight:700;color:var(--success);margin-bottom:.5rem;text-transform:uppercase">✓ Er alltid aktør</div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--success);margin-bottom:.5rem;text-transform:uppercase">✓ Always an actor</div>
       <ul style="margin:.3rem 0 0 1rem;font-size:.87rem;color:#94a3b8;line-height:1.7">
-        <li>Mennesker (student, lærer, administrator)</li>
-        <li>Eksterne systemer (billing system, bank API)</li>
-        <li>Tid / hendelsestriggers (scheduler)</li>
+        <li>People (student, instructor, administrator)</li>
+        <li>External systems (billing system, bank API)</li>
+        <li>Time / event triggers (scheduler)</li>
       </ul>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--danger)">
-      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase">✗ Aldri aktør</div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase">✗ Never an actor</div>
       <ul style="margin:.3rem 0 0 1rem;font-size:.87rem;color:#94a3b8;line-height:1.7">
-        <li>Input/output-enheter — tastatur, mus, skriver</li>
-        <li>Interne systemkomponenter</li>
-        <li>Databasen systemet bruker internt</li>
+        <li>Input/output devices — keyboard, mouse, printer</li>
+        <li>Internal system components</li>
+        <li>The database the system uses internally</li>
       </ul>
     </div>
   </div>
 
   <div class="callout warn">
-    <div class="callout-title">Viktig: én rolle, ikke én person</div>
-    <p>En aktør spesifiserer en <em>rolle</em> — ikke en konkret person. Kenneth: «We may have multiple roles per user or multiple users per role. That means a user can do multiple things on the system, and also different users can do the same thing.»</p>
-    <p style="margin-top:.5rem">Eksempel: John Smith kan ha rollen <em>Student</em> og <em>Teaching Assistant</em> på samme tid. Det gir to aktører, men bare én person.</p>
+    <div class="callout-title">Important: one role, not one person</div>
+    <p>An actor specifies a <em>role</em> — not a concrete person. Kenneth: «We may have multiple roles per user or multiple users per role. That means a user can do multiple things on the system, and also different users can do the same thing.»</p>
+    <p style="margin-top:.5rem">Example: John Smith can hold the role of <em>Student</em> and <em>Teaching Assistant</em> at the same time. That gives two actors but only one person.</p>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Aktør i domenemodell OG use case-diagram</h3>
-  <p class="prose">Kenneth gjør et viktig poeng: det samme begrepet kan dukke opp både som en <strong>klasse i domenemodellen</strong> og som en <strong>aktør i use case-diagrammet</strong>. Disse spiller ulike roller:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Actor in domain model AND use case diagram</h3>
+  <p class="prose">Kenneth makes an important point: the same concept can appear both as a <strong>class in the domain model</strong> and as an <strong>actor in the use case diagram</strong>. They play different roles:</p>
 
   <div class="two-col">
     <div style="background:var(--surface2);border:1px solid rgba(99,102,241,.35);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">Student i Class Diagram</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Representerer <em>data</em> vi trenger å holde styr på i systemet — studentens navn, ID, hvilke kurs de er meldt på.</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">Student in Class Diagram</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Represents <em>data</em> we need to track in the system — the student's name, ID, which courses they are enrolled in.</p>
     </div>
     <div style="background:var(--surface2);border:1px solid rgba(6,182,212,.35);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem">Student som aktør</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Representerer <em>rollen</em> til en bruker som interagerer med systemet — studenten som logger inn og registrerer seg for kurs.</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem">Student as actor</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Represents the <em>role</em> of a user interacting with the system — the student who logs in and registers for courses.</p>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Hvordan identifisere aktører</h3>
-  <p class="prose">Spør deg selv disse spørsmålene når du leser problem statement:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">How to identify actors</h3>
+  <p class="prose">Ask yourself these questions when reading the problem statement:</p>
   <ul class="prose-list">
-    <li>Hvem eller hva kommer til å <strong>bruke systemet</strong>?</li>
-    <li>Hvilke <strong>roller spiller de</strong> i interaksjonen?</li>
-    <li>Hvem <strong>gir og mottar informasjon</strong> fra systemet?</li>
-    <li>Hvilke <strong>andre systemer</strong> kommuniserer med det?</li>
-    <li>Hvem <strong>installerer, starter, stopper eller vedlikeholder</strong> systemet?</li>
+    <li>Who or what will <strong>use the system</strong>?</li>
+    <li>What <strong>roles do they play</strong> in the interaction?</li>
+    <li>Who <strong>provides and receives information</strong> from the system?</li>
+    <li>What <strong>other systems</strong> communicate with it?</li>
+    <li>Who <strong>installs, starts, stops or maintains</strong> the system?</li>
   </ul>
 
   <div class="callout tip">
-    <div class="callout-title">Fra ASU-eksempelet i forelesningen</div>
-    <p>Kenneth leser problem statement setning for setning og identifiserer: <strong>Student</strong> (registrerer kurs), <strong>Instructor</strong> (velger kurs å undervise, ber om studentliste), <strong>Billing System</strong> (eksternt system som mottar faktureringsinfo). Og gjennom analyse av hvem som «preparer course offerings» og «cancel course offerings», oppdages en fjerde aktør: <strong>Registrar</strong> (administrator som vedlikeholder kursinformasjon).</p>
+    <div class="callout-title">From the lecture's ASU example</div>
+    <p>Kenneth reads the problem statement sentence by sentence and identifies: <strong>Student</strong> (registers for courses), <strong>Instructor</strong> (selects courses to teach, requests student list), <strong>Billing System</strong> (external system that receives billing info). Through analysis of who "prepares course offerings" and "cancels course offerings", a fourth actor is discovered: <strong>Registrar</strong> (administrator who maintains course information).</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 3: Use Cases ─── -->
+<!-- ─── SECTION 3 ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">3</div>
-    <h2>Use Cases — funksjonalitet fra aktørens perspektiv</h2>
+    <h2>Use Cases — functionality from the actor's perspective</h2>
   </div>
 
-  <p class="prose">En <strong>use case</strong> er en spesifikk måte å bruke systemet på — én funksjonalitet sett fra aktørens perspektiv. Kenneth: «A use case describes the interaction that takes place between an actor and the system, and what the system must do from the actor's perspective.»</p>
+  <p class="prose">A <strong>use case</strong> is a specific way of using the system — one functionality from the actor's perspective. Kenneth: «A use case describes the interaction that takes place between an actor and the system, and what the system must do from the actor's perspective.»</p>
 
   <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.2rem;margin:1rem 0">
-    <p style="font-size:.9rem;color:#f1f5f9;font-weight:600;margin-bottom:.6rem">Kjennetegn på en use case:</p>
+    <p style="font-size:.9rem;color:#f1f5f9;font-weight:600;margin-bottom:.6rem">Characteristics of a use case:</p>
     <ul style="margin:0 0 0 1.2rem;font-size:.88rem;color:#cbd5e1;line-height:1.75">
-      <li><strong style="color:#f1f5f9">Alltid initiert av en aktør</strong> — en use case starter aldri av seg selv</li>
-      <li><strong style="color:#f1f5f9">Komplett sekvens</strong> av hendelser og handlinger — en hel historie, ikke et fragment</li>
-      <li>Starter med <strong style="color:#f1f5f9">basic flow</strong> (normal gang) — alternative flows legges til i use case specification (Modul 8)</li>
-      <li>Bruker <strong style="color:#f1f5f9">vokabular fra applikasjonsdomenet</strong></li>
+      <li><strong style="color:#f1f5f9">Always initiated by an actor</strong> — a use case never starts by itself</li>
+      <li><strong style="color:#f1f5f9">Complete sequence</strong> of events and actions — a whole story, not a fragment</li>
+      <li>Starts with <strong style="color:#f1f5f9">basic flow</strong> (normal path) — alternative flows added in use case specification (Module 8)</li>
+      <li>Uses <strong style="color:#f1f5f9">vocabulary from the application domain</strong></li>
     </ul>
   </div>
 
   <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Use case vs scenario</h3>
   <div class="two-col">
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent)">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase">Use Case (klassen)</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Generell beskrivelse av en funksjonalitet — for alle brukere i denne rollen. Eks: «Register for Courses»</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase">Use Case (the class)</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">General description of a functionality — for all users in this role. E.g. «Register for Courses»</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent2)">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase">Scenario (instansen)</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Én konkret brukers forsøk på å gjennomføre use casen. Kenneth: «Kenneth is using the system to do something.»</p>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase">Scenario (the instance)</div>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">One specific user's attempt to execute the use case. Kenneth: «Kenneth is using the system to do something.»</p>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Navngiving — riktig og feil</h3>
-  <p class="prose">Use cases navngis fra <strong>aktørens perspektiv</strong>, med present tense verb i aktiv form. Kenneth er eksplisitt på dette.</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Naming — correct and incorrect</h3>
+  <p class="prose">Use cases are named from the <strong>actor's perspective</strong>, using a present tense verb in active form. Kenneth is explicit about this.</p>
 
   <div class="two-col" style="margin:.75rem 0">
     <div style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:1rem">
-      <div style="font-size:.75rem;font-weight:700;color:var(--success);margin-bottom:.5rem">✓ GOD NAVNGIVING</div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--success);margin-bottom:.5rem">✓ GOOD NAMING</div>
       <ul style="margin:0 0 0 1rem;font-size:.88rem;color:#86efac;line-height:1.75">
         <li>Register for Courses</li>
         <li>Maintain Course Information</li>
@@ -294,44 +290,44 @@
       </ul>
     </div>
     <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:1rem">
-      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem">✗ DÅRLIG NAVNGIVING</div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--danger);margin-bottom:.5rem">✗ BAD NAMING</div>
       <ul style="margin:0 0 0 1rem;font-size:.88rem;color:#fca5a5;line-height:1.75">
-        <li>Course Registration (substantiv)</li>
-        <li>Student registers courses (past tense)</li>
-        <li>Add/Drop Function (teknisk)</li>
-        <li>Process enrollment (ikke aktørperspektiv)</li>
+        <li>Course Registration (noun)</li>
+        <li>Student registers courses (wrong tense)</li>
+        <li>Add/Drop Function (technical)</li>
+        <li>Process enrollment (not actor perspective)</li>
       </ul>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Hvordan identifisere use cases</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">How to identify use cases</h3>
   <ul class="prose-list">
-    <li>Hvilke <strong>oppgaver ønsker aktøren å utføre</strong> på systemet?</li>
-    <li>Hvilken <strong>informasjon ønsker aktøren å hente fra</strong> systemet?</li>
-    <li>Om hvilke <strong>eksterne hendelser</strong> må aktøren informere systemet?</li>
-    <li>Om hvilke <strong>hendelser vil aktøren bli informert</strong> av systemet?</li>
-    <li>Hvordan vil systemet bli <strong>støttet og vedlikeholdt</strong>?</li>
+    <li>What <strong>tasks does the actor want to perform</strong> on the system?</li>
+    <li>What <strong>information does the actor want to retrieve from</strong> the system?</li>
+    <li>About what <strong>external events</strong> must the actor inform the system?</li>
+    <li>About what <strong>events will the actor be notified</strong> by the system?</li>
+    <li>How will the system be <strong>supported and maintained</strong>?</li>
   </ul>
 
   <div class="callout danger">
-    <div class="callout-title">Den viktigste regelen — Kenneth's gylne regel</div>
+    <div class="callout-title">The most important rule — Kenneth's golden rule</div>
     <p>«A good use case typically represents a major piece of functionality that is complete from beginning to the end. It has to be a complete story from beginning to end.»</p>
-    <p style="margin-top:.6rem">Kenneth viser dette med ASU-eksempelet: «select course offering», «add course», «drop course» er <em>ikke</em> gode use cases alene — de er fragmenter av en større historie. Den fullstendige historien er: <strong>«Register for Courses»</strong>.</p>
+    <p style="margin-top:.6rem">Kenneth demonstrates with the ASU example: «select course offering», «add course», «drop course» are <em>not</em> good use cases on their own — they are fragments of a larger story. The complete story is: <strong>«Register for Courses»</strong>.</p>
     <p style="margin-top:.6rem">«It is better to have longer and more extensive use cases than smaller or partial ones.»</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 4: UML-notasjon ─── -->
+<!-- ─── SECTION 4 ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">4</div>
-    <h2>Use Case-diagrammet — notasjon</h2>
+    <h2>Use Case Diagram — Notation</h2>
   </div>
 
-  <p class="prose">Et use case-diagram består av fire elementer. Klikk gjennom diagrammet nedenfor for å utforske hvert element:</p>
+  <p class="prose">A use case diagram consists of four elements. Click through the diagram below to explore each element:</p>
 
   <div class="fig">
-    <div class="fig-title">Notasjonselementer</div>
+    <div class="fig-title">Notation elements</div>
     <div class="three-col" style="gap:1rem">
       <div class="notation-card" id="nc-actor" onclick="highlightNC('actor')" style="cursor:pointer;transition:border-color .15s;border:1.5px solid var(--border)">
         <svg width="40" height="60" viewBox="0 0 40 60">
@@ -341,8 +337,8 @@
           <line x1="20" y1="44" x2="8" y2="58" stroke="#6366f1" stroke-width="2"/>
           <line x1="20" y1="44" x2="32" y2="58" stroke="#6366f1" stroke-width="2"/>
         </svg>
-        <div class="notation-name">Aktør</div>
-        <div class="notation-desc">Stick figure. Noe utenfor systemet som interagerer direkte med det.</div>
+        <div class="notation-name">Actor</div>
+        <div class="notation-desc">Stick figure. Something outside the system that interacts directly with it.</div>
       </div>
       <div class="notation-card" id="nc-usecase" onclick="highlightNC('usecase')" style="cursor:pointer;transition:border-color .15s;border:1.5px solid var(--border)">
         <svg width="100" height="40" viewBox="0 0 100 40">
@@ -350,7 +346,7 @@
           <text x="50" y="25" text-anchor="middle" fill="#67e8f9" font-size="10" font-family="sans-serif">Use Case</text>
         </svg>
         <div class="notation-name">Use Case</div>
-        <div class="notation-desc">Oval. Én funksjonalitet fra aktørens perspektiv.</div>
+        <div class="notation-desc">Oval. One functionality from the actor's perspective.</div>
       </div>
       <div class="notation-card" id="nc-boundary" onclick="highlightNC('boundary')" style="cursor:pointer;transition:border-color .15s;border:1.5px solid var(--border)">
         <svg width="70" height="50" viewBox="0 0 70 50">
@@ -358,18 +354,18 @@
           <text x="35" y="28" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif">System</text>
         </svg>
         <div class="notation-name">System Boundary</div>
-        <div class="notation-desc">Rektangel. Avgrenser hva som er innenfor og utenfor systemet.</div>
+        <div class="notation-desc">Rectangle. Defines what is inside and outside the system.</div>
       </div>
     </div>
-    <div id="nc-explain" style="background:var(--surface3);border-radius:8px;padding:1rem;margin-top:1rem;font-size:.88rem;color:#cbd5e1;min-height:50px;line-height:1.65">Klikk på et element ovenfor for forklaring.</div>
+    <div id="nc-explain" style="background:var(--surface3);border-radius:8px;padding:1rem;margin-top:1rem;font-size:.88rem;color:#cbd5e1;min-height:50px;line-height:1.65">Click an element above for explanation.</div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Pil vs linje — den viktigste eksamensfellen</h3>
-  <p class="prose">Dette er en av de hyppigste feilene på eksamen. Kenneth forklarer det nøye med Billing System-eksempelet:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Arrow vs line — the most common exam trap</h3>
+  <p class="prose">This is one of the most frequent errors on exams. Kenneth explains it carefully with the Billing System example:</p>
 
   <div class="two-col" style="margin:1rem 0">
     <div style="background:var(--surface3);border:1.5px solid rgba(34,197,94,.4);border-radius:8px;padding:1.1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--success);text-transform:uppercase;margin-bottom:.6rem">→ Pil fra aktør til use case</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--success);text-transform:uppercase;margin-bottom:.6rem">→ Arrow from actor to use case</div>
       <div style="display:flex;align-items:center;gap:.5rem;margin:.5rem 0">
         <svg width="24" height="48" viewBox="0 0 24 48" style="flex-shrink:0">
           <circle cx="12" cy="8" r="6" fill="none" stroke="#22c55e" stroke-width="1.5"/>
@@ -387,11 +383,11 @@
           <text x="40" y="18" text-anchor="middle" fill="#86efac" font-size="8" font-family="sans-serif">Use Case</text>
         </svg>
       </div>
-      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6;margin-top:.5rem">Betyr: <strong style="color:#f1f5f9">aktøren initierer use casen</strong>. Aktøren starter den.</p>
-      <p style="font-size:.82rem;color:#94a3b8;margin-top:.4rem">Eks: Student → Register for Courses. Studenten starter registreringen.</p>
+      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6;margin-top:.5rem">Means: <strong style="color:#f1f5f9">the actor initiates the use case</strong>. The actor starts it.</p>
+      <p style="font-size:.82rem;color:#94a3b8;margin-top:.4rem">E.g. Student → Register for Courses. The student starts the registration.</p>
     </div>
     <div style="background:var(--surface3);border:1.5px solid rgba(245,158,11,.4);border-radius:8px;padding:1.1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--warn);text-transform:uppercase;margin-bottom:.6rem">— Linje (ingen pil)</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--warn);text-transform:uppercase;margin-bottom:.6rem">— Plain line (no arrow)</div>
       <div style="display:flex;align-items:center;gap:.5rem;margin:.5rem 0">
         <svg width="24" height="48" viewBox="0 0 24 48" style="flex-shrink:0">
           <circle cx="12" cy="8" r="6" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
@@ -408,39 +404,39 @@
           <text x="40" y="18" text-anchor="middle" fill="#fde68a" font-size="8" font-family="sans-serif">Use Case</text>
         </svg>
       </div>
-      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6;margin-top:.5rem">Betyr: <strong style="color:#f1f5f9">aktøren kommuniserer med use casen, men initierer den ikke</strong>.</p>
-      <p style="font-size:.82rem;color:#94a3b8;margin-top:.4rem">Eks: Billing System — Register for Courses. Billing System mottar info, men Student starter use casen.</p>
+      <p style="font-size:.85rem;color:#cbd5e1;line-height:1.6;margin-top:.5rem">Means: <strong style="color:#f1f5f9">the actor communicates with the use case but does not initiate it</strong>.</p>
+      <p style="font-size:.82rem;color:#94a3b8;margin-top:.4rem">E.g. Billing System — Register for Courses. Billing System receives info, but Student initiates the use case.</p>
     </div>
   </div>
 
   <div class="callout danger">
-    <div class="callout-title">Kenneth's konkrete forklaring</div>
+    <div class="callout-title">Kenneth's exact explanation</div>
     <p>«We have a link, a line between Register for Courses and the Billing System. Because within the Register for Courses use case, eventually you're going to receive billing information. So that's why we have a line here — that means there will be some communication between the Billing System and the use case. We don't have an arrow. That means this use case is <em>not</em> started by the Billing System. It's actually started by the Student.»</p>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Generalisering — på aktør, ikke use case</h3>
-  <p class="prose">Du kan bruke generalisering på aktører (f.eks. Employee generalisert til SalesClerk og Manager). Kenneth advarer imidlertid eksplisitt: «Try not to use use case generalization in your project. It is often used incorrectly. I suggest you try to avoid using generalization on use cases.» — Bruk det på aktører, ikke på use cases.</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Generalisation — on actors, not use cases</h3>
+  <p class="prose">You can use generalisation on actors (e.g. Employee generalised into SalesClerk and Manager). However, Kenneth warns explicitly: «Try not to use use case generalization in your project. It is often used incorrectly. I suggest you try to avoid using generalization on use cases.» — Use it on actors, not on use cases.</p>
 </div>
 
-<!-- ─── SEKSJON 5: ASU Eksempel ─── -->
+<!-- ─── SECTION 5 ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">5</div>
-    <h2>Komplett eksempel — ASU Course Registration</h2>
+    <h2>Complete example — ASU Course Registration</h2>
   </div>
 
-  <p class="prose">Kenneth går gjennom dette eksempelet steg for steg i L7-3. Det er det primære eksempelet for use case modeling i kurset. Her er hele prosessen:</p>
+  <p class="prose">Kenneth walks through this example step by step in L7-3. It is the primary example for use case modeling in the course. Here is the full process:</p>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.25rem 0 .75rem">Steg 1 — Les problem statement, identifiser funksjonaliteter</h3>
-  <p class="prose">Kenneth leser problem statement setning for setning og trekker ut delvis funksjonaliteter:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.25rem 0 .75rem">Step 1 — Read the problem statement, identify partial functionalities</h3>
+  <p class="prose">Kenneth reads the problem statement sentence by sentence and extracts partial functionalities:</p>
 
   <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:.75rem 0;overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;font-size:.84rem">
       <thead>
         <tr style="border-bottom:1px solid var(--border)">
-          <th style="text-align:left;padding:.5rem .6rem;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase">Fra problem statement</th>
-          <th style="text-align:left;padding:.5rem .6rem;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase">Delvis funksjonalitet</th>
-          <th style="text-align:left;padding:.5rem .6rem;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase">Aktør</th>
+          <th style="text-align:left;padding:.5rem .6rem;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase">From problem statement</th>
+          <th style="text-align:left;padding:.5rem .6rem;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase">Partial functionality</th>
+          <th style="text-align:left;padding:.5rem .6rem;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase">Actor</th>
         </tr>
       </thead>
       <tbody>
@@ -488,8 +484,8 @@
     </table>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Steg 2 — Grupper til komplette use cases</h3>
-  <p class="prose">Listen over er ikke brukbar direkte — for mange fragmenter gjør diagrammet uleselig. Kenneth grupperer dem:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Step 2 — Group into complete use cases</h3>
+  <p class="prose">The list above cannot be used directly — too many fragments make the diagram unreadable. Kenneth groups them:</p>
 
   <div style="display:flex;flex-direction:column;gap:.7rem;margin:1rem 0">
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent)">
@@ -516,109 +512,77 @@
         <span style="font-size:.88rem;font-weight:700;color:#67e8f9">Maintain Course Information</span>
         <span style="font-size:.75rem;color:var(--warn);background:rgba(245,158,11,.1);border-radius:4px;padding:.15rem .4rem">Registrar</span>
       </div>
-      <p style="font-size:.83rem;color:#94a3b8">Registrar vedlikeholder kursinformasjonen — en komplett historie fra begynnelse til slutt.</p>
+      <p style="font-size:.83rem;color:#94a3b8">The Registrar maintains course information — a complete story from beginning to end.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent3)">
       <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:.5rem">
         <span style="font-size:.8rem;color:#94a3b8;font-family:monospace">Select courses to teach</span>
         <span style="font-size:.75rem;color:var(--warn);background:rgba(245,158,11,.1);border-radius:4px;padding:.15rem .4rem">Instructor</span>
-        <span style="font-size:.8rem;color:#94a3b8">og</span>
+        <span style="font-size:.8rem;color:#94a3b8">and</span>
         <span style="font-size:.8rem;color:#94a3b8;font-family:monospace">Request enrollment list</span>
         <span style="font-size:.75rem;color:var(--warn);background:rgba(245,158,11,.1);border-radius:4px;padding:.15rem .4rem">Instructor</span>
-        <span style="font-size:.8rem;color:#94a3b8">→ holdes separate</span>
+        <span style="font-size:.8rem;color:#94a3b8">→ kept separate</span>
       </div>
-      <p style="font-size:.83rem;color:#94a3b8">Disse to er ulike nok til å beholdes som separate use cases — de representerer ulike komplette historier.</p>
+      <p style="font-size:.83rem;color:#94a3b8">These two are different enough to be kept as separate use cases — they represent different complete stories.</p>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Steg 3 — Komplett use case-diagram</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Step 3 — Complete use case diagram</h3>
 
   <div class="fig">
     <div class="fig-title">ASU Course Registration System — Use Case Diagram</div>
     <svg width="100%" height="380" viewBox="0 0 680 380" style="display:block;max-width:680px;margin:0 auto;font-family:sans-serif">
-      <!-- System boundary -->
       <rect x="140" y="20" width="400" height="340" rx="6" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="0"/>
       <text x="340" y="14" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="bold">ASU Course Registration System</text>
-
-      <!-- ─── Use Cases ─── -->
-      <!-- Register for Courses -->
       <ellipse cx="340" cy="90" rx="110" ry="24" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
       <text x="340" y="94" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="600">Register for Courses</text>
-
-      <!-- Maintain Course Information -->
       <ellipse cx="340" cy="175" rx="120" ry="24" fill="#1a2236" stroke="#06b6d4" stroke-width="1.5"/>
       <text x="340" y="179" text-anchor="middle" fill="#67e8f9" font-size="11" font-weight="600">Maintain Course Information</text>
-
-      <!-- Select Courses to Teach -->
       <ellipse cx="340" cy="260" rx="115" ry="24" fill="#1a2236" stroke="#8b5cf6" stroke-width="1.5"/>
       <text x="340" y="264" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="600">Select Courses to Teach</text>
-
-      <!-- Request Enrollment List -->
       <ellipse cx="340" cy="335" rx="115" ry="24" fill="#1a2236" stroke="#8b5cf6" stroke-width="1.5"/>
       <text x="340" y="339" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="600">Request Enrollment List</text>
-
-      <!-- ─── Actors ─── -->
-      <!-- Student (left) -->
       <circle cx="50" cy="75" r="14" fill="none" stroke="#22c55e" stroke-width="1.5"/>
       <line x1="50" y1="89" x2="50" y2="118" stroke="#22c55e" stroke-width="1.5"/>
       <line x1="32" y1="103" x2="68" y2="103" stroke="#22c55e" stroke-width="1.5"/>
       <line x1="50" y1="118" x2="36" y2="136" stroke="#22c55e" stroke-width="1.5"/>
       <line x1="50" y1="118" x2="64" y2="136" stroke="#22c55e" stroke-width="1.5"/>
       <text x="50" y="152" text-anchor="middle" fill="#86efac" font-size="10" font-weight="600">Student</text>
-
-      <!-- Registrar (left lower) -->
       <circle cx="50" cy="175" r="14" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
       <line x1="50" y1="189" x2="50" y2="218" stroke="#f59e0b" stroke-width="1.5"/>
       <line x1="32" y1="203" x2="68" y2="203" stroke="#f59e0b" stroke-width="1.5"/>
       <line x1="50" y1="218" x2="36" y2="236" stroke="#f59e0b" stroke-width="1.5"/>
       <line x1="50" y1="218" x2="64" y2="236" stroke="#f59e0b" stroke-width="1.5"/>
       <text x="50" y="252" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Registrar</text>
-
-      <!-- Instructor (right) -->
       <circle cx="630" cy="280" r="14" fill="none" stroke="#6366f1" stroke-width="1.5"/>
       <line x1="630" y1="294" x2="630" y2="323" stroke="#6366f1" stroke-width="1.5"/>
       <line x1="612" y1="308" x2="648" y2="308" stroke="#6366f1" stroke-width="1.5"/>
       <line x1="630" y1="323" x2="616" y2="341" stroke="#6366f1" stroke-width="1.5"/>
       <line x1="630" y1="323" x2="644" y2="341" stroke="#6366f1" stroke-width="1.5"/>
       <text x="630" y="357" text-anchor="middle" fill="#a5b4fc" font-size="10" font-weight="600">Instructor</text>
-
-      <!-- Billing System (right top) -->
       <rect x="600" y="60" width="70" height="35" rx="3" fill="#1a2236" stroke="#94a3b8" stroke-width="1.5"/>
       <text x="635" y="72" text-anchor="middle" fill="#94a3b8" font-size="8">«system»</text>
       <text x="635" y="85" text-anchor="middle" fill="#cbd5e1" font-size="9" font-weight="600">Billing</text>
-
-      <!-- ─── Connections ─── -->
-      <!-- Student → Register for Courses (arrow = initiates) -->
       <line x1="68" y1="90" x2="227" y2="90" stroke="#22c55e" stroke-width="1.5"/>
       <polygon points="227,86 238,90 227,94" fill="#22c55e"/>
       <text x="145" y="84" text-anchor="middle" fill="#22c55e" font-size="8">initiates →</text>
-
-      <!-- Registrar → Maintain Course Information (arrow = initiates) -->
       <line x1="68" y1="190" x2="217" y2="180" stroke="#f59e0b" stroke-width="1.5"/>
       <polygon points="215,176 226,179 217,184" fill="#f59e0b"/>
       <text x="140" y="178" text-anchor="middle" fill="#f59e0b" font-size="8">initiates →</text>
-
-      <!-- Billing System — Register for Courses (plain line = communication only) -->
       <line x1="600" y1="88" x2="453" y2="91" stroke="#94a3b8" stroke-width="1.5"/>
       <text x="530" y="80" text-anchor="middle" fill="#64748b" font-size="8">communicates —</text>
-
-      <!-- Instructor → Select Courses to Teach (arrow) -->
       <line x1="612" y1="275" x2="458" y2="265" stroke="#a5b4fc" stroke-width="1.5"/>
       <polygon points="460,261 449,265 460,269" fill="#a5b4fc"/>
-
-      <!-- Instructor → Request Enrollment List (arrow) -->
       <line x1="612" y1="293" x2="458" y2="333" stroke="#a5b4fc" stroke-width="1.5"/>
       <polygon points="460,329 449,334 461,338" fill="#a5b4fc"/>
-
-      <!-- Legend -->
       <rect x="148" y="355" width="380" height="18" rx="3" fill="none"/>
       <line x1="155" y1="364" x2="175" y2="364" stroke="#22c55e" stroke-width="1.5"/>
       <polygon points="173,360 183,364 173,368" fill="#22c55e"/>
-      <text x="186" y="368" fill="#94a3b8" font-size="8">= initierer (aktør starter use case)</text>
+      <text x="186" y="368" fill="#94a3b8" font-size="8">= initiates (actor starts use case)</text>
       <line x1="340" y1="364" x2="360" y2="364" stroke="#94a3b8" stroke-width="1.5"/>
-      <text x="363" y="368" fill="#94a3b8" font-size="8">= kommunikasjon (initierer ikke)</text>
+      <text x="363" y="368" fill="#94a3b8" font-size="8">= communication (does not initiate)</text>
     </svg>
-    <div class="fig-caption">Ferdig use case-diagram for ASU Course Registration. Student og Registrar bruker pil (de initierer). Billing System bruker plain line (kommuniserer, men initierer ikke).</div>
+    <div class="fig-caption">Completed use case diagram for ASU Course Registration. Student and Registrar use arrows (they initiate). Billing System uses a plain line (communicates but does not initiate).</div>
   </div>
 </div>
 
@@ -636,111 +600,111 @@
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 1</span>
-      <h3>Identifiser aktører og use cases — Biblioteksystem</h3>
+      <h3>Identify actors and use cases — Library system</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
       <p><strong>Problem statement:</strong></p>
       <p style="background:var(--surface3);border-radius:6px;padding:.75rem;margin:.75rem 0;color:#a5b4fc;font-style:italic">"A library system allows members to search for books, borrow books, and return books. Library staff can add new books to the catalog and remove books. An external fine calculation system calculates overdue fines and sends them to the library system. Members can also reserve books that are currently on loan."</p>
       <ul>
-        <li><strong>a)</strong> Identifiser alle aktørene. Forklar rollen til hver.</li>
-        <li><strong>b)</strong> Identifiser alle use casene. Gi dem gode navn.</li>
-        <li><strong>c)</strong> Hvilke aktører bruker pil (initierer) og hvilke bruker plain line?</li>
+        <li><strong>a)</strong> Identify all the actors. Explain the role of each.</li>
+        <li><strong>b)</strong> Identify all the use cases. Give them good names.</li>
+        <li><strong>c)</strong> Which actors use an arrow (initiates) and which use a plain line?</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
-        <div class="sol-title">Løsning</div>
-        <p><strong>a) Aktører:</strong></p>
+        <div class="sol-title">Solution</div>
+        <p><strong>a) Actors:</strong></p>
         <ul>
-          <li><strong>Member</strong> — person som registrerer seg som bibliotekets bruker og låner bøker</li>
-          <li><strong>Library Staff</strong> — ansatt som administrerer boksamlingen</li>
-          <li><strong>Fine Calculation System</strong> — eksternt system som beregner bøter</li>
+          <li><strong>Member</strong> — person who registers as a library user and borrows books</li>
+          <li><strong>Library Staff</strong> — employee who manages the book collection</li>
+          <li><strong>Fine Calculation System</strong> — external system that calculates fines</li>
         </ul>
         <p style="margin-top:.6rem"><strong>b) Use Cases:</strong></p>
         <ul>
-          <li><strong>Search for Books</strong> — Member søker i katalogen</li>
-          <li><strong>Borrow Book</strong> — Member låner en bok</li>
-          <li><strong>Return Book</strong> — Member leverer tilbake en bok</li>
-          <li><strong>Reserve Book</strong> — Member reserverer en bok som er utlånt</li>
-          <li><strong>Manage Book Catalog</strong> — Library Staff legger til og fjerner bøker (grupper add + remove)</li>
-          <li><strong>Process Overdue Fines</strong> — systemet mottar og behandler bøteinfo</li>
+          <li><strong>Search for Books</strong> — Member searches the catalog</li>
+          <li><strong>Borrow Book</strong> — Member borrows a book</li>
+          <li><strong>Return Book</strong> — Member returns a book</li>
+          <li><strong>Reserve Book</strong> — Member reserves a book currently on loan</li>
+          <li><strong>Manage Book Catalog</strong> — Library Staff adds and removes books (group add + remove)</li>
+          <li><strong>Process Overdue Fines</strong> — system receives and handles fine information</li>
         </ul>
-        <p style="margin-top:.6rem"><strong>c) Pil vs linje:</strong></p>
+        <p style="margin-top:.6rem"><strong>c) Arrow vs plain line:</strong></p>
         <ul>
-          <li>Member → (pil) Search, Borrow, Return, Reserve — Member initierer alle disse</li>
-          <li>Library Staff → (pil) Manage Book Catalog — Staff initierer</li>
-          <li>Fine Calculation System — (plain line) Process Overdue Fines — systemet kommuniserer/sender data, men en intern hendelse eller schedule initierer prosessen, ikke det eksterne systemet</li>
+          <li>Member → (arrow) Search, Borrow, Return, Reserve — Member initiates all of these</li>
+          <li>Library Staff → (arrow) Manage Book Catalog — Staff initiates</li>
+          <li>Fine Calculation System — (plain line) Process Overdue Fines — the system communicates/sends data, but an internal event or schedule initiates the process, not the external system</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Mark as done</button>
     </div>
   </div>
 
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 2</span>
-      <h3>Er disse gode use cases? Bruk Kenneth's regel</h3>
+      <h3>Are these good use cases? Apply Kenneth's rule</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
-      <p>For hvert forslag: er det en god use case? Bruk Kenneth's regel: «A good use case is a complete story from beginning to end.»</p>
+      <p>For each proposal: is it a good use case? Apply Kenneth's rule: «A good use case is a complete story from beginning to end.»</p>
       <ul>
-        <li><strong>a)</strong> «Click Submit Button» (nettbutikk)</li>
-        <li><strong>b)</strong> «Place Order» (nettbutikk — inkluderer browse, add to cart, enter payment, confirm)</li>
-        <li><strong>c)</strong> «Enter Password» (banksystem)</li>
-        <li><strong>d)</strong> «Transfer Money» (banksystem — inkluderer login, velg konto, spesifiser beløp, bekreft, kvittering)</li>
-        <li><strong>e)</strong> «Course Registration» (kursregistrering)</li>
-        <li><strong>f)</strong> «Register for Courses» (kursregistrering)</li>
+        <li><strong>a)</strong> «Click Submit Button» (online shop)</li>
+        <li><strong>b)</strong> «Place Order» (online shop — includes browse, add to cart, enter payment, confirm)</li>
+        <li><strong>c)</strong> «Enter Password» (banking system)</li>
+        <li><strong>d)</strong> «Transfer Money» (banking system — includes login, select account, specify amount, confirm, receipt)</li>
+        <li><strong>e)</strong> «Course Registration» (course registration system)</li>
+        <li><strong>f)</strong> «Register for Courses» (course registration system)</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
-        <div class="sol-title">Løsning</div>
+        <div class="sol-title">Solution</div>
         <ul>
-          <li><strong>a) Ikke god</strong> — «Click Submit Button» er en handling, ikke en funksjonalitet fra aktørens perspektiv. Det er et fragment av en større use case.</li>
-          <li><strong>b) God</strong> — «Place Order» er en komplett historie fra begynnelse til slutt. Aktøren ønsker å bestille — og hele prosessen er representert.</li>
-          <li><strong>c) Ikke god</strong> — «Enter Password» er ett steg i en autentiseringsflyt, ikke en komplett funksjonalitet. Er det start? Er det slutt?</li>
-          <li><strong>d) God</strong> — «Transfer Money» er en komplett, meningsfull transaksjonshistorie.</li>
-          <li><strong>e) Dårlig navn</strong> — «Course Registration» er et substantiv. Use cases skal navngis med present tense, aktiv form: «Register for Courses».</li>
-          <li><strong>f) God</strong> — Korrekt navn (verb, present tense, aktørens perspektiv) og representerer en komplett funksjonalitet.</li>
+          <li><strong>a) Not good</strong> — «Click Submit Button» is an action, not a functionality from the actor's perspective. It is a fragment of a larger use case.</li>
+          <li><strong>b) Good</strong> — «Place Order» is a complete story from beginning to end. The actor wants to order — and the entire process is represented.</li>
+          <li><strong>c) Not good</strong> — «Enter Password» is one step in an authentication flow, not a complete functionality. Is it a start? Is it an end?</li>
+          <li><strong>d) Good</strong> — «Transfer Money» is a complete, meaningful transaction story.</li>
+          <li><strong>e) Bad name</strong> — «Course Registration» is a noun. Use cases should be named with present tense, active form: «Register for Courses».</li>
+          <li><strong>f) Good</strong> — Correct name (verb, present tense, actor's perspective) and represents a complete functionality.</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Mark as done</button>
     </div>
   </div>
 
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 3</span>
-      <h3>Tegn use case-diagram — Online Banking</h3>
+      <h3>Draw a use case diagram — Online Banking</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
       <p><strong>Problem statement:</strong></p>
       <p style="background:var(--surface3);border-radius:6px;padding:.75rem;margin:.75rem 0;color:#a5b4fc;font-style:italic">"An online banking system allows customers to view their account balance and transaction history, transfer money between their own accounts, and pay bills. Bank employees can open new accounts and close existing accounts. An external credit scoring system periodically receives customer data from the banking system to update credit scores."</p>
       <ul>
-        <li>Identifiser aktørene og use casene</li>
-        <li>Skisser use case-diagrammet (beskriv det med tekst eller tegn det): system boundary, aktørplassering, riktig bruk av pil vs plain line</li>
+        <li>Identify the actors and use cases</li>
+        <li>Sketch the use case diagram (describe it in text or draw it): system boundary, actor placement, correct use of arrow vs plain line</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
-        <div class="sol-title">Løsning</div>
-        <p><strong>Aktører:</strong> Customer, Bank Employee, Credit Scoring System (eksternt)</p>
+        <div class="sol-title">Solution</div>
+        <p><strong>Actors:</strong> Customer, Bank Employee, Credit Scoring System (external)</p>
         <p style="margin-top:.6rem"><strong>Use Cases:</strong></p>
         <ul>
-          <li>View Account Summary (Customer) — balance + history er én komplett funksjonalitet</li>
+          <li>View Account Summary (Customer) — balance + history is one complete functionality</li>
           <li>Transfer Money (Customer)</li>
           <li>Pay Bill (Customer)</li>
-          <li>Manage Accounts (Bank Employee) — open + close grupperes som én use case</li>
-          <li>Update Credit Score (intern prosess, trigges periodisk)</li>
+          <li>Manage Accounts (Bank Employee) — open + close grouped as one use case</li>
+          <li>Update Credit Score (internal process, triggered periodically)</li>
         </ul>
-        <p style="margin-top:.6rem"><strong>Diagram-notasjon:</strong></p>
+        <p style="margin-top:.6rem"><strong>Diagram notation:</strong></p>
         <ul>
-          <li>Customer → (pil) View Account Summary, Transfer Money, Pay Bill — Customer initierer</li>
-          <li>Bank Employee → (pil) Manage Accounts — Employee initierer</li>
-          <li>Credit Scoring System — (plain line) Update Credit Score — systemet mottar data, men det er en intern hendelse/schedule som utløser prosessen, ikke det eksterne systemet</li>
+          <li>Customer → (arrow) View Account Summary, Transfer Money, Pay Bill — Customer initiates</li>
+          <li>Bank Employee → (arrow) Manage Accounts — Employee initiates</li>
+          <li>Credit Scoring System — (plain line) Update Credit Score — the system receives data, but an internal event/schedule triggers the process, not the external system</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -763,9 +727,9 @@ function switchTab(name,btn){
 }
 
 const ncExplain={
-  actor:'<strong style="color:#6366f1">Aktør (stick figure)</strong><br><br>Representerer noe <em>utenfor</em> systemet som interagerer direkte med det. Kan være en person (Student, Instructor) eller et annet system (Billing System). Plasseres alltid <em>utenfor</em> system-boundary-boksen.<br><br>Husk: en aktør er en rolle, ikke en konkret person. En bruker kan ha flere aktørroller.',
-  usecase:'<strong style="color:#06b6d4">Use Case (oval)</strong><br><br>Representerer én funksjonalitet systemet tilbyr — fra aktørens perspektiv. Plasseres alltid <em>innenfor</em> system-boundary-boksen.<br><br>Navn: present tense, aktiv form (Register for Courses, ikke Course Registration). En use case er alltid initivert av en aktør.',
-  boundary:'<strong style="color:#8b5cf6">System Boundary (rektangel)</strong><br><br>Avgrenser hva som er <em>innenfor</em> systemet (use cases) og hva som er <em>utenfor</em> (aktørene). Hjelper med å tydeliggjøre scope — hva systemet faktisk håndterer vs. hva som er eksternt.'
+  actor:'<strong style="color:#6366f1">Actor (stick figure)</strong><br><br>Represents something <em>outside</em> the system that interacts directly with it. Can be a person (Student, Instructor) or another system (Billing System). Always placed <em>outside</em> the system boundary rectangle.<br><br>Remember: an actor is a role, not a concrete person. One user can have multiple actor roles.',
+  usecase:'<strong style="color:#06b6d4">Use Case (oval)</strong><br><br>Represents one functionality the system provides — from the actor\'s perspective. Always placed <em>inside</em> the system boundary rectangle.<br><br>Name: present tense, active form (Register for Courses, not Course Registration). A use case is always initiated by an actor.',
+  boundary:'<strong style="color:#8b5cf6">System Boundary (rectangle)</strong><br><br>Defines what is <em>inside</em> the system (use cases) and what is <em>outside</em> (actors). Helps clarify scope — what the system actually handles vs. what is external.'
 };
 function highlightNC(key){
   ['actor','usecase','boundary'].forEach(k=>{
@@ -785,12 +749,12 @@ function toggleEx(header){
 function toggleSol(btn){
   const sol=btn.nextElementSibling;
   const show=sol.classList.toggle('show');
-  btn.textContent=show?'Skjul løsning':'Vis løsning';
+  btn.textContent=show?'Hide solution':'Show solution';
 }
 function markDone(btn,id){
   btn.classList.toggle('done');
   const done=btn.classList.contains('done');
-  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  btn.textContent=done?'✓ Done!':'✓ Mark as done';
   const p=getModP();
   const s=new Set(p.doneExercises||[]);
   done?s.add(id):s.delete(id);
@@ -799,16 +763,16 @@ function markDone(btn,id){
 }
 
 const QUESTIONS=[
-  {q:'Hva er en aktør i use case-modellering?',opts:['En intern komponent i systemet som behandler data','Noe utenfor systemet som interagerer direkte med det — en person eller et annet system','En bruker som er logget inn i systemet','En klasse i domain model som utfører operasjoner'],correct:1,exp:'Kenneth: «An actor represents something outside the system that interacts directly with the system. It can be a person or another system.» Nøkkelord er UTENFOR og DIREKTE. Interne komponenter er ikke aktører.'},
-  {q:'Er tastaturet en aktør i et system?',opts:['Ja — det gir input til systemet','Nei — input/output-enheter er aldri aktører','Ja, hvis brukeren taster inn viktige data','Det avhenger av systemets domene'],correct:1,exp:'Kenneth er eksplisitt: «Input-output devices — for example your keyboard, your mouse, your printers — they are never actors.» Aktører er de som bruker systemet med en intensjon, ikke fysiske perifere enheter.'},
-  {q:'Hva er forskjellen på en use case og et scenario?',opts:['De er synonymer og brukes om hverandre','Use case = klassen (generell beskrivelse). Scenario = instansen (én konkret brukers forsøk).','Scenario = klassen. Use case = instansen.','Use case er en del av et scenario'],correct:1,exp:'Kenneth: «A scenario is a concrete, focused, informal description of a single use of the system from a single user.» Akkurat som en klasse klassifiserer objekter, klassifiserer en use case scenarioer. Scenario = instans.'},
-  {q:'En student sender inn en kursregistrering. Billing System mottar automatisk faktureringsinfo. Hvilken linjetype bruker du mellom Billing System og «Register for Courses»?',opts:['Pil fra Billing System til use case','Pil fra use case til Billing System','Plain line (ingen pil)','Stiplet pil (avhengighet)'],correct:2,exp:'Kenneth: «We have a line here — that means there will be some communication between the Billing System and the use case. We don\'t have an arrow. That means this use case is not started by the Billing System. It\'s actually started by the Student.» Billing System kommuniserer, men initierer ikke.'},
-  {q:'Hva er Kenneth\'s gylne regel for hva som er en god use case?',opts:['En use case skal dekke nøyaktig én klasse i domain model','En use case er en komplett historie fra begynnelse til slutt','En use case skal ha under 5 steg','En use case kan bare ha én aktør'],correct:1,exp:'Kenneth: «A good use case typically represents a major piece of functionality that is complete from beginning to the end. It is better to have longer and more extensive use cases than smaller or partial ones.» Fragmenter som «add course» og «drop course» er ikke gode use cases alene — de grupperes til «Register for Courses».'},
-  {q:'Hva er riktig navngiving for en use case?',opts:['course_registration','Course Registration','Register for Courses','registerCourses()'],correct:2,exp:'Use cases navngis med et present tense, aktivt verbfrase fra aktørens perspektiv. Kenneth: «Give a use case name from the perspective of an actor and using a present tense word phrase in active voice.» «Register for Courses» er riktig — «Course Registration» (substantiv) er feil.'},
-  {q:'Kan samme konsept (f.eks. Student) dukke opp som både en klasse i class diagram OG som aktør i use case diagram?',opts:['Nei — det er selvmotsigende','Ja, og de spiller ulike roller: klassen representerer data, aktøren representerer rollen som bruker','Bare hvis Student er abstrakt i class diagram','Bare i solution model, ikke requirement model'],correct:1,exp:'Kenneth: «It\'s possible to have both a domain class and also an actor that represent the same thing.» I class diagram representerer Student data vi trenger å holde styr på. I use case diagram representerer Student en bruker som interagerer med systemet.'},
-  {q:'Hvem initierer «Register for Courses» i ASU-eksempelet — Student eller Billing System?',opts:['Billing System — fordi det mottar faktureringsinfo fra use casen','Student — fordi studenten starter registreringsprosessen','Begge initierer den','Registrar — fordi de vedlikeholder kursinformasjonen'],correct:1,exp:'Student har en pil (→) til «Register for Courses» fordi studenten starter use casen. Billing System har en plain line fordi det bare kommuniserer med (mottar data fra) use casen, men ikke initierer den. Kenneth er meget tydelig på dette.'},
-  {q:'Kenneth advarer mot en spesifikk type generalisering i use case-diagrammer. Hva er det?',opts:['Generalisering på aktører — det gjør diagrammet komplisert','Generalisering på use cases — det brukes ofte feil','Generalisering mellom system og aktør','Alle typer generalisering er forbudt i use case-diagrammer'],correct:1,exp:'Kenneth: «Try not to use use case generalization in your project. It is often used incorrectly. I suggest you try to avoid using generalization on use cases.» Generalisering på aktører er greit (f.eks. Employee → SalesClerk/Manager), men hold deg unna use case-generalisering.'},
-  {q:'I ASU-eksempelet: Kenneth oppdager Registrar som aktør underveis i analysen. Hva trigget denne oppdagelsen?',opts:['Registrar var nevnt eksplisitt i problem statement fra starten','Kenneth snakket med domeneeksperter om hvem som «preparer» og «cancel» course offerings','Registrar er alltid en standardaktør i registreringssystemer','Billing System fortalte Kenneth om Registrar'],correct:1,exp:'Kenneth: «You may talk to the domain experts. Then the domain expert is going to tell you that an admin or a registrar is going to maintain all the cost information on the system.» Domeneekspertise er essensielt for å avdekke alle aktørene — de er ikke alltid åpenbare fra teksten alene.'},
+  {q:'What is an actor in use case modeling?',opts:['An internal component of the system that processes data','Something outside the system that interacts directly with it — a person or another system','A user who is logged into the system','A class in the domain model that performs operations'],correct:1,exp:'Kenneth: «An actor represents something outside the system that interacts directly with the system. It can be a person or another system.» Key words are OUTSIDE and DIRECTLY. Internal components are not actors.'},
+  {q:'Is a keyboard an actor in a system?',opts:['Yes — it provides input to the system','No — input/output devices are never actors','Yes, if the user types in important data','It depends on the system\'s domain'],correct:1,exp:'Kenneth is explicit: «Input-output devices — for example your keyboard, your mouse, your printers — they are never actors.» Actors are those who use the system with an intention, not physical peripheral devices.'},
+  {q:'What is the difference between a use case and a scenario?',opts:['They are synonyms and used interchangeably','Use case = the class (general description). Scenario = the instance (one specific user\'s attempt).','Scenario = the class. Use case = the instance.','A use case is part of a scenario'],correct:1,exp:'Kenneth: «A scenario is a concrete, focused, informal description of a single use of the system from a single user.» Just as a class classifies objects, a use case classifies scenarios. Scenario = instance.'},
+  {q:'A student submits a course registration. The Billing System automatically receives billing info. What line type do you use between Billing System and «Register for Courses»?',opts:['Arrow from Billing System to use case','Arrow from use case to Billing System','Plain line (no arrow)','Dashed arrow (dependency)'],correct:2,exp:'Kenneth: «We have a line here — that means there will be some communication between the Billing System and the use case. We don\'t have an arrow. That means this use case is not started by the Billing System. It\'s actually started by the Student.» Billing System communicates but does not initiate.'},
+  {q:'What is Kenneth\'s golden rule for what makes a good use case?',opts:['A use case should cover exactly one class in the domain model','A use case is a complete story from beginning to end','A use case should have fewer than 5 steps','A use case can only have one actor'],correct:1,exp:'Kenneth: «A good use case typically represents a major piece of functionality that is complete from beginning to the end. It is better to have longer and more extensive use cases than smaller or partial ones.» Fragments like «add course» and «drop course» are not good use cases on their own — they are grouped into «Register for Courses».'},
+  {q:'What is the correct naming for a use case?',opts:['course_registration','Course Registration','Register for Courses','registerCourses()'],correct:2,exp:'Use cases are named with a present tense, active verb phrase from the actor\'s perspective. Kenneth: «Give a use case name from the perspective of an actor and using a present tense word phrase in active voice.» «Register for Courses» is correct — «Course Registration» (noun) is wrong.'},
+  {q:'Can the same concept (e.g. Student) appear as both a class in the class diagram AND as an actor in the use case diagram?',opts:['No — that is contradictory','Yes, and they play different roles: the class represents data, the actor represents the role as user','Only if Student is abstract in the class diagram','Only in solution model, not requirement model'],correct:1,exp:'Kenneth: «It\'s possible to have both a domain class and also an actor that represent the same thing.» In the class diagram, Student represents data we need to track. In the use case diagram, Student represents a user interacting with the system.'},
+  {q:'Who initiates «Register for Courses» in the ASU example — Student or Billing System?',opts:['Billing System — because it receives billing info from the use case','Student — because the student starts the registration process','Both initiate it','Registrar — because they maintain the course information'],correct:1,exp:'Student has an arrow (→) to «Register for Courses» because the student starts the use case. Billing System has a plain line because it only communicates with (receives data from) the use case, but does not initiate it. Kenneth is very clear on this.'},
+  {q:'Kenneth warns against a specific type of generalisation in use case diagrams. What is it?',opts:['Generalisation on actors — it makes the diagram complex','Generalisation on use cases — it is often used incorrectly','Generalisation between system and actor','All types of generalisation are forbidden in use case diagrams'],correct:1,exp:'Kenneth: «Try not to use use case generalization in your project. It is often used incorrectly. I suggest you try to avoid using generalization on use cases.» Generalisation on actors is fine (e.g. Employee → SalesClerk/Manager), but avoid use case generalisation.'},
+  {q:'In the ASU example: Kenneth discovers Registrar as an actor during analysis. What triggered this discovery?',opts:['Registrar was explicitly mentioned in the problem statement from the start','Kenneth consulted domain experts about who "prepares" and "cancels" course offerings','Registrar is always a standard actor in registration systems','The Billing System told Kenneth about the Registrar'],correct:1,exp:'Kenneth: «You may talk to the domain experts. Then the domain expert is going to tell you that an admin or a registrar is going to maintain all the cost information on the system.» Domain expertise is essential for uncovering all actors — they are not always obvious from the text alone.'},
 ];
 
 let qAnswers={},qCurrent=0;
@@ -822,15 +786,15 @@ function renderQuestion(idx){
   const q=QUESTIONS[idx];const answered=qAnswers[idx];
   document.getElementById('quiz-container').innerHTML=`
     <div>
-      <div class="q-num">Spørsmål ${idx+1} av ${QUESTIONS.length}</div>
+      <div class="q-num">Question ${idx+1} of ${QUESTIONS.length}</div>
       <div class="q-text">${q.q}</div>
       <div class="q-options">${q.opts.map((o,i)=>`<button class="q-opt ${answered!=null?(i===q.correct?'correct':(i===answered.chosen?'wrong':''))  :''}" onclick="answerQ(${idx},${i})" ${answered!=null?'disabled':''}>${o}</button>`).join('')}</div>
       <div class="q-explanation ${answered!=null?'show':''}">💡 ${q.exp}</div>
       <div class="q-nav">
-        ${idx>0?`<button onclick="gotoQ(${idx-1})">← Forrige</button>`:''}
-        ${idx<QUESTIONS.length-1?`<button class="primary" onclick="gotoQ(${idx+1})">Neste →</button>`:''}
-        ${idx===QUESTIONS.length-1&&Object.keys(qAnswers).length===QUESTIONS.length?`<button class="primary" onclick="finishQuiz()">Se resultat</button>`:''}
-        <span class="q-score">${Object.keys(qAnswers).length}/${QUESTIONS.length} besvart</span>
+        ${idx>0?`<button onclick="gotoQ(${idx-1})">← Previous</button>`:''}
+        ${idx<QUESTIONS.length-1?`<button class="primary" onclick="gotoQ(${idx+1})">Next →</button>`:''}
+        ${idx===QUESTIONS.length-1&&Object.keys(qAnswers).length===QUESTIONS.length?`<button class="primary" onclick="finishQuiz()">View results</button>`:''}
+        <span class="q-score">${Object.keys(qAnswers).length}/${QUESTIONS.length} answered</span>
       </div>
     </div>`;
 }
@@ -847,8 +811,8 @@ function finishQuiz(){
 }
 function showQuizResult(score,total){
   const pct=Math.round(score/total*100);
-  const msg=pct>=80?'🎉 Utmerket! Du har god kontroll på use case modeling.':pct>=60?'👍 Bra jobbet! Les gjennom forklaringene du fikk feil.':'📚 Gå gjennom teorien igjen — spesielt pil vs linje og use case-definisjonen.';
-  document.getElementById('quiz-container').innerHTML=`<div class="quiz-result"><div class="score-big">${score}/${total}</div><p>${pct}% riktige</p><p style="margin-top:.3rem">${msg}</p><button onclick="resetQuiz()">Prøv igjen</button></div>`;
+  const msg=pct>=80?'🎉 Excellent! You have solid control over use case modeling.':pct>=60?'👍 Good work! Review the explanations for the ones you got wrong.':'📚 Go through the theory again — especially arrow vs line and the use case definition.';
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-result"><div class="score-big">${score}/${total}</div><p>${pct}% correct</p><p style="margin-top:.3rem">${msg}</p><button onclick="resetQuiz()">Try again</button></div>`;
   document.getElementById('quiz-dots').innerHTML='';
 }
 function resetQuiz(){qAnswers={};qCurrent=0;saveP({quizDone:false,quizScore:null});renderQuiz();}
@@ -856,14 +820,14 @@ function resetQuiz(){qAnswers={};qCurrent=0;saveP({quizDone:false,quizScore:null
 function updateNav(){
   const p=getModP();
   const ex=(p.doneExercises||[]).length;
-  document.getElementById('nav-prog').textContent=`${ex}/3 oppgaver · quiz ${p.quizScore!=null?p.quizScore+'/10':'—'}`;
+  document.getElementById('nav-prog').textContent=`${ex}/3 exercises · quiz ${p.quizScore!=null?p.quizScore+'/10':'—'}`;
 }
 
 (function init(){
   const p=getModP();
   (p.doneExercises||[]).forEach(id=>{
     const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+    if(btn){btn.classList.add('done');btn.textContent='✓ Done!';}
   });
   updateNav();
 })();

@@ -155,27 +155,27 @@
 <body>
 
 <nav>
-  <a href="../../index.html" class="nav-back">← Hjem</a>
-  <span class="nav-title">Modul 5 — Software Development Processes</span>
+  <a href="../../index.html" class="nav-back">← Home</a>
+  <span class="nav-title">Module 5 — Software Development Processes</span>
   <span class="nav-prog" id="nav-prog"></span>
 </nav>
 
 <div class="hero">
-  <div class="module-tag">Modul 05</div>
+  <div class="module-tag">Module 05</div>
   <h1>Software Development Processes</h1>
-  <p>Waterfall, Agile, Scrum, Spiral og Unified Process — forstå styrker og svakheter slik at du kan velge riktig prosess til riktig scenario.</p>
+  <p>Waterfall, Agile, Scrum, Spiral and Unified Process — understand the strengths and weaknesses so you can choose the right process for any scenario.</p>
   <div class="hero-meta">
-    <span class="meta-pill">📖 5 seksjoner</span>
-    <span class="meta-pill">🎯 10 quizspørsmål</span>
-    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">📖 5 sections</span>
+    <span class="meta-pill">🎯 10 quiz questions</span>
+    <span class="meta-pill">✏️ 3 exercises</span>
     <span class="meta-pill">⏱ ~40 min</span>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Theory</button>
   <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Exercises</button>
 </div>
 
 <div class="content">
@@ -187,120 +187,120 @@
 <div class="section">
   <div class="section-header">
     <div class="section-num">1</div>
-    <h2>Felles kjerne — alle prosesser inneholder de samme fasene</h2>
+    <h2>Common core — all processes contain the same phases</h2>
   </div>
 
-  <p class="prose">Kenneth starter forelesningen med et viktig poeng: <strong>uansett hvilken software development process du velger, vil den alltid inneholde de samme grunnleggende fasene.</strong> Det som skiller prosessene er ikke hva de gjør, men <em>hvordan</em> de kombinerer, vektlegger og utfører fasene.</p>
+  <p class="prose">Kenneth opens the lecture with an important point: <strong>regardless of which software development process you choose, it will always contain the same fundamental phases.</strong> What distinguishes processes is not what they do, but <em>how</em> they combine, emphasise and execute those phases.</p>
 
   <div class="fig">
-    <div class="fig-title">Felles kjerne i alle prosesser</div>
+    <div class="fig-title">Common core in all processes</div>
     <div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;justify-content:center">
       <div style="background:rgba(99,102,241,.15);border:1.5px solid var(--accent);border-radius:8px;padding:.7rem 1.1rem;text-align:center;min-width:110px">
         <div style="font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em">Requirements</div>
-        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Hva skal vi bygge?</div>
+        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">What do we build?</div>
       </div>
       <div style="color:var(--muted);font-size:1.2rem">→</div>
       <div style="background:rgba(6,182,212,.1);border:1.5px solid var(--accent2);border-radius:8px;padding:.7rem 1.1rem;text-align:center;min-width:130px">
         <div style="font-size:.75rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.07em">Analysis &amp; Design</div>
-        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Hvordan skal vi bygge det?</div>
+        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">How do we build it?</div>
       </div>
       <div style="color:var(--muted);font-size:1.2rem">→</div>
       <div style="background:rgba(139,92,246,.1);border:1.5px solid var(--accent3);border-radius:8px;padding:.7rem 1.1rem;text-align:center;min-width:110px">
         <div style="font-size:.75rem;font-weight:700;color:var(--accent3);text-transform:uppercase;letter-spacing:.07em">Implementation</div>
-        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Skriv koden</div>
+        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Write the code</div>
       </div>
       <div style="color:var(--muted);font-size:1.2rem">→</div>
       <div style="background:rgba(34,197,94,.1);border:1.5px solid var(--success);border-radius:8px;padding:.7rem 1.1rem;text-align:center;min-width:110px">
         <div style="font-size:.75rem;font-weight:700;color:var(--success);text-transform:uppercase;letter-spacing:.07em">Testing</div>
-        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Verifiser korrekthet</div>
+        <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Verify correctness</div>
       </div>
     </div>
     <div class="fig-caption">Kenneth: «No matter which software development process you use, eventually the process will contain these stages.»</div>
   </div>
 
-  <p class="prose">Etter dette kurset er det viktigste du skal sitte igjen med: <strong>forstå styrker og svakheter til hver prosess, slik at du gitt et scenario vet hvilken som passer.</strong> Det er eksamensspørsmålet.</p>
+  <p class="prose">The most important takeaway from this module: <strong>understand the strengths and weaknesses of each process, so that given a scenario you know which one fits.</strong> That is the exam question.</p>
 </div>
 
 <!-- SECTION 2 -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">2</div>
-    <h2>Plan-drevne prosesser — Waterfall, Code &amp; Fix, Prototyping, Spiral, Phased Release</h2>
+    <h2>Plan-driven processes — Waterfall, Code &amp; Fix, Prototyping, Spiral, Phased Release</h2>
   </div>
 
-  <p class="prose">Klikk på en prosess for å se Kenneth's forklaring, pros og cons:</p>
+  <p class="prose">Click on a process to see Kenneth's explanation, pros and cons:</p>
 
   <div class="proc-cards">
     <div class="proc-card" onclick="showProc(this,'waterfall')">
       <h4>Waterfall</h4>
-      <div class="tag-row"><span class="tag pro">Forutsigbar</span><span class="tag pro">Disiplinert</span><span class="tag con">Kan ikke gå tilbake</span></div>
-      <p>Lineær, én fase av gangen — krav må fryses tidlig.</p>
+      <div class="tag-row"><span class="tag pro">Predictable</span><span class="tag pro">Disciplined</span><span class="tag con">Can't go back</span></div>
+      <p>Linear, one phase at a time — requirements must be frozen early.</p>
     </div>
     <div class="proc-card" onclick="showProc(this,'codefix')">
       <h4>Code &amp; Fix</h4>
-      <div class="tag-row"><span class="tag pro">Enkel å starte</span><span class="tag con">Uforutsigbar</span><span class="tag con">Ikke skalerbar</span></div>
-      <p>Kode → test → fiks, gjenta. Unngå for store systemer.</p>
+      <div class="tag-row"><span class="tag pro">Easy to start</span><span class="tag con">Unpredictable</span><span class="tag con">Not scalable</span></div>
+      <p>Code → test → fix, repeat. Avoid for large systems.</p>
     </div>
     <div class="proc-card" onclick="showProc(this,'proto')">
       <h4>Prototyping</h4>
-      <div class="tag-row"><span class="tag pro">Vage krav OK</span><span class="tag pro">Klientfeedback</span><span class="tag con">Ufullstendig prosess</span></div>
-      <p>Rask prototype → vis til klient → raffiner.</p>
+      <div class="tag-row"><span class="tag pro">Vague requirements OK</span><span class="tag pro">Client feedback</span><span class="tag con">Incomplete process</span></div>
+      <p>Rapid prototype → show client → refine.</p>
     </div>
     <div class="proc-card" onclick="showProc(this,'spiral')">
       <h4>Spiral</h4>
-      <div class="tag-row"><span class="tag pro">Risikoanalyse</span><span class="tag pro">Iterativ</span><span class="tag con">Trenger risikoekspert</span></div>
-      <p>Planlegg → risikoanalyse → implementer → evaluer, gjenta.</p>
+      <div class="tag-row"><span class="tag pro">Risk analysis</span><span class="tag pro">Iterative</span><span class="tag con">Needs risk expert</span></div>
+      <p>Plan → risk analysis → implement → evaluate, repeat.</p>
     </div>
     <div class="proc-card" onclick="showProc(this,'phased')">
       <h4>Phased Release</h4>
-      <div class="tag-row"><span class="tag pro">Tidlig feedback</span><span class="tag pro">Reduserer risiko</span><span class="tag con">Vanskelig å dele opp</span></div>
-      <p>Lever systemet stykkevis som «builds».</p>
+      <div class="tag-row"><span class="tag pro">Early feedback</span><span class="tag pro">Reduces risk</span><span class="tag con">Hard to split</span></div>
+      <p>Deliver the system in incremental «builds».</p>
     </div>
   </div>
-  <div class="proc-detail" id="proc-detail-box">Klikk på en prosess ovenfor.</div>
+  <div class="proc-detail" id="proc-detail-box">Click on a process above.</div>
 
   <div class="fig" style="margin-top:1.5rem">
-    <div class="fig-title">Sammenlignstabell</div>
+    <div class="fig-title">Comparison table</div>
     <div style="overflow-x:auto">
       <table class="proc-table">
         <thead>
           <tr>
-            <th>Prosess</th>
-            <th>Tilnærming</th>
-            <th>Passer best når...</th>
-            <th>Viktigste ulempe</th>
+            <th>Process</th>
+            <th>Approach</th>
+            <th>Best when...</th>
+            <th>Main drawback</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><span class="proc-name">Waterfall</span></td>
-            <td>Lineær, sekvensiell</td>
-            <td>Krav er velforstått og stabile</td>
-            <td>Å gå tilbake er svært kostbart</td>
+            <td>Linear, sequential</td>
+            <td>Requirements are well understood and stable</td>
+            <td>Going back is very costly</td>
           </tr>
           <tr>
             <td><span class="proc-name">Code &amp; Fix</span></td>
-            <td>Kode → test → fiks</td>
-            <td>Programmeringsoppgaver (ikke produksjon)</td>
-            <td>Uforutsigbar, mesete kode, ikke skalerbar</td>
+            <td>Code → test → fix</td>
+            <td>Programming assignments (not production)</td>
+            <td>Unpredictable, messy code, not scalable</td>
           </tr>
           <tr>
             <td><span class="proc-name">Prototyping</span></td>
-            <td>Rask prototype → feedback</td>
-            <td>Krav er vage og uklare</td>
-            <td>Ikke en komplett prosess; lite dokumentasjon</td>
+            <td>Rapid prototype → feedback</td>
+            <td>Requirements are vague and unclear</td>
+            <td>Not a complete process; little documentation</td>
           </tr>
           <tr>
             <td><span class="proc-name">Spiral</span></td>
-            <td>Iterativ + risikoanalyse</td>
-            <td>Intern utvikling med høy risiko</td>
-            <td>Trenger risikoekspert; mer overhead</td>
+            <td>Iterative + risk analysis</td>
+            <td>Internal development with high risk</td>
+            <td>Needs a risk expert; more overhead</td>
           </tr>
           <tr>
             <td><span class="proc-name">Phased Release</span></td>
-            <td>Inkrementelle builds</td>
-            <td>Stor system som kan deles opp</td>
-            <td>Vanskelig å identifisere delte komponenter</td>
+            <td>Incremental builds</td>
+            <td>Large system that can be decomposed</td>
+            <td>Hard to identify shared components</td>
           </tr>
         </tbody>
       </table>
@@ -308,7 +308,7 @@
   </div>
 
   <div class="callout warn">
-    <div class="callout-title">Kenneth om Code &amp; Fix</div>
+    <div class="callout-title">Kenneth on Code &amp; Fix</div>
     <p>«This is usually the approach that we use in programming assignment. But it's not suitable for large systems. If you are using this process, you make the process unpredictable and also uncontrollable. Very likely maybe over budget, over schedule and also fails to meet expectations — because you don't know exactly how many times you have to fix before you get the correct system. So this is the process that we should avoid.»</p>
   </div>
 </div>
@@ -317,54 +317,54 @@
 <div class="section">
   <div class="section-header">
     <div class="section-num">3</div>
-    <h2>Agile — XP, Continuous Integration og Scrum</h2>
+    <h2>Agile — XP, Continuous Integration and Scrum</h2>
   </div>
 
-  <p class="prose">Agile handler ikke om å kaste planer — det handler om å prioritere annerledes. Agile-manifestet setter fire verdier:</p>
+  <p class="prose">Agile is not about throwing away plans — it is about prioritising differently. The Agile Manifesto establishes four core values:</p>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0">
     <div style="background:rgba(99,102,241,.1);border:1.5px solid rgba(99,102,241,.4);border-radius:8px;padding:.9rem">
-      <div style="font-size:.75rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.07em">Vi verdsetter mer:</div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.07em">We value more:</div>
       <ul style="margin:.3rem 0 0 1.1rem;font-size:.85rem;color:#cbd5e1;line-height:1.7">
-        <li>Individer og interaksjoner</li>
-        <li>Fungerende software</li>
-        <li>Samarbeid med kunden</li>
-        <li>Respons på endring</li>
+        <li>Individuals and interactions</li>
+        <li>Working software</li>
+        <li>Customer collaboration</li>
+        <li>Responding to change</li>
       </ul>
     </div>
     <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;padding:.9rem">
-      <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.07em">Fremfor:</div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.07em">Over:</div>
       <ul style="margin:.3rem 0 0 1.1rem;font-size:.85rem;color:#64748b;line-height:1.7">
-        <li>Prosesser og verktøy</li>
-        <li>Dokumentasjon</li>
-        <li>Kontraktsforhandling</li>
-        <li>Å følge en plan</li>
+        <li>Processes and tools</li>
+        <li>Comprehensive documentation</li>
+        <li>Contract negotiation</li>
+        <li>Following a plan</li>
       </ul>
     </div>
   </div>
 
   <div class="callout info">
-    <div class="callout-title">Viktig presisering fra Kenneth</div>
-    <p>«This does not imply that there's no value in the items on the right hand side. Just that we focus less on those items.» Agile erstatter ikke dokumentasjon — det prioriterer bare fungerende software over det.</p>
+    <div class="callout-title">Important clarification from Kenneth</div>
+    <p>«This does not imply that there's no value in the items on the right hand side. Just that we focus less on those items.» Agile does not eliminate documentation — it simply prioritises working software over it.</p>
   </div>
 
   <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Extreme Programming (XP)</h3>
-  <p class="prose">XP er en agile-praksis med tre kjennetegn Kenneth fremhever spesielt:</p>
+  <p class="prose">XP is an agile practice with three hallmarks Kenneth highlights in the lecture:</p>
   <ul class="prose-list">
-    <li><strong>Pair programming</strong> — To utviklere jobber ved samme maskin. Én koder, én kontrollerer. Kenneth: «If we try to avoid making mistakes, another guy is double-checking your source code — then we can avoid mistakes.»</li>
-    <li><strong>Test-Driven Development (TDD)</strong> — Tenk på testcaser FØR du implementerer. Kenneth: «Even before we implement, we think about what are the possible test cases for the system.»</li>
-    <li><strong>Kunden velger features</strong> — Utviklerne gir tid- og kostestimat per feature. Kunden velger selv hvilke som inkluderes i neste iterasjon.</li>
+    <li><strong>Pair programming</strong> — Two developers work at the same machine. One codes, the other reviews. Kenneth: «If we try to avoid making mistakes, another guy is double-checking your source code — then we can avoid mistakes.»</li>
+    <li><strong>Test-Driven Development (TDD)</strong> — Think about test cases BEFORE you implement. Kenneth: «Even before we implement, we think about what are the possible test cases for the system.»</li>
+    <li><strong>Customer selects features</strong> — Developers provide time and cost estimates per feature. The customer decides which ones to include in the next iteration.</li>
   </ul>
 
   <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Continuous Integration (CI)</h3>
-  <p class="prose">Utviklere integrerer kode til et delt repository <strong>daglig</strong> — ikke ukentlig eller månedlig. Fordelen er at feil oppdages umiddelbart, og konflikter er minimale fordi endringene er små.</p>
+  <p class="prose">Developers integrate code into a shared repository <strong>daily</strong> — not weekly or monthly. The benefit is that errors are detected immediately, and conflicts are minimal because each change is small.</p>
 
   <div class="fig">
-    <div class="fig-title">CI-arkitektur</div>
+    <div class="fig-title">CI architecture</div>
     <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;justify-content:center">
       <div style="text-align:center">
         <div style="background:var(--surface3);border:1.5px solid var(--accent);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#a5b4fc">Developer A</div>
-        <div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">commit daglig</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">commit daily</div>
       </div>
       <div style="color:var(--muted)">→</div>
       <div style="text-align:center">
@@ -372,76 +372,76 @@
       </div>
       <div style="color:var(--muted)">→</div>
       <div style="text-align:center">
-        <div style="background:rgba(139,92,246,.1);border:1.5px solid var(--accent3);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#c4b5fd">CI Server<br><span style="font-weight:400;font-size:.75rem">bygg + test automatisk</span></div>
+        <div style="background:rgba(139,92,246,.1);border:1.5px solid var(--accent3);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#c4b5fd">CI Server<br><span style="font-weight:400;font-size:.75rem">build + test automatically</span></div>
       </div>
       <div style="color:var(--muted)">→</div>
       <div style="text-align:center">
-        <div style="background:rgba(239,68,68,.1);border:1.5px solid var(--danger);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#fca5a5">Feedback<br><span style="font-weight:400;font-size:.75rem">til alle utviklere</span></div>
+        <div style="background:rgba(239,68,68,.1);border:1.5px solid var(--danger);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;font-weight:700;color:#fca5a5">Feedback<br><span style="font-weight:400;font-size:.75rem">to all developers</span></div>
       </div>
     </div>
     <div class="fig-caption">Building and testing are done automatically using scripts on the CI server.</div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Scrum — roller, artefakter og seremonier</h3>
-  <p class="prose">Scrum er den mest brukte agile-prosessen i industrien. Kenneth: «Scrum is an agile software development process that mainly specifies <em>what</em> you should do — the team needs to decide <em>how</em> to work on it.»</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Scrum — roles, artifacts and ceremonies</h3>
+  <p class="prose">Scrum is the most widely used agile process in industry. Kenneth: «Scrum is an agile software development process that mainly specifies <em>what</em> you should do — the team needs to decide <em>how</em> to work on it.»</p>
 
   <div class="role-grid">
     <div class="role-card">
       <h4>Product Owner</h4>
-      <p>= Klienten. Definerer og prioriterer kravene i product backlog. Bestemmer release-datoer. Godkjenner eller avviser leveranser. Kenneth: «The product owner is your client.»</p>
+      <p>= The client. Defines and prioritises requirements in the product backlog. Sets release dates. Accepts or rejects deliverables. Kenneth: «The product owner is your client.»</p>
     </div>
     <div class="role-card sm">
       <h4>Scrum Master</h4>
-      <p>= Manager / fasilitator. Sørger for at Scrum-verdiene følges. Fjerner hindringer. Skjermer teamet fra ytre forstyrrelser. Setter opp møter. Kenneth: «Scrum master is usually the manager.»</p>
+      <p>= Manager / facilitator. Ensures Scrum values are followed. Removes impediments. Shields the team from external interference. Sets up meetings. Kenneth: «Scrum master is usually the manager.»</p>
     </div>
     <div class="role-card team">
       <h4>Development Team</h4>
-      <p>Selvorganisert team av utviklere og testere. Bestemmer selv den beste måten å levere produktet på. Tverrfunksjonelt — ingen spesialistroller.</p>
+      <p>Self-organising team of developers and testers. Decides the best way to deliver the product. Cross-functional — no specialist roles.</p>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Scrum-flyten</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">The Scrum flow</h3>
 
   <div class="fig">
-    <div class="fig-title">Fra Product Backlog til ferdig inkrement</div>
+    <div class="fig-title">From Product Backlog to shippable increment</div>
     <div class="scrum-flow">
-      <div class="scrum-box backlog">Product<br>Backlog<br><span style="font-size:.72rem;font-weight:400">alle features</span></div>
+      <div class="scrum-box backlog">Product<br>Backlog<br><span style="font-size:.72rem;font-weight:400">all features</span></div>
       <div class="scrum-arrow">→</div>
-      <div class="scrum-box backlog">Sprint<br>Planning<br><span style="font-size:.72rem;font-weight:400">velg features</span></div>
+      <div class="scrum-box backlog">Sprint<br>Planning<br><span style="font-size:.72rem;font-weight:400">select features</span></div>
       <div class="scrum-arrow">→</div>
-      <div class="scrum-box sprint">Sprint<br>Backlog<br><span style="font-size:.72rem;font-weight:400">2–4 uker</span></div>
+      <div class="scrum-box sprint">Sprint<br>Backlog<br><span style="font-size:.72rem;font-weight:400">2–4 weeks</span></div>
       <div class="scrum-arrow">→</div>
       <div style="display:flex;flex-direction:column;gap:.3rem;align-items:center">
-        <div style="font-size:.72rem;color:var(--muted);text-align:center">Daily Scrum<br>↻ hver dag</div>
+        <div style="font-size:.72rem;color:var(--muted);text-align:center">Daily Scrum<br>↻ every day</div>
         <div class="scrum-box sprint" style="font-size:.78rem;padding:.5rem .8rem">Design<br>Code<br>Test</div>
       </div>
       <div class="scrum-arrow">→</div>
       <div class="scrum-box done">Potentially<br>Shippable<br>Increment</div>
     </div>
-    <div class="fig-caption">Krav endres ikke innen en sprint. Etter sprint-review starter neste sprint.</div>
+    <div class="fig-caption">Requirements do not change within a sprint. After the sprint review the next sprint begins.</div>
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin:1.25rem 0">
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem">Artefakter</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem">Artifacts</div>
       <ul style="margin:.3rem 0 0 1.1rem;font-size:.85rem;color:#cbd5e1;line-height:1.7">
-        <li><strong style="color:#f1f5f9">Product Backlog</strong> — alle features (wish list)</li>
-        <li><strong style="color:#f1f5f9">Sprint Backlog</strong> — features for inneværende sprint</li>
-        <li><strong style="color:#f1f5f9">Burn-down Chart</strong> — gjenstående arbeid per dag</li>
+        <li><strong style="color:#f1f5f9">Product Backlog</strong> — all features (wish list)</li>
+        <li><strong style="color:#f1f5f9">Sprint Backlog</strong> — features for the current sprint</li>
+        <li><strong style="color:#f1f5f9">Burn-down Chart</strong> — remaining work per day</li>
       </ul>
     </div>
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem">Seremonier</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem">Ceremonies</div>
       <ul style="margin:.3rem 0 0 1.1rem;font-size:.85rem;color:#cbd5e1;line-height:1.7">
-        <li><strong style="color:#f1f5f9">Sprint Planning</strong> — velg features fra backlog</li>
-        <li><strong style="color:#f1f5f9">Daily Scrum</strong> — hva gjorde du i går? i dag? hindringer?</li>
-        <li><strong style="color:#f1f5f9">Sprint Review</strong> — demo av ferdig inkrement</li>
+        <li><strong style="color:#f1f5f9">Sprint Planning</strong> — select features from backlog</li>
+        <li><strong style="color:#f1f5f9">Daily Scrum</strong> — what did you do yesterday? today? blockers?</li>
+        <li><strong style="color:#f1f5f9">Sprint Review</strong> — demo of completed increment</li>
       </ul>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Burn-down Chart — det viktigste verktøyet i Scrum</h3>
-  <p class="prose">Kenneth (via Scrum-videoen): «The Burn-down Chart is the number one reason for Scrum's popularity and one of the best project visibility tools.» Grafen viser gjenstående arbeid (timer/story points) per dag i en sprint.</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Burn-down Chart — the most important Scrum tool</h3>
+  <p class="prose">Kenneth (from the Scrum lecture): «The Burn-down Chart is the number one reason for Scrum's popularity and one of the best project visibility tools.» The graph shows remaining work (hours/story points) per day in a sprint.</p>
 
   <div class="fig">
     <div class="fig-title">Burn-down Chart — idealverdi vs faktisk</div>
@@ -472,7 +472,7 @@
         <line x1="55" y1="195" x2="85" y2="195" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="6,3"/>
         <text x="90" y="198" fill="#64748b" font-size="9" font-family="sans-serif">Ideal</text>
         <line x1="130" y1="195" x2="160" y2="195" stroke="#06b6d4" stroke-width="2"/>
-        <text x="165" y="198" fill="#64748b" font-size="9" font-family="sans-serif">Faktisk</text>
+        <text x="165" y="198" fill="#64748b" font-size="9" font-family="sans-serif">Actual</text>
       </svg>
     </div>
     <div class="fig-caption">Burndown velocity = helningen på grafen. Avvik mellom ideal og faktisk synliggjør om prosjektet er på rute.</div>
@@ -613,14 +613,14 @@
         <li><strong>Scenario B:</strong> En startup skal lage en ny app, men vet ikke helt hva brukerne egentlig trenger. De vil involvere tidlige brukere kontinuerlig og lansere raskt.</li>
         <li><strong>Scenario C:</strong> Et stort finansforetak skal migrere et legacy-system. Teknologirisikoen er høy (ukjent), men de kan jobbe internt uten ekstern klient.</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>A → Waterfall.</strong> Kravene er stabile og frosne (kontrakt). Dokumentasjonskravet passer Waterfall. Kenneth: «This model can only be applied when the requirements are well understood and unlikely to change.»</p>
         <p style="margin-top:.6rem"><strong>B → Agile (Scrum/XP).</strong> Vage krav + kontinuerlig brukerfeedback + rask lansering = kjernen i Agile. Kenneth: «Agile is adaptable to changing requirements. Immediate feedback is provided by the client.»</p>
         <p style="margin-top:.6rem"><strong>C → Spiral.</strong> Høy teknologirisiko + intern utvikling = Spiral. Kenneth: «It's more appropriate for internal development. The risk evaluation can help reduce development problems.»</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -639,7 +639,7 @@
         <li>d) I starten valgte teamet 15 av 80 features å jobbe med denne perioden. Hva heter listen de 80 er på? Hva heter listen de 15 er på?</li>
         <li>e) Grafen som viser gjenstående arbeid per dag — hva heter den, og hva avdekker den?</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <ul>
@@ -650,7 +650,7 @@
           <li><strong>e) Burn-down Chart</strong> — avdekker om teamet er på rute. Burndown velocity (helningen) lar deg beregne estimert fullføringsdato.</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -667,7 +667,7 @@
         <li>b) Hvilken prosess ville Kenneth anbefalt for et banksystem? Begrunn.</li>
         <li>c) Hva er problemet med «messy code» i Code &amp; Fix over tid?</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <p><strong>a)</strong></p>
@@ -679,7 +679,7 @@
         <p style="margin-top:.6rem"><strong>b)</strong> For et banksystem: <strong>Waterfall eller Spiral</strong>. Bankkrav er typisk godt definerte (regulatoriske krav) → Waterfall passer. Hvis risikoen er høy (ny teknologi) → Spiral. Begge håndhever formalitet og dokumentasjon.</p>
         <p style="margin-top:.6rem"><strong>c)</strong> Teknisk gjeld bygger seg opp. Workarounds legges over workarounds. Kenneth: «Very often the code structure is going to be messy because you're going to put many workarounds in your source code to make it work.» Over tid blir koden nesten umulig å vedlikeholde.</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -726,12 +726,12 @@ function toggleEx(header){
 function toggleSol(btn){
   const sol=btn.nextElementSibling;
   const show=sol.classList.toggle('show');
-  btn.textContent=show?'Skjul løsning':'Vis løsning';
+  btn.textContent=show?'Hide solution':'Show solution';
 }
 function markDone(btn,id){
   btn.classList.toggle('done');
   const done=btn.classList.contains('done');
-  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  btn.textContent=done?'✓ Done!':'✓ Mark as done';
   const p=getModP();
   const s=new Set(p.doneExercises||[]);
   done?s.add(id):s.delete(id);
@@ -804,7 +804,7 @@ function updateNav(){
   const p=getModP();
   (p.doneExercises||[]).forEach(id=>{
     const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+    if(btn){btn.classList.add('done');btn.textContent='✓ Done!';}
   });
   updateNav();
 })();

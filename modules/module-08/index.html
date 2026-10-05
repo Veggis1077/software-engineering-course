@@ -142,41 +142,41 @@
 <body>
 
 <nav>
-  <a href="../../index.html" class="nav-back">← Hjem</a>
-  <span class="nav-title">Modul 8 — Use Case Specification</span>
+  <a href="../../index.html" class="nav-back">← Home</a>
+  <span class="nav-title">Module 8 — Use Case Specification</span>
   <span class="nav-prog" id="nav-prog"></span>
 </nav>
 
 <div class="hero">
-  <div class="module-tag">Modul 08</div>
+  <div class="module-tag">Module 08</div>
   <h1>Use Case Specification</h1>
-  <p>Lær å skrive presise use case-spesifikasjoner med basic flow, extension points, alternative flows og subflows — direkte fra Kenneth's forelesninger.</p>
+  <p>Learn to write precise use case specifications with basic flow, extension points, alternative flows and subflows — drawn directly from Kenneth's lectures.</p>
   <div class="hero-meta">
-    <span class="meta-pill">📖 4 seksjoner</span>
-    <span class="meta-pill">🎯 10 quizspørsmål</span>
-    <span class="meta-pill">✏️ 3 oppgaver</span>
+    <span class="meta-pill">📖 4 sections</span>
+    <span class="meta-pill">🎯 10 quiz questions</span>
+    <span class="meta-pill">✏️ 3 exercises</span>
     <span class="meta-pill">⏱ ~40 min</span>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Theory</button>
   <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Exercises</button>
 </div>
 
 <div class="content">
 <!-- ═══════════════════ THEORY ═══════════════════ -->
 <div class="panel active" id="panel-theory">
 
-<!-- ─── SEKSJON 1: Use Case Specification Format ─── -->
+<!-- ─── SECTION 1: Use Case Specification Format ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">1</div>
-    <h2>Use Case Specification — de 8 komponentene</h2>
+    <h2>Use Case Specification — the 8 components</h2>
   </div>
 
-  <p class="prose">En use case-spesifikasjon er et tekstdokument som presist beskriver flyten av hendelser innenfor én use case. Kenneth sier: «We have to specify what the system and the actor should perform within the use case.» Klikk på hver rad for å forstå den i detalj:</p>
+  <p class="prose">A use case specification is a text document that precisely describes the flow of events within one use case. Kenneth says: «We have to specify what the system and the actor should perform within the use case.» Click each row to explore it in detail:</p>
 
   <div class="uc-spec">
     <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-1')">
@@ -184,7 +184,7 @@
       <div class="uc-val">Register for Courses</div>
     </div>
     <div class="uc-explain" id="uc-exp-1">
-      <strong>Obligatorisk.</strong> Bruk present tense, aktiv form, fra aktørens perspektiv. Eks: «Register for Courses», «Withdraw Money», «Select Courses to Teach». Reflekterer hva aktøren gjør — ikke hva systemet gjør.
+      <strong>Required.</strong> Use present tense, active voice, from the actor's perspective. E.g.: «Register for Courses», «Withdraw Money», «Select Courses to Teach». Reflects what the actor does — not what the system does.
     </div>
 
     <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-2')">
@@ -192,7 +192,7 @@
       <div class="uc-val">This use case describes how a student registers for courses for a given semester. It begins when the student chooses to register and ends when the schedule is confirmed.</div>
     </div>
     <div class="uc-explain" id="uc-exp-2">
-      <strong>Obligatorisk.</strong> Kort og presis — formål og overordnet oversikt. Inkluder: hva use casen gjør, hvem som initierer den, og når den slutter. Hold det til 2–4 setninger.
+      <strong>Required.</strong> Short and precise — purpose and high-level overview. Include: what the use case does, who initiates it, and when it ends. Keep it to 2–4 sentences.
     </div>
 
     <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-3')">
@@ -200,178 +200,178 @@
       <div class="uc-val">Student (initiator), Billing System (secondary)</div>
     </div>
     <div class="uc-explain" id="uc-exp-3">
-      <strong>Obligatorisk.</strong> List alle aktører — primær (den som initierer) og sekundær (andre systemer/aktører som deltar). Skillnaden mellom primær og sekundær er viktig for use case-diagrammet (pil vs linje).
+      <strong>Required.</strong> List all actors — primary (the one who initiates) and secondary (other systems/actors that participate). The distinction between primary and secondary matters for the use case diagram (arrow vs plain line).
     </div>
 
     <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-4')">
       <div class="uc-label">Preconditions</div>
-      <div class="uc-val"><em>(bare hvis nødvendig)</em><br>The student is logged in to the system.</div>
+      <div class="uc-val"><em>(only if necessary)</em><br>The student is logged in to the system.</div>
     </div>
     <div class="uc-explain" id="uc-exp-4">
-      <strong>Valgfri — bare legg til hvis use casen IKKE kan utføres uten visse forutsetninger.</strong>
+      <strong>Optional — only add if the use case CANNOT be performed without certain preconditions.</strong>
       <br><br>
       Kenneth: «A precondition is a statement about the state that the system and/or the actor must be in for the use case to be performed.»
       <br><br>
-      To kritiske regler:
+      Two critical rules:
       <ul style="margin:.5rem 0 0 1.2rem">
-        <li><strong>Precondition sier HVA som må være sant — ikke HVORDAN gjøre det sant.</strong> Skriv: «Student is logged in», ikke «Student must log in by entering username and password».</li>
-        <li><strong>Preconditions gjør use cases uavhengige av hverandre.</strong> Du trenger ikke beskrive login-flyten inne i Register-use casen — precondition fanger kravet uten å koble de to use casene.</li>
+        <li><strong>Precondition states WHAT must be true — not HOW to make it true.</strong> Write: «Student is logged in», not «Student must log in by entering username and password».</li>
+        <li><strong>Preconditions keep use cases independent of each other.</strong> You don't need to describe the login flow inside the Register use case — the precondition captures the requirement without coupling the two use cases.</li>
       </ul>
       <br>
-      ATM-eksempel: precondition for «Withdraw Money» → «Balance ≥ amount to withdraw». Dette er HVA som må være sant, ikke en forklaring av hvordan systemet sjekker det.
+      ATM example: precondition for «Withdraw Money» → «Balance ≥ amount to withdraw». This states WHAT must be true, not an explanation of how the system checks it.
     </div>
 
     <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-5')">
       <div class="uc-label">Flow of Events</div>
-      <div class="uc-val"><em>Basic Flow + Alternative Flows (se nedenfor)</em></div>
+      <div class="uc-val"><em>Basic Flow + Alternative Flows (see below)</em></div>
     </div>
     <div class="uc-explain" id="uc-exp-5">
-      <strong>Obligatorisk.</strong> Beskriv sekvensen av handlinger — hva systemet og aktøren gjør. Start alltid med <em>basic flow</em> (normaltilfellet). Legg til <em>alternative flows</em> etterpå for unntak, varianter og valgfri atferd.
+      <strong>Required.</strong> Describe the sequence of actions — what the system and actor do. Always start with the <em>basic flow</em> (the normal path). Add <em>alternative flows</em> afterwards for exceptions, variants and optional behavior.
       <br><br>
-      Basic flow skrives som pseudokode: <code>if/then</code>, <code>while</code>, <code>repeat</code>. Kenneth: «It's kind of like specifying the flow of events using pseudo-code.»
+      Basic flow is written as pseudo-code: <code>if/then</code>, <code>while</code>, <code>repeat</code>. Kenneth: «It's kind of like specifying the flow of events using pseudo-code.»
     </div>
 
     <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-6')">
       <div class="uc-label">Postconditions</div>
-      <div class="uc-val"><em>(bare hvis viktig)</em><br>The student's schedule is confirmed and saved. The billing system has been notified.</div>
+      <div class="uc-val"><em>(only if important)</em><br>The student's schedule is confirmed and saved. The billing system has been notified.</div>
     </div>
     <div class="uc-explain" id="uc-exp-6">
-      <strong>Valgfri — bare legg til hvis nødvendig.</strong> Kenneth: «A postcondition is only needed if the system state when the use case ends is important to an actor, OR if the completion leaves the system in a state that may need to be a precondition for another use case.»
+      <strong>Optional — only add when necessary.</strong> Kenneth: «A postcondition is only needed if the system state when the use case ends is important to an actor, OR if the completion leaves the system in a state that may need to be a precondition for another use case.»
       <br><br>
-      ATM-eksempel: postcondition for «Withdraw Money» → «Balance is still non-negative after withdrawal.»
+      ATM example: postcondition for «Withdraw Money» → «Balance is still non-negative after withdrawal.»
       <br><br>
-      Formål: hjelper stakeholders forstå hva resultatet av use casen er — spesielt viktig når resultattilstanden ikke er åpenbar.
+      Purpose: helps stakeholders understand the outcome of the use case — especially important when the resulting state is not obvious.
     </div>
 
     <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-7')">
       <div class="uc-label">Alternative Flows</div>
-      <div class="uc-val"><em>A1, A2, ... An — se Seksjon 2</em></div>
+      <div class="uc-val"><em>A1, A2, ... An — see Section 2</em></div>
     </div>
     <div class="uc-explain" id="uc-exp-7">
-      <strong>Legg til etter behov.</strong> Alternative flows beskriver valgfri, variant eller eksepsjonell atferd. De nummereres A1, A2, ..., An. Hvert alternative flow spesifiserer eksplisitt <em>where it resumes</em> i slutten. Se Seksjon 2 for detaljert gjennomgang.
+      <strong>Add as needed.</strong> Alternative flows describe optional, variant or exceptional behavior. They are numbered A1, A2, ..., An. Each alternative flow explicitly specifies <em>where it resumes</em> at the end. See Section 2 for a detailed walkthrough.
     </div>
 
     <div class="uc-row clickable" onclick="toggleUCRow(this,'uc-exp-8')">
       <div class="uc-label">Non-Functional Req.</div>
-      <div class="uc-val"><em>(bare hvis relevant for akkurat denne use casen)</em><br>The registration must complete within 3 seconds.</div>
+      <div class="uc-val"><em>(only if relevant to this specific use case)</em><br>The registration must complete within 3 seconds.</div>
     </div>
     <div class="uc-explain" id="uc-exp-8">
-      <strong>Valgfri.</strong> Kun ikke-funksjonelle krav som er spesifikke for <em>denne</em> use casen (f.eks. responstid for registrering). Generelle system-NFR plasseres i SRS, ikke her.
+      <strong>Optional.</strong> Only non-functional requirements specific to <em>this</em> use case (e.g. response time for registration). General system-wide NFRs belong in the SRS, not here.
     </div>
   </div>
 
   <div class="callout warn" style="margin-top:1.25rem">
-    <div class="callout-title">Precondition vs Postcondition — klassisk eksamensspørsmål</div>
-    <p><strong>Precondition</strong> = tilstand systemet/aktøren MÅ være i <em>før</em> use casen starter. Sier HVA som er sant, ikke HVORDAN det ble sant. Gjør use cases uavhengige av hverandre.<br><br>
-    <strong>Postcondition</strong> = tilstand systemet er i <em>etter</em> use casen. Bare nødvendig hvis tilstanden er viktig for en annen use case, eller ikke er åpenbar.</p>
+    <div class="callout-title">Precondition vs Postcondition — classic exam question</div>
+    <p><strong>Precondition</strong> = state the system/actor MUST be in <em>before</em> the use case starts. States WHAT is true, not HOW it became true. Keeps use cases independent of each other.<br><br>
+    <strong>Postcondition</strong> = state the system is in <em>after</em> the use case. Only necessary if that state matters to another use case, or is not obvious.</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 2: Extension Points og Alternative Flows ─── -->
+<!-- ─── SECTION 2: Extension Points and Alternative Flows ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">2</div>
-    <h2>Extension Points og Alternative Flows</h2>
+    <h2>Extension Points and Alternative Flows</h2>
   </div>
 
-  <p class="prose">Et <strong>extension point</strong> er et navngitt sted i flyten av hendelser — en label — der alternativ atferd kan settes inn. Kenneth forklarer: «Extension points are primarily used for defining alternative flows — alternative, exceptional, or optional behavior within the use case specification.»</p>
+  <p class="prose">An <strong>extension point</strong> is a named place in the flow of events — a label — where alternative behavior can be inserted. Kenneth explains: «Extension points are primarily used for defining alternative flows — alternative, exceptional, or optional behavior within the use case specification.»</p>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">De tre typene extension points</h3>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">The three types of extension points</h3>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-bottom:1.25rem">
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent)">
       <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Single Location</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Labelen forekommer <strong style="color:#cbd5e1">nøyaktig én gang</strong> i spesifikasjonen. Eksempel: «enter term» vises bare ett sted i flyten.</p>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">The label appears <strong style="color:#cbd5e1">exactly once</strong> in the specification. Example: «enter term» appears at only one place in the flow.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent2)">
       <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Discrete Locations</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Labelen forekommer på <strong style="color:#cbd5e1">to eller flere spesifikke steder</strong>. Eks: «line passed» vises i create activity OG i modify activity.</p>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">The label appears at <strong style="color:#cbd5e1">two or more specific places</strong>. E.g.: «line passed» appears in the create activity AND in the modify activity.</p>
     </div>
     <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent3)">
       <div style="font-size:.78rem;font-weight:700;color:var(--accent3);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Region</div>
-      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Definerer et <strong style="color:#cbd5e1">område mellom to extension points</strong>. Alt som skjer innenfor regionen kan referere til den. Eks: fra «begin modifying» til «confirm modifying».</p>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Defines a <strong style="color:#cbd5e1">span between two extension points</strong>. Anything within the region can reference it. E.g.: from «begin modifying» to «confirm modifying».</p>
     </div>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .5rem">De tre typene alternative flows</h3>
-  <p class="prose">Alternative flows nummereres A1, A2, ..., An. Klikk for å utforske forskjellene:</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .5rem">The three types of alternative flows</h3>
+  <p class="prose">Alternative flows are numbered A1, A2, ..., An. Click to explore the differences:</p>
 
   <div class="af-grid">
-    <div class="af-card" onclick="showAF(this,'specific','<strong>Specific Alternative Flow</strong><br><br>Starter ved ett spesifikt extension point. Første linje har formen:<br><br><code>At [extension point], if/when [condition], [action].</code><br><br>Eks: «At <em>select activity</em>, if the instructor entered the wrong term or year, the system informs the instructor that the term or year is invalid. The flow of events resumes at <em>enter term</em>.»<br><br>Avhenger av at noe spesifikt skjer på et spesifikt sted i flyten.')">
+    <div class="af-card" onclick="showAF(this,'specific','<strong>Specific Alternative Flow</strong><br><br>Starts at one specific extension point. First line takes the form:<br><br><code>At [extension point], if/when [condition], [action].</code><br><br>E.g.: «At <em>select activity</em>, if the instructor entered the wrong term or year, the system informs the instructor that the term or year is invalid. The flow of events resumes at <em>enter term</em>.»<br><br>Depends on something specific happening at a specific place in the flow.')">
       <div class="af-sym">A1</div>
       <div class="af-title">Specific</div>
-      <p style="font-size:.8rem;color:var(--muted)">Starter ved ett navngitt extension point</p>
+      <p style="font-size:.8rem;color:var(--muted)">Starts at one named extension point</p>
     </div>
-    <div class="af-card" onclick="showAF(this,'bounded','<strong>Bounded Alternative Flow</strong><br><br>Kan skje <em>mellom</em> to extension points — innenfor en region. Første linje:<br><br><code>Between [EP1] and [EP2], if/when [condition], [action].</code><br><br>Eks: «Between <em>begin modifying schedule</em> and <em>confirm modifying schedule</em>, if a schedule already exists, show a popup. The flow of events resumes at <em>select activity</em>.»<br><br>Nyttig for å modellere feil som kan oppstå gjennom en hel sekvens.')">
+    <div class="af-card" onclick="showAF(this,'bounded','<strong>Bounded Alternative Flow</strong><br><br>Can occur <em>between</em> two extension points — within a region. First line:<br><br><code>Between [EP1] and [EP2], if/when [condition], [action].</code><br><br>E.g.: «Between <em>begin modifying schedule</em> and <em>confirm modifying schedule</em>, if a schedule already exists, show a popup. The flow of events resumes at <em>select activity</em>.»<br><br>Useful for modeling errors that can arise throughout a whole sequence.')">
       <div class="af-sym">A2</div>
       <div class="af-title">Bounded</div>
-      <p style="font-size:.8rem;color:var(--muted)">Skjer mellom to extension points (region)</p>
+      <p style="font-size:.8rem;color:var(--muted)">Occurs between two extension points (region)</p>
     </div>
-    <div class="af-card" onclick="showAF(this,'general','<strong>General Alternative Flow</strong><br><br>Kan starte <em>når som helst</em> i flyten — ikke knyttet til et spesifikt sted. Første linje:<br><br><code>At any time, if/when [condition], [action].</code><br><br>Eks: «At any time, if the student cancels, the system discards all changes. The use case ends.»<br><br>Brukes typisk for generelle unntak: tidstidsavbrudd, avbryting, nettverksfeil.')">
+    <div class="af-card" onclick="showAF(this,'general','<strong>General Alternative Flow</strong><br><br>Can start <em>at any time</em> in the flow — not tied to a specific place. First line:<br><br><code>At any time, if/when [condition], [action].</code><br><br>E.g.: «At any time, if the student cancels, the system discards all changes. The use case ends.»<br><br>Typically used for generic exceptions: timeouts, cancellation, network errors.')">
       <div class="af-sym">A3</div>
       <div class="af-title">General</div>
-      <p style="font-size:.8rem;color:var(--muted)">Kan starte når som helst i flyten</p>
+      <p style="font-size:.8rem;color:var(--muted)">Can start at any time in the flow</p>
     </div>
   </div>
-  <div class="af-explain-box" id="af-explain">Klikk på en alternativ-flow-type for forklaring.</div>
+  <div class="af-explain-box" id="af-explain">Click an alternative flow type for an explanation.</div>
 
   <div class="callout danger" style="margin-top:1.25rem">
-    <div class="callout-title">Siste linje i alternative flow — obligatorisk</div>
-    <p>Kenneth er eksplisitt: «The last line of an alternative flow must specify the exit point of the flow — where the actor resumes the flow of events.»</p>
+    <div class="callout-title">Last line of an alternative flow — required</div>
+    <p>Kenneth is explicit: «The last line of an alternative flow must specify the exit point of the flow — where the actor resumes the flow of events.»</p>
     <ul>
-      <li><strong>Valgfri atferd</strong> → resume ved original extension point</li>
-      <li><strong>Variant atferd</strong> → resume ved et annet extension point</li>
-      <li><strong>Eksepsjonell atferd</strong> → resume ved original EP, et annet EP, <em>eller</em> use casen slutter</li>
+      <li><strong>Optional behavior</strong> → resume at the original extension point</li>
+      <li><strong>Variant behavior</strong> → resume at a different extension point</li>
+      <li><strong>Exceptional behavior</strong> → resume at original EP, a different EP, <em>or</em> the use case ends</li>
     </ul>
-    <p style="margin-top:.5rem">Glem denne linjen på eksamen = feil svar. Alltid spesifiser eksplisitt.</p>
+    <p style="margin-top:.5rem">Forget this line on the exam = wrong answer. Always specify it explicitly.</p>
   </div>
 </div>
 
-<!-- ─── SEKSJON 3: Subflows ─── -->
+<!-- ─── SECTION 3: Subflows ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">3</div>
     <h2>Subflows</h2>
   </div>
 
-  <p class="prose">En <strong>subflow</strong> er et segment av hendelser innenfor en use case som har et klart formål og er atomisk — man trekker det ut for å forbedre lesbarheten. Kenneth: «By using subflow, we can improve the readability of a use case specification.»</p>
+  <p class="prose">A <strong>subflow</strong> is a segment of events within a use case that has a clear purpose and is atomic — extracted to improve readability. Kenneth: «By using subflow, we can improve the readability of a use case specification.»</p>
 
   <div class="two-col">
     <div style="background:var(--surface2);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--success);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Subflow — regler</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--success);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Subflow — rules</div>
       <ul style="font-size:.87rem;color:#cbd5e1;line-height:1.7;margin-left:1.2rem">
-        <li>Nummereres <strong style="color:#f1f5f9">S1, S2, ..., Sn</strong></li>
-        <li>Gi hvert subflow et <strong style="color:#f1f5f9">beskrivende navn</strong></li>
-        <li><strong style="color:#f1f5f9">Ingen nesting</strong> — ikke legg subflows inni subflows</li>
-        <li>Et subflow er <strong style="color:#f1f5f9">ikke en separat use case</strong> — bare en del av den</li>
+        <li>Numbered <strong style="color:#f1f5f9">S1, S2, ..., Sn</strong></li>
+        <li>Give each subflow a <strong style="color:#f1f5f9">descriptive name</strong></li>
+        <li><strong style="color:#f1f5f9">No nesting</strong> — don't put subflows inside subflows</li>
+        <li>A subflow is <strong style="color:#f1f5f9">not a separate use case</strong> — just a part of one</li>
       </ul>
     </div>
     <div style="background:var(--surface2);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:1rem">
-      <div style="font-size:.78rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Subflow vs separat use case</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--danger);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em">Subflow vs separate use case</div>
       <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Kenneth: «A subflow is not a separate use case. It's just part of the use case — a segment that is meaningful and has a clear purpose.»</p>
-      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem">Separat use case: ville du noen gang gjort <em>bare</em> dette trinnet uten resten? Hvis nei → subflow.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem">Separate use case test: would you ever do <em>just</em> this step without the rest? If no → subflow.</p>
     </div>
   </div>
 
   <div class="callout info" style="margin-top:1rem">
-    <div class="callout-title">Ikke dele opp for mye — Kenneth's poeng</div>
-    <p>Kenneth advarer mot over-splitting: «Use cases do not directly communicate with each other. We assume use cases are intended to be independent of each other.»</p>
-    <p style="margin-top:.5rem">Eksempel på feil: «Select Products», «Enter Order Info», «Enter Shipping Info», «Enter Payment», «Confirm Order» — alle som separate use cases. Kenneth: «They are too small. They are simply part of the story, not the entire story.» <strong>Løsning:</strong> Grupper alt til én stor «Place Order»-use case og bruk subflows for delene.</p>
+    <div class="callout-title">Don't over-split — Kenneth's point</div>
+    <p>Kenneth warns against splitting too much: «Use cases do not directly communicate with each other. We assume use cases are intended to be independent of each other.»</p>
+    <p style="margin-top:.5rem">Example of over-splitting: «Select Products», «Enter Order Info», «Enter Shipping Info», «Enter Payment», «Confirm Order» — all as separate use cases. Kenneth: «They are too small. They are simply part of the story, not the entire story.» <strong>Solution:</strong> Group everything into one «Place Order» use case and use subflows for the parts.</p>
     <p style="margin-top:.5rem">Test: «Would you ever do just one thing without doing the others? If you have to do other things together anyway, then why don't you group them together?»</p>
   </div>
 
-  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">Hvor mye detalj er nok?</h3>
-  <p class="prose">Kenneth's tommelfingerregel: «There should be enough detail so that all the stakeholders understand what's happening within the use case. The basic flow should unambiguously describe the required behavior. Keep asking yourself, <em>what does this mean?</em> — until all ambiguities have been resolved.»</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.5rem 0 .75rem">How much detail is enough?</h3>
+  <p class="prose">Kenneth's rule of thumb: «There should be enough detail so that all the stakeholders understand what's happening within the use case. The basic flow should unambiguously describe the required behavior. Keep asking yourself, <em>what does this mean?</em> — until all ambiguities have been resolved.»</p>
 </div>
 
-<!-- ─── SEKSJON 4: Komplett eksempel ─── -->
+<!-- ─── SECTION 4: Complete example ─── -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">4</div>
-    <h2>Komplett eksempel — «Select Courses to Teach» (ASU)</h2>
+    <h2>Complete example — «Select Courses to Teach» (ASU)</h2>
   </div>
 
-  <p class="prose">Kenneth bruker ASU Course Registration System som gjennomgående eksempel. Her er en komplett use case-spesifikasjon med alle elementer — klikk på radene for forklaringer.</p>
+  <p class="prose">Kenneth uses the ASU Course Registration System as a running example. Here is a complete use case specification with all elements — click the rows for explanations.</p>
 
   <div class="uc-spec">
     <div class="uc-row">
@@ -439,7 +439,7 @@
     <div class="flow-step"><span class="step-num">2.</span><span class="step-text"><strong style="color:#86efac">The flow of events resumes at <em>select activity</em>.</strong></span></div>
   </div>
 
-  <div class="fig-caption" style="margin-top:.75rem">Extension points er markert <span class="ep-tag">EP</span>. Subflows er markert <span class="sub-tag">S1/S2</span>. Legg merke til at hvert alternative flow eksplisitt angir hvor flyten gjenopptas (grønn tekst).</div>
+  <div class="fig-caption" style="margin-top:.75rem">Extension points are marked <span class="ep-tag">EP</span>. Subflows are marked <span class="sub-tag">S1/S2</span>. Notice that each alternative flow explicitly states where the flow resumes (green text).</div>
 </div>
 
 </div><!-- /panel-theory -->
@@ -456,22 +456,22 @@
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 1</span>
-      <h3>Skriv en use case-spesifikasjon for «Withdraw Money» (ATM)</h3>
+      <h3>Write a use case specification for «Withdraw Money» (ATM)</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
-      <p><strong>Scenario:</strong> Du skal skrive en komplett use case-spesifikasjon for use casen «Withdraw Money» fra et ATM-system. Kenneth bruker dette eksempelet direkte i forelesningen.</p>
+      <p><strong>Scenario:</strong> Write a complete use case specification for the use case «Withdraw Money» from an ATM system. Kenneth uses this example directly in the lecture.</p>
       <ul>
-        <li>Aktøren er en <strong>Bank Customer</strong></li>
-        <li>Kunden setter inn kortet, taster PIN, velger beløp og tar ut pengene</li>
-        <li>Systemet skal sjekke at saldo er tilstrekkelig</li>
-        <li>Systemet skal oppdatere saldo etter uttak</li>
-        <li>Alternative tilfeller: feil PIN, utilstrekkelig saldo, kunden avbryter</li>
+        <li>The actor is a <strong>Bank Customer</strong></li>
+        <li>The customer inserts the card, enters PIN, selects an amount and takes the cash</li>
+        <li>The system must check that the balance is sufficient</li>
+        <li>The system must update the balance after withdrawal</li>
+        <li>Alternative cases: wrong PIN, insufficient balance, customer cancels</li>
       </ul>
-      <p style="margin-top:.75rem">Skriv: Use Case Name, Brief Description, Participating Actors, Precondition, Basic Flow (med minst ett extension point), Postcondition, og minst to alternative flows (spesifiser type for hvert).</p>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <p style="margin-top:.75rem">Write: Use Case Name, Brief Description, Participating Actors, Precondition, Basic Flow (with at least one extension point), Postcondition, and at least two alternative flows (specify the type for each).</p>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
-        <div class="sol-title">Løsning</div>
+        <div class="sol-title">Solution</div>
         <p><strong>Use Case Name:</strong> Withdraw Money</p>
         <p><strong>Brief Description:</strong> This use case describes how a bank customer withdraws cash from an ATM. It begins when the customer inserts their card and ends when the cash is dispensed or the transaction is cancelled.</p>
         <p><strong>Participating Actors:</strong> Bank Customer (initiator), Banking System (secondary)</p>
@@ -491,53 +491,53 @@
         <p><strong>A2 (Specific — Insufficient Balance):</strong> At <em>amount entered</em>, if the balance is less than the requested amount: the system displays an insufficient funds message. The flow resumes at <em>amount entered</em>.</p>
         <p><strong>A3 (General — Customer Cancels):</strong> At any time, if the Customer presses Cancel: the system ejects the card and discards all changes. The use case ends.</p>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Mark as done</button>
     </div>
   </div>
 
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 2</span>
-      <h3>Identifiser type alternative flow</h3>
+      <h3>Identify the type of alternative flow</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
-      <p>For hvert alternative flow nedenfor: identifiser om det er <strong>Specific</strong>, <strong>Bounded</strong>, eller <strong>General</strong>. Begrunn svaret.</p>
+      <p>For each alternative flow below: identify whether it is <strong>Specific</strong>, <strong>Bounded</strong>, or <strong>General</strong>. Justify your answer.</p>
       <ul>
         <li style="margin-bottom:.6rem"><strong>a)</strong> «At any time, if the network connection is lost, the system displays an error and the use case ends.»</li>
         <li style="margin-bottom:.6rem"><strong>b)</strong> «At <em>confirm order</em>, if the payment fails, the system prompts the customer to retry. The flow resumes at <em>enter payment</em>.»</li>
         <li style="margin-bottom:.6rem"><strong>c)</strong> «Between <em>begin checkout</em> and <em>confirm checkout</em>, if the shopping cart becomes empty, the system returns to the main page. The use case ends.»</li>
         <li style="margin-bottom:.6rem"><strong>d)</strong> «At <em>select activity</em> and <em>modify schedule</em>, if the deadline has passed, the system displays a message. The flow resumes at <em>select activity</em>.»</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
-        <div class="sol-title">Løsning</div>
+        <div class="sol-title">Solution</div>
         <ul>
-          <li><strong>a) General</strong> — «At any time» er den klassiske formuleringen for general alternative flow. Kan starte når som helst i flyten, ikke knyttet til et spesifikt sted.</li>
-          <li><strong>b) Specific</strong> — «At <em>confirm order</em>» peker på ett spesifikt extension point. Første linje: «At [EP], if [condition]» — typisk specific.</li>
-          <li><strong>c) Bounded</strong> — «Between <em>begin checkout</em> and <em>confirm checkout</em>» definerer en region mellom to extension points. Klassiisk bounded.</li>
-          <li><strong>d) Discrete locations (Specific)</strong> — «At <em>select activity</em> and <em>modify schedule</em>» viser at det er en discrete locations extension point (forekommer på to steder). Alternative flowen er fortsatt av typen Specific (knyttet til navngitte extension points, selv om de er to).</li>
+          <li><strong>a) General</strong> — «At any time» is the classic phrasing for a general alternative flow. It can start at any point in the flow, not tied to a specific place.</li>
+          <li><strong>b) Specific</strong> — «At <em>confirm order</em>» points to one specific extension point. First line: «At [EP], if [condition]» — typical specific.</li>
+          <li><strong>c) Bounded</strong> — «Between <em>begin checkout</em> and <em>confirm checkout</em>» defines a region between two extension points. Classic bounded.</li>
+          <li><strong>d) Discrete locations (Specific)</strong> — «At <em>select activity</em> and <em>modify schedule</em>» indicates a discrete locations extension point (appears at two places). The alternative flow type is still Specific (tied to named extension points, even though there are two).</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Mark as done</button>
     </div>
   </div>
 
   <div class="exercise">
     <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 3</span>
-      <h3>Subflow eller separat use case?</h3>
+      <h3>Subflow or separate use case?</h3>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body">
-      <p>Kenneth advarer mot å dele opp for mye. For hvert scenario: avgjør om det bør være en <strong>subflow</strong>, en <strong>separat use case</strong>, eller et <strong>alternative flow</strong>. Bruk Kenneths test: «Would you ever do just this one thing without doing the others?»</p>
+      <p>Kenneth warns against splitting too much. For each scenario: decide whether it should be a <strong>subflow</strong>, a <strong>separate use case</strong>, or an <strong>alternative flow</strong>. Use Kenneth's test: «Would you ever do just this one thing without doing the others?»</p>
       <ul>
         <li style="margin-bottom:.6rem"><strong>a)</strong> «Enter Payment Information» som del av «Place Order»</li>
         <li style="margin-bottom:.6rem"><strong>b)</strong> «View Order History» — en student kan åpne dette uavhengig fra menyen</li>
         <li style="margin-bottom:.6rem"><strong>c)</strong> «Create Schedule» og «Modify Schedule» som deler av «Select Courses to Teach»</li>
         <li style="margin-bottom:.6rem"><strong>d)</strong> «System disconnects unexpectedly» som del av en hvilken som helst use case</li>
       </ul>
-      <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
+      <button class="sol-btn" onclick="toggleSol(this)">Show solution</button>
       <div class="solution">
         <div class="sol-title">Løsning</div>
         <ul>
@@ -547,7 +547,7 @@
           <li><strong>d) General Alternative Flow.</strong> «System disconnects» er ikke en subflow (ikke et segment av normalflyten) og ikke en separat use case. Det er eksepsjonell atferd som kan skje når som helst — typisk general alternative flow. «At any time, if the connection is lost...»</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Mark as done</button>
     </div>
   </div>
 
@@ -590,12 +590,12 @@ function toggleEx(header){
 function toggleSol(btn){
   const sol=btn.nextElementSibling;
   const show=sol.classList.toggle('show');
-  btn.textContent=show?'Skjul løsning':'Vis løsning';
+  btn.textContent=show?'Hide solution':'Show solution';
 }
 function markDone(btn,id){
   btn.classList.toggle('done');
   const done=btn.classList.contains('done');
-  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  btn.textContent=done?'✓ Done!':'✓ Mark as done';
   const p=getModP();
   const s=new Set(p.doneExercises||[]);
   done?s.add(id):s.delete(id);
@@ -668,7 +668,7 @@ function updateNav(){
   const p=getModP();
   (p.doneExercises||[]).forEach(id=>{
     const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
+    if(btn){btn.classList.add('done');btn.textContent='✓ Done!';}
   });
   updateNav();
 })();
