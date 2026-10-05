@@ -3,56 +3,359 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Software Engineering — Læringsportal</title>
+  <title>Software Engineering</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
-    header { padding: 2.5rem 2rem 1.5rem; border-bottom: 1px solid #1e293b; }
-    header h1 { font-size: 1.8rem; font-weight: 700; color: #f8fafc; }
-    header p { margin-top: 0.4rem; color: #94a3b8; font-size: 0.95rem; }
-    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
-    .progress-bar-wrapper { margin: 2rem 0 1rem; }
-    .progress-bar-wrapper label { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.4rem; display: block; }
-    .progress-bar { background: #1e293b; border-radius: 99px; height: 8px; overflow: hidden; }
-    .progress-bar-fill { background: #6366f1; height: 100%; border-radius: 99px; transition: width 0.4s ease; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
-    .card { background: #1e293b; border-radius: 12px; padding: 1.5rem; border: 1px solid #334155; transition: border-color 0.2s, transform 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
-    .card:hover { border-color: #6366f1; transform: translateY(-2px); }
-    .card.locked { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
-    .card-tag { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #6366f1; margin-bottom: 0.5rem; }
-    .card h2 { font-size: 1.05rem; font-weight: 600; color: #f1f5f9; margin-bottom: 0.4rem; }
-    .card p { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; }
-    .card-footer { margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: #0f172a; color: #64748b; }
-    .badge.done { background: #166534; color: #86efac; }
-    .badge.active { background: #1e3a8a; color: #93c5fd; }
-    .coming-soon { text-align: center; padding: 3rem 1rem; color: #475569; }
-    .coming-soon span { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface2: #1a2236;
+      --border: #1f2d45;
+      --accent: #6366f1;
+      --accent2: #06b6d4;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --success: #22c55e;
+      --warn: #f59e0b;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99,102,241,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(99,102,241,.12);
+      border: 1px solid rgba(99,102,241,.3);
+      padding: .3rem .9rem;
+      border-radius: 99px;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: #f8fafc;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      margin: 1.2rem auto 0;
+      max-width: 560px;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+
+    /* ── OVERALL PROGRESS ── */
+    .progress-section {
+      max-width: 720px;
+      margin: 3rem auto 0;
+      padding: 0 1.5rem;
+    }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .6rem;
+    }
+    .progress-header span { font-size: .85rem; color: var(--muted); }
+    .progress-header strong { font-size: .9rem; color: var(--text); }
+    .track {
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .track-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      transition: width .5s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── STATS ROW ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 2.5rem 1.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      display: block;
+    }
+    .stat-label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 1.5rem 1rem;
+      font-size: .78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── MODULE GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      transition: border-color .18s, transform .18s, box-shadow .18s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity .18s;
+    }
+    .card:hover { border-color: rgba(99,102,241,.5); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.35); }
+    .card:hover::before { opacity: 1; }
+
+    .card.locked {
+      opacity: .4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .card.done { border-color: rgba(34,197,94,.25); }
+    .card.done::before { background: linear-gradient(90deg, var(--success), #16a34a); opacity: 1; }
+    .card.active { border-color: rgba(99,102,241,.4); }
+
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .card-num {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(99,102,241,.1);
+      padding: .2rem .6rem;
+      border-radius: 4px;
+    }
+    .card-status {
+      font-size: .72rem;
+      padding: .2rem .6rem;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+    .card-status.done { background: rgba(34,197,94,.12); color: var(--success); }
+    .card-status.active { background: rgba(99,102,241,.12); color: #a5b4fc; }
+    .card-status.locked-label { background: var(--surface2); color: var(--muted); }
+
+    .card h2 { font-size: 1rem; font-weight: 600; color: #f1f5f9; line-height: 1.4; }
+    .card p { font-size: .85rem; color: var(--muted); line-height: 1.55; flex: 1; }
+
+    .card-footer {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      padding-top: .5rem;
+      border-top: 1px solid var(--border);
+    }
+    .pill {
+      font-size: .72rem;
+      padding: .18rem .55rem;
+      border-radius: 99px;
+      background: var(--surface2);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+
+    .card-progress { height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .card-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--muted);
+    }
+    .empty-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; opacity: .5; }
+    .empty h3 { font-size: 1rem; font-weight: 600; color: #475569; margin-bottom: .4rem; }
+    .empty code { font-size: .82rem; color: #475569; background: var(--surface2); padding: .15rem .45rem; border-radius: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: .8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); }
   </style>
 </head>
 <body>
-  <header>
-    <div style="max-width:900px;margin:0 auto;">
-      <h1>Software Engineering</h1>
-      <p>Velg en modul for å starte — fremdriften din lagres automatisk.</p>
-    </div>
-  </header>
 
-  <div class="container">
-    <div class="progress-bar-wrapper">
-      <label id="progress-label">Fremdrift: laster…</label>
-      <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
-    </div>
+  <div class="hero">
+    <div class="hero-tag">HKBU · Software Engineering</div>
+    <h1>Lær <span>Software Engineering</span><br>modul for modul</h1>
+    <p class="hero-sub">Interaktive forklaringer, oppgaver og quizer — fremdriften din lagres automatisk.</p>
+  </div>
 
-    <div class="grid" id="module-grid">
-      <!-- Modulkort legges inn her etter hvert som de bygges -->
-      <div class="coming-soon" style="grid-column:1/-1;">
-        <span>📚</span>
-        Ingen moduler er bygd ennå. Last opp slides til <code>modules/module-01/slides/</code> for å starte.
-      </div>
+  <div class="progress-section">
+    <div class="progress-header">
+      <span>Total fremdrift</span>
+      <strong id="progress-text">0 av 0 moduler</strong>
+    </div>
+    <div class="track"><div class="track-fill" id="track-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-num" id="stat-done">0</span><span class="stat-label">Fullført</span></div>
+    <div class="stat"><span class="stat-num" id="stat-exercises">0</span><span class="stat-label">Oppgaver løst</span></div>
+    <div class="stat"><span class="stat-num" id="stat-quiz">—</span><span class="stat-label">Beste quiz</span></div>
+  </div>
+
+  <div class="section-label">Moduler</div>
+
+  <div class="grid" id="module-grid">
+    <!-- Module cards injected by JS or added statically as modules are built -->
+    <div class="empty">
+      <span class="empty-icon">📂</span>
+      <h3>Ingen moduler ennå</h3>
+      <p>Last opp slides til <code>modules/module-01/slides/</code><br>så bygger vi første modul.</p>
     </div>
   </div>
 
-  <script src="assets/js/progress.js"></script>
+  <footer>
+    <a href="https://github.com/Veggis1077/software-engineering-course" target="_blank">GitHub</a> ·
+    Fremdrift lagres lokalt i nettleseren din
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'se-progress-v1';
+
+    // Module definitions — add entries here as modules are built
+    const MODULES = [
+      // { id: 'mod01', num: '01', title: 'Introduction & Processes', desc: 'Hva er software engineering? Prosesser og livssyklus.', path: 'modules/module-01/', exercises: 5, quizQuestions: 10 },
+    ];
+
+    function getProgress() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+    }
+
+    function renderModules() {
+      const grid = document.getElementById('module-grid');
+      const progress = getProgress();
+
+      if (!MODULES.length) return; // keep empty state
+
+      grid.innerHTML = '';
+      let doneCount = 0, totalExercises = 0, doneExercises = 0, bestQuiz = null;
+
+      MODULES.forEach((mod, i) => {
+        const p = progress[mod.id] || {};
+        const exDone = (p.doneExercises || []).length;
+        const finished = p.finished || false;
+        const isActive = !finished && (i === 0 || progress[MODULES[i-1]?.id]?.finished);
+        const isLocked = i > 0 && !progress[MODULES[i-1]?.id]?.finished && !finished;
+        const quizScore = p.quizScore != null ? Math.round(p.quizScore / (p.quizTotal||1) * 100) : null;
+
+        if (finished) doneCount++;
+        totalExercises += mod.exercises || 0;
+        doneExercises += exDone;
+        if (quizScore != null && (bestQuiz === null || quizScore > bestQuiz)) bestQuiz = quizScore;
+
+        const pct = mod.exercises ? Math.round(exDone / mod.exercises * 100) : 0;
+
+        const statusLabel = finished ? 'Fullført' : isActive ? 'Aktiv' : 'Låst';
+        const statusClass = finished ? 'done' : isActive ? 'active' : 'locked-label';
+        const cardClass = finished ? 'done' : isActive ? 'active' : 'locked';
+
+        grid.innerHTML += `
+          <a href="${mod.path}" class="card ${cardClass}">
+            <div class="card-top">
+              <span class="card-num">Modul ${mod.num}</span>
+              <span class="card-status ${statusClass}">${statusLabel}</span>
+            </div>
+            <h2>${mod.title}</h2>
+            <p>${mod.desc}</p>
+            <div class="card-progress"><div class="card-progress-fill" style="width:${pct}%"></div></div>
+            <div class="card-footer">
+              <span class="pill">📝 ${exDone}/${mod.exercises} oppgaver</span>
+              ${quizScore != null ? `<span class="pill">🎯 Quiz ${quizScore}%</span>` : `<span class="pill">📊 ${mod.quizQuestions} spørsmål</span>`}
+            </div>
+          </a>`;
+      });
+
+      // Update stats
+      const total = MODULES.length;
+      document.getElementById('track-fill').style.width = total ? (doneCount/total*100)+'%' : '0%';
+      document.getElementById('progress-text').textContent = `${doneCount} av ${total} moduler`;
+      document.getElementById('stat-done').textContent = doneCount;
+      document.getElementById('stat-exercises').textContent = `${doneExercises}/${totalExercises}`;
+      document.getElementById('stat-quiz').textContent = bestQuiz != null ? bestQuiz+'%' : '—';
+    }
+
+    renderModules();
+  </script>
 </body>
 </html>
