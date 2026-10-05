@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Engineering — Læringsportal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+    header { padding: 2.5rem 2rem 1.5rem; border-bottom: 1px solid #1e293b; }
+    header h1 { font-size: 1.8rem; font-weight: 700; color: #f8fafc; }
+    header p { margin-top: 0.4rem; color: #94a3b8; font-size: 0.95rem; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .progress-bar-wrapper { margin: 2rem 0 1rem; }
+    .progress-bar-wrapper label { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.4rem; display: block; }
+    .progress-bar { background: #1e293b; border-radius: 99px; height: 8px; overflow: hidden; }
+    .progress-bar-fill { background: #6366f1; height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+    .card { background: #1e293b; border-radius: 12px; padding: 1.5rem; border: 1px solid #334155; transition: border-color 0.2s, transform 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+    .card:hover { border-color: #6366f1; transform: translateY(-2px); }
+    .card.locked { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+    .card-tag { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #6366f1; margin-bottom: 0.5rem; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: #f1f5f9; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; }
+    .card-footer { margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: #0f172a; color: #64748b; }
+    .badge.done { background: #166534; color: #86efac; }
+    .badge.active { background: #1e3a8a; color: #93c5fd; }
+    .coming-soon { text-align: center; padding: 3rem 1rem; color: #475569; }
+    .coming-soon span { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="max-width:900px;margin:0 auto;">
+      <h1>Software Engineering</h1>
+      <p>Velg en modul for å starte — fremdriften din lagres automatisk.</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="progress-bar-wrapper">
+      <label id="progress-label">Fremdrift: laster…</label>
+      <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="grid" id="module-grid">
+      <!-- Modulkort legges inn her etter hvert som de bygges -->
+      <div class="coming-soon" style="grid-column:1/-1;">
+        <span>📚</span>
+        Ingen moduler er bygd ennå. Last opp slides til <code>modules/module-01/slides/</code> for å starte.
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/progress.js"></script>
+</body>
+</html>

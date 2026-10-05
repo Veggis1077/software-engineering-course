@@ -1,0 +1,45 @@
+/* Shared styles across module pages */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --border: #334155;
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --success: #22c55e;
+  --radius: 10px;
+}
+
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+a { color: var(--accent-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* Nav breadcrumb */
+.breadcrumb { padding: 1rem 1.5rem; font-size: 0.85rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+
+/* Section cards */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.2rem; }
+.card h2 { font-size: 1.1rem; margin-bottom: 0.75rem; color: #f1f5f9; }
+
+/* Buttons */
+.btn { display: inline-block; padding: 0.5rem 1.2rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; border: none; transition: opacity 0.15s; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { opacity: 0.88; }
+.btn-outline { background: transparent; color: var(--accent-light); border: 1px solid var(--accent); }
+.btn-outline:hover { background: var(--accent); color: #fff; }
+
+/* Quiz */
+.quiz-option { display: block; width: 100%; text-align: left; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 0.65rem 1rem; margin-bottom: 0.5rem; cursor: pointer; transition: border-color 0.15s; }
+.quiz-option:hover { border-color: var(--accent); }
+.quiz-option.correct { border-color: var(--success); background: #14532d22; color: var(--success); }
+.quiz-option.wrong { border-color: #ef4444; background: #7f1d1d22; color: #f87171; }
+
+/* Progress chip */
+.chip { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; padding: 0.2rem 0.65rem; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); }
+.chip.done { border-color: #166534; color: #86efac; background: #14532d33; }
