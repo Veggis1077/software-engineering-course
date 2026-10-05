@@ -6,164 +6,162 @@
   <title>Module 2 — UML Class Diagrams</title>
   <style>
     :root {
-      --bg: #0a0e1a; --surface: #111827; --surface2: #1a2236; --surface3: #1f2d45;
-      --border: #1f2d45; --accent: #6366f1; --accent2: #06b6d4; --accent3: #8b5cf6;
-      --text: #e2e8f0; --muted: #64748b; --success: #22c55e; --warn: #f59e0b; --danger: #ef4444;
-      --radius: 10px;
+      --bg:#0a0e1a; --surface:#111827; --surface2:#1a2236; --surface3:#1f2d45;
+      --border:#1f2d45; --accent:#6366f1; --accent2:#06b6d4; --accent3:#8b5cf6;
+      --text:#e2e8f0; --muted:#64748b; --success:#22c55e; --warn:#f59e0b; --danger:#ef4444;
+      --radius:10px;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    nav{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:50}
+    .nav-back{font-size:.85rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.3rem}
+    .nav-back:hover{color:var(--text)}
+    .nav-title{font-size:.9rem;font-weight:600;color:var(--text);margin-left:auto}
+    .nav-prog{font-size:.78rem;color:var(--muted)}
+    .hero{padding:3rem 1.5rem 2rem;max-width:900px;margin:0 auto}
+    .module-tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);padding:.25rem .7rem;border-radius:99px;display:inline-block;margin-bottom:1rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;color:#f8fafc;line-height:1.2}
+    .hero p{margin-top:.75rem;color:var(--muted);font-size:1rem;max-width:580px}
+    .hero-meta{display:flex;gap:1rem;margin-top:1.2rem;flex-wrap:wrap}
+    .meta-pill{font-size:.78rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:.25rem .7rem;border-radius:99px}
+    .tabs{display:flex;gap:.25rem;border-bottom:1px solid var(--border);padding:0 1.5rem;max-width:900px;margin:0 auto}
+    .tab{padding:.75rem 1.2rem;font-size:.88rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;transition:color .15s,border-color .15s}
+    .tab:hover{color:var(--text)}
+    .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .content{max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem}
+    .panel{display:none}
+    .panel.active{display:block}
 
-    /* NAV */
-    nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: .75rem 1.5rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 50; }
-    .nav-back { font-size: .85rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: .35rem; }
-    .nav-back:hover { color: var(--text); }
-    .nav-title { font-size: .9rem; font-weight: 600; color: var(--text); margin-left: auto; }
-    .nav-prog { font-size: .78rem; color: var(--muted); }
-
-    /* HERO */
-    .hero { padding: 3rem 1.5rem 2rem; max-width: 860px; margin: 0 auto; }
-    .module-tag { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); background: rgba(99,102,241,.1); border: 1px solid rgba(99,102,241,.25); padding: .25rem .7rem; border-radius: 99px; display: inline-block; margin-bottom: 1rem; }
-    .hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; color: #f8fafc; line-height: 1.2; }
-    .hero p { margin-top: .75rem; color: var(--muted); font-size: 1rem; max-width: 560px; }
-    .hero-meta { display: flex; gap: 1.2rem; margin-top: 1.2rem; flex-wrap: wrap; }
-    .meta-pill { font-size: .78rem; color: var(--muted); display: flex; align-items: center; gap: .3rem; background: var(--surface); border: 1px solid var(--border); padding: .25rem .7rem; border-radius: 99px; }
-
-    /* TABS */
-    .tabs { display: flex; gap: .25rem; border-bottom: 1px solid var(--border); padding: 0 1.5rem; max-width: 860px; margin: 0 auto; }
-    .tab { padding: .75rem 1.2rem; font-size: .88rem; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; background: none; border-top: none; border-left: none; border-right: none; }
-    .tab:hover { color: var(--text); }
-    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-    /* CONTENT */
-    .content { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-    .panel { display: none; }
-    .panel.active { display: block; }
-
-    /* SECTIONS */
-    .section { margin-bottom: 3rem; }
-    .section-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; }
-    .section-num { width: 28px; height: 28px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; color: #fff; flex-shrink: 0; }
-    .section h2 { font-size: 1.15rem; font-weight: 700; color: #f1f5f9; }
-    .section p, .section li { color: #cbd5e1; font-size: .95rem; }
-    .section ul { margin: .75rem 0 .75rem 1.25rem; }
-    .section li { margin-bottom: .4rem; }
-
-    /* CARDS */
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
-    .card h3 { font-size: .95rem; font-weight: 600; color: #f1f5f9; margin-bottom: .5rem; }
+    /* SECTION */
+    .section{margin-bottom:3.5rem}
+    .section-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+    .section-num{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0}
+    .section h2{font-size:1.25rem;font-weight:700;color:#f1f5f9}
+    .prose{color:#cbd5e1;font-size:.96rem;margin-bottom:1rem}
+    .prose strong{color:#f1f5f9}
+    ul.prose-list{color:#cbd5e1;font-size:.95rem;margin:.5rem 0 1rem 1.4rem}
+    ul.prose-list li{margin-bottom:.45rem}
 
     /* CALLOUT */
-    .callout { background: rgba(99,102,241,.08); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.25rem; margin: 1rem 0; }
-    .callout.tip { border-color: var(--accent2); background: rgba(6,182,212,.08); }
-    .callout.warn { border-color: var(--warn); background: rgba(245,158,11,.08); }
-    .callout p { font-size: .9rem; color: #cbd5e1; }
-    .callout strong { color: var(--text); }
+    .callout{border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin:1.2rem 0}
+    .callout.info{background:rgba(99,102,241,.08);border-left:3px solid var(--accent)}
+    .callout.tip{background:rgba(6,182,212,.08);border-left:3px solid var(--accent2)}
+    .callout.warn{background:rgba(245,158,11,.08);border-left:3px solid var(--warn)}
+    .callout.danger{background:rgba(239,68,68,.08);border-left:3px solid var(--danger)}
+    .callout-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+    .callout.info .callout-title{color:var(--accent)}
+    .callout.tip .callout-title{color:var(--accent2)}
+    .callout.warn .callout-title{color:var(--warn)}
+    .callout.danger .callout-title{color:var(--danger)}
+    .callout p,.callout li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .callout ul{margin:.4rem 0 0 1.2rem}
 
-    /* ── INTERACTIVE UML FIGURES ── */
-    .fig { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.25rem 0; overflow-x: auto; }
-    .fig-caption { font-size: .78rem; color: var(--muted); margin-top: .75rem; text-align: center; }
+    /* FIG */
+    .fig{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0;overflow-x:auto}
+    .fig-caption{font-size:.78rem;color:var(--muted);margin-top:.85rem;text-align:center;font-style:italic}
+    .fig-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem}
 
-    /* Class box */
-    .uml-class { display: inline-block; min-width: 180px; border: 2px solid var(--accent); border-radius: 6px; overflow: hidden; cursor: pointer; transition: border-color .15s, box-shadow .15s; font-family: 'Courier New', monospace; }
-    .uml-class:hover, .uml-class.selected { border-color: var(--accent2); box-shadow: 0 0 0 3px rgba(6,182,212,.2); }
-    .uml-class .cls-name { background: rgba(99,102,241,.2); padding: .45rem .75rem; font-size: .85rem; font-weight: 700; color: #a5b4fc; text-align: center; border-bottom: 1px solid var(--border); }
-    .uml-class .cls-name.abstract { font-style: italic; }
-    .uml-class .cls-attrs, .uml-class .cls-ops { padding: .45rem .75rem; font-size: .78rem; color: #94a3b8; border-bottom: 1px solid var(--border); min-height: 36px; }
-    .uml-class .cls-ops { border-bottom: none; }
-    .uml-class .cls-line { color: #64748b; font-size: .7rem; }
+    /* UML CLASS BOX */
+    .uml-wrap{display:inline-flex;flex-direction:column;align-items:center;gap:.4rem}
+    .uml-class{display:inline-block;min-width:190px;border:2px solid var(--accent);border-radius:6px;overflow:hidden;font-family:'Courier New',monospace;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+    .uml-class:hover,.uml-class.hl{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(6,182,212,.18)}
+    .uml-class.abstract-cls{border-color:var(--accent3)}
+    .uml-name{background:rgba(99,102,241,.18);padding:.45rem .8rem;font-size:.85rem;font-weight:700;color:#a5b4fc;text-align:center;border-bottom:1px solid var(--border)}
+    .uml-name.italic-name{font-style:italic;color:#c4b5fd}
+    .uml-attrs,.uml-ops{padding:.45rem .8rem;font-size:.77rem;color:#94a3b8;border-bottom:1px solid var(--border);line-height:1.7}
+    .uml-ops{border-bottom:none}
+    .uml-line{display:block}
+    .uml-lbl{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.2rem}
 
-    .uml-row { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
-    .uml-label { font-size: .72rem; color: var(--muted); text-align: center; margin-top: .35rem; }
+    /* HIGHLIGHT STATES */
+    .hl-name .uml-name{background:rgba(99,102,241,.4)!important;outline:2px solid var(--accent)}
+    .hl-attr .uml-attrs{background:rgba(6,182,212,.15)!important;outline:1px solid var(--accent2)}
+    .hl-op .uml-ops{background:rgba(139,92,246,.15)!important;outline:1px solid var(--accent3)}
 
-    /* Tooltip */
-    .tooltip-area { position: relative; }
-    .tooltip-area [data-tip] { cursor: help; text-decoration: underline dotted var(--muted); }
-    .tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 0; background: var(--surface3); border: 1px solid var(--border); border-radius: 6px; padding: .5rem .75rem; font-size: .8rem; color: var(--text); width: 240px; z-index: 100; pointer-events: none; }
-    .tooltip-area [data-tip]:hover + .tooltip { display: block; }
+    /* EXPLAIN PANEL */
+    .explain-panel{flex:1;min-width:230px;background:var(--surface3);border-radius:8px;padding:1.1rem;font-size:.88rem;color:#cbd5e1;min-height:120px;line-height:1.65}
+    .explain-panel strong{color:#f1f5f9}
 
-    /* Multiplicity grid */
-    .mult-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .75rem; margin: 1rem 0; }
-    .mult-card { background: var(--surface3); border: 1px solid var(--border); border-radius: 8px; padding: .75rem; cursor: pointer; transition: border-color .15s; }
-    .mult-card:hover, .mult-card.active { border-color: var(--accent); }
-    .mult-card .symbol { font-size: 1.4rem; font-weight: 700; color: var(--accent); font-family: monospace; margin-bottom: .3rem; }
-    .mult-card .meaning { font-size: .78rem; color: var(--muted); }
-    .mult-explain { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; font-size: .88rem; color: #cbd5e1; min-height: 60px; margin-top: .5rem; transition: all .2s; }
+    /* ASSOCIATION DIAGRAM */
+    .assoc-fig{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+    .assoc-box{background:var(--surface3);border:1.5px solid var(--accent);border-radius:6px;padding:.6rem 1rem;font-family:monospace;font-size:.82rem;color:#a5b4fc;font-weight:700;white-space:nowrap}
+    .assoc-line{flex:1;min-width:40px;height:1px;background:var(--muted);position:relative}
+    .assoc-line .lbl{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.78rem;color:var(--muted);white-space:nowrap}
+    .assoc-line .mult-l{position:absolute;top:4px;left:-8px;font-size:.82rem;color:var(--warn);font-weight:700}
+    .assoc-line .mult-r{position:absolute;top:4px;right:-8px;font-size:.82rem;color:var(--warn);font-weight:700}
 
-    /* Diamond comparison */
-    .diamond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
-    .diamond-card { background: var(--surface3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
-    .diamond-card.agg { border-color: rgba(99,102,241,.4); }
-    .diamond-card.comp { border-color: rgba(34,197,94,.4); }
-    .diamond-card h4 { font-size: .88rem; font-weight: 600; margin-bottom: .5rem; }
-    .diamond-card.agg h4 { color: #a5b4fc; }
-    .diamond-card.comp h4 { color: #86efac; }
-    .diamond-card p { font-size: .82rem; color: #94a3b8; line-height: 1.5; }
-    .diamond-svg { display: block; margin: .5rem auto; }
+    /* MULT CARDS */
+    .mult-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem;margin:1rem 0}
+    .mult-card{background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;padding:.8rem;cursor:pointer;transition:border-color .15s}
+    .mult-card:hover,.mult-card.active{border-color:var(--warn)}
+    .mult-sym{font-size:1.3rem;font-weight:700;color:var(--warn);font-family:monospace;margin-bottom:.3rem}
+    .mult-name{font-size:.75rem;color:var(--muted)}
+    .mult-explain-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.88rem;color:#cbd5e1;min-height:64px;margin-top:.5rem;transition:all .2s}
 
-    /* ── QUIZ ── */
-    .quiz-progress { display: flex; gap: .3rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .qp-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: background .2s; }
-    .qp-dot.answered { background: var(--accent); }
-    .qp-dot.correct { background: var(--success); }
-    .qp-dot.wrong { background: var(--danger); }
+    /* DIAMOND COMPARISON */
+    .diamond-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.2rem 0}
+    .d-card{background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:1.1rem}
+    .d-card.agg{border-color:rgba(99,102,241,.45)}
+    .d-card.comp{border-color:rgba(34,197,94,.45)}
+    .d-card h4{font-size:.9rem;font-weight:700;margin-bottom:.6rem}
+    .d-card.agg h4{color:#a5b4fc}
+    .d-card.comp h4{color:#86efac}
+    .d-card p{font-size:.85rem;color:#94a3b8;line-height:1.6;margin-bottom:.5rem}
+    .d-example{font-size:.8rem;padding:.5rem .75rem;border-radius:6px;margin-top:.5rem;font-style:italic}
+    .d-card.agg .d-example{background:rgba(99,102,241,.1);color:#a5b4fc}
+    .d-card.comp .d-example{background:rgba(34,197,94,.1);color:#86efac}
 
-    .question { display: none; }
-    .question.active { display: block; }
-    .q-num { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .5rem; }
-    .q-text { font-size: 1rem; font-weight: 600; color: #f1f5f9; margin-bottom: 1.25rem; line-height: 1.5; }
-    .q-options { display: flex; flex-direction: column; gap: .5rem; }
-    .q-opt { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: .75rem 1rem; cursor: pointer; font-size: .9rem; color: var(--text); text-align: left; transition: border-color .15s, background .15s; }
-    .q-opt:hover:not(:disabled) { border-color: var(--accent); background: rgba(99,102,241,.08); }
-    .q-opt.correct { border-color: var(--success); background: rgba(34,197,94,.1); color: #86efac; }
-    .q-opt.wrong { border-color: var(--danger); background: rgba(239,68,68,.1); color: #fca5a5; }
-    .q-explanation { margin-top: .85rem; background: var(--surface3); border-radius: 8px; padding: .85rem 1rem; font-size: .85rem; color: #cbd5e1; display: none; }
-    .q-explanation.show { display: block; }
-    .q-nav { display: flex; gap: .75rem; margin-top: 1.25rem; align-items: center; }
-    .q-nav button { padding: .5rem 1.1rem; border-radius: 6px; font-size: .85rem; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--text); transition: background .15s; }
-    .q-nav button:hover { background: var(--surface3); }
-    .q-nav button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .q-nav button.primary:hover { opacity: .88; }
-    .q-score { font-size: .85rem; color: var(--muted); margin-left: auto; }
+    /* QUIZ */
+    .quiz-progress{display:flex;gap:.35rem;margin-bottom:1.75rem;flex-wrap:wrap}
+    .qp-dot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:background .2s}
+    .qp-dot.correct{background:var(--success)}
+    .qp-dot.wrong{background:var(--danger)}
+    .q-num{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem}
+    .q-text{font-size:1rem;font-weight:600;color:#f1f5f9;margin-bottom:1.25rem;line-height:1.55}
+    .q-options{display:flex;flex-direction:column;gap:.5rem}
+    .q-opt{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;cursor:pointer;font-size:.9rem;color:var(--text);text-align:left;transition:border-color .15s,background .15s}
+    .q-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(99,102,241,.08)}
+    .q-opt.correct{border-color:var(--success)!important;background:rgba(34,197,94,.1);color:#86efac}
+    .q-opt.wrong{border-color:var(--danger)!important;background:rgba(239,68,68,.1);color:#fca5a5}
+    .q-explanation{margin-top:.9rem;background:var(--surface3);border-radius:8px;padding:.9rem 1rem;font-size:.87rem;color:#cbd5e1;display:none;line-height:1.65}
+    .q-explanation.show{display:block}
+    .q-nav{display:flex;gap:.75rem;margin-top:1.25rem;align-items:center;flex-wrap:wrap}
+    .q-nav button{padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:background .15s}
+    .q-nav button:hover{background:var(--surface3)}
+    .q-nav button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .q-nav button.primary:hover{opacity:.88}
+    .q-score{font-size:.82rem;color:var(--muted);margin-left:auto}
+    .quiz-result{text-align:center;padding:2.5rem}
+    .score-big{font-size:3.5rem;font-weight:800;color:var(--accent)}
+    .quiz-result p{color:var(--muted);margin-top:.5rem;font-size:.95rem}
+    .quiz-result button{margin-top:1.5rem;padding:.6rem 1.6rem;border-radius:6px;background:var(--accent);border:none;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer}
 
-    .quiz-result { text-align: center; padding: 2rem; }
-    .quiz-result .score-big { font-size: 3rem; font-weight: 800; color: var(--accent); }
-    .quiz-result p { color: var(--muted); margin-top: .5rem; }
-    .quiz-result button { margin-top: 1.5rem; padding: .6rem 1.5rem; border-radius: 6px; background: var(--accent); border: none; color: #fff; font-size: .9rem; font-weight: 600; cursor: pointer; }
+    /* EXERCISES */
+    .exercise{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden}
+    .ex-header{padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;user-select:none}
+    .ex-header:hover{background:var(--surface2)}
+    .ex-num{background:var(--surface3);border-radius:6px;padding:.2rem .55rem;font-size:.75rem;font-weight:700;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-header h3{font-size:.92rem;font-weight:600;color:#f1f5f9;flex:1;line-height:1.5}
+    .ex-toggle{font-size:.75rem;color:var(--muted);flex-shrink:0;margin-top:.15rem}
+    .ex-body{padding:1.25rem;border-top:1px solid var(--border);display:none}
+    .ex-body p,.ex-body li{font-size:.9rem;color:#cbd5e1;line-height:1.65}
+    .ex-body ul{margin:.6rem 0 .6rem 1.3rem}
+    .ex-body strong{color:#f1f5f9}
+    .solution{background:var(--surface2);border-radius:8px;padding:1.1rem;margin-top:1rem;display:none}
+    .solution.show{display:block}
+    .sol-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--success);margin-bottom:.65rem}
+    .solution p,.solution li{font-size:.88rem;color:#cbd5e1;line-height:1.65}
+    .solution ul{margin:.5rem 0 .5rem 1.3rem}
+    .solution strong{color:#f1f5f9}
+    .sol-btn{margin-top:.85rem;padding:.4rem .9rem;border-radius:6px;font-size:.82rem;font-weight:500;background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s}
+    .sol-btn:hover{border-color:var(--success);color:var(--success)}
+    .done-btn{display:inline-block;margin-top:.75rem;padding:.5rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:500;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);color:var(--success);cursor:pointer;transition:background .15s}
+    .done-btn:hover{background:rgba(34,197,94,.18)}
+    .done-btn.done{background:rgba(34,197,94,.2)}
 
-    /* ── EXERCISES ── */
-    .exercise { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1.25rem; overflow: hidden; }
-    .exercise-header { padding: 1rem 1.25rem; display: flex; align-items: flex-start; gap: .75rem; cursor: pointer; }
-    .ex-num { background: var(--surface3); border-radius: 6px; padding: .2rem .55rem; font-size: .75rem; font-weight: 700; color: var(--muted); flex-shrink: 0; }
-    .exercise-header h3 { font-size: .92rem; font-weight: 600; color: #f1f5f9; flex: 1; line-height: 1.45; }
-    .ex-toggle { margin-left: auto; font-size: .75rem; color: var(--muted); flex-shrink: 0; }
-    .exercise-body { padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--border); }
-    .exercise-body p, .exercise-body li { font-size: .9rem; color: #cbd5e1; }
-    .exercise-body ul { margin: .5rem 0 .5rem 1.25rem; }
-    .solution { background: var(--surface2); border-radius: 8px; padding: 1rem; margin-top: 1rem; display: none; }
-    .solution.show { display: block; }
-    .solution h4 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--success); margin-bottom: .6rem; }
-    .solution p, .solution li { font-size: .88rem; color: #cbd5e1; }
-    .solution ul { margin: .5rem 0 .5rem 1.25rem; }
-    .sol-btn { margin-top: .75rem; padding: .4rem .9rem; border-radius: 6px; font-size: .8rem; font-weight: 500; background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: pointer; transition: color .15s, border-color .15s; }
-    .sol-btn:hover { border-color: var(--success); color: var(--success); }
-    .done-btn { padding: .5rem 1.1rem; border-radius: 6px; font-size: .85rem; font-weight: 500; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3); color: var(--success); cursor: pointer; margin-top: .75rem; transition: background .15s; }
-    .done-btn:hover { background: rgba(34,197,94,.2); }
-    .done-btn.done { background: rgba(34,197,94,.2); }
-
-    /* CODE */
-    code { font-family: 'Courier New', monospace; font-size: .85em; background: var(--surface3); padding: .1em .4em; border-radius: 4px; color: #a5b4fc; }
-
-    /* SVG DIAGRAM */
-    svg text { font-family: 'Courier New', monospace; }
-    .link-line { stroke: #334155; stroke-width: 1.5; fill: none; }
-    .diamond-hollow { fill: #0a0e1a; stroke: #6366f1; stroke-width: 1.5; }
-    .diamond-filled { fill: #22c55e; stroke: #22c55e; stroke-width: 1.5; }
-
-    @media (max-width: 600px) {
-      .diamond-grid { grid-template-columns: 1fr; }
-      .uml-row { gap: 1rem; }
-    }
+    code{font-family:'Courier New',monospace;font-size:.85em;background:var(--surface3);padding:.1em .4em;border-radius:4px;color:#a5b4fc}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    @media(max-width:620px){.two-col,.diamond-row{grid-template-columns:1fr}.assoc-fig{flex-direction:column;align-items:flex-start}}
   </style>
 </head>
 <body>
@@ -177,7 +175,7 @@
 <div class="hero">
   <div class="module-tag">Modul 02</div>
   <h1>UML Class Diagrams</h1>
-  <p>Lær å modellere datakrav med klasser, assosiasjoner, multiplicities og aggregering.</p>
+  <p>Lær å modellere datakrav med klasser, assosiasjoner, multiplicities, aggregering og komposisjon — direkte fra forelesningene til Professor Kenneth.</p>
   <div class="hero-meta">
     <span class="meta-pill">📖 4 seksjoner</span>
     <span class="meta-pill">🎯 10 quizspørsmål</span>
@@ -187,341 +185,446 @@
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('theory', this)">Teori</button>
-  <button class="tab" onclick="switchTab('quiz', this)">Quiz</button>
-  <button class="tab" onclick="switchTab('exercises', this)">Oppgaver</button>
+  <button class="tab active" onclick="switchTab('theory',this)">Teori</button>
+  <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
+  <button class="tab" onclick="switchTab('exercises',this)">Oppgaver</button>
 </div>
 
-<!-- ═══════════════════════════════════════════ THEORY ═══ -->
 <div class="content">
+<!-- ═══════════════════ THEORY ═══════════════════ -->
 <div class="panel active" id="panel-theory">
 
-  <!-- 1. Hva er UML -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">1</div>
-      <h2>Hva er UML og hvorfor modellere?</h2>
-    </div>
-    <p>UML (Unified Modeling Language) er et visuelt modelleringsspråk — et verktøy for å kommunisere med alle stakeholders i et prosjekt. Det er <strong>ikke</strong> en utviklingsmetodologi.</p>
-
-    <div class="callout tip" style="margin-top:1rem">
-      <p><strong>Analogi:</strong> Før du bygger et fly, bygger du en modell. Modellen skjuler irrelevante detaljer (abstraction) og gjør det mulig å kommunisere med alle som er involvert — uten å vise hele den tekniske implementasjonen.</p>
-    </div>
-
-    <div class="card" style="margin-top:1.25rem">
-      <h3>De tre diagramtypene i kurset</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-top:.75rem">
-        <div style="background:var(--surface3);border-radius:8px;padding:.9rem;border-left:3px solid var(--accent)">
-          <div style="font-size:.8rem;font-weight:700;color:var(--accent);margin-bottom:.3rem">CLASS DIAGRAM</div>
-          <div style="font-size:.82rem;color:#94a3b8">Fanger <strong style="color:#cbd5e1">datakrav</strong> — viktige objekter og deres relasjoner</div>
-        </div>
-        <div style="background:var(--surface3);border-radius:8px;padding:.9rem;border-left:3px solid var(--accent2)">
-          <div style="font-size:.8rem;font-weight:700;color:var(--accent2);margin-bottom:.3rem">USE CASE DIAGRAM</div>
-          <div style="font-size:.82rem;color:#94a3b8">Fanger <strong style="color:#cbd5e1">funksjonelle krav</strong> — hva systemet skal gjøre</div>
-        </div>
-        <div style="background:var(--surface3);border-radius:8px;padding:.9rem;border-left:3px solid var(--accent3)">
-          <div style="font-size:.8rem;font-weight:700;color:var(--accent3);margin-bottom:.3rem">STATE MACHINE</div>
-          <div style="font-size:.82rem;color:#94a3b8">Fanger <strong style="color:#cbd5e1">tilstander</strong> — mulige tilstander til et objekt</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout warn" style="margin-top:1rem">
-      <p><strong>Requirement model vs Solution model:</strong> En requirement model sier <em>hva</em> som finnes i domenet — ingen implementasjonsdetaljer. En solution model er det vi faktisk skal implementere.</p>
-    </div>
+<!-- ─── SEKSJON 1: Hvorfor modellere ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Hva er UML, og hvorfor bygger vi modeller?</h2>
   </div>
 
-  <!-- 2. Klasser -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">2</div>
-      <h2>Klasser — klassifisering av objekter</h2>
-    </div>
-    <p>Klikk på de ulike delene av klasseboksen for å lære hva de betyr.</p>
+  <p class="prose">UML (Unified Modeling Language) er et <strong>visuelt modelleringsspråk</strong> — et standardisert verktøy vi bruker for å kommunisere med alle stakeholders i et prosjekt. Det er viktig å forstå at UML <strong>ikke er en utviklingsmetodologi</strong>, men et språk vi kan bruke uavhengig av hvilken prosess vi følger.</p>
 
-    <div class="fig">
-      <div style="display:flex;gap:3rem;align-items:flex-start;flex-wrap:wrap">
-        <!-- Interaktiv klasseboks -->
-        <div>
-          <div class="uml-class" id="class-demo" onclick="cycleClassPart()">
-            <div class="cls-name" id="cls-name-demo">Account</div>
-            <div class="cls-attrs" id="cls-attrs-demo">
-              <div class="cls-line">+ accountNo : Integer</div>
-              <div class="cls-line">+ balance : Money</div>
-            </div>
-            <div class="cls-ops" id="cls-ops-demo">
-              <div class="cls-line">+ checkBalance() : Money</div>
-              <div class="cls-line">+ deposit(amount : Money)</div>
-              <div class="cls-line">+ withdraw(amount : Money)</div>
-            </div>
+  <p class="prose">Professor Kenneth forklarer det slik: tenk på flybygging. Ingeniørene bygger en modell av flyet <em>før</em> de faktisk bygger det — fordi flyet er så komplekst at det ikke er mulig å kommunisere alle detaljene direkte. Modellen gjør tre ting:</p>
+
+  <ul class="prose-list">
+    <li><strong>Abstraction</strong> — vi skjuler irrelevante detaljer og viser kun det essensielle</li>
+    <li><strong>Kommunikasjon</strong> — alle stakeholders (klient, designer, programmerer) kan se og forstå den samme modellen</li>
+    <li><strong>Bedre design</strong> — vi forstår kravene bedre, noe som gir renere design og mer vedlikeholdbar kode</li>
+  </ul>
+
+  <div class="callout warn">
+    <div class="callout-title">Klassisk misforståelse</div>
+    <p>Kenneth viser et morsomt bilde i forelesningen: klienten forklarer ett, prosjektlederen forstår noe annet, analytikeren bestemmer noe tredje, og programmereren implementerer noe fjerde. Det ingen av dem spør om, er hva brukeren <em>egentlig</em> trenger — og det er kanskje noe mye enklere. Nettopp derfor bygger vi modeller tidlig: for å synkronisere alle.</p>
+  </div>
+
+  <p class="prose" style="margin-top:1rem">I dette kurset jobber vi med tre typer diagrammer:</p>
+
+  <div class="fig">
+    <div class="fig-title">De tre UML-diagramtypene i COMP3111</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem">
+      <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent)">
+        <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Class Diagram</div>
+        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Fanger <strong style="color:#cbd5e1">datakrav</strong> — hvilke viktige objekter og konsepter vi trenger å holde styr på i systemet, og hvordan de henger sammen.</p>
+      </div>
+      <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent2)">
+        <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">Use Case Diagram</div>
+        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Fanger <strong style="color:#cbd5e1">funksjonelle krav</strong> — hvilke funksjoner systemet skal tilby, sett fra brukerens perspektiv.</p>
+      </div>
+      <div style="background:var(--surface3);border-radius:8px;padding:1rem;border-left:3px solid var(--accent3)">
+        <div style="font-size:.78rem;font-weight:700;color:var(--accent3);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">State Machine</div>
+        <p style="font-size:.85rem;color:#94a3b8;line-height:1.6">Fanger <strong style="color:#cbd5e1">tilstander</strong> — alle mulige tilstander et enkelt objekt kan befinne seg i, og hva som forårsaker overganger.</p>
+      </div>
+    </div>
+    <div class="fig-caption">Modul 2–3 handler om Class Diagram. Use Case og State Machine dekkes i senere moduler.</div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Requirement model vs Solution model</div>
+    <p>I dette kurset skiller vi alltid mellom to nivåer:</p>
+    <ul>
+      <li><strong>Requirement model</strong> — fanger hva som <em>finnes</em> i applikasjonsdomenet. Ingen implementasjonsdetaljer. Vi sier ikke «hvordan» systemet løser problemet, bare «hva» som eksisterer.</li>
+      <li><strong>Solution model</strong> — den modellen vi faktisk skal implementere. Her tenker vi på design og kode.</li>
+    </ul>
+    <p style="margin-top:.5rem">I dette kurset fokuserer vi foreløpig på <strong>requirement model</strong>. Kenneth presiserer: «Requirement model har ingenting med implementasjon å gjøre.»</p>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 2: Klasser ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>Klasser — klassifisering av objekter</h2>
+  </div>
+
+  <p class="prose">En klasse er en <strong>klassifisering</strong> av objekter. Kenneth forklarer det med bank som eksempel: i en bank har vi mange individuelle kontoer — «threats account», «savings account», «events account» osv. Hver konto har egne verdier (kontonummer, saldo), men de har alle de <em>samme</em> attributtene og operasjonene. Istedenfor å referere til hver enkelt konto om og om igjen, <strong>klassifiserer</strong> vi dem alle under én klasse: <code>Account</code>.</p>
+
+  <p class="prose">En klasse har tre deler. Klikk på klassen nedenfor for å utforske hver del:</p>
+
+  <div class="fig">
+    <div style="display:flex;gap:2.5rem;align-items:flex-start;flex-wrap:wrap">
+      <div>
+        <div id="class-demo" class="uml-class" onclick="cycleClassPart()" style="min-width:210px">
+          <div class="uml-name" id="d-name">Account</div>
+          <div class="uml-attrs" id="d-attrs">
+            <span class="uml-line">+ accountNo : Integer</span>
+            <span class="uml-line">+ balance : Money</span>
           </div>
-          <div class="uml-label">Klikk for å markere delene</div>
-        </div>
-        <!-- Forklaring -->
-        <div style="flex:1;min-width:220px">
-          <div id="class-explain" style="background:var(--surface3);border-radius:8px;padding:1rem;font-size:.88rem;color:#cbd5e1;min-height:120px">
-            <strong style="color:#a5b4fc">Klikk på klassen</strong> for å se forklaring av hver del.
+          <div class="uml-ops" id="d-ops">
+            <span class="uml-line">+ checkBalance() : Money</span>
+            <span class="uml-line">+ deposit(amount : Money)</span>
+            <span class="uml-line">+ withdraw(amount : Money)</span>
+            <span class="uml-line">+ payInterest()</span>
           </div>
-          <div style="margin-top:.75rem;font-size:.8rem;color:var(--muted)">Synlighet: <code>+</code> public &nbsp; <code>-</code> private &nbsp; <code>#</code> protected</div>
+        </div>
+        <div class="uml-lbl">Klikk for å markere delene</div>
+      </div>
+      <div class="explain-panel" id="class-explain">
+        <strong>Klikk på klassen</strong> for å utforske de tre delene:<br><br>
+        Første klikk → klassenavn<br>
+        Andre klikk → attributter<br>
+        Tredje klikk → operasjoner
+      </div>
+    </div>
+    <div class="fig-caption">Bankeksempelet fra forelesningen: Account-klassen med attributter og operasjoner</div>
+  </div>
+
+  <p class="prose">La oss gå gjennom hver del i detalj:</p>
+
+  <div class="two-col">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.6rem">Klassenavn</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Skal bruke vokabularet fra <strong style="color:#f1f5f9">applikasjonsdomenet</strong>, slik at modellen er meningsfull og lesbar for alle stakeholders. <code>Account</code> er et begrep folk i bankverdenen kjenner igjen.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem"><strong style="color:#f1f5f9">En god klasse fanger én og bare én abstraksjon.</strong> Du skal ikke mikse to konsepter i én klasse — da mister du fordelen med modularitet.</p>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:.6rem">Attributter</div>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Format: <code>synlighet navn : type</code>. <strong style="color:#f1f5f9">Navn og type er obligatorisk</strong>. Synlighet, initial value og multiplicity er valgfritt i UML-modellen, men bør inkluderes der det er relevant.</p>
+      <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.5rem">Synlighet: <code>+</code> public, <code>-</code> private, <code>#</code> protected, <code>~</code> package</p>
+    </div>
+  </div>
+
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem;margin-top:-.15rem">
+    <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent3);margin-bottom:.6rem">Operasjoner</div>
+    <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65">Format: <code>synlighet navn(parameternavn : type) : returtype</code>. Eks: <code>+ deposit(amount : Money)</code> — public, tar inn et beløp, returnerer ingenting.</p>
+    <p style="font-size:.87rem;color:#cbd5e1;line-height:1.65;margin-top:.6rem"><strong style="color:#f1f5f9">Operasjon vs metode:</strong> En <em>operasjon</em> er spesifikasjonen — «hva» den gjør. En <em>metode</em> er én konkret implementasjon av operasjonen. Samme operasjon kan ha <em>flere</em> metoder (f.eks. ulike implementasjoner for CheckingAccount og SavingsAccount). Når vi snakker om class diagram sier vi «operasjon», men i kode snakker vi om «metode».</p>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-title">Eksempel fra forelesningen</div>
+    <p>Kenneth viser at <code>payInterest()</code> bare gir mening for sparekonto, og <code>serviceCharge</code> bare for brukskonto. Dette er et signal om at vi kanskje burde ha separate subklasser (CheckingAccount, SavingsAccount) under en felles Account-superklasse — noe vi dekker i Modul 3 om generalisering.</p>
+  </div>
+</div>
+
+<!-- ─── SEKSJON 3: Assosiasjoner og multiplicities ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Assosiasjoner og multiplicities</h2>
+  </div>
+
+  <p class="prose">Objekter eksisterer ikke alene — de er koblet til hverandre. Kenneth forklarer dette med et konkret eksempel: «Fred may hold an account, and this account may be associated with HSBC. Another guy, let's say Sarah, may have an account from Bank of China.» Vi har mange slike individuelle koblinger (<em>links</em>), og istedenfor å liste dem alle, <strong>klassifiserer</strong> vi dem som en <em>assosiasjon</em> mellom klassene.</p>
+
+  <div class="fig">
+    <div class="fig-title">Fra individuelle linker til assosiasjon</div>
+    <div style="display:flex;flex-direction:column;gap:1.2rem">
+      <!-- Instansnivå -->
+      <div>
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem;font-weight:600">INSTANSNIVÅ (mange individuelle linker)</div>
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center">
+          <div style="font-family:monospace;font-size:.82rem;color:#94a3b8">Fred ——holds——→ HSBC-account-001</div>
+          <div style="font-family:monospace;font-size:.82rem;color:#94a3b8">Sarah ——holds——→ BOC-account-042</div>
+          <div style="font-family:monospace;font-size:.82rem;color:#94a3b8">John ——holds——→ HSBC-account-107</div>
+          <div style="font-size:.78rem;color:var(--muted);font-style:italic">...og mange flere</div>
         </div>
       </div>
-      <div class="fig-caption">En UML-klasse har tre deler: klassenavn, attributter og operasjoner</div>
+      <div style="display:flex;align-items:center;gap:.5rem;color:var(--muted);font-size:.85rem">
+        <div style="height:1px;flex:1;background:var(--border)"></div>
+        Klassifisering (abstraction)
+        <div style="height:1px;flex:1;background:var(--border)"></div>
+      </div>
+      <!-- Klassenivå -->
+      <div>
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:.75rem;font-weight:600">KLASSENIVÅ (én assosiasjon)</div>
+        <div class="assoc-fig">
+          <div class="assoc-box">Customer</div>
+          <div class="assoc-line" style="min-width:80px">
+            <span class="lbl">holds</span>
+            <span class="mult-l">1</span>
+            <span class="mult-r">0..*</span>
+          </div>
+          <div class="assoc-box">Account</div>
+          <div class="assoc-line" style="min-width:80px">
+            <span class="lbl">is with</span>
+            <span class="mult-l">0..*</span>
+            <span class="mult-r">1</span>
+          </div>
+          <div class="assoc-box">Bank</div>
+        </div>
+      </div>
     </div>
+    <div class="fig-caption">En kunde har 0 eller flere kontoer (0..*). En konto tilhører nøyaktig én kunde (1) og én bank (1).</div>
+  </div>
 
-    <div class="callout">
-      <p><strong>Operasjon vs metode:</strong> En <em>operasjon</em> er spesifikasjonen (f.eks. <code>deposit()</code>). En <em>metode</em> er én konkret implementasjon av operasjonen. Samme operasjon kan ha flere metoder.</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .5rem">Multiplicity — antallsbegrensninger</h3>
+  <p class="prose">Multiplicity spesifiserer <strong>hvor mange objekter</strong> i én klasse som kan knyttes til ett objekt i den andre. Dette er et <strong>applikasjonsdomene-krav</strong> — du får verdiene fra domeneeksperter, ikke fra programmererne. Kenneth sier: «Domeneekspertene vil fortelle deg at en bank kan ha mange kontoer, og at en konto kan assosieres med nøyaktig én bank.»</p>
+
+  <p class="prose">Klikk på symbolene for å forstå hvert:</p>
+  <div class="mult-grid">
+    <div class="mult-card" onclick="showMult(this,'1','<strong>Nøyaktig én (1)</strong><br><br>Obligatorisk og unik. Objektet MÅ være assosiert med nøyaktig ett annet objekt — ikke null, ikke to.<br><br><em>Eksempel:</em> En konto (<code>Account</code>) tilhører nøyaktig én bank. Du kan ikke ha en konto uten bank, og ikke en konto i to banker samtidig.')">
+      <div class="mult-sym">1</div><div class="mult-name">Nøyaktig én</div>
     </div>
+    <div class="mult-card" onclick="showMult(this,'0..1','<strong>Null eller én (0..1)</strong><br><br>Valgfri deltakelse. Objektet <em>kan</em> eksistere uten å være assosiert, men kan ikke ha mer enn én.<br><br><em>Eksempel:</em> En ansatt kan ha 0 eller 1 parkeringsplass. Det er ikke obligatorisk.')">
+      <div class="mult-sym">0..1</div><div class="mult-name">Null eller én</div>
+    </div>
+    <div class="mult-card" onclick="showMult(this,'*','<strong>Null eller flere (*)</strong><br><br>Ingen nedre eller øvre grense. Shorthand for 0..*. Brukes på «mange»-siden av en relasjon.<br><br><em>Eksempel:</em> En bank kan ha hvilken som helst antall kontoer (0, 1, 1000, eller ingen).')">
+      <div class="mult-sym">*</div><div class="mult-name">Null eller flere</div>
+    </div>
+    <div class="mult-card" onclick="showMult(this,'1..*','<strong>Én eller flere (1..*)</strong><br><br>Obligatorisk, men ubestemt øvre grense. MÅ ha minst ett.<br><br><em>Eksempel:</em> En ordre MÅ ha minst én ordrelinje. En ordre uten noen produkter gir ikke mening.')">
+      <div class="mult-sym">1..*</div><div class="mult-name">Én eller flere</div>
+    </div>
+    <div class="mult-card" onclick="showMult(this,'1..5','<strong>Spesifikt intervall (a..b)</strong><br><br>Definert nedre og øvre grense.<br><br><em>Eksempel fra forelesningen:</em> En student kan melde seg på minst 1 og maks 5 kurs per semester (1..5). Et kurs MÅ ha 10–45 studenter (10..45).<br><br>⚠️ Se nedenfor om «add-drop»-problemet!')">
+      <div class="mult-sym">1..5</div><div class="mult-name">Intervall</div>
+    </div>
+  </div>
+  <div class="mult-explain-box" id="mult-explain">Klikk på et symbol ovenfor for forklaring.</div>
 
-    <div class="callout tip">
-      <p><strong>Tommelfingerregel:</strong> En god klasse fanger <em>én og bare én</em> abstraksjon. Ikke bland to konsepter i samme klasse.</p>
+  <div class="callout danger" style="margin-top:1.25rem">
+    <div class="callout-title">Add-drop-problemet — Kenneth's klassiske eksempel</div>
+    <p>Kenneth stiller spørsmålet: «En student MÅ ta 1–5 kurs, og et kurs MÅ ha 10–45 studenter. Er det riktig å sette dette i class diagrammet?»</p>
+    <p style="margin-top:.6rem">Svaret er <strong>nei</strong>. Multiplicity gjelder <em>alltid</em> — også FØR add-drop-perioden. Og hva skjer rett etter at et nytt semester begynner? Det er 0 studenter i alle kurs, og ingen studenter har ennå meldt seg på noe. Da brytes begrensningene <code>1..5</code> og <code>10..45</code> umiddelbart.</p>
+    <p style="margin-top:.6rem"><strong>Løsning:</strong> Relax til <code>0..5</code> og <code>0..45</code> i diagrammet. Legg til en UML-note som sier: <em>«After add-drop: student enrolls in 1..5 courses; course has 10..45 students.»</em></p>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Unære assosiasjoner — rollenavn er påkrevd</h3>
+  <p class="prose">En assosiasjon kan gå mellom en klasse og seg selv — dette kalles en <strong>unær assosiasjon</strong>. Da er rollenavn på begge sider <em>obligatorisk</em>. Uten dem vet vi ikke hvem som spiller hvilken rolle.</p>
+
+  <div class="fig">
+    <div class="fig-title">Eksempel: Employee manages Employee</div>
+    <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap">
+      <div>
+        <svg width="240" height="90" viewBox="0 0 240 90">
+          <rect x="60" y="20" width="120" height="40" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+          <text x="120" y="44" text-anchor="middle" fill="#a5b4fc" font-size="12" font-weight="bold" font-family="monospace">Employee</text>
+          <path d="M60 40 Q10 40 10 70 Q10 95 60 60" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+          <text x="30" y="32" fill="#64748b" font-size="10" font-family="sans-serif">manages</text>
+          <text x="3" y="86" fill="#f59e0b" font-size="10" font-family="sans-serif">boss</text>
+          <text x="55" y="72" fill="#f59e0b" font-size="10" font-family="sans-serif">worker</text>
+          <text x="5" y="52" fill="#94a3b8" font-size="9" font-family="sans-serif">0..*</text>
+          <text x="62" y="60" fill="#94a3b8" font-size="9" font-family="sans-serif">0..1</text>
+        </svg>
+      </div>
+      <div style="flex:1;font-size:.87rem;color:#cbd5e1;line-height:1.65">
+        <p>En ansatt kan være sjef for 0 eller flere andre (<code>boss</code>-rollen). En ansatt kan ha 0 eller 1 sjefer (<code>worker</code>-rollen).</p>
+        <p style="margin-top:.6rem">Kenneth forklarer: «Uten rollenavnene kan vi fra dataene fortelle at John og Frank er koblet, men vi vet ikke hvem som er sjefen og hvem som er den ansatte.»</p>
+        <p style="margin-top:.6rem;color:var(--muted);font-size:.82rem">For binære assosiasjoner er rollenavn valgfritt (det er som regel åpenbart). For unære er det <strong style="color:#f1f5f9">alltid påkrevd</strong>.</p>
+      </div>
     </div>
   </div>
 
-  <!-- 3. Assosiasjoner og multiplicity -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">3</div>
-      <h2>Assosiasjoner og multiplicities</h2>
-    </div>
-    <p>En assosiasjon klassifiserer linker mellom instanser. Klikk på et multiplicity-symbol nedenfor for å se hva det betyr.</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#f1f5f9;margin:1.75rem 0 .75rem">Kan vi ha to assosiasjoner mellom samme par av klasser?</h3>
+  <p class="prose">Ja — men bare hvis de to assosiasjonene har <strong>forskjellig mening</strong>. Kenneth gir eksempelet med en person og et universitet: én assosiasjon for «studerer ved» og én for «jobber for». De har to ulike betydninger, og begge er nødvendige.</p>
+</div>
 
-    <div class="fig">
-      <svg width="420" height="80" style="display:block;margin:0 auto;overflow:visible">
-        <rect x="10" y="15" width="120" height="50" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
-        <text x="70" y="35" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold">Customer</text>
-        <line x1="10" y1="40" x2="130" y2="40" stroke="#334155" stroke-width="1"/>
-        <text x="70" y="57" text-anchor="middle" fill="#94a3b8" font-size="10">+ name : String</text>
+<!-- ─── SEKSJON 4: Aggregering og komposisjon ─── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>Aggregering og komposisjon — «del av»-relasjoner</h2>
+  </div>
 
-        <line x1="130" y1="40" x2="290" y2="40" stroke="#94a3b8" stroke-width="1.5"/>
-        <text x="210" y="33" text-anchor="middle" fill="#64748b" font-size="10">holds</text>
-        <text x="140" y="55" fill="#f59e0b" font-size="11" font-weight="bold">1</text>
-        <text x="272" y="55" fill="#f59e0b" font-size="11" font-weight="bold">0..*</text>
+  <p class="prose">Noen ganger er ett objekt en <strong>del av</strong> et annet. Da bruker vi enten aggregering (◇) eller komposisjon (◆). Begge bruker en diamantform, men de betyr noe forskjellig.</p>
 
-        <rect x="290" y="15" width="120" height="50" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
-        <text x="350" y="35" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold">Account</text>
-        <line x1="290" y1="40" x2="410" y2="40" stroke="#334155" stroke-width="1"/>
-        <text x="350" y="57" text-anchor="middle" fill="#94a3b8" font-size="10">+ balance : Money</text>
+  <div class="callout warn">
+    <div class="callout-title">Viktig presisering fra Kenneth</div>
+    <p>Bruk <em>ikke</em> aggregering/komposisjon bare fordi noe «har» noe annet. Kenneth sier eksplisitt: «Kenneth has a bank account — but a bank account is not part of me. It's not something that's inside my body. So you should not use aggregation between Person and Account.» Bruk kun diamant når noe virkelig er en fysisk eller konseptuell del av noe annet.</p>
+  </div>
+
+  <div class="diamond-row">
+    <div class="d-card agg">
+      <h4>◇ Aggregering (hollow diamond)</h4>
+      <svg width="120" height="36" style="display:block;margin:.5rem 0">
+        <polygon points="10,18 28,8 46,18 28,28" fill="#0a0e1a" stroke="#6366f1" stroke-width="2"/>
+        <line x1="46" y1="18" x2="110" y2="18" stroke="#6366f1" stroke-width="1.5"/>
+        <text x="48" y="13" fill="#94a3b8" font-size="9" font-family="sans-serif">0..1</text>
+        <text x="90" y="13" fill="#94a3b8" font-size="9" font-family="sans-serif">0..*</text>
       </svg>
-      <div class="fig-caption">En kunde holder 0 eller flere kontoer; en konto tilhører nøyaktig 1 kunde</div>
+      <p><strong>Valgfri deltakelse</strong> — delen kan eksistere uten helheten. Multiplicity på «helhet»-siden er <code>0..1</code>.</p>
+      <p>Tenk slik: «Hvis jeg ødelegger helheten, ødelegges <em>ikke</em> nødvendigvis delen.»</p>
+      <div class="d-example">Eksempel: Hard Disk ◇—— Computer<br>En harddisk kan tas ut av en PC og fortsatt brukes. Harddisken eksisterer uavhengig av datamaskinen.</div>
     </div>
-
-    <p style="margin-bottom:.75rem">Klikk for å utforske hva de ulike multiplicity-symbolene betyr:</p>
-    <div class="mult-grid">
-      <div class="mult-card" onclick="showMult(this, '1', 'Nøyaktig én — objektet MÅ være assosiert med nøyaktig ett annet objekt. F.eks. en konto tilhører nøyaktig én bank.')">
-        <div class="symbol">1</div>
-        <div class="meaning">Nøyaktig én</div>
-      </div>
-      <div class="mult-card" onclick="showMult(this, '0..1', 'Null eller én — valgfri deltakelse. Objektet kan eksistere uten å være assosiert. F.eks. en ansatt kan ha 0 eller 1 parkeringsplass.')">
-        <div class="symbol">0..1</div>
-        <div class="meaning">Null eller én</div>
-      </div>
-      <div class="mult-card" onclick="showMult(this, '*', 'Null eller flere (any) — ingen øvre grense. Vanligst for «mange»-siden av en relasjon. Kan skrives som 0..* ')">
-        <div class="symbol">*</div>
-        <div class="meaning">Null eller flere</div>
-      </div>
-      <div class="mult-card" onclick="showMult(this, '1..*', 'Én eller flere — obligatorisk, men ubestemt antall. F.eks. en ordre MÅ ha minst én ordrelinje.')">
-        <div class="symbol">1..*</div>
-        <div class="meaning">Én eller flere</div>
-      </div>
-      <div class="mult-card" onclick="showMult(this, '1..5', 'Et spesifikt intervall. F.eks. en student kan ta mellom 1 og 5 kurs per semester.')">
-        <div class="symbol">1..5</div>
-        <div class="meaning">Spesifikt intervall</div>
-      </div>
-    </div>
-    <div class="mult-explain" id="mult-explain">Klikk på et symbol ovenfor.</div>
-
-    <div class="callout warn" style="margin-top:1rem">
-      <p><strong>Husk:</strong> Multiplicity er et <em>applikasjonsdomene-krav</em>. Spør domeneekspertene — de vet svaret, ikke programmererne. Og tenk på: gjelder begrensningen <em>alltid</em>? (Se student/kurs-eksempelet — hva skjer FØR add-drop?)</p>
-    </div>
-
-    <div class="card">
-      <h3>Unær assosiasjon — rollenavn er påkrevd</h3>
-      <div class="fig" style="margin:.75rem 0 0">
-        <svg width="260" height="70" style="display:block;margin:0 auto">
-          <rect x="70" y="10" width="120" height="40" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
-          <text x="130" y="35" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold">Employee</text>
-          <path d="M70 30 Q20 30 20 55 Q20 80 70 50" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
-          <text x="5" y="28" fill="#64748b" font-size="10">manages</text>
-          <text x="22" y="75" fill="#f59e0b" font-size="10">boss</text>
-          <text x="72" y="65" fill="#f59e0b" font-size="10">worker</text>
-        </svg>
-        <div class="fig-caption">Uten rollenavn (boss/worker) kan vi ikke se hvem som er sjef</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4. Aggregering vs komposisjon -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">4</div>
-      <h2>Aggregering vs Komposisjon</h2>
-    </div>
-    <p>Begge brukes for «del av»-relasjoner, men de er forskjellige. Bruk kun disse når noe <em>virkelig</em> er del av noe annet.</p>
-
-    <div class="diamond-grid">
-      <div class="diamond-card agg">
-        <h4>◇ Aggregering (hollow)</h4>
-        <svg class="diamond-svg" width="80" height="40">
-          <polygon points="40,5 60,20 40,35 20,20" fill="#0a0e1a" stroke="#6366f1" stroke-width="2"/>
-          <line x1="60" y1="20" x2="80" y2="20" stroke="#6366f1" stroke-width="1.5"/>
-        </svg>
-        <p>Valgfri deltakelse — delen kan <strong style="color:#e2e8f0">eksistere uten</strong> helheten. Multiplicity på helhet-siden er <code>0..1</code>.</p>
-        <p style="margin-top:.5rem;color:#6366f1;font-size:.8rem">Eksempel: Hard disk ◇— Computer<br>En disk kan eksistere uten en datamaskin.</p>
-      </div>
-      <div class="diamond-card comp">
-        <h4>◆ Komposisjon (filled)</h4>
-        <svg class="diamond-svg" width="80" height="40">
-          <polygon points="40,5 60,20 40,35 20,20" fill="#22c55e" stroke="#22c55e" stroke-width="2"/>
-          <line x1="60" y1="20" x2="80" y2="20" stroke="#22c55e" stroke-width="1.5"/>
-        </svg>
-        <p>Obligatorisk deltakelse — delen kan <strong style="color:#e2e8f0">ikke eksistere</strong> uten helheten. Multiplicity er <code>1</code>.</p>
-        <p style="margin-top:.5rem;color:#22c55e;font-size:.8rem">Eksempel: Room ◆— Building<br>Rommet ødelegges hvis bygningen ødelegges.</p>
-      </div>
-    </div>
-
-    <div class="callout tip">
-      <p><strong>Tommelfingerregel:</strong> Spør deg selv: «Hvis jeg ødelegger helheten — ødelegges også delene?» Ja → filled diamond (komposisjon). Nei → hollow diamond (aggregering).</p>
-    </div>
-
-    <div class="callout warn">
-      <p><strong>Advarsel:</strong> Ikke erstatt alle «has/have»-relasjoner med aggregering. Eks: «Kenneth has a bank account» — en konto er <em>ikke</em> en del av kroppen hans. Bruk vanlig assosiasjon der.</p>
-    </div>
-
-    <!-- Full eksempel-diagram -->
-    <div class="fig">
-      <svg width="100%" height="160" viewBox="0 0 500 160" style="display:block;max-width:500px;margin:0 auto">
-        <!-- Building -->
-        <rect x="10" y="55" width="100" height="50" rx="4" fill="#1a2236" stroke="#22c55e" stroke-width="1.5"/>
-        <text x="60" y="75" text-anchor="middle" fill="#86efac" font-size="11" font-weight="bold">Building</text>
-        <line x1="10" y1="82" x2="110" y2="82" stroke="#1f2d45"/>
-        <text x="60" y="96" text-anchor="middle" fill="#94a3b8" font-size="9">+ address : String</text>
-        <line x1="10" y1="102" x2="110" y2="102" stroke="#1f2d45"/>
-
-        <!-- filled diamond -->
-        <polygon points="110,80 126,73 142,80 126,87" fill="#22c55e" stroke="#22c55e" stroke-width="1.5"/>
-        <line x1="142" y1="80" x2="185" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
-        <text x="148" y="72" fill="#64748b" font-size="9">1</text>
-        <text x="170" y="72" fill="#64748b" font-size="9">1..*</text>
-
-        <!-- Room -->
-        <rect x="185" y="55" width="100" height="50" rx="4" fill="#1a2236" stroke="#22c55e" stroke-width="1.5"/>
-        <text x="235" y="75" text-anchor="middle" fill="#86efac" font-size="11" font-weight="bold">Room</text>
-        <line x1="185" y1="82" x2="285" y2="82" stroke="#1f2d45"/>
-        <text x="235" y="96" text-anchor="middle" fill="#94a3b8" font-size="9">+ roomNo : Integer</text>
-        <line x1="185" y1="102" x2="285" y2="102" stroke="#1f2d45"/>
-
-        <!-- hollow diamond -->
-        <line x1="285" y1="80" x2="340" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
-        <polygon points="340,80 356,73 372,80 356,87" fill="#0a0e1a" stroke="#6366f1" stroke-width="1.5"/>
-        <text x="288" y="72" fill="#64748b" font-size="9">0..1</text>
-        <text x="342" y="72" fill="#64748b" font-size="9">0..*</text>
-
-        <!-- Computer -->
-        <rect x="372" y="55" width="120" height="50" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
-        <text x="432" y="75" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold">Computer</text>
-        <line x1="372" y1="82" x2="492" y2="82" stroke="#1f2d45"/>
-        <text x="432" y="96" text-anchor="middle" fill="#94a3b8" font-size="9">+ model : String</text>
-        <line x1="372" y1="102" x2="492" y2="102" stroke="#1f2d45"/>
-
-        <!-- Labels -->
-        <text x="60" y="145" text-anchor="middle" fill="#22c55e" font-size="9">Komposisjon</text>
-        <text x="328" y="145" text-anchor="middle" fill="#6366f1" font-size="9">Aggregering</text>
+    <div class="d-card comp">
+      <h4>◆ Komposisjon (filled diamond)</h4>
+      <svg width="120" height="36" style="display:block;margin:.5rem 0">
+        <polygon points="10,18 28,8 46,18 28,28" fill="#22c55e" stroke="#22c55e" stroke-width="2"/>
+        <line x1="46" y1="18" x2="110" y2="18" stroke="#22c55e" stroke-width="1.5"/>
+        <text x="48" y="13" fill="#94a3b8" font-size="9" font-family="sans-serif">1</text>
+        <text x="90" y="13" fill="#94a3b8" font-size="9" font-family="sans-serif">1..*</text>
       </svg>
-      <div class="fig-caption">Venstre: Room ◆ Building (komposisjon) &nbsp;|&nbsp; Høyre: Computer ◇ Room (aggregering)</div>
+      <p><strong>Obligatorisk deltakelse</strong> — delen eksisterer <em>ikke</em> uten helheten. Multiplicity på «helhet»-siden er <code>1</code>.</p>
+      <p>Tenk slik: «Hvis jeg ødelegger helheten, ødelegges også alle delene.»</p>
+      <div class="d-example">Eksempel: Room ◆—— Building<br>Et rom kan ikke eksistere uten bygningen. Rives bygningen, forsvinner alle rommene med den.</div>
     </div>
   </div>
+
+  <div class="fig" style="margin-top:1.25rem">
+    <div class="fig-title">Kenneth's to klassiske eksempler side ved side</div>
+    <svg width="100%" height="140" viewBox="0 0 540 140" style="display:block;max-width:540px;margin:0 auto">
+      <!-- Building -->
+      <rect x="10" y="45" width="110" height="50" rx="4" fill="#1a2236" stroke="#22c55e" stroke-width="1.5"/>
+      <text x="65" y="65" text-anchor="middle" fill="#86efac" font-size="11" font-weight="bold" font-family="monospace">Building</text>
+      <line x1="10" y1="72" x2="120" y2="72" stroke="#1f2d45"/>
+      <text x="65" y="85" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">+ address : String</text>
+      <line x1="10" y1="90" x2="120" y2="90" stroke="#1f2d45"/>
+      <!-- Filled diamond + line -->
+      <polygon points="120,70 136,62 152,70 136,78" fill="#22c55e" stroke="#22c55e" stroke-width="1.5"/>
+      <line x1="152" y1="70" x2="195" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="155" y="60" fill="#64748b" font-size="9" font-family="sans-serif">1</text>
+      <text x="175" y="60" fill="#64748b" font-size="9" font-family="sans-serif">1..*</text>
+      <!-- Room -->
+      <rect x="195" y="45" width="110" height="50" rx="4" fill="#1a2236" stroke="#22c55e" stroke-width="1.5"/>
+      <text x="250" y="65" text-anchor="middle" fill="#86efac" font-size="11" font-weight="bold" font-family="monospace">Room</text>
+      <line x1="195" y1="72" x2="305" y2="72" stroke="#1f2d45"/>
+      <text x="250" y="85" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">+ roomNo : Integer</text>
+      <line x1="195" y1="90" x2="305" y2="90" stroke="#1f2d45"/>
+      <!-- Labels -->
+      <text x="135" y="108" text-anchor="middle" fill="#22c55e" font-size="9" font-family="sans-serif">KOMPOSISJON ◆</text>
+      <text x="135" y="120" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="sans-serif">Room eksisterer ikke uten Building</text>
+
+      <!-- Separator -->
+      <line x1="320" y1="20" x2="320" y2="130" stroke="#1f2d45" stroke-dasharray="4,3"/>
+
+      <!-- Computer -->
+      <rect x="335" y="45" width="110" height="50" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="390" y="65" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold" font-family="monospace">Computer</text>
+      <line x1="335" y1="72" x2="445" y2="72" stroke="#1f2d45"/>
+      <text x="390" y="85" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">+ model : String</text>
+      <line x1="335" y1="90" x2="445" y2="90" stroke="#1f2d45"/>
+      <!-- Hollow diamond + line -->
+      <line x1="445" y1="70" x2="468" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
+      <polygon points="468,70 484,62 500,70 484,78" fill="#0a0e1a" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="447" y="60" fill="#64748b" font-size="9" font-family="sans-serif">0..1</text>
+      <!-- HardDisk -->
+      <rect x="500" y="45" width="35" height="50" rx="4" fill="#1a2236" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="517" y="63" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="bold" font-family="monospace">Hard</text>
+      <text x="517" y="75" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="bold" font-family="monospace">Disk</text>
+      <!-- Labels -->
+      <text x="420" y="108" text-anchor="middle" fill="#6366f1" font-size="9" font-family="sans-serif">AGGREGERING ◇</text>
+      <text x="420" y="120" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="sans-serif">Disk kan eksistere uten Computer</text>
+    </svg>
+    <div class="fig-caption">Venstre: Room ◆ Building — komposisjon (obligatorisk). Høyre: HardDisk ◇ Computer — aggregering (valgfri).</div>
+  </div>
+
+  <p class="prose" style="margin-top:1.25rem">Kenneth oppsummerer: «The decision to use aggregation is a matter of judgment, and it's also a design decision. It's not wrong to use a plain association instead of aggregation. But when you use a diamond, you add more semantics — everyone who reads the diagram knows that something is part of something else.»</p>
+</div>
 
 </div><!-- /panel-theory -->
 
-<!-- ═══════════════════════════════════════════ QUIZ ═══ -->
+<!-- ═══════════════════ QUIZ ═══════════════════ -->
 <div class="panel" id="panel-quiz">
   <div class="quiz-progress" id="quiz-dots"></div>
   <div id="quiz-container"></div>
 </div>
 
-<!-- ═══════════════════════════════════════════ EXERCISES ═══ -->
+<!-- ═══════════════════ EXERCISES ═══════════════════ -->
 <div class="panel" id="panel-exercises">
 
   <div class="exercise">
-    <div class="exercise-header" onclick="toggleEx(this)">
+    <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 1</span>
-      <h3>Klassifiser og tegn: Bank-system</h3>
+      <h3>Bank-system: klasser, assosiasjoner og generalisering</h3>
       <span class="ex-toggle">▾</span>
     </div>
-    <div class="exercise-body" style="display:none">
-      <p><strong>Scenario:</strong> En bank har mange kunder. Hver kunde kan ha null eller flere kontoer. Hver konto tilhører nøyaktig én kunde. En konto kan enten være en sparekonto (med <em>interest rate</em>) eller en brukskonto (med <em>service charge</em>). En konto kan ikke være begge samtidig.</p>
+    <div class="ex-body">
+      <p><strong>Scenario (fra forelesningen):</strong> Du skal bygge et system for en bank. Fra applikasjonsdomenet vet du følgende:</p>
       <ul>
-        <li>Identifiser klassene og trekk inn attributter</li>
-        <li>Sett riktig multiplicity på assosiasjonene</li>
-        <li>Bruk generalisering for kontotypene — er de disjoint eller overlapping? Complete eller incomplete?</li>
+        <li>En bank har mange kunder. Hver kunde kan ha null eller flere kontoer.</li>
+        <li>Hver konto tilhører nøyaktig én kunde og én bank.</li>
+        <li>Det finnes to typer kontoer: <em>sparekonto</em> (SavingsAccount) med attributtet <code>interestRate</code>, og <em>brukskonto</em> (CheckingAccount) med attributtet <code>serviceCharge</code>.</li>
+        <li>Felles for begge: <code>accountNo : Integer</code>, <code>balance : Money</code>, og operasjoner <code>checkBalance()</code>, <code>deposit()</code>, <code>withdraw()</code>.</li>
+        <li>En konto kan ikke være begge typer samtidig, og det finnes ingen andre kontotyper.</li>
       </ul>
+      <p style="margin-top:.75rem">Tegn class diagrammet. Inkluder: klasser, attributter, assosiasjoner med multiplicity, generalisering med riktig constraint.</p>
       <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
       <div class="solution">
-        <h4>Løsning</h4>
-        <p><strong>Klasser:</strong> Customer, Account, SavingsAccount, CheckingAccount</p>
-        <p><strong>Assosiasjoner:</strong> Customer <code>1 ——— 0..*</code> Account (holds)</p>
-        <p><strong>Generalisering:</strong> Account → SavingsAccount, CheckingAccount</p>
+        <div class="sol-title">Løsning</div>
+        <p><strong>Klasser:</strong> Bank, Customer, Account (abstract), SavingsAccount, CheckingAccount</p>
+        <p style="margin-top:.5rem"><strong>Assosiasjoner:</strong></p>
         <ul>
-          <li>SavingsAccount: + interestRate : Percentage</li>
-          <li>CheckingAccount: + serviceCharge : Money</li>
-          <li>Constraint: <code>{disjoint, complete}</code> — en konto er enten sparing eller bruk, og det finnes ingen andre typer</li>
+          <li>Bank <code>1 ——— 0..*</code> Customer (has) — En bank kan ha mange kunder, en kunde tilhører én bank</li>
+          <li>Customer <code>1 ——— 0..*</code> Account (holds) — En kunde kan ha ingen eller mange kontoer</li>
+          <li>Account <code>0..* ——— 1</code> Bank (is with) — En konto tilhører nøyaktig én bank</li>
         </ul>
-        <p>Account bør være <em>abstract</em> (italic) siden alle instanser er enten CheckingAccount eller SavingsAccount.</p>
+        <p style="margin-top:.5rem"><strong>Generalisering:</strong> Account → {SavingsAccount, CheckingAccount}</p>
+        <ul>
+          <li>Constraint: <code>{disjoint, complete}</code></li>
+          <li>Disjoint fordi en konto ikke kan være begge typer</li>
+          <li>Complete fordi det ikke finnes andre kontotyper i dette domenet</li>
+          <li>Account bør være <em>abstract</em> (italic) — alle instanser er enten Savings eller Checking, aldri bare «Account»</li>
+        </ul>
+        <p style="margin-top:.5rem"><strong>Attributter:</strong> Account har <code>accountNo, balance</code> og operasjoner. SavingsAccount legger til <code>interestRate</code> og <code>payInterest()</code>. CheckingAccount legger til <code>serviceCharge</code>.</p>
       </div>
-      <button class="done-btn" onclick="markDone(this, 'ex1')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex1')">✓ Markér som gjort</button>
     </div>
   </div>
 
   <div class="exercise">
-    <div class="exercise-header" onclick="toggleEx(this)">
+    <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 2</span>
-      <h3>Multiplicity-analyse: Universitet</h3>
+      <h3>Multiplicity-analyse med add-drop-problemet</h3>
       <span class="ex-toggle">▾</span>
     </div>
-    <div class="exercise-body" style="display:none">
-      <p>Fra applikasjonsdomenet vet du:</p>
+    <div class="ex-body">
+      <p><strong>Scenario (direkte fra forelesningen):</strong> Kenneth stiller dette eksakte spørsmålet:</p>
+      <p style="background:var(--surface3);border-radius:6px;padding:.75rem;margin:.75rem 0;font-style:italic;color:#a5b4fc">"A student must enroll into at least one course and can enroll into at most five courses in a semester. A course must have at least 10 students and cannot have more than 45 students."</p>
       <ul>
-        <li>En student MÅ ta minst 1 kurs og kan ta maks 5 kurs per semester</li>
-        <li>Et kurs MÅ ha minst 10 studenter og kan ha maks 45 studenter</li>
+        <li>a) Hva er multiplicity-verdiene om du setter dem <em>direkte</em> fra domenkravene?</li>
+        <li>b) Hva er problemet med disse verdiene i et class diagram?</li>
+        <li>c) Hva er den riktige løsningen?</li>
       </ul>
-      <p><strong>Spørsmål:</strong> Er disse multiplicity-verdiene riktige å sette direkte i class diagrammet? Hva er problemet, og hva er løsningen?</p>
       <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
       <div class="solution">
-        <h4>Løsning</h4>
-        <p><strong>Problem:</strong> Multiplicity gjelder <em>alltid</em> — også FØR add-drop-perioden. Før add-drop har kurs 0 studenter og studenter er påmeldt 0 kurs. Begrensningen <code>1..5</code> og <code>10..45</code> brytes umiddelbart.</p>
-        <p><strong>Løsning:</strong> Relax til <code>0..5</code> og <code>0..45</code> i diagrammet. Legg til en <em>note</em> som sier: «After add-drop: student enrolled in 1..5 courses; course has 10..45 students»</p>
+        <div class="sol-title">Løsning</div>
+        <p><strong>a) Direkte fra domenet:</strong> Student <code>1..5 ——— 10..45</code> Course</p>
+        <p style="margin-top:.6rem"><strong>b) Problemet:</strong> Multiplicity i et class diagram gjelder <em>alltid</em> — ikke bare i normal drift, men i alle tilstander systemet kan befinne seg i. Rett etter semesterstart, <em>før</em> add-drop-perioden er ferdig, vil kurser ha 0 studenter og studenter ha meldt seg på 0 kurs. Dette bryter begge begrensningene umiddelbart.</p>
+        <p style="margin-top:.6rem"><strong>c) Riktig løsning:</strong></p>
+        <ul>
+          <li>Sett multiplicity til <code>0..5</code> og <code>0..45</code> i selve diagrammet</li>
+          <li>Legg til en UML-note ved assosiasjonen: <em>«After add-drop: student enrolled in 1..5 courses; course has 10..45 students»</em></li>
+        </ul>
+        <p style="margin-top:.6rem">Kenneth sier: «Once we specify constraints within the class diagram, we have to always follow these constraints — all the time.»</p>
       </div>
-      <button class="done-btn" onclick="markDone(this, 'ex2')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex2')">✓ Markér som gjort</button>
     </div>
   </div>
 
   <div class="exercise">
-    <div class="exercise-header" onclick="toggleEx(this)">
+    <div class="ex-header" onclick="toggleEx(this)">
       <span class="ex-num">Ex 3</span>
-      <h3>Aggregering eller komposisjon?</h3>
+      <h3>Aggregering, komposisjon eller vanlig assosiasjon?</h3>
       <span class="ex-toggle">▾</span>
     </div>
-    <div class="exercise-body" style="display:none">
-      <p>Avgjør for hvert par om det er aggregering (◇), komposisjon (◆) eller vanlig assosiasjon. Begrunn svaret.</p>
+    <div class="ex-body">
+      <p>For hvert par: avgjør om det er komposisjon (◆), aggregering (◇), eller vanlig assosiasjon (—). Bruk Kenneth's tommelfingerregel: <em>«Ødelegger du helheten — ødelegges også delene?»</em></p>
       <ul>
-        <li>a) Order og OrderLine</li>
-        <li>b) Person og BankAccount</li>
-        <li>c) Car og Engine</li>
-        <li>d) University og Department</li>
-        <li>e) Student og Course</li>
+        <li><strong>a)</strong> Order og OrderLine (en ordrelinje er alltid tilknyttet én ordre)</li>
+        <li><strong>b)</strong> Person og BankAccount (en person eier en konto)</li>
+        <li><strong>c)</strong> University og Department (en avdeling hører til ett universitet)</li>
+        <li><strong>d)</strong> Computer og HardDisk (harddisken kan tas ut og brukes et annet sted)</li>
+        <li><strong>e)</strong> Student og Course (en student tar kurs)</li>
+        <li><strong>f)</strong> Car og Engine (motoren er integrert i bilen og kan ikke enkelt flyttes)</li>
       </ul>
       <button class="sol-btn" onclick="toggleSol(this)">Vis løsning</button>
       <div class="solution">
-        <h4>Løsning</h4>
+        <div class="sol-title">Løsning</div>
         <ul>
-          <li><strong>a) Order ◆ OrderLine</strong> — komposisjon. En ordrelinje kan ikke eksistere uten ordren. Sletter du ordren, forsvinner linjene.</li>
-          <li><strong>b) Person — BankAccount</strong> — vanlig assosiasjon. En bankkonto er ikke en del av personen.</li>
-          <li><strong>c) Car ◆ Engine</strong> — komposisjon (vanligvis). En motor i denne konteksten er integrert del av bilen. Diskuteres — kan avhenge av domenet.</li>
-          <li><strong>d) University ◆ Department</strong> — komposisjon. En avdeling eksisterer ikke uten universitetet.</li>
-          <li><strong>e) Student — Course</strong> — vanlig assosiasjon (enrolls in). Et kurs er ikke en del av studenten.</li>
+          <li><strong>a) Order ◆ OrderLine — Komposisjon.</strong> En ordrelinje kan ikke eksistere uten ordren. Sletter du ordren, forsvinner linjene med den.</li>
+          <li><strong>b) Person — BankAccount — Vanlig assosiasjon.</strong> Kenneth er eksplisitt: «A bank account is not part of me. It's not something inside my body.» Bruk ikke diamant her.</li>
+          <li><strong>c) University ◆ Department — Komposisjon.</strong> En avdeling eksisterer ikke selvstendig uten universitetet.</li>
+          <li><strong>d) Computer ◇ HardDisk — Aggregering.</strong> Kenneth's eksempel: harddisken kan fjernes og brukes i et annet system. Den eksisterer selvstendig.</li>
+          <li><strong>e) Student — Course — Vanlig assosiasjon.</strong> Et kurs er ikke en del av studenten.</li>
+          <li><strong>f) Car ◆ Engine — Komposisjon</strong> (i de fleste domenekontekster). En motor i en bil er integrert — ødelegges bilen, ødelegges motoren i dette systemet. (Merknad: i et mekanisk-verksted-system ville svaret kanskje være aggregering. Domenet bestemmer.)</li>
         </ul>
       </div>
-      <button class="done-btn" onclick="markDone(this, 'ex3')">✓ Markér som gjort</button>
+      <button class="done-btn" onclick="markDone(this,'ex3')">✓ Markér som gjort</button>
     </div>
   </div>
 
@@ -529,158 +632,139 @@
 </div><!-- /content -->
 
 <script>
-// ── STORAGE ──
-const MOD_ID = 'mod02';
-const KEY = 'se-progress-v1';
-function getP() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } }
-function saveP(d) { const p = getP(); p[MOD_ID] = {...(p[MOD_ID]||{}), ...d, updatedAt: Date.now()}; localStorage.setItem(KEY, JSON.stringify(p)); }
-function getModP() { return getP()[MOD_ID] || {}; }
+const MOD_ID='mod02',KEY='se-progress-v1';
+function getP(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};}}
+function saveP(d){const p=getP();p[MOD_ID]={...(p[MOD_ID]||{}),...d,updatedAt:Date.now()};localStorage.setItem(KEY,JSON.stringify(p));}
+function getModP(){return getP()[MOD_ID]||{};}
 
-// ── TABS ──
-function switchTab(name, btn) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
+function switchTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
   btn.classList.add('active');
-  if (name === 'quiz') renderQuiz();
+  if(name==='quiz')renderQuiz();
 }
 
-// ── CLASS DEMO ──
-const classParts = [
-  { highlight: 'name', text: '<strong style="color:#a5b4fc">Klassenavn</strong>: «Account» — skal bruke vokabular fra applikasjonsdomenet. Én klasse fanger én abstraksjon. Bruk singular-form (Account, ikke Accounts).' },
-  { highlight: 'attrs', text: '<strong style="color:#a5b4fc">Attributter</strong>: Egenskapene til objektet. Format: <code>synlighet navn : type</code>. Synlighet: <code>+</code> public, <code>-</code> private, <code>#</code> protected. Navn og type er obligatorisk.' },
-  { highlight: 'ops', text: '<strong style="color:#a5b4fc">Operasjoner</strong>: Handlinger objektet kan utføre. Format: <code>synlighet navn(parametere) : returtype</code>. En operasjon (spec) kan ha flere metoder (implementasjoner).' },
+// Class demo
+const classParts=[
+  {id:'name',text:'<strong style="color:#a5b4fc">Klassenavn</strong><br><br>Skal bruke vokabular fra applikasjonsdomenet — «Account» er et begrep alle i bank-verdenen forstår. En god klasse fanger <em>én og bare én</em> abstraksjon. Kenneth: «A good class should capture one and only one abstraction — you should not mix multiple things together.»'},
+  {id:'attr',text:'<strong style="color:#06b6d4">Attributter</strong><br><br>Format: <code>synlighet navn : type</code>. <strong>Navn og type er obligatorisk</strong>. <code>+</code> public, <code>-</code> private, <code>#</code> protected.<br><br>Her: <code>accountNo : Integer</code> og <code>balance : Money</code>. Alle Account-instanser deler disse attributtene — det er <em>nettopp</em> grunnen til at vi klassifiserer dem under én klasse.'},
+  {id:'op',text:'<strong style="color:#8b5cf6">Operasjoner</strong><br><br>Format: <code>synlighet navn(parameter : type) : returtype</code>.<br><br>Viktig distinksjon: en <em>operasjon</em> er spesifikasjonen («hva»). En <em>metode</em> er én konkret implementasjon («hvordan»). Samme operasjon kan ha flere metoder — f.eks. kan <code>withdraw()</code> være implementert ulikt for SavingsAccount og CheckingAccount.'},
 ];
-let partIdx = 0;
-function cycleClassPart() {
-  partIdx = (partIdx + 1) % (classParts.length + 1);
-  const nm = document.getElementById('cls-name-demo');
-  const at = document.getElementById('cls-attrs-demo');
-  const op = document.getElementById('cls-ops-demo');
-  const ex = document.getElementById('class-explain');
-  nm.style.background = ''; at.style.background = ''; op.style.background = '';
-  if (partIdx === 0) { ex.innerHTML = '<strong style="color:#a5b4fc">Klikk på klassen</strong> for å se forklaring av hver del.'; return; }
-  const p = classParts[partIdx - 1];
-  if (p.highlight === 'name') nm.style.background = 'rgba(99,102,241,.35)';
-  if (p.highlight === 'attrs') at.style.background = 'rgba(99,102,241,.2)';
-  if (p.highlight === 'ops') op.style.background = 'rgba(99,102,241,.2)';
-  ex.innerHTML = p.text;
+let partIdx=0;
+function cycleClassPart(){
+  const el=document.getElementById('class-demo');
+  el.querySelector('.uml-name').style.outline='';
+  el.querySelector('.uml-attrs').style.outline='';
+  el.querySelector('.uml-ops').style.outline='';
+  el.querySelector('.uml-name').style.background='';
+  el.querySelector('.uml-attrs').style.background='';
+  el.querySelector('.uml-ops').style.background='';
+  partIdx=(partIdx+1)%(classParts.length+1);
+  const ex=document.getElementById('class-explain');
+  if(partIdx===0){ex.innerHTML='<strong>Klikk på klassen</strong> for å utforske de tre delene:<br><br>Første klikk → klassenavn<br>Andre klikk → attributter<br>Tredje klikk → operasjoner';return;}
+  const p=classParts[partIdx-1];
+  if(p.id==='name'){el.querySelector('.uml-name').style.outline='2px solid #6366f1';el.querySelector('.uml-name').style.background='rgba(99,102,241,.35)';}
+  if(p.id==='attr'){el.querySelector('.uml-attrs').style.outline='2px solid #06b6d4';el.querySelector('.uml-attrs').style.background='rgba(6,182,212,.15)';}
+  if(p.id==='op'){el.querySelector('.uml-ops').style.outline='2px solid #8b5cf6';el.querySelector('.uml-ops').style.background='rgba(139,92,246,.15)';}
+  ex.innerHTML=p.text;
 }
 
-// ── MULTIPLICITY ──
-function showMult(el, sym, text) {
-  document.querySelectorAll('.mult-card').forEach(c => c.classList.remove('active'));
+function showMult(el,sym,html){
+  document.querySelectorAll('.mult-card').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('mult-explain').innerHTML = '<strong style="color:#f59e0b">' + sym + '</strong> — ' + text;
+  document.getElementById('mult-explain').innerHTML='<strong style="color:#f59e0b;font-size:1.05rem;font-family:monospace">'+sym+'</strong><br><br>'+html;
 }
 
-// ── EXERCISES ──
-function toggleEx(header) {
-  const body = header.nextElementSibling;
-  const arrow = header.querySelector('.ex-toggle');
-  const open = body.style.display !== 'none';
-  body.style.display = open ? 'none' : 'block';
-  arrow.textContent = open ? '▾' : '▴';
+function toggleEx(header){
+  const body=header.nextElementSibling;
+  const arrow=header.querySelector('.ex-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  arrow.textContent=open?'▾':'▴';
 }
-function toggleSol(btn) {
-  const sol = btn.nextElementSibling;
-  const show = sol.classList.toggle('show');
-  btn.textContent = show ? 'Skjul løsning' : 'Vis løsning';
+function toggleSol(btn){
+  const sol=btn.nextElementSibling;
+  const show=sol.classList.toggle('show');
+  btn.textContent=show?'Skjul løsning':'Vis løsning';
 }
-function markDone(btn, id) {
+function markDone(btn,id){
   btn.classList.toggle('done');
-  const done = btn.classList.contains('done');
-  btn.textContent = done ? '✓ Gjort!' : '✓ Markér som gjort';
-  const p = getModP();
-  const doneSet = new Set(p.doneExercises || []);
-  done ? doneSet.add(id) : doneSet.delete(id);
-  saveP({ doneExercises: [...doneSet] });
+  const done=btn.classList.contains('done');
+  btn.textContent=done?'✓ Gjort!':'✓ Markér som gjort';
+  const p=getModP();
+  const s=new Set(p.doneExercises||[]);
+  done?s.add(id):s.delete(id);
+  saveP({doneExercises:[...s]});
   updateNav();
 }
 
-// ── QUIZ DATA ──
-const QUESTIONS = [
-  { q: 'Hva er UML?', opts: ['Et programmeringsspråk for Java', 'Et visuelt modelleringsspråk og industristandard', 'En software-utviklingsmetodologi', 'Et rammeverk for testing'], correct: 1, exp: 'UML er et visuelt modelleringsspråk — det er ikke en metodologi og ikke et programmeringsspråk. Det er et verktøy for kommunikasjon.' },
-  { q: 'Hva er forskjellen på en operasjon og en metode?', opts: ['De er det samme', 'En operasjon er én implementasjon; en metode er spesifikasjonen', 'En operasjon er spesifikasjonen; en metode er én konkret implementasjon', 'En metode tilhører superklassen; en operasjon tilhører subklassen'], correct: 2, exp: 'Operasjon = spesifikasjonen (hva den gjør). Metode = en konkret implementasjon. Samme operasjon kan ha flere metoder (f.eks. ulike implementasjoner for ulike subklasser).' },
-  { q: 'En student kan ta 1–5 kurs, men FØR add-drop har ingen studenter registrert seg på noe. Hva bør multiplicity være i class diagrammet?', opts: ['1..5 — kravene fra domenet', '0..5 med en note om at 1..5 gjelder etter add-drop', '5 — alltid', '0..* — ingen begrensning'], correct: 1, exp: 'Multiplicity i et class diagram gjelder ALLTID. Siden 0 studenter kan være registrert før add-drop, må vi relax til 0..5 og legge kravene om 1–5 i en note.' },
-  { q: 'Hva er forskjellen på aggregering (◇) og komposisjon (◆)?', opts: ['Ingen — de brukes om hverandre', 'Aggregering: valgfri deltakelse (del kan eksistere uten helhet). Komposisjon: obligatorisk deltakelse.', 'Komposisjon: valgfri deltakelse. Aggregering: obligatorisk deltakelse.', 'Aggregering brukes kun for klasser med attributter'], correct: 1, exp: 'Hollow diamond (◇) = aggregering = valgfri = delen kan eksistere uten helheten. Filled diamond (◆) = komposisjon = obligatorisk = delen eksisterer ikke uten helheten.' },
-  { q: 'Hvilken synlighetsmodifikator betyr at en attributt er tilgjengelig for alle objekter i systemet?', opts: ['- (private)', '# (protected)', '+ (public)', '~ (package)'], correct: 2, exp: '+ betyr public — tilgjengelig for alle. - er private (kun inni klassen). # er protected (klassen + subklasser).' },
-  { q: 'Person ◇ BankAccount eller Person — BankAccount?', opts: ['Person ◇ BankAccount (aggregering)', 'Person — BankAccount (vanlig assosiasjon)', 'Person ◆ BankAccount (komposisjon)', 'Avhenger av om bankkontoen er digital'], correct: 1, exp: 'En bankkonto er ikke en del av personen (ikke «inside»). Bruk vanlig assosiasjon. Aggregering og komposisjon brukes kun når noe virkelig er en del av noe annet.' },
-  { q: 'Hva er en unær assosiasjon og hva er spesielt med den?', opts: ['En assosiasjon mellom tre klasser', 'En assosiasjon der en klasse er knyttet til seg selv — krever rollenavn på begge sider', 'En assosiasjon uten multiplicity', 'En assosiasjon som bare kan brukes i solution model'], correct: 1, exp: 'Unær assosiasjon = en klasse assosiert med seg selv (f.eks. Employee manages Employee). Rollenavn (boss/worker) er PÅKREVD for å si hvem som spiller hvilken rolle.' },
-  { q: 'Hva er en requirement model?', opts: ['En modell som viser kildekode-strukturen', 'En modell som fanger viktige objekter i domenet — uavhengig av implementasjon', 'En modell for testing', 'En modell av databasen'], correct: 1, exp: 'En requirement model fanger hva som finnes i applikasjonsdomenet. Den har ingenting med implementasjon å gjøre — det er formålet med solution model.' },
-  { q: 'Multiplicity "0..1" betyr:', opts: ['Alltid nøyaktig null', 'Valgfri deltakelse — null eller én', 'Obligatorisk — minst én', 'Ubegrenset antall'], correct: 1, exp: '0..1 = valgfri deltakelse. Lower bound = 0 betyr at objektet KAN eksistere uten å være assosiert. Upper bound = 1 betyr at det maks kan være én.' },
-  { q: 'Hva skiller en god klasse fra en dårlig?', opts: ['En god klasse har mange attributter', 'En god klasse fanger én og bare én abstraksjon, og bruker domene-vokabular', 'En god klasse har ingen operasjoner', 'En god klasse arver alltid fra en superklasse'], correct: 1, exp: 'En god klasse fanger nøyaktig én abstraksjon (ett konsept) og navngis med domene-vokabular. Å blande to konsepter i én klasse er et tegn på dårlig design.' },
+// QUIZ
+const QUESTIONS=[
+  {q:'Hva er UML?',opts:['Et programmeringsspråk (som Java eller Python)','Et visuelt modelleringsspråk og industristandard','En software-utviklingsmetodologi med faste steg','Et testverktøy for å verifisere kode'],correct:1,exp:'UML er et visuelt <em>modelleringsspråk</em> — ikke en metodologi og ikke et programmeringsspråk. Kenneth: «It\'s software development methodology or process neutral.» Det er et verktøy for å kommunisere modeller, uavhengig av hvilken prosess du bruker.'},
+  {q:'Kenneth viser et eksempel der klienten forklarer én ting, men programmereren implementerer noe helt annet. Hva er den <em>viktigste</em> grunnen til at vi bygger UML-modeller?',opts:['For å ha dokumentasjon til eksamensinnlevering','For å synkronisere alle stakeholders\' forståelse av systemet — og unngå misforståelser','For å gjøre koden raskere å skrive','For å erstatte testing'],correct:1,exp:'Kjerneformålet med modellering er kommunikasjon. Kenneth sier: «We need a model to communicate with different people that we have within the project.» Uten en felles modell kan klienten, analytikeren og programmereren ha tre helt forskjellige bilder av hva systemet skal gjøre.'},
+  {q:'Hva er forskjellen på en <em>operasjon</em> og en <em>metode</em> i UML?',opts:['De er synonymer og kan brukes om hverandre','En operasjon er spesifikasjonen; en metode er én konkret implementasjon av den','En operasjon er privat; en metode er public','En metode finnes i superklassen; en operasjon i subklassen'],correct:1,exp:'Operasjon = spesifikasjonen («hva» den gjør, som vist i class diagrammet). Metode = én konkret implementasjon av operasjonen. Kenneth: «An operation can have several methods because there are different possible ways to implement the same operation.» F.eks. kan <code>withdraw()</code> være implementert ulikt for CheckingAccount og SavingsAccount.'},
+  {q:'Kenneth stiller dette spørsmålet i forelesningen: Et kurs MÅ ha 10–45 studenter. Kan du sette multiplicity <code>10..45</code> direkte i class diagrammet?',opts:['Ja — multiplicity skal alltid reflektere domenkravene nøyaktig','Nei — multiplicity i class diagram gjelder alltid, inkludert FØR add-drop da kurser har 0 studenter','Ja, men bare i solution model, ikke requirement model','Nei — multiplicity kan aldri settes til et intervall'],correct:1,exp:'Kenneth er eksplisitt: «Once we specify constraints within the class diagram, we have to always follow these constraints — all the time.» Løsningen: relax til <code>0..45</code> i diagrammet og legg domenekravet i en UML-note.'},
+  {q:'Hva er forskjellen på aggregering (◇) og komposisjon (◆)?',opts:['Ingen — de betyr det samme og brukes om hverandre','Aggregering: delen kan eksistere uten helheten (0..1). Komposisjon: delen eksisterer ikke uten helheten (1).','Komposisjon: delen kan eksistere uten helheten. Aggregering: obligatorisk.','Aggregering brukes bare for klasser med arv'],correct:1,exp:'Hollow diamond (◇) = aggregering = valgfri deltakelse = delen lever videre hvis helheten forsvinner (f.eks. HardDisk uten Computer). Filled diamond (◆) = komposisjon = obligatorisk = delene ødelegges med helheten (f.eks. Room uten Building).'},
+  {q:'Kenneth gir dette eksempelet: «Kenneth has a bank account.» Hvilken relasjon bør brukes mellom Person og BankAccount?',opts:['Person ◆ BankAccount (komposisjon)','Person ◇ BankAccount (aggregering)','Person — BankAccount (vanlig assosiasjon)','Det trengs ingen relasjon'],correct:2,exp:'Kenneth er tydelig: «A bank account is not part of me. It\'s not something that\'s inside my body. So you should not use aggregation between Person and Account.» Bruk vanlig assosiasjon. Diamant brukes <em>kun</em> når noe virkelig er en fysisk eller konseptuell del av noe annet.'},
+  {q:'Hva er en unær assosiasjon, og hva er spesielt med den?',opts:['En assosiasjon mellom tre klasser (ternær)','En assosiasjon der en klasse er koblet til seg selv — rollenavn på begge sider er obligatorisk','En assosiasjon uten multiplicity','En assosiasjon som bare finnes i solution model'],correct:1,exp:'Unær assosiasjon = en klasse assosiert med seg selv. Eksempel: Employee manages Employee. Uten rollenavn (boss/worker) kan vi ikke se hvem som er sjef og hvem som er ansatt. Kenneth: «For unary association, it\'s always required to provide the role names.»'},
+  {q:'Kan vi ha to assosiasjoner mellom samme par av klasser?',opts:['Nei — kun én assosiasjon per klassepar er tillatt','Ja — men bare hvis begge assosiasjonene har ulik multiplicity','Ja — men bare hvis de har to forskjellige meninger (semantikk)','Ja — alltid, uten begrensning'],correct:2,exp:'Ja, det er tillatt å ha to assosiasjoner mellom samme par, men bare når de representerer to <em>ulike</em> konsepter. Kenneth\'s eksempel: en person kan både «attends» (er student ved) og «works for» (er ansatt ved) samme universitet. Begge assosiasjonene er nødvendige fordi de betyr noe forskjellig.'},
+  {q:'Hva er en <em>requirement model</em> i UML?',opts:['En modell av databasen med tabeller og fremmednøkler','En modell som fanger viktige objekter i applikasjonsdomenet — uten implementasjonsdetaljer','En modell av kildekoden med klasser og arv','En modell som spesifiserer testcaser'],correct:1,exp:'Requirement model fanger hva som <em>finnes</em> i applikasjonsdomenet. Kenneth: «If we are talking about the requirement model, it has nothing to do with implementation. Given the application domain, we try to capture all the important objects. That\'s it.» Implementasjonsdetaljer hører hjemme i solution model.'},
+  {q:'En klasse «Account» er vist med italic skrift i et class diagram. Hva betyr det?',opts:['At klassen er privat og ikke tilgjengelig utenfra','At klassen er abstrakt — den har ingen direkte instanser','At klassen er deprecated og bør fjernes','At klassen bare brukes i requirement model'],correct:1,exp:'Italic i UML betyr abstrakt klasse. En abstrakt klasse har ingen direkte instanser — alle instanser er av en subtype. I bankeksempelet har Account ingen egne instanser; alle instanser er enten SavingsAccount eller CheckingAccount. Kenneth: «Abstract class has no direct instances — we use it for modeling purpose.»'},
 ];
-
-// ── QUIZ ENGINE ──
-let qCurrent = 0;
-let qAnswers = {};
-function renderQuiz() {
-  const p = getModP();
-  if (p.quizDone) { showQuizResult(p.quizScore, p.quizTotal); return; }
-  const dots = document.getElementById('quiz-dots');
-  dots.innerHTML = QUESTIONS.map((_, i) => `<div class="qp-dot ${qAnswers[i] != null ? (qAnswers[i].correct ? 'correct' : 'wrong') : ''}" id="dot-${i}"></div>`).join('');
+let qAnswers={},qCurrent=0;
+function renderQuiz(){
+  const p=getModP();
+  if(p.quizDone){showQuizResult(p.quizScore,p.quizTotal);return;}
+  document.getElementById('quiz-dots').innerHTML=QUESTIONS.map((_,i)=>`<div class="qp-dot ${qAnswers[i]!=null?(qAnswers[i].correct?'correct':'wrong'):''}" id="dot-${i}"></div>`).join('');
   renderQuestion(qCurrent);
 }
-function renderQuestion(idx) {
-  const q = QUESTIONS[idx];
-  const answered = qAnswers[idx];
-  const container = document.getElementById('quiz-container');
-  container.innerHTML = `
-    <div class="question active">
+function renderQuestion(idx){
+  const q=QUESTIONS[idx];const answered=qAnswers[idx];
+  document.getElementById('quiz-container').innerHTML=`
+    <div>
       <div class="q-num">Spørsmål ${idx+1} av ${QUESTIONS.length}</div>
       <div class="q-text">${q.q}</div>
-      <div class="q-options">
-        ${q.opts.map((o, i) => `<button class="q-opt ${answered != null ? (i === q.correct ? 'correct' : (i === answered.chosen ? 'wrong' : '')) : ''}" onclick="answerQ(${idx}, ${i})" ${answered != null ? 'disabled' : ''}>${o}</button>`).join('')}
-      </div>
-      <div class="q-explanation ${answered != null ? 'show' : ''}">💡 ${q.exp}</div>
+      <div class="q-options">${q.opts.map((o,i)=>`<button class="q-opt ${answered!=null?(i===q.correct?'correct':(i===answered.chosen?'wrong':''))  :''}" onclick="answerQ(${idx},${i})" ${answered!=null?'disabled':''}>${o}</button>`).join('')}</div>
+      <div class="q-explanation ${answered!=null?'show':''}">💡 ${q.exp}</div>
       <div class="q-nav">
-        ${idx > 0 ? `<button onclick="gotoQ(${idx-1})">← Forrige</button>` : ''}
-        ${idx < QUESTIONS.length - 1 ? `<button class="primary" onclick="gotoQ(${idx+1})">Neste →</button>` : ''}
-        ${idx === QUESTIONS.length - 1 && Object.keys(qAnswers).length === QUESTIONS.length ? `<button class="primary" onclick="finishQuiz()">Se resultat</button>` : ''}
+        ${idx>0?`<button onclick="gotoQ(${idx-1})">← Forrige</button>`:''}
+        ${idx<QUESTIONS.length-1?`<button class="primary" onclick="gotoQ(${idx+1})">Neste →</button>`:''}
+        ${idx===QUESTIONS.length-1&&Object.keys(qAnswers).length===QUESTIONS.length?`<button class="primary" onclick="finishQuiz()">Se resultat</button>`:''}
         <span class="q-score">${Object.keys(qAnswers).length}/${QUESTIONS.length} besvart</span>
       </div>
     </div>`;
 }
-function answerQ(qIdx, chosen) {
-  const q = QUESTIONS[qIdx];
-  qAnswers[qIdx] = { chosen, correct: chosen === q.correct };
-  document.getElementById('dot-' + qIdx).className = 'qp-dot ' + (chosen === q.correct ? 'correct' : 'wrong');
-  renderQuestion(qIdx);
+function answerQ(qi,chosen){
+  qAnswers[qi]={chosen,correct:chosen===QUESTIONS[qi].correct};
+  document.getElementById('dot-'+qi).className='qp-dot '+(chosen===QUESTIONS[qi].correct?'correct':'wrong');
+  renderQuestion(qi);
 }
-function gotoQ(idx) { qCurrent = idx; renderQuestion(idx); }
-function finishQuiz() {
-  const score = Object.values(qAnswers).filter(a => a.correct).length;
-  saveP({ quizScore: score, quizTotal: QUESTIONS.length, quizDone: true });
-  updateNav();
-  showQuizResult(score, QUESTIONS.length);
+function gotoQ(idx){qCurrent=idx;renderQuestion(idx);}
+function finishQuiz(){
+  const score=Object.values(qAnswers).filter(a=>a.correct).length;
+  saveP({quizScore:score,quizTotal:QUESTIONS.length,quizDone:true});
+  updateNav();showQuizResult(score,QUESTIONS.length);
 }
-function showQuizResult(score, total) {
-  const pct = Math.round(score / total * 100);
-  const msg = pct >= 80 ? '🎉 Utmerket!' : pct >= 60 ? '👍 Bra jobbet!' : '📚 Les gjennom teorien og prøv igjen.';
-  document.getElementById('quiz-container').innerHTML = `<div class="quiz-result"><div class="score-big">${score}/${total}</div><p>${pct}% riktige — ${msg}</p><button onclick="resetQuiz()">Prøv igjen</button></div>`;
-  document.getElementById('quiz-dots').innerHTML = '';
+function showQuizResult(score,total){
+  const pct=Math.round(score/total*100);
+  const msg=pct>=80?'🎉 Utmerket! Du har god kontroll på modul 2.':pct>=60?'👍 Bra jobbet! Les gjennom forklaringene du fikk feil.':'📚 Gå gjennom teorien igjen — spesielt multiplicity og aggregering.';
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-result"><div class="score-big">${score}/${total}</div><p>${pct}% riktige</p><p style="margin-top:.3rem">${msg}</p><button onclick="resetQuiz()">Prøv igjen</button></div>`;
+  document.getElementById('quiz-dots').innerHTML='';
 }
-function resetQuiz() {
-  qAnswers = {}; qCurrent = 0;
-  saveP({ quizDone: false, quizScore: null });
-  renderQuiz();
+function resetQuiz(){qAnswers={};qCurrent=0;saveP({quizDone:false,quizScore:null});renderQuiz();}
+
+function updateNav(){
+  const p=getModP();
+  const ex=(p.doneExercises||[]).length;
+  document.getElementById('nav-prog').textContent=`${ex}/3 oppgaver · quiz ${p.quizScore!=null?p.quizScore+'/10':'—'}`;
 }
 
-// ── NAV PROGRESS ──
-function updateNav() {
-  const p = getModP();
-  const exDone = (p.doneExercises || []).length;
-  const quizDone = p.quizDone ? 1 : 0;
-  document.getElementById('nav-prog').textContent = `${exDone}/3 oppgaver · quiz ${p.quizScore != null ? p.quizScore + '/10' : '—'}`;
-}
-
-// ── INIT ──
-(function init() {
-  const p = getModP();
-  (p.doneExercises || []).forEach(id => {
-    const btn = document.querySelector(`.done-btn[onclick*="${id}"]`);
-    if (btn) { btn.classList.add('done'); btn.textContent = '✓ Gjort!'; }
+(function init(){
+  const p=getModP();
+  (p.doneExercises||[]).forEach(id=>{
+    const btn=document.querySelector(`.done-btn[onclick*="${id}"]`);
+    if(btn){btn.classList.add('done');btn.textContent='✓ Gjort!';}
   });
   updateNav();
 })();
